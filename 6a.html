@@ -8,45 +8,138 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif; }
         
-        body { background: #0b0b0b; background-image: radial-gradient(circle at 10% 20%, #1e1a0f 0%, #0a0705 90%); color: #e6e6e6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; position: relative; overflow-x: hidden; transition: background 0.5s, filter 0.5s; }
+        body { background: #0b0b0b; background-image: radial-gradient(circle at 10% 20%, #1e1a0f 0%, #0a0705 90%); color: #e6e6e6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; position: relative; overflow-x: hidden; transition: background 0.8s, color 0.5s; }
         
-        /* 👻 Призрачный ивент — монохром только для интерфейса */
+        /* 👻 Призрачный ивент — тёмно-серый фон с голубым свечением */
         body.ghost-active {
-            filter: grayscale(1) brightness(0.9);
-            animation: ghostBg 6s infinite alternate;
+            background: #121212;
+            background-image: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #0a0a0a 90%);
+            color: #d0e0ff;
         }
-        /* Исключаем картинки предметов из монохрома */
-        body.ghost-active .spawn-item,
-        body.ghost-active .spawn-item *,
-        body.ghost-active .candy-icon,
-        body.ghost-active .candy-icon-lg,
-        body.ghost-active .secret-spawn-btn img {
-            filter: grayscale(0) brightness(1) !important;
+        body.ghost-active::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(136, 204, 255, 0.08) 0%, transparent 70%);
+            animation: ghostPulse 4s infinite alternate;
         }
-        /* Добавляем призрачно-голубое свечение к картинкам */
-        body.ghost-active .spawn-item {
-            filter: grayscale(0) brightness(1) drop-shadow(0 0 10px #88ccff) !important;
-        }
-        body.ghost-active .spawn-ghost {
-            filter: drop-shadow(0 0 20px #88ccff) drop-shadow(0 0 35px #88ccff) !important;
-        }
-        
-        @keyframes ghostBg { 
-            0% { background: #0a0a0a; background-image: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #050505 90%); } 
-            100% { background: #1a1a1a; background-image: radial-gradient(circle at 70% 70%, #2a2a2a 0%, #0a0a0a 90%); } 
+        @keyframes ghostPulse {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.8; transform: scale(1.1); }
         }
         
-        body.ghost-active .container { animation: ghostBorder 3s infinite alternate; }
-        @keyframes ghostBorder { 
-            0% { border-color: #88ccff; box-shadow: 0 0 35px #88ccffaa, 0 0 15px #88ccff inset; } 
-            100% { border-color: #aaddff; box-shadow: 0 0 35px #aaddffaa, 0 0 15px #aaddff inset; } 
+        body.ghost-active .container {
+            background: rgba(20, 20, 25, 0.92);
+            border-color: #88ccff;
+            box-shadow: 0 0 40px #88ccff66, 0 0 20px #88ccff inset;
+            animation: ghostContainerGlow 3s infinite alternate;
         }
-        body.ghost-active h1 { animation: ghostText 3s infinite alternate; }
-        @keyframes ghostText { 
-            0% { color: #aaddff; text-shadow: 4px 4px 0 #222, 0 0 25px #88ccff; } 
-            100% { color: #ffffff; text-shadow: 4px 4px 0 #333, 0 0 25px #88ccff; } 
+        @keyframes ghostContainerGlow {
+            0% { box-shadow: 0 0 25px #88ccff44, 0 0 15px #88ccff inset; }
+            100% { box-shadow: 0 0 55px #88ccffaa, 0 0 25px #88ccff inset; }
         }
-        body.ghost-active .tab-btn.active { animation: ghostBorder 3s infinite alternate; }
+        
+        body.ghost-active .bat {
+            color: #88ccff;
+            opacity: 0.7;
+            text-shadow: 0 0 15px #88ccff, 0 0 30px #88ccff;
+        }
+        body.ghost-active .spider-web svg {
+            filter: drop-shadow(0 0 8px #88ccff);
+            opacity: 0.4;
+        }
+        
+        body.ghost-active h1 {
+            color: #aaddff;
+            text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #88ccff, 0 0 50px #88ccff;
+        }
+        body.ghost-active h1 span {
+            background: #88ccff;
+            color: #0a0a1a;
+            box-shadow: 0 0 30px #88ccff;
+        }
+        body.ghost-active .subhead {
+            color: #aaccff;
+        }
+        body.ghost-active .subhead strong {
+            color: #88ccff;
+            text-shadow: 0 0 10px #88ccff;
+        }
+        body.ghost-active .official-stamp {
+            border-color: #88ccff;
+            color: #aaddff;
+            box-shadow: 0 0 25px #88ccff66;
+        }
+        body.ghost-active .tab-btn {
+            border-color: #4a4a5a;
+            color: #aaccff;
+        }
+        body.ghost-active .tab-btn.active {
+            background: #88ccff;
+            border-color: #88ccff;
+            color: #0a0a1a;
+            box-shadow: 0 0 25px #88ccff;
+        }
+        body.ghost-active .event-card {
+            border-color: #4a4a5a;
+            background: #1a1a1f;
+        }
+        body.ghost-active .event-card:hover {
+            border-color: #88ccff;
+            box-shadow: 0 0 25px #88ccff44;
+        }
+        body.ghost-active .event-title { color: #aaddff; }
+        body.ghost-active .event-desc { color: #99aabb; }
+        body.ghost-active .timer {
+            background: #1a1a1f;
+            border-color: #4a4a5a;
+            color: #aaddff;
+        }
+        body.ghost-active .clicker-balance {
+            background: #1a1a1f;
+            border-color: #88ccff;
+            color: #aaddff;
+            box-shadow: 0 0 15px #88ccff44;
+        }
+        body.ghost-active .cps-display {
+            background: #1a1a1f;
+            border-color: #4a4a5a;
+            color: #99aabb;
+        }
+        body.ghost-active .cps-display strong { color: #88ccff; }
+        body.ghost-active .pumpkin-click-area {
+            background: #0f0f14;
+            border-color: #4a4a5a;
+        }
+        body.ghost-active .shop h3 { color: #aaddff; border-color: #88ccff; }
+        body.ghost-active .shop-item {
+            background: #1a1a1f;
+            border-color: #4a4a5a;
+        }
+        body.ghost-active .shop-item-name { color: #aaddff; }
+        body.ghost-active .shop-item-desc { color: #8899aa; }
+        body.ghost-active .buy-btn {
+            background: #88ccff;
+            color: #0a0a1a;
+        }
+        body.ghost-active .buy-btn:hover:not(:disabled) {
+            background: #aaddff;
+            box-shadow: 0 0 25px #88ccff;
+        }
+        body.ghost-active .buy-btn:disabled {
+            background: #333344;
+            color: #666688;
+        }
+        body.ghost-active footer { color: #667788; border-color: #333344; }
+        body.ghost-active footer strong { color: #88ccff; }
+        body.ghost-active .event-timer-side {
+            background: #1a1a1f;
+            border-color: #88ccff;
+            box-shadow: 0 0 25px #88ccff44;
+        }
+        body.ghost-active .event-timer-side .timer-value { color: #aaddff; }
 
         /* 🌈 Радужный фон */
         body.rainbow-active { animation: rainbowBg 8s infinite linear; }
@@ -64,7 +157,7 @@
         @keyframes floatBat { 0% { transform: translateY(0) rotate(-5deg); } 100% { transform: translateY(-25px) rotate(10deg); } }
         .spider-web { position: fixed; top: 0; left: 0; width: 140px; height: 140px; opacity: 0.25; pointer-events: none; z-index: 1; }
         .spider-web svg { width: 100%; height: 100%; filter: drop-shadow(0 0 4px #ff9900); }
-        .container { max-width: 900px; width: 100%; background: rgba(20, 16, 10, 0.88); backdrop-filter: blur(4px); border: 2px solid #e67e22; border-radius: 40px 12px 40px 12px; box-shadow: 0 0 35px rgba(230, 126, 34, 0.4), 0 0 15px #b85e00 inset; padding: 2.5rem 2rem; position: relative; z-index: 10; text-align: center; transition: border-color 0.3s, filter 0.3s; }
+        .container { max-width: 900px; width: 100%; background: rgba(20, 16, 10, 0.88); backdrop-filter: blur(4px); border: 2px solid #e67e22; border-radius: 40px 12px 40px 12px; box-shadow: 0 0 35px rgba(230, 126, 34, 0.4), 0 0 15px #b85e00 inset; padding: 2.5rem 2rem; position: relative; z-index: 10; text-align: center; transition: border-color 0.3s, background 0.5s, box-shadow 0.5s; }
         .official-stamp { display: inline-block; background: #2a1e0c; border: 3px double #e67e22; color: #f7d9a0; padding: 0.4rem 1.5rem; border-radius: 30px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 1.5rem; box-shadow: 0 0 20px rgba(230, 126, 34, 0.5); }
         h1 { font-size: 2.6rem; font-weight: 800; color: #ffb347; text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #ff8c00; letter-spacing: 2px; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
         h1 span { background: #ff9f1a; color: #1a1207; padding: 0 18px; border-radius: 50px; font-size: 2.2rem; box-shadow: 0 0 25px #ffb347; }
@@ -80,7 +173,6 @@
         .event-timer-side { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); background: #1a140c; border: 2px solid #e67e22; border-radius: 20px; padding: 1rem 0.8rem; z-index: 50; text-align: center; box-shadow: 0 0 20px #e67e2280; writing-mode: vertical-rl; text-orientation: mixed; font-weight: 700; color: #ffb347; font-size: 0.9rem; letter-spacing: 1px; }
         .event-timer-side .timer-value { color: #ffb347; font-variant-numeric: tabular-nums; margin-top: 0.5rem; }
         body.rainbow-active .event-timer-side { animation: rainbowBorder 4s infinite linear; }
-        body.ghost-active .event-timer-side { animation: ghostBorder 3s infinite alternate; }
         @media (max-width: 700px) { .event-timer-side { position: static; writing-mode: horizontal-tb; margin-bottom: 1rem; width: 100%; transform: none; font-size: 1rem; } }
 
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 2rem 0 1rem; text-align: left; }
@@ -130,10 +222,7 @@
         .spawn-golden { width: 90px; height: 90px; filter: drop-shadow(0 0 20px #ffd700) drop-shadow(0 0 35px #ffaa00); animation: popIn 0.3s ease-out, goldenSpin 2s infinite linear; }
         .spawn-diamond { width: 95px; height: 95px; filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 35px #0088ff); animation: popIn 0.3s ease-out, diamondSpin 2s infinite linear; }
         .spawn-rainbow { width: 110px; height: 110px; animation: popIn 0.3s ease-out, rainbowSpin 2s infinite linear; }
-        
-        /* 👻 Призрачное ведро */
         .spawn-ghost { width: 90px; height: 90px; filter: drop-shadow(0 0 20px #88ccff) drop-shadow(0 0 35px #88ccff); animation: popIn 0.3s ease-out, ghostSpin 2s infinite linear; }
-        
         @keyframes goldenSpin { 0% { transform: rotate(-5deg) scale(1); } 50% { transform: rotate(5deg) scale(1.1); } 100% { transform: rotate(-5deg) scale(1); } }
         @keyframes diamondSpin { 0% { transform: rotate(-8deg) scale(1); } 50% { transform: rotate(8deg) scale(1.15); } 100% { transform: rotate(-8deg) scale(1); } }
         @keyframes rainbowSpin { 0% { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff0000); } 16% { transform: rotate(20deg) scale(1.1); filter: drop-shadow(0 0 20px #ff8800); } 33% { transform: rotate(40deg) scale(1.15); filter: drop-shadow(0 0 20px #ffff00); } 50% { transform: rotate(60deg) scale(1.2); filter: drop-shadow(0 0 20px #00ff00); } 66% { transform: rotate(80deg) scale(1.15); filter: drop-shadow(0 0 20px #0088ff); } 83% { transform: rotate(100deg) scale(1.1); filter: drop-shadow(0 0 20px #8800ff); } 100% { transform: rotate(120deg) scale(1); filter: drop-shadow(0 0 20px #ff0000); } }
@@ -147,7 +236,7 @@
         .secret-spawn-btn:hover { border-color: #ffb347; background: #3a2a14; box-shadow: 0 0 15px #e67e2250; }
         .secret-spawn-btn img { width: 40px; height: 40px; image-rendering: pixelated; }
         .secret-spawn-btn.rainbow-btn { border-color: #ff0000; background: linear-gradient(135deg, #2a0a0a, #0a2a0a, #0a0a2a); animation: rainbowBorder 4s infinite linear; }
-        .secret-spawn-btn.ghost-btn { border-color: #88ccff; background: linear-gradient(135deg, #1a1a1a, #2a2a2a, #1a1a1a); animation: ghostBorder 3s infinite alternate; }
+        .secret-spawn-btn.ghost-btn { border-color: #88ccff; background: linear-gradient(135deg, #1a1a2a, #2a2a3a, #1a1a2a); animation: ghostPulse 3s infinite alternate; }
         .shop { margin-top: 2rem; text-align: left; }
         .shop h3 { color: #ffb347; font-size: 1.4rem; margin-bottom: 1rem; border-bottom: 2px dotted #b8651a; padding-bottom: 6px; }
         .shop-item { background: #18130c; border: 1px solid #4a3a25; border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; transition: 0.2s; }
@@ -599,7 +688,7 @@
                 if (ghostActive && Math.random() < GHOST_CANDY_CHANCE) {
                     isGhostCandy = true;
                     colorGlow = '#88ccff';
-                    el.style.filter = `grayscale(0) drop-shadow(0 0 15px ${colorGlow}) drop-shadow(0 0 25px ${colorGlow}) !important`;
+                    el.style.filter = `drop-shadow(0 0 15px ${colorGlow}) drop-shadow(0 0 25px ${colorGlow})`;
                     el.style.animation = 'popIn 0.3s ease-out, ghostSpin 1s infinite alternate';
                 } else if (Math.random() < COLORED_CHANCE + luck * 0.01) {
                     colored = true;
