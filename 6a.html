@@ -287,6 +287,9 @@
         let rainbowActive = false;
         let rainbowEndTime = 0;
 
+        // Кэш карточек магазина, чтобы не пересоздавать их
+        let shopCardsBuilt = false;
+
         function showToast(msg) {
             const t = document.getElementById('toast');
             t.textContent = msg; t.classList.add('show');
@@ -340,7 +343,12 @@
         }
 
         function setCoffinCandy(v) { coffinCandy = Math.max(0, v); saveCoffinCandy(); updateCoffinCandyUI(); }
-        function setClickerCandy(v) { clickerCandy = v; saveClickerState(); updateClickerCandyUI(); renderShop(); }
+        function setClickerCandy(v) {
+            clickerCandy = v;
+            saveClickerState();
+            updateClickerCandyUI();
+            updateShopButtons(); // ✅ только обновляем кнопки, не пересоздаём карточки
+        }
 
         function updateCoffinCandyUI() {
             const el = document.getElementById('coffinCandy'); if (el) el.textContent = fmtCandy(coffinCandy);
@@ -521,24 +529,55 @@
 
         function getPrice(item) { return Math.ceil(item.basePrice * Math.pow(item.priceMultiplier, item.getLevel())); }
 
-        function renderShop() {
-            const list = document.getElementById('shopList'); if (!list) return; list.innerHTML = '';
+        // ✅ Создаём карточки ОДИН РАЗ
+        function buildShop() {
+            const list = document.getElementById('shopList');
+            if (!list) return;
+            list.innerHTML = '';
             SHOP_ITEMS.forEach(item => {
-                const level = item.getLevel(); const price = getPrice(item);
-                const maxed = level >= item.maxLevel; const canBuy = !maxed && clickerCandy >= price;
                 const div = document.createElement('div');
-                div.className = 'shop-item' + (maxed ? ' owned' : '');
+                div.className = 'shop-item';
+                div.id = 'shop-item-' + item.id;
                 div.innerHTML = `
                     <div class="shop-item-info">
                         <div class="shop-item-name">${item.name}</div>
                         <div class="shop-item-desc">${item.desc}</div>
-                        <div class="shop-item-level">Уровень: ${level} / ${item.maxLevel}</div>
+                        <div class="shop-item-level" id="shop-level-${item.id}">Уровень: 0 / ${item.maxLevel}</div>
                     </div>
-                    <button class="buy-btn" ${maxed || !canBuy ? 'disabled' : ''} onclick="buyItem('${item.id}')">
-                        ${maxed ? '✅ Максимум' : `Купить за ${price} <img src="${ICONS.candy1}" class="candy-icon" alt="">`}
+                    <button class="buy-btn" id="shop-btn-${item.id}" onclick="buyItem('${item.id}')">
+                        Купить
                     </button>
                 `;
                 list.appendChild(div);
+            });
+            shopCardsBuilt = true;
+            updateShopButtons();
+        }
+
+        // ✅ Только обновляем состояние кнопок и уровней, не пересоздавая HTML
+        function updateShopButtons() {
+            if (!shopCardsBuilt) return;
+            SHOP_ITEMS.forEach(item => {
+                const level = item.getLevel();
+                const price = getPrice(item);
+                const maxed = level >= item.maxLevel;
+                const canBuy = !maxed && clickerCandy >= price;
+
+                const btn = document.getElementById('shop-btn-' + item.id);
+                const lvlEl = document.getElementById('shop-level-' + item.id);
+                const card = document.getElementById('shop-item-' + item.id);
+                if (!btn || !lvlEl || !card) return;
+
+                lvlEl.textContent = `Уровень: ${level} / ${item.maxLevel}`;
+                card.classList.toggle('owned', maxed);
+
+                if (maxed) {
+                    btn.textContent = '✅ Максимум';
+                    btn.disabled = true;
+                } else {
+                    btn.innerHTML = `Купить за ${price} <img src="${ICONS.candy1}" class="candy-icon" alt="">`;
+                    btn.disabled = !canBuy;
+                }
             });
         }
 
@@ -547,7 +586,9 @@
             const level = item.getLevel(); if (level >= item.maxLevel) return;
             const price = getPrice(item);
             if (clickerCandy < price) { showToast('❌ Недостаточно конфет'); return; }
-            clickerCandy -= price; item.apply(); saveClickerState(); updateClickerCandyUI(); updateCpsUI(); renderShop();
+            clickerCandy -= price; item.apply(); saveClickerState();
+            updateClickerCandyUI(); updateCpsUI();
+            updateShopButtons(); // ✅ не пересоздаём магазин
             if (id === 'spawnRate') startSpawnTimer();
             showToast(`✅ Куплено: ${item.name}`);
         }
@@ -556,7 +597,7 @@
         updateCoffinCandyUI();
         updateClickerCandyUI();
         updateCpsUI();
-        renderShop();
+        buildShop();       // ✅ создаём магазин один раз
         tickTimers();
         setInterval(tickTimers, 1000);
         startSpawnTimer();
