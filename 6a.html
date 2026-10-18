@@ -4,632 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Официальный сайт 6А класса — ГБОУ Лицей 486</title>
-
     <link rel="icon" type="image/x-icon" href="logo.ico">
-
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
-        }
-
-        body {
-            background: #0b0b0b;
-            background-image: radial-gradient(circle at 10% 20%, #1e1a0f 0%, #0a0705 90%);
-            color: #e6e6e6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-            overflow-x: hidden;
-            transition: background 0.5s;
-        }
-
-        /* 🌈 Ивент "Радуга" — переливающийся фон */
-        body.rainbow-active {
-            animation: rainbowBg 8s infinite linear;
-        }
-        @keyframes rainbowBg {
-            0%   { background: #2a0a0a; background-image: radial-gradient(circle at 10% 20%, #3a0a0a 0%, #1a0505 90%); }
-            16%  { background: #2a1a0a; background-image: radial-gradient(circle at 30% 50%, #3a2a0a 0%, #1a0f05 90%); }
-            33%  { background: #0a2a0a; background-image: radial-gradient(circle at 50% 20%, #0a3a0a 0%, #051a05 90%); }
-            50%  { background: #0a1a2a; background-image: radial-gradient(circle at 70% 50%, #0a2a3a 0%, #05101a 90%); }
-            66%  { background: #1a0a2a; background-image: radial-gradient(circle at 90% 20%, #2a0a3a 0%, #10051a 90%); }
-            83%  { background: #2a0a1a; background-image: radial-gradient(circle at 30% 80%, #3a0a2a 0%, #1a0510 90%); }
-            100% { background: #2a0a0a; background-image: radial-gradient(circle at 10% 20%, #3a0a0a 0%, #1a0505 90%); }
-        }
-
-        body.rainbow-active .container {
-            animation: rainbowBorder 4s infinite linear;
-        }
-        @keyframes rainbowBorder {
-            0%   { border-color: #ff0000; box-shadow: 0 0 35px #ff0000aa, 0 0 15px #ff0000 inset; }
-            16%  { border-color: #ff8800; box-shadow: 0 0 35px #ff8800aa, 0 0 15px #ff8800 inset; }
-            33%  { border-color: #ffff00; box-shadow: 0 0 35px #ffff00aa, 0 0 15px #ffff00 inset; }
-            50%  { border-color: #00ff00; box-shadow: 0 0 35px #00ff00aa, 0 0 15px #00ff00 inset; }
-            66%  { border-color: #0088ff; box-shadow: 0 0 35px #0088ffaa, 0 0 15px #0088ff inset; }
-            83%  { border-color: #8800ff; box-shadow: 0 0 35px #8800ffaa, 0 0 15px #8800ff inset; }
-            100% { border-color: #ff0000; box-shadow: 0 0 35px #ff0000aa, 0 0 15px #ff0000 inset; }
-        }
-        body.rainbow-active .tab-btn.active {
-            animation: rainbowBorder 4s infinite linear;
-        }
-        body.rainbow-active h1 {
-            animation: rainbowText 4s infinite linear;
-        }
-        @keyframes rainbowText {
-            0%   { color: #ff0000; text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #ff0000; }
-            16%  { color: #ff8800; text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #ff8800; }
-            33%  { color: #ffff00; text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #ffff00; }
-            50%  { color: #00ff00; text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #00ff00; }
-            66%  { color: #0088ff; text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #0088ff; }
-            83%  { color: #8800ff; text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #8800ff; }
-            100% { color: #ff0000; text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #ff0000; }
-        }
-
-        .bat {
-            position: fixed;
-            color: #ffb347;
-            font-size: 2rem;
-            opacity: 0.5;
-            pointer-events: none;
-            z-index: 0;
-            animation: floatBat 12s infinite alternate ease-in-out;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif; }
+        body { background: #0b0b0b; background-image: radial-gradient(circle at 10% 20%, #1e1a0f 0%, #0a0705 90%); color: #e6e6e6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; position: relative; overflow-x: hidden; transition: background 0.5s; }
+        body.rainbow-active { animation: rainbowBg 8s infinite linear; }
+        @keyframes rainbowBg { 0% { background: #2a0a0a; } 16% { background: #2a1a0a; } 33% { background: #0a2a0a; } 50% { background: #0a1a2a; } 66% { background: #1a0a2a; } 83% { background: #2a0a1a; } 100% { background: #2a0a0a; } }
+        body.rainbow-active .container { animation: rainbowBorder 4s infinite linear; }
+        @keyframes rainbowBorder { 0% { border-color: #ff0000; box-shadow: 0 0 35px #ff0000aa, 0 0 15px #ff0000 inset; } 16% { border-color: #ff8800; } 33% { border-color: #ffff00; } 50% { border-color: #00ff00; } 66% { border-color: #0088ff; } 83% { border-color: #8800ff; } 100% { border-color: #ff0000; } }
+        body.rainbow-active .tab-btn.active { animation: rainbowBorder 4s infinite linear; }
+        body.rainbow-active h1 { animation: rainbowText 4s infinite linear; }
+        @keyframes rainbowText { 0% { color: #ff0000; } 16% { color: #ff8800; } 33% { color: #ffff00; } 50% { color: #00ff00; } 66% { color: #0088ff; } 83% { color: #8800ff; } 100% { color: #ff0000; } }
+        .bat { position: fixed; color: #ffb347; font-size: 2rem; opacity: 0.5; pointer-events: none; z-index: 0; animation: floatBat 12s infinite alternate ease-in-out; }
         .bat1 { top: 15%; right: 5%; animation-duration: 15s; }
         .bat2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
         .bat3 { top: 60%; right: 12%; animation-duration: 14s; font-size: 2.4rem; animation-delay: -7s; }
-
-        @keyframes floatBat {
-            0% { transform: translateY(0) rotate(-5deg); }
-            100% { transform: translateY(-25px) rotate(10deg); }
-        }
-
-        .spider-web {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 140px;
-            height: 140px;
-            opacity: 0.25;
-            pointer-events: none;
-            z-index: 1;
-        }
+        @keyframes floatBat { 0% { transform: translateY(0) rotate(-5deg); } 100% { transform: translateY(-25px) rotate(10deg); } }
+        .spider-web { position: fixed; top: 0; left: 0; width: 140px; height: 140px; opacity: 0.25; pointer-events: none; z-index: 1; }
         .spider-web svg { width: 100%; height: 100%; filter: drop-shadow(0 0 4px #ff9900); }
-
-        .container {
-            max-width: 900px;
-            width: 100%;
-            background: rgba(20, 16, 10, 0.88);
-            backdrop-filter: blur(4px);
-            border: 2px solid #e67e22;
-            border-radius: 40px 12px 40px 12px;
-            box-shadow: 0 0 35px rgba(230, 126, 34, 0.4), 0 0 15px #b85e00 inset;
-            padding: 2.5rem 2rem;
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            transition: border-color 0.3s;
-        }
-
-        .official-stamp {
-            display: inline-block;
-            background: #2a1e0c;
-            border: 3px double #e67e22;
-            color: #f7d9a0;
-            padding: 0.4rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            margin-bottom: 1.5rem;
-            box-shadow: 0 0 20px rgba(230, 126, 34, 0.5);
-        }
-
-        h1 {
-            font-size: 2.6rem;
-            font-weight: 800;
-            color: #ffb347;
-            text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #ff8c00;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        h1 span {
-            background: #ff9f1a;
-            color: #1a1207;
-            padding: 0 18px;
-            border-radius: 50px;
-            font-size: 2.2rem;
-            box-shadow: 0 0 25px #ffb347;
-        }
-
-        .subhead {
-            font-size: 1.3rem;
-            color: #e6c9a0;
-            margin: 1rem 0 2rem 0;
-        }
+        .container { max-width: 900px; width: 100%; background: rgba(20, 16, 10, 0.88); backdrop-filter: blur(4px); border: 2px solid #e67e22; border-radius: 40px 12px 40px 12px; box-shadow: 0 0 35px rgba(230, 126, 34, 0.4), 0 0 15px #b85e00 inset; padding: 2.5rem 2rem; position: relative; z-index: 10; text-align: center; transition: border-color 0.3s; }
+        .official-stamp { display: inline-block; background: #2a1e0c; border: 3px double #e67e22; color: #f7d9a0; padding: 0.4rem 1.5rem; border-radius: 30px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 1.5rem; box-shadow: 0 0 20px rgba(230, 126, 34, 0.5); }
+        h1 { font-size: 2.6rem; font-weight: 800; color: #ffb347; text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #ff8c00; letter-spacing: 2px; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        h1 span { background: #ff9f1a; color: #1a1207; padding: 0 18px; border-radius: 50px; font-size: 2.2rem; box-shadow: 0 0 25px #ffb347; }
+        .subhead { font-size: 1.3rem; color: #e6c9a0; margin: 1rem 0 2rem 0; }
         .subhead strong { color: #ffb347; }
-
-        .tabs {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        .tab-btn {
-            background: #18130c;
-            border: 2px solid #4a3a25;
-            color: #e6c9a0;
-            padding: 0.7rem 1.6rem;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+        .tabs { display: flex; gap: 10px; justify-content: center; margin-bottom: 2rem; flex-wrap: wrap; }
+        .tab-btn { background: #18130c; border: 2px solid #4a3a25; color: #e6c9a0; padding: 0.7rem 1.6rem; border-radius: 30px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s; }
         .tab-btn:hover { border-color: #b8651a; color: #ffb347; }
-        .tab-btn.active {
-            background: #e67e22;
-            border-color: #ffb347;
-            color: #0b0b0b;
-            box-shadow: 0 0 20px #e67e2280;
-        }
-
+        .tab-btn.active { background: #e67e22; border-color: #ffb347; color: #0b0b0b; box-shadow: 0 0 20px #e67e2280; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-
-        /* ===== РАДУЖНЫЙ ТАЙМЕР СБОКУ ===== */
-        .rainbow-timer-side {
-            position: fixed;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: #1a140c;
-            border: 2px solid #e67e22;
-            border-radius: 20px;
-            padding: 1rem 0.8rem;
-            z-index: 50;
-            text-align: center;
-            box-shadow: 0 0 20px #e67e2280;
-            writing-mode: vertical-rl;
-            text-orientation: mixed;
-            font-weight: 700;
-            color: #ffb347;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-        .rainbow-timer-side .timer-value {
-            color: #ffb347;
-            font-variant-numeric: tabular-nums;
-            margin-top: 0.5rem;
-        }
-        body.rainbow-active .rainbow-timer-side {
-            animation: rainbowBorder 4s infinite linear;
-        }
-
-        @media (max-width: 700px) {
-            .rainbow-timer-side {
-                position: static;
-                writing-mode: horizontal-tb;
-                margin-bottom: 1rem;
-                width: 100%;
-                transform: none;
-                font-size: 1rem;
-            }
-        }
-
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 2rem 0 1rem;
-            text-align: left;
-        }
-
-        .event-card {
-            background: #18130c;
-            border: 2px solid #d67e1e;
-            border-radius: 24px 6px 24px 6px;
-            padding: 1.5rem;
-            cursor: pointer;
-            transition: 0.25s ease;
-            box-shadow: 0 0 15px #00000070;
-            position: relative;
-            user-select: none;
-        }
-        .event-card:hover {
-            transform: translateY(-5px);
-            border-color: #ffa733;
-            box-shadow: 0 10px 25px #e67e2260, 0 0 15px #ffb347 inset;
-        }
-        .event-card.ended {
-            background: #2a2a2a;
-            border-color: #555;
-            cursor: default;
-            opacity: 0.75;
-        }
+        .rainbow-timer-side { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); background: #1a140c; border: 2px solid #e67e22; border-radius: 20px; padding: 1rem 0.8rem; z-index: 50; text-align: center; box-shadow: 0 0 20px #e67e2280; writing-mode: vertical-rl; text-orientation: mixed; font-weight: 700; color: #ffb347; font-size: 0.9rem; letter-spacing: 1px; }
+        .rainbow-timer-side .timer-value { color: #ffb347; font-variant-numeric: tabular-nums; margin-top: 0.5rem; }
+        body.rainbow-active .rainbow-timer-side { animation: rainbowBorder 4s infinite linear; }
+        @media (max-width: 700px) { .rainbow-timer-side { position: static; writing-mode: horizontal-tb; margin-bottom: 1rem; width: 100%; transform: none; font-size: 1rem; } }
+        .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 2rem 0 1rem; text-align: left; }
+        .event-card { background: #18130c; border: 2px solid #d67e1e; border-radius: 24px 6px 24px 6px; padding: 1.5rem; cursor: pointer; transition: 0.25s ease; box-shadow: 0 0 15px #00000070; position: relative; user-select: none; }
+        .event-card:hover { transform: translateY(-5px); border-color: #ffa733; box-shadow: 0 10px 25px #e67e2260, 0 0 15px #ffb347 inset; }
+        .event-card.ended { background: #2a2a2a; border-color: #555; cursor: default; opacity: 0.75; }
         .event-card.ended:hover { transform: none; box-shadow: 0 0 15px #00000070; }
-
-        .event-title {
-            font-size: 1.5rem;
-            color: #ffb347;
-            margin-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .event-title { font-size: 1.5rem; color: #ffb347; margin-bottom: 0.6rem; display: flex; align-items: center; gap: 8px; }
         .event-card.ended .event-title { color: #999; }
-
-        .event-desc {
-            color: #ddccb0;
-            font-size: 1rem;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-        }
-
-        .timer {
-            background: #2a1e0c;
-            border: 1px solid #b8651a;
-            border-radius: 12px;
-            padding: 0.7rem 1rem;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #ffb347;
-            letter-spacing: 1px;
-            font-variant-numeric: tabular-nums;
-        }
+        .event-desc { color: #ddccb0; font-size: 1rem; line-height: 1.5; margin-bottom: 1rem; }
+        .timer { background: #2a1e0c; border: 1px solid #b8651a; border-radius: 12px; padding: 0.7rem 1rem; text-align: center; font-size: 1.2rem; font-weight: 700; color: #ffb347; letter-spacing: 1px; font-variant-numeric: tabular-nums; }
         .event-card.ended .timer { background: #333; border-color: #555; color: #888; display: none; }
-
-        .ended-label {
-            display: none;
-            color: #ff6b6b;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 1.1rem;
-            margin-top: 0.8rem;
-            text-align: center;
-        }
+        .ended-label { display: none; color: #ff6b6b; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 1.1rem; margin-top: 0.8rem; text-align: center; }
         .event-card.ended .ended-label { display: block; }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.85);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            backdrop-filter: blur(4px);
-        }
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
         .modal-overlay.active { display: flex; }
-
-        .modal {
-            background: #1a140c;
-            border: 2px solid #e67e22;
-            border-radius: 30px 8px 30px 8px;
-            padding: 2rem;
-            max-width: 600px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            box-shadow: 0 0 50px #e67e2280;
-            position: relative;
-        }
-        .modal-close {
-            position: absolute;
-            top: 12px;
-            right: 18px;
-            background: none;
-            border: none;
-            color: #ffb347;
-            font-size: 2rem;
-            cursor: pointer;
-            line-height: 1;
-        }
+        .modal { background: #1a140c; border: 2px solid #e67e22; border-radius: 30px 8px 30px 8px; padding: 2rem; max-width: 600px; width: 100%; max-height: 90vh; overflow-y: auto; box-shadow: 0 0 50px #e67e2280; position: relative; }
+        .modal-close { position: absolute; top: 12px; right: 18px; background: none; border: none; color: #ffb347; font-size: 2rem; cursor: pointer; line-height: 1; }
         .modal-close:hover { color: #fff; }
         .modal h2 { color: #ffb347; font-size: 1.8rem; margin-bottom: 1rem; padding-right: 30px; }
         .modal p { color: #ddccb0; line-height: 1.6; margin-bottom: 1rem; font-size: 1.05rem; }
         .modal strong { color: #ffb347; }
-
-        .btn {
-            background: #e67e22;
-            color: #0b0b0b;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.2s;
-            margin: 0.3rem;
-        }
+        .btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.7rem 1.5rem; border-radius: 30px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s; margin: 0.3rem; }
         .btn:hover { background: #ffa733; box-shadow: 0 0 18px #ffb347; }
         .btn:disabled { background: #555; color: #888; cursor: not-allowed; box-shadow: none; }
-
-        footer {
-            margin-top: 2rem;
-            color: #8a7a63;
-            font-size: 0.9rem;
-            border-top: 1px solid #4a3a25;
-            padding-top: 1.2rem;
-            letter-spacing: 1px;
-            width: 100%;
-            text-align: center;
-        }
+        footer { margin-top: 2rem; color: #8a7a63; font-size: 0.9rem; border-top: 1px solid #4a3a25; padding-top: 1.2rem; letter-spacing: 1px; width: 100%; text-align: center; }
         footer strong { color: #e67e22; }
-
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: #2a1e0c;
-            border: 2px solid #e67e22;
-            color: #ffb347;
-            padding: 0.8rem 1.5rem;
-            border-radius: 30px;
-            font-weight: 700;
-            z-index: 200;
-            opacity: 0;
-            transition: 0.3s;
-            box-shadow: 0 0 25px #e67e2280;
-            pointer-events: none;
-        }
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #2a1e0c; border: 2px solid #e67e22; color: #ffb347; padding: 0.8rem 1.5rem; border-radius: 30px; font-weight: 700; z-index: 200; opacity: 0; transition: 0.3s; box-shadow: 0 0 25px #e67e2280; pointer-events: none; }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-
-        /* ===== КЛИКЕР ===== */
-        .clicker-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 1.5rem;
-        }
-        .clicker-balance {
-            background: #2a1e0c;
-            border: 2px solid #b8651a;
-            border-radius: 16px;
-            padding: 0.6rem 1.4rem;
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: #ffb347;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .clicker-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; }
+        .clicker-balance { background: #2a1e0c; border: 2px solid #b8651a; border-radius: 16px; padding: 0.6rem 1.4rem; font-size: 1.4rem; font-weight: 800; color: #ffb347; display: flex; align-items: center; gap: 8px; }
         .clicker-balance small { font-size: 0.9rem; color: #e6c9a0; font-weight: 400; }
-
-        .candy-icon {
-            width: 22px;
-            height: 22px;
-            vertical-align: middle;
-            image-rendering: pixelated;
-            filter: drop-shadow(0 0 4px #ffb347);
-        }
-        .candy-icon-lg {
-            width: 30px;
-            height: 30px;
-            vertical-align: middle;
-            image-rendering: pixelated;
-            filter: drop-shadow(0 0 6px #ffb347);
-        }
-
-        .cps-display {
-            background: #1f1a12;
-            border: 1px solid #4a3a25;
-            border-radius: 16px;
-            padding: 0.6rem 1.4rem;
-            color: #e6c9a0;
-            font-size: 1rem;
-        }
+        .candy-icon { width: 22px; height: 22px; vertical-align: middle; image-rendering: pixelated; filter: drop-shadow(0 0 4px #ffb347); }
+        .candy-icon-lg { width: 30px; height: 30px; vertical-align: middle; image-rendering: pixelated; filter: drop-shadow(0 0 6px #ffb347); }
+        .cps-display { background: #1f1a12; border: 1px solid #4a3a25; border-radius: 16px; padding: 0.6rem 1.4rem; color: #e6c9a0; font-size: 1rem; }
         .cps-display strong { color: #ffb347; }
-
-        .pumpkin-click-area {
-            position: relative;
-            height: 300px;
-            margin: 1rem 0;
-            background: #110d08;
-            border: 2px dashed #4a3a25;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .click-float {
-            position: absolute;
-            color: #ffb347;
-            font-weight: 800;
-            font-size: 1.4rem;
-            pointer-events: none;
-            animation: floatUp 0.9s ease-out forwards;
-            z-index: 3;
-            text-shadow: 0 0 10px #000;
-        }
-        @keyframes floatUp {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-90px) scale(1.3); }
-        }
-
-        /* ===== СПАВН-ПРЕДМЕТЫ ===== */
-        .spawn-item {
-            position: absolute;
-            cursor: pointer;
-            z-index: 4;
-            user-select: none;
-            image-rendering: pixelated;
-            object-fit: contain;
-            transition: transform 0.1s;
-            animation: popIn 0.3s ease-out;
-        }
+        .pumpkin-click-area { position: relative; height: 300px; margin: 1rem 0; background: #110d08; border: 2px dashed #4a3a25; border-radius: 20px; overflow: hidden; }
+        .click-float { position: absolute; color: #ffb347; font-weight: 800; font-size: 1.4rem; pointer-events: none; animation: floatUp 0.9s ease-out forwards; z-index: 3; text-shadow: 0 0 10px #000; }
+        @keyframes floatUp { 0% { opacity: 1; transform: translateY(0) scale(1); } 100% { opacity: 0; transform: translateY(-90px) scale(1.3); } }
+        .spawn-item { position: absolute; cursor: pointer; z-index: 4; user-select: none; image-rendering: pixelated; object-fit: contain; transition: transform 0.1s; animation: popIn 0.3s ease-out; }
         .spawn-item:hover { transform: scale(1.1); }
         .spawn-item:active { transform: scale(0.9); }
         @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-
         .spawn-candy1 { width: 50px; height: 50px; filter: drop-shadow(0 0 8px #ff8c00); }
         .spawn-candy2 { width: 50px; height: 50px; filter: drop-shadow(0 0 8px #ff5500); }
         .spawn-bucket { width: 80px; height: 80px; filter: drop-shadow(0 0 12px #ff8c00); }
-        .spawn-golden { 
-            width: 90px; height: 90px; 
-            filter: drop-shadow(0 0 20px #ffd700) drop-shadow(0 0 35px #ffaa00); 
-            animation: popIn 0.3s ease-out, goldenSpin 2s infinite linear; 
-        }
-        .spawn-diamond { 
-            width: 95px; height: 95px; 
-            filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 35px #0088ff); 
-            animation: popIn 0.3s ease-out, diamondSpin 2s infinite linear; 
-        }
-        .spawn-rainbow { 
-            width: 110px; height: 110px; 
-            animation: popIn 0.3s ease-out, rainbowSpin 2s infinite linear; 
-        }
-        @keyframes goldenSpin {
-            0% { transform: rotate(-5deg) scale(1); }
-            50% { transform: rotate(5deg) scale(1.1); }
-            100% { transform: rotate(-5deg) scale(1); }
-        }
-        @keyframes diamondSpin {
-            0% { transform: rotate(-8deg) scale(1); }
-            50% { transform: rotate(8deg) scale(1.15); }
-            100% { transform: rotate(-8deg) scale(1); }
-        }
-        @keyframes rainbowSpin {
-            0%   { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff0000); }
-            16%  { transform: rotate(20deg) scale(1.1); filter: drop-shadow(0 0 20px #ff8800) drop-shadow(0 0 40px #ff8800); }
-            33%  { transform: rotate(40deg) scale(1.15); filter: drop-shadow(0 0 20px #ffff00) drop-shadow(0 0 40px #ffff00); }
-            50%  { transform: rotate(60deg) scale(1.2); filter: drop-shadow(0 0 20px #00ff00) drop-shadow(0 0 40px #00ff00); }
-            66%  { transform: rotate(80deg) scale(1.15); filter: drop-shadow(0 0 20px #0088ff) drop-shadow(0 0 40px #0088ff); }
-            83%  { transform: rotate(100deg) scale(1.1); filter: drop-shadow(0 0 20px #8800ff) drop-shadow(0 0 40px #8800ff); }
-            100% { transform: rotate(120deg) scale(1); filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff0000); }
-        }
-
-        /* ===== СЕКРЕТНАЯ ПАНЕЛЬ ===== */
-        .secret-panel {
-            display: none;
-            margin-top: 2rem;
-            padding: 1.5rem;
-            background: #1f1a12;
-            border: 2px dashed #ffb347;
-            border-radius: 20px;
-            text-align: center;
-        }
+        .spawn-golden { width: 90px; height: 90px; filter: drop-shadow(0 0 20px #ffd700) drop-shadow(0 0 35px #ffaa00); animation: popIn 0.3s ease-out, goldenSpin 2s infinite linear; }
+        .spawn-diamond { width: 95px; height: 95px; filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 35px #0088ff); animation: popIn 0.3s ease-out, diamondSpin 2s infinite linear; }
+        .spawn-rainbow { width: 110px; height: 110px; animation: popIn 0.3s ease-out, rainbowSpin 2s infinite linear; }
+        @keyframes goldenSpin { 0% { transform: rotate(-5deg) scale(1); } 50% { transform: rotate(5deg) scale(1.1); } 100% { transform: rotate(-5deg) scale(1); } }
+        @keyframes diamondSpin { 0% { transform: rotate(-8deg) scale(1); } 50% { transform: rotate(8deg) scale(1.15); } 100% { transform: rotate(-8deg) scale(1); } }
+        @keyframes rainbowSpin { 0% { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff0000); } 16% { transform: rotate(20deg) scale(1.1); filter: drop-shadow(0 0 20px #ff8800); } 33% { transform: rotate(40deg) scale(1.15); filter: drop-shadow(0 0 20px #ffff00); } 50% { transform: rotate(60deg) scale(1.2); filter: drop-shadow(0 0 20px #00ff00); } 66% { transform: rotate(80deg) scale(1.15); filter: drop-shadow(0 0 20px #0088ff); } 83% { transform: rotate(100deg) scale(1.1); filter: drop-shadow(0 0 20px #8800ff); } 100% { transform: rotate(120deg) scale(1); filter: drop-shadow(0 0 20px #ff0000); } }
+        .secret-panel { display: none; margin-top: 2rem; padding: 1.5rem; background: #1f1a12; border: 2px dashed #ffb347; border-radius: 20px; text-align: center; }
         .secret-panel.visible { display: block; }
-        .secret-panel h3 {
-            color: #ffb347;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-        .secret-spawn-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-        }
-        .secret-spawn-btn {
-            background: #2a1e0c;
-            border: 2px solid #b8651a;
-            border-radius: 16px;
-            padding: 0.8rem 1.2rem;
-            color: #e6c9a0;
-            cursor: pointer;
-            transition: 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            font-weight: 700;
-            min-width: 110px;
-        }
+        .secret-panel h3 { color: #ffb347; margin-bottom: 1rem; font-size: 1.3rem; }
+        .secret-spawn-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
+        .secret-spawn-btn { background: #2a1e0c; border: 2px solid #b8651a; border-radius: 16px; padding: 0.8rem 1.2rem; color: #e6c9a0; cursor: pointer; transition: 0.2s; display: flex; flex-direction: column; align-items: center; gap: 8px; font-weight: 700; min-width: 110px; }
         .secret-spawn-btn:hover { border-color: #ffb347; background: #3a2a14; box-shadow: 0 0 15px #e67e2250; }
         .secret-spawn-btn img { width: 40px; height: 40px; image-rendering: pixelated; }
         .secret-spawn-btn.rainbow-btn { border-color: #ff0000; background: linear-gradient(135deg, #2a0a0a, #0a2a0a, #0a0a2a); animation: rainbowBorder 4s infinite linear; }
-
         .shop { margin-top: 2rem; text-align: left; }
-        .shop h3 {
-            color: #ffb347;
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            border-bottom: 2px dotted #b8651a;
-            padding-bottom: 6px;
-        }
-        .shop-item {
-            background: #18130c;
-            border: 1px solid #4a3a25;
-            border-radius: 16px;
-            padding: 1rem 1.2rem;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            flex-wrap: wrap;
-            transition: 0.2s;
-        }
+        .shop h3 { color: #ffb347; font-size: 1.4rem; margin-bottom: 1rem; border-bottom: 2px dotted #b8651a; padding-bottom: 6px; }
+        .shop-item { background: #18130c; border: 1px solid #4a3a25; border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; transition: 0.2s; }
         .shop-item.owned { border-color: #4caf50; background: #14200f; }
         .shop-item-info { flex: 1; min-width: 180px; }
         .shop-item-name { color: #ffb347; font-weight: 700; font-size: 1.1rem; }
         .shop-item-desc { color: #b8a88a; font-size: 0.9rem; margin-top: 4px; }
         .shop-item-level { color: #4caf50; font-size: 0.9rem; font-weight: 700; margin-top: 4px; }
-        .buy-btn {
-            background: #e67e22;
-            color: #0b0b0b;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .buy-btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.6rem 1.2rem; border-radius: 30px; font-weight: 700; font-size: 0.95rem; cursor: pointer; white-space: nowrap; transition: 0.2s; display: flex; align-items: center; gap: 6px; }
         .buy-btn:hover:not(:disabled) { background: #ffa733; box-shadow: 0 0 18px #ffb347; }
         .buy-btn:disabled { background: #3a3a3a; color: #777; cursor: not-allowed; }
-
-        .coffin-candy-box {
-            background: #2a1e0c;
-            border: 2px solid #b8651a;
-            border-radius: 16px;
-            padding: 1rem 1.5rem;
-            text-align: center;
-            margin: 1rem 0;
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #ffb347;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
+        .coffin-candy-box { background: #2a1e0c; border: 2px solid #b8651a; border-radius: 16px; padding: 1rem 1.5rem; text-align: center; margin: 1rem 0; font-size: 1.6rem; font-weight: 800; color: #ffb347; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .coffin-candy-box small { font-size: 0.9rem; color: #e6c9a0; font-weight: 400; }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            h1 span { font-size: 1.6rem; }
-            .container { padding: 1.8rem 1.2rem; }
-            .modal { padding: 1.5rem; }
-            .pumpkin-click-area { height: 260px; }
-        }
+        @media (max-width: 600px) { h1 { font-size: 2rem; } h1 span { font-size: 1.6rem; } .container { padding: 1.8rem 1.2rem; } .modal { padding: 1.5rem; } .pumpkin-click-area { height: 260px; } }
     </style>
 </head>
 <body>
 
-    <!-- Летучие мыши -->
     <div class="bat bat1">🦇</div>
     <div class="bat bat2">🦇</div>
     <div class="bat bat3">🦇</div>
@@ -643,7 +127,6 @@
         </svg>
     </div>
 
-    <!-- 🌈 Боковой таймер радуги -->
     <div class="rainbow-timer-side" id="rainbowTimerSide">
         🌈 Радуга через: <span class="timer-value" id="rainbowTimerValue">--:--</span>
     </div>
@@ -659,30 +142,23 @@
             <button class="tab-btn" onclick="switchTab('games', this)">🎮 Игры</button>
         </div>
 
-        <!-- ===== ГЛАВНАЯ ===== -->
         <div class="tab-content active" id="tab-home">
             <div class="events-grid">
                 <div class="event-card" id="card1" onclick="openEvent1()">
                     <div class="event-title">🍬 Сладость или гадость</div>
-                    <div class="event-desc">
-                        Сделай своему однокласснику сладость или гадость. Одноклассник выбирается случайно!
-                    </div>
+                    <div class="event-desc">Сделай своему однокласснику сладость или гадость. Одноклассник выбирается случайно!</div>
                     <div class="timer" id="timer1">--:--:--</div>
                     <div class="ended-label">🔚 Ивент закончился</div>
                 </div>
-
                 <div class="event-card" id="card2" onclick="openEvent2()">
                     <div class="event-title">⚰️ Собери и укради гроб</div>
-                    <div class="event-desc">
-                        За пятёрку любого ученика добавляется 0.5 конфетки. Максимум — 100 конфет.
-                    </div>
+                    <div class="event-desc">За пятёрку любого ученика добавляется 0.5 конфетки. Максимум — 100 конфет.</div>
                     <div class="timer" id="timer2">--:--:--</div>
                     <div class="ended-label">🔚 Ивент закончился</div>
                 </div>
             </div>
         </div>
 
-        <!-- ===== ИГРЫ ===== -->
         <div class="tab-content" id="tab-games">
             <div class="clicker-header">
                 <div class="clicker-balance">
@@ -694,14 +170,12 @@
                 </div>
             </div>
 
-            <!-- Поле для спавна -->
             <div class="pumpkin-click-area" id="clickArea"></div>
 
             <p style="color:#8a7a63; font-size:0.9rem; margin:0.5rem 0 1rem;">
                 Лови предметы на поле! Золотое ведро даёт 5000+100 за уровень прокачки, алмазное — ещё больше, а радужное — <strong>ооооооооооочень много</strong>!
             </p>
 
-            <!-- 🔑 Секретная кнопка -->
             <div style="text-align:center; margin-top:1rem;">
                 <button class="btn" style="background:#4a3a25; color:#e6c9a0; font-size:0.8rem; padding:0.4rem 1rem;" onclick="toggleSecretPrompt()">🔑 Ввести пароль</button>
             </div>
@@ -710,28 +184,15 @@
                 <button class="btn" onclick="checkPassword()">OK</button>
             </div>
 
-            <!-- 🔓 Секретная панель спавна -->
             <div class="secret-panel" id="secretPanel">
                 <h3>🔓 Секретный режим</h3>
                 <div class="secret-spawn-grid">
-                    <button class="secret-spawn-btn" onclick="spawnSpecific('candy1')">
-                        <img src="candy1.png" alt=""> Конфета 1
-                    </button>
-                    <button class="secret-spawn-btn" onclick="spawnSpecific('candy2')">
-                        <img src="candy2.png" alt=""> Конфета 2
-                    </button>
-                    <button class="secret-spawn-btn" onclick="spawnSpecific('bucket')">
-                        <img src="pumpkin_bucket.png" alt=""> Ведро тыкв
-                    </button>
-                    <button class="secret-spawn-btn" onclick="spawnSpecific('golden')">
-                        <img src="golden_pumpkin_bucket.png" alt=""> Золотое ведро
-                    </button>
-                    <button class="secret-spawn-btn" onclick="spawnSpecific('diamond')">
-                        <img src="diamond_pumpkin_bucket.png" alt=""> Алмазное ведро
-                    </button>
-                    <button class="secret-spawn-btn rainbow-btn" onclick="spawnSpecific('rainbow')">
-                        <img src="rainbow_pumpkin_bucket.png" alt=""> Радужное ведро
-                    </button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('candy1')"><img src="candy1.png" alt=""> Конфета 1</button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('candy2')"><img src="candy2.png" alt=""> Конфета 2</button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('bucket')"><img src="pumpkin_bucket.png" alt=""> Ведро тыкв</button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('golden')"><img src="golden_pumpkin_bucket.png" alt=""> Золотое ведро</button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('diamond')"><img src="diamond_pumpkin_bucket.png" alt=""> Алмазное ведро</button>
+                    <button class="secret-spawn-btn rainbow-btn" onclick="spawnSpecific('rainbow')"><img src="rainbow_pumpkin_bucket.png" alt=""> Радужное ведро</button>
                 </div>
                 <div style="margin-top:1.5rem;">
                     <button class="btn" style="background:#ff0000; color:#fff;" onclick="toggleRainbowEvent()">🌈 Вкл/Выкл Радугу</button>
@@ -749,32 +210,21 @@
         </footer>
     </div>
 
-    <!-- Модалка 1 -->
     <div class="modal-overlay" id="modal1">
         <div class="modal">
             <button class="modal-close" onclick="closeModal('modal1')">×</button>
             <h2>🍬 Сладость или гадость</h2>
-            <p>
-                Сделай своему однокласснику <strong>сладость</strong> (что-то приятное) 
-                или <strong>гадость</strong> (безобидный розыгрыш). 
-                Одноклассник выбирается случайно — но это уже на твоё усмотрение!
-            </p>
+            <p>Сделай своему однокласснику <strong>сладость</strong> (что-то приятное) или <strong>гадость</strong> (безобидный розыгрыш). Одноклассник выбирается случайно — но это уже на твоё усмотрение!</p>
             <p>Ивент заканчивается <strong>в полночь 20 октября 2026</strong>.</p>
-            <div id="event1EndedMsg" style="display:none; color:#ff6b6b; font-weight:700; text-align:center; padding:1rem;">
-                🔚 Ивент завершён 20 октября 2026 в 00:00
-            </div>
+            <div id="event1EndedMsg" style="display:none; color:#ff6b6b; font-weight:700; text-align:center; padding:1rem;">🔚 Ивент завершён 20 октября 2026 в 00:00</div>
         </div>
     </div>
 
-    <!-- Модалка 2 (гроб) -->
     <div class="modal-overlay" id="modal2">
         <div class="modal">
             <button class="modal-close" onclick="closeModal('modal2')">×</button>
             <h2>⚰️ Собери и укради гроб</h2>
-            <p>
-                За каждую <strong>пятёрку</strong> любого ученика добавляется <strong>0.5 конфетки</strong>. 
-                Максимум — <strong>100 конфет</strong>.
-            </p>
+            <p>За каждую <strong>пятёрку</strong> любого ученика добавляется <strong>0.5 конфетки</strong>. Максимум — <strong>100 конфет</strong>.</p>
             <p>Ивент заканчивается <strong>в полночь 24 октября 2026</strong>.</p>
 
             <div id="event2Active">
@@ -794,92 +244,55 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        // ========== ПУТИ К ЛОКАЛЬНЫМ ИКОНКАМ ==========
         const ICONS = {
-            candy1: 'candy1.png',
-            candy2: 'candy2.png',
-            bucket: 'pumpkin_bucket.png',
-            golden: 'golden_pumpkin_bucket.png',
-            diamond: 'diamond_pumpkin_bucket.png',
-            rainbow: 'rainbow_pumpkin_bucket.png'
+            candy1: 'candy1.png', candy2: 'candy2.png', bucket: 'pumpkin_bucket.png',
+            golden: 'golden_pumpkin_bucket.png', diamond: 'diamond_pumpkin_bucket.png', rainbow: 'rainbow_pumpkin_bucket.png'
         };
 
-        // ========== КОНСТАНТЫ ==========
         const EVENT1_END = new Date('2026-10-20T00:00:00');
         const EVENT2_END = new Date('2026-10-24T00:00:00');
         const COFFIN_START_CANDY = 57.5;
         const CLICKER_START_CANDY = 0;
         const SECRET_PASSWORD = '03111383';
 
-        // Настройки спавна
-        const BASE_SPAWN_INTERVAL = 3000;    // базовый интервал 3 сек
-        const MIN_SPAWN_INTERVAL = 300;      // минимальный 0.3 сек
+        const BASE_SPAWN_INTERVAL = 3000;
+        const MIN_SPAWN_INTERVAL = 300;
         const SPAWN_LIFETIME = 5000;
         const MAX_ITEMS_ON_SCREEN = 8;
 
-        // Базовые вероятности
-        const SPAWN_CHANCES = {
-            candy1: 44,
-            candy2: 44,
-            bucket: 10,
-            golden: 1.99,
-            diamond: 0.009,
-            rainbow: 0.001
-        };
-
-        // Награды
-        const GOLDEN_BASE = 5000;
-        const GOLDEN_PER_UPGRADE = 100;
-        const DIAMOND_BASE = 25000;
-        const DIAMOND_PER_UPGRADE = 500;
-        const RAINBOW_BASE = 1000000;
-        const RAINBOW_PER_UPGRADE = 10000;
-
-        const COLORED_CHANCE = 0.05;
-        const COLORED_MULTIPLIER = 5;
-
-        const RAINBOW_DURATION = 3 * 60 * 1000; // 3 минуты
+        const SPAWN_CHANCES = { candy1: 44, candy2: 44, bucket: 10, golden: 1.99, diamond: 0.009, rainbow: 0.001 };
+        const GOLDEN_BASE = 5000, GOLDEN_PER_UPGRADE = 100;
+        const DIAMOND_BASE = 25000, DIAMOND_PER_UPGRADE = 500;
+        const RAINBOW_BASE = 1000000, RAINBOW_PER_UPGRADE = 10000;
+        const COLORED_CHANCE = 0.05, COLORED_MULTIPLIER = 5;
+        const RAINBOW_DURATION = 3 * 60 * 1000;
 
         const STORAGE_KEYS = {
-            coffinCandy: '6a_coffin_candy_v2',
-            clickerCandy: '6a_clicker_candy',
-            clickPower: '6a_click_power',
-            autoClickers: '6a_auto_clickers',
-            luck: '6a_luck',
-            autoClickerSpeed: '6a_auto_speed',
-            spawnRate: '6a_spawn_rate',
-            secretUnlocked: '6a_secret_unlocked',
-            rainbowForce: '6a_rainbow_force'
+            coffinCandy: '6a_coffin_candy_v2', clickerCandy: '6a_clicker_candy',
+            clickPower: '6a_click_power', autoClickers: '6a_auto_clickers',
+            luck: '6a_luck', autoClickerSpeed: '6a_auto_speed', spawnRate: '6a_spawn_rate',
+            secretUnlocked: '6a_secret_unlocked', rainbowForce: '6a_rainbow_force'
         };
 
-        // ========== СОСТОЯНИЕ ==========
         let coffinCandy = COFFIN_START_CANDY;
         let clickerCandy = CLICKER_START_CANDY;
         let clickPower = 1;
         let autoClickers = 0;
         let luck = 0;
-        let autoClickerSpeed = 0;   // уровень скорости
-        let spawnRate = 0;          // уровень частоты спавна
+        let autoClickerSpeed = 0;
+        let spawnRate = 0;
         let secretUnlocked = false;
         let spawnTimer = null;
-
         let rainbowForce = false;
         let rainbowActive = false;
         let rainbowEndTime = 0;
 
-        // ========== УТИЛИТЫ ==========
         function showToast(msg) {
             const t = document.getElementById('toast');
-            t.textContent = msg;
-            t.classList.add('show');
-            clearTimeout(t._timer);
-            t._timer = setTimeout(() => t.classList.remove('show'), 1500);
+            t.textContent = msg; t.classList.add('show');
+            clearTimeout(t._timer); t._timer = setTimeout(() => t.classList.remove('show'), 1500);
         }
-
-        function fmtCandy(v) {
-            return parseFloat(v.toFixed(3)).toString();
-        }
-
+        function fmtCandy(v) { return parseFloat(v.toFixed(3)).toString(); }
         function formatTime(ms) {
             if (ms <= 0) return '00:00:00';
             const totalSec = Math.floor(ms / 1000);
@@ -891,7 +304,6 @@
             if (d > 0) return `${d}д ${pad(h)}:${pad(m)}:${pad(s)}`;
             return `${pad(h)}:${pad(m)}:${pad(s)}`;
         }
-
         function formatShort(ms) {
             if (ms <= 0) return '00:00';
             const totalSec = Math.floor(ms / 1000);
@@ -899,80 +311,23 @@
             const s = totalSec % 60;
             return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
         }
+        function getAutoSpeedPerUnit() { return 0.5 + (autoClickerSpeed * 0.05); }
+        function getTotalCPS() { return autoClickers * getAutoSpeedPerUnit(); }
+        function getSpawnInterval() { return Math.max(MIN_SPAWN_INTERVAL, BASE_SPAWN_INTERVAL * Math.pow(0.9, spawnRate)); }
 
-        // Текущая скорость автокликера (конфет в секунду за 1 автокликер)
-        function getAutoSpeedPerUnit() {
-            // Базовая 0.5 + по 0.05 за уровень скорости
-            return 0.5 + (autoClickerSpeed * 0.05);
-        }
-
-        // Общая скорость всех автокликеров
-        function getTotalCPS() {
-            return autoClickers * getAutoSpeedPerUnit();
-        }
-
-        // Текущий интервал спавна
-        function getSpawnInterval() {
-            // Каждый уровень уменьшает интервал на 10%
-            let interval = BASE_SPAWN_INTERVAL * Math.pow(0.9, spawnRate);
-            return Math.max(MIN_SPAWN_INTERVAL, interval);
-        }
-
-        // ========== СОХРАНЕНИЕ ==========
         function loadState() {
-            try {
-                const raw = localStorage.getItem(STORAGE_KEYS.coffinCandy);
-                if (raw === null) {
-                    coffinCandy = COFFIN_START_CANDY;
-                    localStorage.setItem(STORAGE_KEYS.coffinCandy, String(COFFIN_START_CANDY));
-                } else {
-                    const v = parseFloat(raw);
-                    coffinCandy = isNaN(v) ? COFFIN_START_CANDY : v;
-                }
-            } catch (e) { coffinCandy = COFFIN_START_CANDY; }
-
-            try {
-                const v = parseFloat(localStorage.getItem(STORAGE_KEYS.clickerCandy));
-                clickerCandy = isNaN(v) ? CLICKER_START_CANDY : v;
-            } catch (e) { clickerCandy = CLICKER_START_CANDY; }
-
-            try {
-                const cp = parseFloat(localStorage.getItem(STORAGE_KEYS.clickPower));
-                clickPower = isNaN(cp) ? 1 : cp;
-            } catch (e) { clickPower = 1; }
-
-            try {
-                const ac = parseInt(localStorage.getItem(STORAGE_KEYS.autoClickers));
-                autoClickers = isNaN(ac) ? 0 : ac;
-            } catch (e) { autoClickers = 0; }
-
-            try {
-                const l = parseFloat(localStorage.getItem(STORAGE_KEYS.luck));
-                luck = isNaN(l) ? 0 : l;
-            } catch (e) { luck = 0; }
-
-            try {
-                const as = parseInt(localStorage.getItem(STORAGE_KEYS.autoClickerSpeed));
-                autoClickerSpeed = isNaN(as) ? 0 : as;
-            } catch (e) { autoClickerSpeed = 0; }
-
-            try {
-                const sr = parseInt(localStorage.getItem(STORAGE_KEYS.spawnRate));
-                spawnRate = isNaN(sr) ? 0 : sr;
-            } catch (e) { spawnRate = 0; }
-
-            try {
-                secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true';
-            } catch (e) { secretUnlocked = false; }
-
-            try {
-                rainbowForce = localStorage.getItem(STORAGE_KEYS.rainbowForce) === 'true';
-            } catch (e) { rainbowForce = false; }
+            try { const raw = localStorage.getItem(STORAGE_KEYS.coffinCandy); if (raw === null) { coffinCandy = COFFIN_START_CANDY; localStorage.setItem(STORAGE_KEYS.coffinCandy, String(COFFIN_START_CANDY)); } else { const v = parseFloat(raw); coffinCandy = isNaN(v) ? COFFIN_START_CANDY : v; } } catch (e) { coffinCandy = COFFIN_START_CANDY; }
+            try { const v = parseFloat(localStorage.getItem(STORAGE_KEYS.clickerCandy)); clickerCandy = isNaN(v) ? CLICKER_START_CANDY : v; } catch (e) { clickerCandy = CLICKER_START_CANDY; }
+            try { const cp = parseFloat(localStorage.getItem(STORAGE_KEYS.clickPower)); clickPower = isNaN(cp) ? 1 : cp; } catch (e) { clickPower = 1; }
+            try { const ac = parseInt(localStorage.getItem(STORAGE_KEYS.autoClickers)); autoClickers = isNaN(ac) ? 0 : ac; } catch (e) { autoClickers = 0; }
+            try { const l = parseFloat(localStorage.getItem(STORAGE_KEYS.luck)); luck = isNaN(l) ? 0 : l; } catch (e) { luck = 0; }
+            try { const as = parseInt(localStorage.getItem(STORAGE_KEYS.autoClickerSpeed)); autoClickerSpeed = isNaN(as) ? 0 : as; } catch (e) { autoClickerSpeed = 0; }
+            try { const sr = parseInt(localStorage.getItem(STORAGE_KEYS.spawnRate)); spawnRate = isNaN(sr) ? 0 : sr; } catch (e) { spawnRate = 0; }
+            try { secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true'; } catch (e) { secretUnlocked = false; }
+            try { rainbowForce = localStorage.getItem(STORAGE_KEYS.rainbowForce) === 'true'; } catch (e) { rainbowForce = false; }
         }
 
-        function saveCoffinCandy() {
-            try { localStorage.setItem(STORAGE_KEYS.coffinCandy, String(coffinCandy)); } catch (e) {}
-        }
+        function saveCoffinCandy() { try { localStorage.setItem(STORAGE_KEYS.coffinCandy, String(coffinCandy)); } catch (e) {} }
         function saveClickerState() {
             try {
                 localStorage.setItem(STORAGE_KEYS.clickerCandy, String(clickerCandy));
@@ -984,41 +339,17 @@
             } catch (e) {}
         }
 
-        // ========== UI КОНФЕТ ==========
-        function setCoffinCandy(v) {
-            coffinCandy = Math.max(0, v);
-            saveCoffinCandy();
-            updateCoffinCandyUI();
-        }
-        function setClickerCandy(v) {
-            clickerCandy = v;
-            saveClickerState();
-            updateClickerCandyUI();
-            renderShop();
-        }
+        function setCoffinCandy(v) { coffinCandy = Math.max(0, v); saveCoffinCandy(); updateCoffinCandyUI(); }
+        function setClickerCandy(v) { clickerCandy = v; saveClickerState(); updateClickerCandyUI(); renderShop(); }
 
         function updateCoffinCandyUI() {
-            const el = document.getElementById('coffinCandy');
-            if (el) el.textContent = fmtCandy(coffinCandy);
-            const f = document.getElementById('finalCandy');
-            if (f) f.textContent = fmtCandy(coffinCandy);
+            const el = document.getElementById('coffinCandy'); if (el) el.textContent = fmtCandy(coffinCandy);
+            const f = document.getElementById('finalCandy'); if (f) f.textContent = fmtCandy(coffinCandy);
         }
+        function updateClickerCandyUI() { const el = document.getElementById('gameCandy'); if (el) el.textContent = fmtCandy(clickerCandy); }
+        function updateCpsUI() { const el = document.getElementById('cpsValue'); if (el) el.textContent = fmtCandy(getTotalCPS()); }
+        function getTotalUpgradeLevels() { return (clickPower - 1) + autoClickers + luck + autoClickerSpeed + spawnRate; }
 
-        function updateClickerCandyUI() {
-            const el = document.getElementById('gameCandy');
-            if (el) el.textContent = fmtCandy(clickerCandy);
-        }
-
-        function updateCpsUI() {
-            const el = document.getElementById('cpsValue');
-            if (el) el.textContent = fmtCandy(getTotalCPS());
-        }
-
-        function getTotalUpgradeLevels() {
-            return (clickPower - 1) + autoClickers + luck + autoClickerSpeed + spawnRate;
-        }
-
-        // ========== ВКЛАДКИ ==========
         function switchTab(name, btn) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1026,241 +357,105 @@
             btn.classList.add('active');
         }
 
-        // ========== ТАЙМЕРЫ ==========
         function tickTimers() {
             const now = Date.now();
-
-            const card1 = document.getElementById('card1');
-            const timer1 = document.getElementById('timer1');
+            const card1 = document.getElementById('card1'); const timer1 = document.getElementById('timer1');
             const ms1 = EVENT1_END.getTime() - now;
-            if (ms1 <= 0) {
-                card1.classList.add('ended');
-                timer1.textContent = '';
-            } else {
-                card1.classList.remove('ended');
-                timer1.textContent = formatTime(ms1);
-            }
+            if (ms1 <= 0) { card1.classList.add('ended'); timer1.textContent = ''; }
+            else { card1.classList.remove('ended'); timer1.textContent = formatTime(ms1); }
 
-            const card2 = document.getElementById('card2');
-            const timer2 = document.getElementById('timer2');
+            const card2 = document.getElementById('card2'); const timer2 = document.getElementById('timer2');
             const ms2 = EVENT2_END.getTime() - now;
-            if (ms2 <= 0) {
-                card2.classList.add('ended');
-                timer2.textContent = '';
-            } else {
-                card2.classList.remove('ended');
-                timer2.textContent = formatTime(ms2);
-            }
+            if (ms2 <= 0) { card2.classList.add('ended'); timer2.textContent = ''; }
+            else { card2.classList.remove('ended'); timer2.textContent = formatTime(ms2); }
 
-            // 🌈 Радужный таймер — до начала следующего часа
-            if (rainbowForce) {
-                document.getElementById('rainbowTimerValue').textContent = 'ВКЛ';
-            } else if (rainbowActive) {
-                document.getElementById('rainbowTimerValue').textContent = 'АКТИВНА!';
-            } else {
+            if (rainbowForce) { document.getElementById('rainbowTimerValue').textContent = 'ВКЛ'; }
+            else if (rainbowActive) { document.getElementById('rainbowTimerValue').textContent = 'АКТИВНА!'; }
+            else {
                 const nowDate = new Date();
                 const nextHour = new Date(nowDate);
                 nextHour.setMinutes(0, 0, 0);
                 nextHour.setHours(nextHour.getHours() + 1);
                 const msLeft = nextHour.getTime() - now;
-                if (msLeft <= 0) {
-                    document.getElementById('rainbowTimerValue').textContent = 'СКОРО!';
-                } else {
-                    document.getElementById('rainbowTimerValue').textContent = formatShort(msLeft);
-                }
+                document.getElementById('rainbowTimerValue').textContent = (msLeft <= 0) ? 'СКОРО!' : formatShort(msLeft);
             }
         }
 
-        // ========== ИВЕНТ РАДУГА (по часам) ==========
         function checkRainbowEvent() {
             const now = Date.now();
             const nowDate = new Date();
-
-            // Принудительно
-            if (rainbowForce) {
-                if (!rainbowActive) activateRainbow();
-                return;
-            }
-
-            // Если радуга активна — проверяем, не закончилась ли
-            if (rainbowActive) {
-                if (now >= rainbowEndTime) {
-                    deactivateRainbow();
-                }
-                return;
-            }
-
-            // Радуга начинается в 0 минут 0 секунд каждого часа
-            // Проверяем: если сейчас ровно начало часа (в пределах первых 2 секунд) — включаем
-            const minutes = nowDate.getMinutes();
-            const seconds = nowDate.getSeconds();
-            if (minutes === 0 && seconds <= 2) {
-                activateRainbow();
-            }
+            if (rainbowForce) { if (!rainbowActive) activateRainbow(); return; }
+            if (rainbowActive) { if (now >= rainbowEndTime) deactivateRainbow(); return; }
+            const minutes = nowDate.getMinutes(); const seconds = nowDate.getSeconds();
+            if (minutes === 0 && seconds <= 2) activateRainbow();
         }
-
-        function activateRainbow() {
-            if (rainbowActive) return;
-            rainbowActive = true;
-            rainbowEndTime = Date.now() + RAINBOW_DURATION;
-            document.body.classList.add('rainbow-active');
-            showToast('🌈 ИВЕНТ РАДУГА НАЧАЛСЯ! Все награды ×2, шансы редких выше!');
-        }
-
-        function deactivateRainbow() {
-            rainbowActive = false;
-            document.body.classList.remove('rainbow-active');
-            showToast('🌈 Радуга закончилась. Ждём следующий час!');
-        }
-
+        function activateRainbow() { if (rainbowActive) return; rainbowActive = true; rainbowEndTime = Date.now() + RAINBOW_DURATION; document.body.classList.add('rainbow-active'); showToast('🌈 ИВЕНТ РАДУГА НАЧАЛСЯ! Все награды ×2!'); }
+        function deactivateRainbow() { rainbowActive = false; document.body.classList.remove('rainbow-active'); showToast('🌈 Радуга закончилась. Ждём следующий час!'); }
         function toggleRainbowEvent() {
             rainbowForce = !rainbowForce;
             try { localStorage.setItem(STORAGE_KEYS.rainbowForce, String(rainbowForce)); } catch (e) {}
-            if (rainbowForce) {
-                showToast('🌈 Радуга включена принудительно!');
-                if (!rainbowActive) activateRainbow();
-            } else {
-                showToast('🌈 Радуга выключена');
-                if (rainbowActive) deactivateRainbow();
-            }
+            if (rainbowForce) { showToast('🌈 Радуга включена принудительно!'); if (!rainbowActive) activateRainbow(); }
+            else { showToast('🌈 Радуга выключена'); if (rainbowActive) deactivateRainbow(); }
         }
 
-        // ========== МОДАЛКИ ==========
-        function openModal(id) {
-            document.getElementById(id).classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function openEvent1() {
-            const ended = Date.now() >= EVENT1_END.getTime();
-            document.getElementById('event1EndedMsg').style.display = ended ? 'block' : 'none';
-            openModal('modal1');
-        }
-
+        function openModal(id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = ''; }
+        function openEvent1() { const ended = Date.now() >= EVENT1_END.getTime(); document.getElementById('event1EndedMsg').style.display = ended ? 'block' : 'none'; openModal('modal1'); }
         function openEvent2() {
             const ended = Date.now() >= EVENT2_END.getTime();
-            if (ended) {
-                document.getElementById('event2Active').style.display = 'none';
-                document.getElementById('event2EndedMsg').style.display = 'block';
-                document.getElementById('finalCandy').textContent = fmtCandy(coffinCandy);
-            } else {
-                document.getElementById('event2Active').style.display = 'block';
-                document.getElementById('event2EndedMsg').style.display = 'none';
-                updateCoffinCandyUI();
-            }
+            if (ended) { document.getElementById('event2Active').style.display = 'none'; document.getElementById('event2EndedMsg').style.display = 'block'; document.getElementById('finalCandy').textContent = fmtCandy(coffinCandy); }
+            else { document.getElementById('event2Active').style.display = 'block'; document.getElementById('event2EndedMsg').style.display = 'none'; updateCoffinCandyUI(); }
             openModal('modal2');
         }
 
-        // ========== КЛИКЕР ==========
         function spawnFloatText(e, text, customColor) {
-            const area = document.getElementById('clickArea');
-            if (!area) return;
+            const area = document.getElementById('clickArea'); if (!area) return;
             const rect = area.getBoundingClientRect();
             let x, y;
-            if (e && e.clientX) {
-                x = e.clientX - rect.left;
-                y = e.clientY - rect.top;
-            } else {
-                x = rect.width / 2;
-                y = rect.height / 2;
-            }
-            const el = document.createElement('div');
-            el.className = 'click-float';
-            el.textContent = text;
+            if (e && e.clientX) { x = e.clientX - rect.left; y = e.clientY - rect.top; } else { x = rect.width / 2; y = rect.height / 2; }
+            const el = document.createElement('div'); el.className = 'click-float'; el.textContent = text;
             if (customColor) el.style.color = customColor;
-            el.style.left = (x - 20) + 'px';
-            el.style.top = (y - 20) + 'px';
-            area.appendChild(el);
-            setTimeout(() => el.remove(), 900);
+            el.style.left = (x - 20) + 'px'; el.style.top = (y - 20) + 'px';
+            area.appendChild(el); setTimeout(() => el.remove(), 900);
         }
 
-        // ========== СПАВН ПРЕДМЕТОВ ==========
         function getSpawnChances() {
-            if (rainbowActive) {
-                return {
-                    candy1: 30,
-                    candy2: 30,
-                    bucket: 20,
-                    golden: 10,
-                    diamond: 5,
-                    rainbow: 0.1
-                };
-            }
+            if (rainbowActive) return { candy1: 30, candy2: 30, bucket: 20, golden: 10, diamond: 5, rainbow: 0.1 };
             const luckMult = 1 + (luck * 0.05);
-            return {
-                candy1: Math.max(1, 44 - luck * 2),
-                candy2: Math.max(1, 44 - luck * 2),
-                bucket: 10,
-                golden: 1.99 * luckMult,
-                diamond: 0.009 * luckMult,
-                rainbow: 0.001 * luckMult
-            };
+            return { candy1: Math.max(1, 44 - luck * 2), candy2: Math.max(1, 44 - luck * 2), bucket: 10, golden: 1.99 * luckMult, diamond: 0.009 * luckMult, rainbow: 0.001 * luckMult };
         }
 
         function spawnRandomItem() {
-            const area = document.getElementById('clickArea');
-            if (!area) return;
+            const area = document.getElementById('clickArea'); if (!area) return;
             if (area.querySelectorAll('.spawn-item').length >= MAX_ITEMS_ON_SCREEN) return;
-
             const chances = getSpawnChances();
             const total = Object.values(chances).reduce((a, b) => a + b, 0);
             const roll = Math.random() * total;
-            let type = 'candy1';
-            let acc = 0;
-            for (const [key, chance] of Object.entries(chances)) {
-                acc += chance;
-                if (roll <= acc) { type = key; break; }
-            }
+            let type = 'candy1'; let acc = 0;
+            for (const [key, chance] of Object.entries(chances)) { acc += chance; if (roll <= acc) { type = key; break; } }
             spawnItem(type);
         }
 
         function spawnSpecific(type) {
-            const area = document.getElementById('clickArea');
-            if (!area) return;
-            if (area.querySelectorAll('.spawn-item').length >= MAX_ITEMS_ON_SCREEN) {
-                showToast('⚠️ Слишком много предметов на поле');
-                return;
-            }
+            const area = document.getElementById('clickArea'); if (!area) return;
+            if (area.querySelectorAll('.spawn-item').length >= MAX_ITEMS_ON_SCREEN) { showToast('⚠️ Слишком много предметов на поле'); return; }
             spawnItem(type);
         }
 
         function spawnItem(type) {
-            const area = document.getElementById('clickArea');
-            if (!area) return;
-
+            const area = document.getElementById('clickArea'); if (!area) return;
             const el = document.createElement('img');
-            el.className = 'spawn-item';
-            el.dataset.type = type;
-            el.alt = type;
+            el.className = 'spawn-item'; el.dataset.type = type; el.alt = type;
 
-            if (type === 'candy1') {
-                el.src = ICONS.candy1;
-                el.classList.add('spawn-candy1');
-            } else if (type === 'candy2') {
-                el.src = ICONS.candy2;
-                el.classList.add('spawn-candy2');
-            } else if (type === 'bucket') {
-                el.src = ICONS.bucket;
-                el.classList.add('spawn-bucket');
-            } else if (type === 'golden') {
-                el.src = ICONS.golden;
-                el.classList.add('spawn-golden');
-            } else if (type === 'diamond') {
-                el.src = ICONS.diamond;
-                el.classList.add('spawn-diamond');
-            } else if (type === 'rainbow') {
-                el.src = ICONS.rainbow;
-                el.classList.add('spawn-rainbow');
-            } else {
-                return;
-            }
+            if (type === 'candy1') { el.src = ICONS.candy1; el.classList.add('spawn-candy1'); }
+            else if (type === 'candy2') { el.src = ICONS.candy2; el.classList.add('spawn-candy2'); }
+            else if (type === 'bucket') { el.src = ICONS.bucket; el.classList.add('spawn-bucket'); }
+            else if (type === 'golden') { el.src = ICONS.golden; el.classList.add('spawn-golden'); }
+            else if (type === 'diamond') { el.src = ICONS.diamond; el.classList.add('spawn-diamond'); }
+            else if (type === 'rainbow') { el.src = ICONS.rainbow; el.classList.add('spawn-rainbow'); }
+            else return;
 
-            let colored = false;
-            let colorGlow = null;
+            let colored = false; let colorGlow = null;
             if ((type === 'candy1' || type === 'candy2') && Math.random() < COLORED_CHANCE + luck * 0.01) {
                 colored = true;
                 const colors = ['#ff0000', '#ff8800', '#ffff00', '#00ff00', '#0088ff', '#8800ff', '#ff00ff'];
@@ -1272,76 +467,38 @@
             const pad = 50;
             const x = pad + Math.random() * (area.clientWidth - pad * 2);
             const y = pad + Math.random() * (area.clientHeight - pad * 2);
-            el.style.left = x + 'px';
-            el.style.top = y + 'px';
+            el.style.left = x + 'px'; el.style.top = y + 'px';
 
             el.onclick = (ev) => {
                 ev.stopPropagation();
-
-                let bonus = 0;
-                let color = null;
-
-                if (type === 'golden') {
-                    bonus = GOLDEN_BASE + (getTotalUpgradeLevels() * GOLDEN_PER_UPGRADE);
-                    color = '#ffd700';
-                    showToast(`🌟 ЗОЛОТОЕ ВЕДРО! +${fmtCandy(bonus)} конфет!`);
-                } else if (type === 'diamond') {
-                    bonus = DIAMOND_BASE + (getTotalUpgradeLevels() * DIAMOND_PER_UPGRADE);
-                    color = '#00ffff';
-                    showToast(`💎 АЛМАЗНОЕ ВЕДРО! +${fmtCandy(bonus)} конфет!`);
-                } else if (type === 'rainbow') {
-                    bonus = RAINBOW_BASE + (getTotalUpgradeLevels() * RAINBOW_PER_UPGRADE);
-                    color = '#ff00ff';
-                    showToast(`🌈 РАДУЖНОЕ ВЕДРО! +${fmtCandy(bonus)} КОНФЕТ!!!`);
-                } else {
+                let bonus = 0; let color = null;
+                if (type === 'golden') { bonus = GOLDEN_BASE + (getTotalUpgradeLevels() * GOLDEN_PER_UPGRADE); color = '#ffd700'; showToast(`🌟 ЗОЛОТОЕ ВЕДРО! +${fmtCandy(bonus)} конфет!`); }
+                else if (type === 'diamond') { bonus = DIAMOND_BASE + (getTotalUpgradeLevels() * DIAMOND_PER_UPGRADE); color = '#00ffff'; showToast(`💎 АЛМАЗНОЕ ВЕДРО! +${fmtCandy(bonus)} конфет!`); }
+                else if (type === 'rainbow') { bonus = RAINBOW_BASE + (getTotalUpgradeLevels() * RAINBOW_PER_UPGRADE); color = '#ff00ff'; showToast(`🌈 РАДУЖНОЕ ВЕДРО! +${fmtCandy(bonus)} КОНФЕТ!!!`); }
+                else {
                     bonus = clickPower;
-                    if (colored) {
-                        bonus *= COLORED_MULTIPLIER;
-                        color = colorGlow;
-                        showToast(`✨ Цветная конфета! ×${COLORED_MULTIPLIER}! +${fmtCandy(bonus)}`);
-                    }
+                    if (colored) { bonus *= COLORED_MULTIPLIER; color = colorGlow; showToast(`✨ Цветная конфета! ×${COLORED_MULTIPLIER}! +${fmtCandy(bonus)}`); }
                 }
-
-                if (rainbowActive) {
-                    bonus *= 2;
-                }
-
+                if (rainbowActive) bonus *= 2;
                 setClickerCandy(clickerCandy + bonus);
                 spawnFloatText(ev, `+${fmtCandy(bonus)}`, color);
                 el.remove();
             };
-
             area.appendChild(el);
-
-            const lifetime = (type === 'golden' || type === 'diamond' || type === 'rainbow')
-                ? SPAWN_LIFETIME * 1.5
-                : SPAWN_LIFETIME;
-            setTimeout(() => {
-                if (el.parentNode) el.remove();
-            }, lifetime);
+            const lifetime = (type === 'golden' || type === 'diamond' || type === 'rainbow') ? SPAWN_LIFETIME * 1.5 : SPAWN_LIFETIME;
+            setTimeout(() => { if (el.parentNode) el.remove(); }, lifetime);
         }
 
-        function startSpawnTimer() {
-            if (spawnTimer) clearInterval(spawnTimer);
-            spawnTimer = setInterval(spawnRandomItem, getSpawnInterval());
-        }
+        function startSpawnTimer() { if (spawnTimer) clearInterval(spawnTimer); spawnTimer = setInterval(spawnRandomItem, getSpawnInterval()); }
 
-        // Автокликеры (проверяем каждые 100мс для плавности)
         setInterval(() => {
             if (autoClickers > 0) {
                 const gainPerTick = getTotalCPS() * 0.1;
-                if (gainPerTick > 0) {
-                    setClickerCandy(clickerCandy + gainPerTick);
-                }
+                if (gainPerTick > 0) setClickerCandy(clickerCandy + gainPerTick);
             }
         }, 100);
 
-        // ========== СЕКРЕТ ==========
-        function toggleSecretPrompt() {
-            const p = document.getElementById('secretPrompt');
-            p.style.display = p.style.display === 'none' ? 'block' : 'none';
-        }
-
+        function toggleSecretPrompt() { const p = document.getElementById('secretPrompt'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
         function checkPassword() {
             const input = document.getElementById('secretPassword');
             if (input.value === SECRET_PASSWORD) {
@@ -1351,81 +508,24 @@
                 document.getElementById('secretPrompt').style.display = 'none';
                 input.value = '';
                 showToast('🔓 Секретный режим активирован!');
-            } else {
-                showToast('❌ Неверный пароль');
-            }
+            } else showToast('❌ Неверный пароль');
         }
 
-        // ========== МАГАЗИН ==========
         const SHOP_ITEMS = [
-            {
-                id: 'clickPower',
-                name: '💪 Сила клика',
-                desc: 'Увеличивает конфеты за клик на +1',
-                basePrice: 25,
-                priceMultiplier: 1.8,
-                maxLevel: 20,
-                getLevel: () => clickPower - 1,
-                apply: () => { clickPower += 1; }
-            },
-            {
-                id: 'autoClicker',
-                name: '🤖 Автокликер',
-                desc: 'Добавляет +1 автокликер (каждый даёт 0.5+ конфет/сек)',
-                basePrice: 50,
-                priceMultiplier: 1.5,
-                maxLevel: 50,
-                getLevel: () => autoClickers,
-                apply: () => { autoClickers += 1; }
-            },
-            {
-                id: 'autoSpeed',
-                name: '⚡ Скорость автокликера',
-                desc: 'Каждый уровень +0.05 конфет/сек к каждому автокликеру',
-                basePrice: 200,
-                priceMultiplier: 2.2,
-                maxLevel: 20,
-                getLevel: () => autoClickerSpeed,
-                apply: () => { autoClickerSpeed += 1; }
-            },
-            {
-                id: 'spawnRate',
-                name: '⏱️ Частота спавна',
-                desc: 'Каждый уровень ускоряет появление предметов на 10%',
-                basePrice: 150,
-                priceMultiplier: 2.0,
-                maxLevel: 15,
-                getLevel: () => spawnRate,
-                apply: () => { spawnRate += 1; }
-            },
-            {
-                id: 'luck',
-                name: '🍀 Удача',
-                desc: 'Повышает шанс редких предметов и цветных конфет',
-                basePrice: 100,
-                priceMultiplier: 2.0,
-                maxLevel: 15,
-                getLevel: () => luck,
-                apply: () => { luck += 1; }
-            }
+            { id: 'clickPower', name: '💪 Сила клика', desc: 'Увеличивает конфеты за клик на +1', basePrice: 25, priceMultiplier: 1.8, maxLevel: 20, getLevel: () => clickPower - 1, apply: () => { clickPower += 1; } },
+            { id: 'autoClicker', name: '🤖 Автокликер', desc: 'Добавляет +1 автокликер (каждый даёт 0.5+ конфет/сек)', basePrice: 50, priceMultiplier: 1.5, maxLevel: 50, getLevel: () => autoClickers, apply: () => { autoClickers += 1; } },
+            { id: 'autoSpeed', name: '⚡ Скорость автокликера', desc: 'Каждый уровень +0.05 конфет/сек к каждому автокликеру', basePrice: 200, priceMultiplier: 2.2, maxLevel: 20, getLevel: () => autoClickerSpeed, apply: () => { autoClickerSpeed += 1; } },
+            { id: 'spawnRate', name: '⏱️ Частота спавна', desc: 'Каждый уровень ускоряет появление предметов на 10%', basePrice: 150, priceMultiplier: 2.0, maxLevel: 15, getLevel: () => spawnRate, apply: () => { spawnRate += 1; } },
+            { id: 'luck', name: '🍀 Удача', desc: 'Повышает шанс редких предметов и цветных конфет', basePrice: 100, priceMultiplier: 2.0, maxLevel: 15, getLevel: () => luck, apply: () => { luck += 1; } }
         ];
 
-        function getPrice(item) {
-            const level = item.getLevel();
-            return Math.ceil(item.basePrice * Math.pow(item.priceMultiplier, level));
-        }
+        function getPrice(item) { return Math.ceil(item.basePrice * Math.pow(item.priceMultiplier, item.getLevel())); }
 
         function renderShop() {
-            const list = document.getElementById('shopList');
-            if (!list) return;
-            list.innerHTML = '';
-
+            const list = document.getElementById('shopList'); if (!list) return; list.innerHTML = '';
             SHOP_ITEMS.forEach(item => {
-                const level = item.getLevel();
-                const price = getPrice(item);
-                const maxed = level >= item.maxLevel;
-                const canBuy = !maxed && clickerCandy >= price;
-
+                const level = item.getLevel(); const price = getPrice(item);
+                const maxed = level >= item.maxLevel; const canBuy = !maxed && clickerCandy >= price;
                 const div = document.createElement('div');
                 div.className = 'shop-item' + (maxed ? ' owned' : '');
                 div.innerHTML = `
@@ -1443,31 +543,15 @@
         }
 
         function buyItem(id) {
-            const item = SHOP_ITEMS.find(i => i.id === id);
-            if (!item) return;
-            const level = item.getLevel();
-            if (level >= item.maxLevel) return;
+            const item = SHOP_ITEMS.find(i => i.id === id); if (!item) return;
+            const level = item.getLevel(); if (level >= item.maxLevel) return;
             const price = getPrice(item);
-            if (clickerCandy < price) {
-                showToast('❌ Недостаточно конфет');
-                return;
-            }
-            clickerCandy -= price;
-            item.apply();
-            saveClickerState();
-            updateClickerCandyUI();
-            updateCpsUI();
-            renderShop();
-            
-            // Если купили скорость спавна — перезапускаем таймер
-            if (id === 'spawnRate') {
-                startSpawnTimer();
-            }
-            
+            if (clickerCandy < price) { showToast('❌ Недостаточно конфет'); return; }
+            clickerCandy -= price; item.apply(); saveClickerState(); updateClickerCandyUI(); updateCpsUI(); renderShop();
+            if (id === 'spawnRate') startSpawnTimer();
             showToast(`✅ Куплено: ${item.name}`);
         }
 
-        // ========== СТАРТ ==========
         loadState();
         updateCoffinCandyUI();
         updateClickerCandyUI();
@@ -1476,26 +560,26 @@
         tickTimers();
         setInterval(tickTimers, 1000);
         startSpawnTimer();
-
-        // Проверка радуги каждую секунду
         setInterval(checkRainbowEvent, 1000);
         checkRainbowEvent();
-
-        if (secretUnlocked) {
-            document.getElementById('secretPanel').classList.add('visible');
-        }
+        if (secretUnlocked) document.getElementById('secretPanel').classList.add('visible');
 
         document.querySelectorAll('.modal-overlay').forEach(el => {
-            el.addEventListener('click', e => {
-                if (e.target === el) closeModal(el.id);
-            });
+            el.addEventListener('click', e => { if (e.target === el) closeModal(el.id); });
+        });
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') document.querySelectorAll('.modal-overlay.active').forEach(el => closeModal(el.id));
         });
 
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.modal-overlay.active').forEach(el => closeModal(el.id));
-            }
-        });
+        window.buyItem = buyItem;
+        window.switchTab = switchTab;
+        window.openEvent1 = openEvent1;
+        window.openEvent2 = openEvent2;
+        window.closeModal = closeModal;
+        window.toggleSecretPrompt = toggleSecretPrompt;
+        window.checkPassword = checkPassword;
+        window.spawnSpecific = spawnSpecific;
+        window.toggleRainbowEvent = toggleRainbowEvent;
     </script>
 </body>
 </html>
