@@ -287,8 +287,8 @@
         let rainbowActive = false;
         let rainbowEndTime = 0;
 
-        // Кэш карточек магазина, чтобы не пересоздавать их
         let shopCardsBuilt = false;
+        let lastShopUpdate = 0;
 
         function showToast(msg) {
             const t = document.getElementById('toast');
@@ -347,7 +347,7 @@
             clickerCandy = v;
             saveClickerState();
             updateClickerCandyUI();
-            updateShopButtons(); // ✅ только обновляем кнопки, не пересоздаём карточки
+            // ❌ Убрано: updateShopButtons() больше не вызывается тут
         }
 
         function updateCoffinCandyUI() {
@@ -529,7 +529,6 @@
 
         function getPrice(item) { return Math.ceil(item.basePrice * Math.pow(item.priceMultiplier, item.getLevel())); }
 
-        // ✅ Создаём карточки ОДИН РАЗ
         function buildShop() {
             const list = document.getElementById('shopList');
             if (!list) return;
@@ -554,7 +553,6 @@
             updateShopButtons();
         }
 
-        // ✅ Только обновляем состояние кнопок и уровней, не пересоздавая HTML
         function updateShopButtons() {
             if (!shopCardsBuilt) return;
             SHOP_ITEMS.forEach(item => {
@@ -581,6 +579,11 @@
             });
         }
 
+        // ✅ Отдельный таймер для обновления кнопок магазина раз в 400 мс
+        setInterval(() => {
+            updateShopButtons();
+        }, 400);
+
         function buyItem(id) {
             const item = SHOP_ITEMS.find(i => i.id === id); if (!item) return;
             const level = item.getLevel(); if (level >= item.maxLevel) return;
@@ -588,7 +591,7 @@
             if (clickerCandy < price) { showToast('❌ Недостаточно конфет'); return; }
             clickerCandy -= price; item.apply(); saveClickerState();
             updateClickerCandyUI(); updateCpsUI();
-            updateShopButtons(); // ✅ не пересоздаём магазин
+            updateShopButtons();
             if (id === 'spawnRate') startSpawnTimer();
             showToast(`✅ Куплено: ${item.name}`);
         }
@@ -597,7 +600,7 @@
         updateCoffinCandyUI();
         updateClickerCandyUI();
         updateCpsUI();
-        buildShop();       // ✅ создаём магазин один раз
+        buildShop();
         tickTimers();
         setInterval(tickTimers, 1000);
         startSpawnTimer();
