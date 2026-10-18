@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Официальный сайт 6А класса — ГБОУ Лицей 486</title>
 
-    <!-- ✅ ИКОНКА САЙТА (favicon) -->
-    <link rel="icon" type="image/png" href="https://i.postimg.cc/bvjmPv7j/New-Piskel-(58)-(1).png">
+    <!-- ✅ Локальная иконка сайта -->
+    <link rel="icon" type="image/x-icon" href="logo.ico">
 
     <style>
         * {
@@ -331,7 +331,7 @@
         }
         .clicker-balance small { font-size: 0.9rem; color: #e6c9a0; font-weight: 400; }
 
-        /* ✅ Иконка конфеты вместо эмодзи 🍬 */
+        /* ✅ Иконка конфеты */
         .candy-icon {
             width: 22px;
             height: 22px;
@@ -365,7 +365,7 @@
             justify-content: center;
             margin: 1rem 0;
         }
-        /* ✅ Главная тыква — иконка из ссылки */
+        /* ✅ Главная тыква */
         .big-pumpkin {
             width: 140px;
             height: 140px;
@@ -394,7 +394,7 @@
             100% { opacity: 0; transform: translateY(-90px) scale(1.3); }
         }
 
-        /* ✅ Бонусные тыквы — иконка из ссылки */
+        /* ✅ Бонусная тыква */
         .bonus-pumpkin {
             position: absolute;
             width: 70px;
@@ -410,7 +410,7 @@
         @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
         @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-12px); } }
 
-        /* ✅ Золотая тыква — особая анимация */
+        /* ✅ Золотая тыква */
         .golden-pumpkin {
             position: absolute;
             width: 90px;
@@ -552,7 +552,7 @@
         <div class="tab-content" id="tab-games">
             <div class="clicker-header">
                 <div class="clicker-balance">
-                    <img src="https://i.postimg.cc/9fWy1q3F/New-Piskel-(58)-(5).png" class="candy-icon-lg" alt="конфета">
+                    <img src="candy1.png" class="candy-icon-lg" alt="конфета">
                     <span id="gameCandy">0</span> <small>конфет</small>
                 </div>
                 <div class="cps-display">
@@ -562,7 +562,7 @@
 
             <div class="pumpkin-click-area" id="clickArea">
                 <!-- ✅ Главная тыква -->
-                <img src="https://i.postimg.cc/cHCwGy45/New-Piskel-(58)-(4).png" class="big-pumpkin" id="mainPumpkin" onclick="clickMainPumpkin(event)" alt="тыква">
+                <img src="pumpkin_bucket.png" class="big-pumpkin" id="mainPumpkin" onclick="clickMainPumpkin(event)" alt="тыква">
             </div>
 
             <p style="color:#8a7a63; font-size:0.9rem; margin:0.5rem 0 1rem;">
@@ -611,7 +611,7 @@
 
             <div id="event2Active">
                 <div class="coffin-candy-box">
-                    <img src="https://i.postimg.cc/9fWy1q3F/New-Piskel-(58)-(5).png" class="candy-icon-lg" alt="конфета">
+                    <img src="candy1.png" class="candy-icon-lg" alt="конфета">
                     <span id="coffinCandy">57.5</span> <small>/ 100 конфет</small>
                 </div>
             </div>
@@ -626,13 +626,12 @@
     <div class="toast" id="toast"></div>
 
     <script>
-        // ========== ССЫЛКИ НА ИКОНКИ ==========
-        // ✅ Все иконки вынесены сюда — меняешь только здесь
+        // ========== ПУТИ К ЛОКАЛЬНЫМ ИКОНКАМ ==========
         const ICONS = {
-            bonusPumpkin:   'https://i.postimg.cc/kX6st8Cz/New-Piskel-(58)-(2).png',   // бонусная (даёт много)
-            goldenPumpkin:  'https://i.postimg.cc/Px5zfvKF/New-Piskel-(58)-(3).png',   // золотая (ппц много)
-            mainPumpkin:    'https://i.postimg.cc/cHCwGy45/New-Piskel-(58)-(4).png',   // главная тыква
-            candy:          'https://i.postimg.cc/9fWy1q3F/New-Piskel-(58)-(5).png'    // конфетка
+            bonusPumpkin:  'candy2.png',
+            goldenPumpkin: 'golden_pumpkin_bucket.png',
+            mainPumpkin:   'pumpkin_bucket.png',
+            candy:         'candy1.png'
         };
 
         // ========== КОНСТАНТЫ ==========
@@ -827,7 +826,7 @@
             setClickerCandy(clickerCandy + gain);
             spawnFloatText(e, `+${fmtCandy(gain)}`);
 
-            // Сначала проверяем золотую (очень редкую), потом обычную бонусную
+            // Сначала проверяем золотую, потом бонусную
             if (Math.random() < GOLDEN_CHANCE) {
                 spawnGoldenPumpkin();
             } else if (Math.random() < BONUS_CHANCE) {
@@ -901,7 +900,7 @@
             el.style.top = y + 'px';
             el.onclick = (ev) => {
                 ev.stopPropagation();
-                const bonus = 50 + Math.random() * 100; // 50–150 конфет!
+                const bonus = 50 + Math.random() * 100;
                 setClickerCandy(clickerCandy + bonus);
                 spawnFloatText(ev, `🌟 +${fmtCandy(bonus)}`);
                 showToast(`✨ ЗОЛОТАЯ ТЫКВА! +${fmtCandy(bonus)} конфет`);
