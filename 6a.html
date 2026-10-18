@@ -7,8 +7,19 @@
     <link rel="icon" type="image/x-icon" href="logo.ico">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif; }
-        body { background: #0b0b0b; background-image: radial-gradient(circle at 10% 20%, #1e1a0f 0%, #0a0705 90%); color: #e6e6e6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; position: relative; overflow-x: hidden; transition: background 0.5s; }
         
+        body { background: #0b0b0b; background-image: radial-gradient(circle at 10% 20%, #1e1a0f 0%, #0a0705 90%); color: #e6e6e6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; position: relative; overflow-x: hidden; transition: background 0.5s, filter 0.5s; }
+        
+        /* 👻 Призрачный ивент — монохром */
+        body.ghost-active { animation: ghostBg 6s infinite alternate; filter: grayscale(1); }
+        body.ghost-active .container, body.ghost-active .bat, body.ghost-active .spider-web svg { filter: grayscale(1) brightness(0.9); }
+        @keyframes ghostBg { 0% { background: #0a0a0a; background-image: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #050505 90%); } 100% { background: #1a1a1a; background-image: radial-gradient(circle at 70% 70%, #2a2a2a 0%, #0a0a0a 90%); } }
+        body.ghost-active .container { animation: ghostBorder 3s infinite alternate; }
+        @keyframes ghostBorder { 0% { border-color: #888; box-shadow: 0 0 35px #888aa, 0 0 15px #888 inset; } 100% { border-color: #ccc; box-shadow: 0 0 35px #cccaaa, 0 0 15px #ccc inset; } }
+        body.ghost-active h1 { animation: ghostText 3s infinite alternate; }
+        @keyframes ghostText { 0% { color: #aaa; text-shadow: 4px 4px 0 #222, 0 0 25px #aaa; } 100% { color: #eee; text-shadow: 4px 4px 0 #333, 0 0 25px #eee; } }
+        body.ghost-active .tab-btn.active { animation: ghostBorder 3s infinite alternate; }
+
         /* 🌈 Радужный фон */
         body.rainbow-active { animation: rainbowBg 8s infinite linear; }
         @keyframes rainbowBg { 0% { background: #2a0a0a; } 16% { background: #2a1a0a; } 33% { background: #0a2a0a; } 50% { background: #0a1a2a; } 66% { background: #1a0a2a; } 83% { background: #2a0a1a; } 100% { background: #2a0a0a; } }
@@ -18,15 +29,6 @@
         body.rainbow-active h1 { animation: rainbowText 4s infinite linear; }
         @keyframes rainbowText { 0% { color: #ff0000; } 16% { color: #ff8800; } 33% { color: #ffff00; } 50% { color: #00ff00; } 66% { color: #0088ff; } 83% { color: #8800ff; } 100% { color: #ff0000; } }
 
-        /* 👻 Призрачный фон */
-        body.ghost-active { animation: ghostBg 6s infinite alternate; }
-        @keyframes ghostBg { 0% { background: #0a0a1a; background-image: radial-gradient(circle at 30% 30%, #1a1a3a 0%, #050510 90%); } 100% { background: #1a0a1a; background-image: radial-gradient(circle at 70% 70%, #2a1a3a 0%, #0a0510 90%); } }
-        body.ghost-active .container { animation: ghostBorder 3s infinite alternate; }
-        @keyframes ghostBorder { 0% { border-color: #aa00ff; box-shadow: 0 0 35px #aa00ffaa, 0 0 15px #aa00ff inset; } 100% { border-color: #00ffff; box-shadow: 0 0 35px #00ffffaa, 0 0 15px #00ffff inset; } }
-        body.ghost-active h1 { animation: ghostText 3s infinite alternate; }
-        @keyframes ghostText { 0% { color: #aa00ff; text-shadow: 4px 4px 0 #2a0a2a, 0 0 25px #aa00ff; } 100% { color: #00ffff; text-shadow: 4px 4px 0 #0a2a2a, 0 0 25px #00ffff; } }
-        body.ghost-active .tab-btn.active { animation: ghostBorder 3s infinite alternate; }
-
         .bat { position: fixed; color: #ffb347; font-size: 2rem; opacity: 0.5; pointer-events: none; z-index: 0; animation: floatBat 12s infinite alternate ease-in-out; }
         .bat1 { top: 15%; right: 5%; animation-duration: 15s; }
         .bat2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
@@ -34,7 +36,7 @@
         @keyframes floatBat { 0% { transform: translateY(0) rotate(-5deg); } 100% { transform: translateY(-25px) rotate(10deg); } }
         .spider-web { position: fixed; top: 0; left: 0; width: 140px; height: 140px; opacity: 0.25; pointer-events: none; z-index: 1; }
         .spider-web svg { width: 100%; height: 100%; filter: drop-shadow(0 0 4px #ff9900); }
-        .container { max-width: 900px; width: 100%; background: rgba(20, 16, 10, 0.88); backdrop-filter: blur(4px); border: 2px solid #e67e22; border-radius: 40px 12px 40px 12px; box-shadow: 0 0 35px rgba(230, 126, 34, 0.4), 0 0 15px #b85e00 inset; padding: 2.5rem 2rem; position: relative; z-index: 10; text-align: center; transition: border-color 0.3s; }
+        .container { max-width: 900px; width: 100%; background: rgba(20, 16, 10, 0.88); backdrop-filter: blur(4px); border: 2px solid #e67e22; border-radius: 40px 12px 40px 12px; box-shadow: 0 0 35px rgba(230, 126, 34, 0.4), 0 0 15px #b85e00 inset; padding: 2.5rem 2rem; position: relative; z-index: 10; text-align: center; transition: border-color 0.3s, filter 0.3s; }
         .official-stamp { display: inline-block; background: #2a1e0c; border: 3px double #e67e22; color: #f7d9a0; padding: 0.4rem 1.5rem; border-radius: 30px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 1.5rem; box-shadow: 0 0 20px rgba(230, 126, 34, 0.5); }
         h1 { font-size: 2.6rem; font-weight: 800; color: #ffb347; text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #ff8c00; letter-spacing: 2px; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
         h1 span { background: #ff9f1a; color: #1a1207; padding: 0 18px; border-radius: 50px; font-size: 2.2rem; box-shadow: 0 0 25px #ffb347; }
@@ -46,11 +48,11 @@
         .tab-btn.active { background: #e67e22; border-color: #ffb347; color: #0b0b0b; box-shadow: 0 0 20px #e67e2280; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        
+
         .event-timer-side { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); background: #1a140c; border: 2px solid #e67e22; border-radius: 20px; padding: 1rem 0.8rem; z-index: 50; text-align: center; box-shadow: 0 0 20px #e67e2280; writing-mode: vertical-rl; text-orientation: mixed; font-weight: 700; color: #ffb347; font-size: 0.9rem; letter-spacing: 1px; }
         .event-timer-side .timer-value { color: #ffb347; font-variant-numeric: tabular-nums; margin-top: 0.5rem; }
         body.rainbow-active .event-timer-side { animation: rainbowBorder 4s infinite linear; }
-        body.ghost-active .event-timer-side { animation: ghostBorder 3s infinite alternate; }
+        body.ghost-active .event-timer-side { animation: ghostBorder 3s infinite alternate; filter: grayscale(1); }
         @media (max-width: 700px) { .event-timer-side { position: static; writing-mode: horizontal-tb; margin-bottom: 1rem; width: 100%; transform: none; font-size: 1rem; } }
 
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 2rem 0 1rem; text-align: left; }
@@ -101,13 +103,13 @@
         .spawn-diamond { width: 95px; height: 95px; filter: drop-shadow(0 0 20px #00ffff) drop-shadow(0 0 35px #0088ff); animation: popIn 0.3s ease-out, diamondSpin 2s infinite linear; }
         .spawn-rainbow { width: 110px; height: 110px; animation: popIn 0.3s ease-out, rainbowSpin 2s infinite linear; }
         
-        /* 👻 Призрачное ведро */
-        .spawn-ghost { width: 90px; height: 90px; filter: drop-shadow(0 0 20px #aa00ff) drop-shadow(0 0 35px #00ffff); animation: popIn 0.3s ease-out, ghostSpin 2s infinite linear; }
+        /* 👻 Теневое ведро */
+        .spawn-ghost { width: 90px; height: 90px; filter: drop-shadow(0 0 20px #000) drop-shadow(0 0 35px #000); animation: popIn 0.3s ease-out, ghostSpin 2s infinite linear; }
         
         @keyframes goldenSpin { 0% { transform: rotate(-5deg) scale(1); } 50% { transform: rotate(5deg) scale(1.1); } 100% { transform: rotate(-5deg) scale(1); } }
         @keyframes diamondSpin { 0% { transform: rotate(-8deg) scale(1); } 50% { transform: rotate(8deg) scale(1.15); } 100% { transform: rotate(-8deg) scale(1); } }
         @keyframes rainbowSpin { 0% { transform: rotate(0deg) scale(1); filter: drop-shadow(0 0 20px #ff0000) drop-shadow(0 0 40px #ff0000); } 16% { transform: rotate(20deg) scale(1.1); filter: drop-shadow(0 0 20px #ff8800); } 33% { transform: rotate(40deg) scale(1.15); filter: drop-shadow(0 0 20px #ffff00); } 50% { transform: rotate(60deg) scale(1.2); filter: drop-shadow(0 0 20px #00ff00); } 66% { transform: rotate(80deg) scale(1.15); filter: drop-shadow(0 0 20px #0088ff); } 83% { transform: rotate(100deg) scale(1.1); filter: drop-shadow(0 0 20px #8800ff); } 100% { transform: rotate(120deg) scale(1); filter: drop-shadow(0 0 20px #ff0000); } }
-        @keyframes ghostSpin { 0% { transform: translateY(0) rotate(-3deg); filter: drop-shadow(0 0 20px #aa00ff); } 50% { transform: translateY(-10px) rotate(3deg); filter: drop-shadow(0 0 30px #00ffff); } 100% { transform: translateY(0) rotate(-3deg); filter: drop-shadow(0 0 20px #aa00ff); } }
+        @keyframes ghostSpin { 0% { transform: translateY(0) rotate(-3deg); filter: drop-shadow(0 0 20px #000); } 50% { transform: translateY(-10px) rotate(3deg); filter: drop-shadow(0 0 30px #000); } 100% { transform: translateY(0) rotate(-3deg); filter: drop-shadow(0 0 20px #000); } }
         
         .secret-panel { display: none; margin-top: 2rem; padding: 1.5rem; background: #1f1a12; border: 2px dashed #ffb347; border-radius: 20px; text-align: center; }
         .secret-panel.visible { display: block; }
@@ -117,7 +119,7 @@
         .secret-spawn-btn:hover { border-color: #ffb347; background: #3a2a14; box-shadow: 0 0 15px #e67e2250; }
         .secret-spawn-btn img { width: 40px; height: 40px; image-rendering: pixelated; }
         .secret-spawn-btn.rainbow-btn { border-color: #ff0000; background: linear-gradient(135deg, #2a0a0a, #0a2a0a, #0a0a2a); animation: rainbowBorder 4s infinite linear; }
-        .secret-spawn-btn.ghost-btn { border-color: #aa00ff; background: linear-gradient(135deg, #1a0a2a, #0a1a2a, #2a0a1a); animation: ghostBorder 3s infinite alternate; }
+        .secret-spawn-btn.ghost-btn { border-color: #444; background: linear-gradient(135deg, #1a1a1a, #2a2a2a, #1a1a1a); animation: ghostBorder 3s infinite alternate; }
         .shop { margin-top: 2rem; text-align: left; }
         .shop h3 { color: #ffb347; font-size: 1.4rem; margin-bottom: 1rem; border-bottom: 2px dotted #b8651a; padding-bottom: 6px; }
         .shop-item { background: #18130c; border: 1px solid #4a3a25; border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; transition: 0.2s; }
@@ -197,7 +199,7 @@
 
             <p style="color:#8a7a63; font-size:0.9rem; margin:0.5rem 0 1rem;">
                 Лови предметы на поле! Золотое ведро даёт 5000+100 за уровень прокачки, алмазное — ещё больше, а радужное — <strong>ооооооооооочень много</strong>!<br>
-                <span style="color:#aa00ff;">👻 Во время призрачного ивента появляется призрачное ведро — оно <strong>забирает</strong> конфеты!</span>
+                <span style="color:#888;">👻 Во время призрачного ивента всё становится монохромным, появляются призрачные конфеты (×10), но остерегайтесь призрачного ведра — оно <strong>забирает</strong> конфеты!</span>
             </p>
 
             <div style="text-align:center; margin-top:1rem;">
@@ -217,11 +219,11 @@
                     <button class="secret-spawn-btn" onclick="spawnSpecific('golden')"><img src="golden_pumpkin_bucket.png" alt=""> Золотое ведро</button>
                     <button class="secret-spawn-btn" onclick="spawnSpecific('diamond')"><img src="diamond_pumpkin_bucket.png" alt=""> Алмазное ведро</button>
                     <button class="secret-spawn-btn rainbow-btn" onclick="spawnSpecific('rainbow')"><img src="rainbow_pumpkin_bucket.png" alt=""> Радужное ведро</button>
-                    <button class="secret-spawn-btn ghost-btn" onclick="spawnSpecific('ghost')"><img src="ghost_pumpkin_bucket.png" alt=""> Призрачное ведро</button>
+                    <button class="secret-spawn-btn ghost-btn" onclick="spawnSpecific('ghost')"><img src="shadow_pumpkin_bucket.png" alt=""> Теневое ведро</button>
                 </div>
                 <div style="margin-top:1.5rem;">
                     <button class="btn" style="background:#ff0000; color:#fff;" onclick="toggleRainbowEvent()">🌈 Вкл/Выкл Радугу</button>
-                    <button class="btn" style="background:#aa00ff; color:#fff;" onclick="toggleGhostEvent()">👻 Вкл/Выкл Призрака</button>
+                    <button class="btn" style="background:#444; color:#fff;" onclick="toggleGhostEvent()">👻 Вкл/Выкл Призрака</button>
                 </div>
             </div>
 
@@ -273,7 +275,7 @@
         const ICONS = {
             candy1: 'candy1.png', candy2: 'candy2.png', bucket: 'pumpkin_bucket.png',
             golden: 'golden_pumpkin_bucket.png', diamond: 'diamond_pumpkin_bucket.png', rainbow: 'rainbow_pumpkin_bucket.png',
-            ghost: 'ghost_pumpkin_bucket.png'
+            ghost: 'shadow_pumpkin_bucket.png'
         };
 
         const EVENT1_END = new Date('2026-10-20T00:00:00');
@@ -295,11 +297,10 @@
         
         // 👻 Призрачные константы
         const GHOST_MULTIPLIER = 10;
-        const GHOST_CANDY_CHANCE = 0.10; // 10% шанс призрачной конфеты во время ивента
-        const GHOST_BUCKET_CHANCE = 0.15; // 15% шанс призрачного ведра во время ивента
-        const GHOST_STEAL_PERCENT = 0.1; // Забирает 10% конфет
+        const GHOST_CANDY_CHANCE = 0.10;
+        const GHOST_STEAL_PERCENT = 0.1;
 
-        const EVENT_DURATION = 10 * 60 * 1000; // 10 минут
+        const EVENT_DURATION = 10 * 60 * 1000;
 
         const STORAGE_KEYS = {
             coffinCandy: '6a_coffin_candy_v2', clickerCandy: '6a_clicker_candy',
@@ -416,7 +417,6 @@
             if (ms2 <= 0) { card2.classList.add('ended'); timer2.textContent = ''; }
             else { card2.classList.remove('ended'); timer2.textContent = formatTime(ms2); }
 
-            // Радуга и Призрак
             if (rainbowForce) { document.getElementById('rainbowTimerValue').textContent = 'ВКЛ'; }
             else if (rainbowActive) { document.getElementById('rainbowTimerValue').textContent = 'АКТИВНА!'; }
             else {
@@ -424,7 +424,6 @@
                 const nextHour = new Date(nowDate);
                 nextHour.setMinutes(0, 0, 0);
                 nextHour.setHours(nextHour.getHours() + 1);
-                // Радуга в нечётные часы (1, 3, 5...)
                 if (nextHour.getHours() % 2 === 0) nextHour.setHours(nextHour.getHours() + 1);
                 const msLeft = nextHour.getTime() - now;
                 document.getElementById('rainbowTimerValue').textContent = (msLeft <= 0) ? 'СКОРО!' : formatShort(msLeft);
@@ -437,7 +436,6 @@
                 const nextHour = new Date(nowDate);
                 nextHour.setMinutes(0, 0, 0);
                 nextHour.setHours(nextHour.getHours() + 1);
-                // Призрак в чётные часы (0, 2, 4...)
                 if (nextHour.getHours() % 2 === 1) nextHour.setHours(nextHour.getHours() + 1);
                 const msLeft = nextHour.getTime() - now;
                 document.getElementById('ghostTimerValue').textContent = (msLeft <= 0) ? 'СКОРО!' : formatShort(msLeft);
@@ -448,7 +446,6 @@
             const now = Date.now();
             const nowDate = new Date();
 
-            // Радуга (нечётные часы: 1, 3, 5...)
             if (rainbowForce) { if (!rainbowActive) activateRainbow(); }
             else if (rainbowActive) { if (now >= rainbowEndTime) deactivateRainbow(); }
             else {
@@ -457,7 +454,6 @@
                 }
             }
 
-            // Призрак (чётные часы: 0, 2, 4...)
             if (ghostForce) { if (!ghostActive) activateGhost(); }
             else if (ghostActive) { if (now >= ghostEndTime) deactivateGhost(); }
             else {
@@ -493,7 +489,7 @@
             ghostEndTime = Date.now() + EVENT_DURATION;
             document.body.classList.remove('rainbow-active');
             document.body.classList.add('ghost-active');
-            showToast('👻 ПРИЗРАЧНЫЙ ИВЕНТ! Появились призрачные конфеты ×10, но остерегайтесь призрачных вёдер!');
+            showToast('👻 ПРИЗРАЧНЫЙ ИВЕНТ! Всё стало монохромным. Появились призрачные конфеты ×10, но остерегайтесь теневых вёдер!');
         }
         function deactivateGhost() {
             ghostActive = false;
@@ -533,7 +529,6 @@
             if (rainbowActive) {
                 chances = { candy1: 30, candy2: 30, bucket: 20, golden: 10, diamond: 5, rainbow: 0.1 };
             } else if (ghostActive) {
-                // Во время призрачного ивента вместо обычных конфет часто спавнятся призрачные, и появляется призрачное ведро
                 chances = { candy1: 15, candy2: 15, bucket: 10, golden: 5, diamond: 1, rainbow: 0.001, ghost: 15 }; 
             }
             return chances;
@@ -576,7 +571,7 @@
             if (type === 'candy1' || type === 'candy2') {
                 if (ghostActive && Math.random() < GHOST_CANDY_CHANCE) {
                     isGhostCandy = true;
-                    colorGlow = '#aa00ff';
+                    colorGlow = '#333';
                     el.style.filter = `drop-shadow(0 0 15px ${colorGlow}) drop-shadow(0 0 25px ${colorGlow})`;
                     el.style.animation = 'popIn 0.3s ease-out, ghostSpin 1s infinite alternate';
                 } else if (Math.random() < COLORED_CHANCE + luck * 0.01) {
@@ -598,11 +593,10 @@
                 let bonus = 0; let color = null;
 
                 if (type === 'ghost') {
-                    // Призрачное ведро забирает конфеты
                     const steal = Math.max(1, Math.floor(clickerCandy * GHOST_STEAL_PERCENT));
                     setClickerCandy(Math.max(0, clickerCandy - steal));
-                    showToast(`👻 ПРИЗРАЧНОЕ ВЕДРО УКРАЛО ${fmtCandy(steal)} КОНФЕТ!`);
-                    spawnFloatText(ev, `-${fmtCandy(steal)}`, '#aa00ff');
+                    showToast(`👻 ТЕНЕВОЕ ВЕДРО УКРАЛО ${fmtCandy(steal)} КОНФЕТ!`);
+                    spawnFloatText(ev, `-${fmtCandy(steal)}`, '#333');
                     el.remove();
                     return;
                 }
@@ -614,7 +608,7 @@
                     bonus = clickPower;
                     if (isGhostCandy) {
                         bonus *= GHOST_MULTIPLIER;
-                        color = '#aa00ff';
+                        color = '#333';
                         showToast(`👻 Призрачная конфета! ×${GHOST_MULTIPLIER}! +${fmtCandy(bonus)}`);
                     } else if (colored) {
                         bonus *= COLORED_MULTIPLIER;
