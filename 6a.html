@@ -113,7 +113,6 @@
         }
         .subhead strong { color: #ffb347; }
 
-        /* Вкладки */
         .tabs {
             display: flex;
             gap: 10px;
@@ -142,21 +141,6 @@
 
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-
-        /* Конфетный баланс на главной */
-        .balance-box {
-            background: #2a1e0c;
-            border: 2px solid #b8651a;
-            border-radius: 20px;
-            padding: 1rem 2rem;
-            display: inline-block;
-            margin: 1rem 0 2rem;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: #ffb347;
-            box-shadow: 0 0 20px #e67e2250;
-        }
-        .balance-box small { font-size: 1rem; color: #e6c9a0; font-weight: 400; }
 
         .events-grid {
             display: grid;
@@ -233,7 +217,6 @@
         }
         .event-card.ended .ended-label { display: block; }
 
-        /* Модалки */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -414,11 +397,7 @@
         @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
         @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-12px); } }
 
-        /* Магазин */
-        .shop {
-            margin-top: 2rem;
-            text-align: left;
-        }
+        .shop { margin-top: 2rem; text-align: left; }
         .shop h3 {
             color: #ffb347;
             font-size: 1.4rem;
@@ -459,6 +438,19 @@
         .buy-btn:hover:not(:disabled) { background: #ffa733; box-shadow: 0 0 18px #ffb347; }
         .buy-btn:disabled { background: #3a3a3a; color: #777; cursor: not-allowed; }
 
+        .coffin-candy-box {
+            background: #2a1e0c;
+            border: 2px solid #b8651a;
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            text-align: center;
+            margin: 1rem 0;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ffb347;
+        }
+        .coffin-candy-box small { font-size: 0.9rem; color: #e6c9a0; font-weight: 400; }
+
         @media (max-width: 600px) {
             h1 { font-size: 2rem; }
             h1 span { font-size: 1.6rem; }
@@ -489,7 +481,6 @@
         <h1><span>6А</span> класс</h1>
         <div class="subhead"><strong>ГБОУ Лицей №486</strong></div>
 
-        <!-- Вкладки -->
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('home', this)">🏠 Главная</button>
             <button class="tab-btn" onclick="switchTab('games', this)">🎮 Игры</button>
@@ -497,10 +488,6 @@
 
         <!-- ===== ГЛАВНАЯ ===== -->
         <div class="tab-content active" id="tab-home">
-            <div class="balance-box">
-                🍬 <span id="homeCandy">57.5</span> <small>конфет</small>
-            </div>
-
             <div class="events-grid">
                 <div class="event-card" id="card1" onclick="openEvent1()">
                     <div class="event-title">🍬 Сладость или гадость</div>
@@ -526,7 +513,7 @@
         <div class="tab-content" id="tab-games">
             <div class="clicker-header">
                 <div class="clicker-balance">
-                    🍬 <span id="gameCandy">57.5</span> <small>конфет</small>
+                    🍬 <span id="gameCandy">0</span> <small>конфет</small>
                 </div>
                 <div class="cps-display">
                     ⚡ <strong id="cpsValue">0</strong> конфет/сек
@@ -581,11 +568,14 @@
             <p>Ивент заканчивается <strong>в полночь 24 октября 2026</strong>.</p>
 
             <div id="event2Active">
-                <div style="text-align:center; font-size:3rem; margin:1rem 0;">⚰️</div>
+                <div class="coffin-candy-box">
+                    🍬 <span id="coffinCandy">57.5</span> <small>/ 100 конфет</small>
+                </div>
+
                 <div class="secret-area" id="secretArea">
                     <p style="color:#e6c9a0; font-size:0.9rem; margin-bottom:0.5rem;">🔓 Секретный режим активирован:</p>
                     <input type="number" class="secret-input" id="secretAmount" placeholder="Кол-во" step="0.1">
-                    <button class="btn" onclick="setCandySecret()">Установить</button>
+                    <button class="btn" onclick="setCoffinCandySecret()">Установить</button>
                 </div>
 
                 <div style="text-align:center; margin-top:1.5rem;">
@@ -610,23 +600,26 @@
         // ========== КОНСТАНТЫ ==========
         const EVENT1_END = new Date('2026-10-20T00:00:00');
         const EVENT2_END = new Date('2026-10-24T00:00:00');
-        const START_CANDY = 57.5;              // ← стартовое количество конфет
+        const COFFIN_START_CANDY = 57.5;       // ← стартовые конфеты ИВЕНТА «гроб»
+        const CLICKER_START_CANDY = 0;         // ← стартовые конфеты КЛИКЕРА
         const SECRET_PASSWORD = '03111383';
-        const BONUS_CHANCE = 0.08;             // шанс появления бонусной тыквы при клике
-        const BONUS_LIFETIME = 4000;           // сколько мс висит бонусная тыква
+        const BONUS_CHANCE = 0.08;
+        const BONUS_LIFETIME = 4000;
 
         const STORAGE_KEYS = {
-            candy: '6a_candy_count',
+            coffinCandy: '6a_coffin_candy',    // конфеты гроба (отдельно!)
+            clickerCandy: '6a_clicker_candy',  // конфеты кликера (отдельно!)
             secretUnlocked: '6a_secret_unlocked',
             clickPower: '6a_click_power',
             autoClickers: '6a_auto_clickers'
         };
 
         // ========== СОСТОЯНИЕ ==========
-        let candy = START_CANDY;
+        let coffinCandy = COFFIN_START_CANDY;  // счётчик для ивента «гроб»
+        let clickerCandy = CLICKER_START_CANDY; // счётчик для кликера
         let secretUnlocked = false;
-        let clickPower = 1;        // сколько конфет за клик
-        let autoClickers = 0;      // сколько автокликеров (каждый даёт 0.5/сек)
+        let clickPower = 1;
+        let autoClickers = 0;
         let bonusTimeout = null;
 
         // ========== УТИЛИТЫ ==========
@@ -657,46 +650,64 @@
         // ========== СОХРАНЕНИЕ ==========
         function loadState() {
             try {
-                const v = parseFloat(localStorage.getItem(STORAGE_KEYS.candy));
-                candy = isNaN(v) ? START_CANDY : v;
-            } catch (e) { candy = START_CANDY; }
+                const v = parseFloat(localStorage.getItem(STORAGE_KEYS.coffinCandy));
+                coffinCandy = isNaN(v) ? COFFIN_START_CANDY : v;
+            } catch (e) { coffinCandy = COFFIN_START_CANDY; }
+
+            try {
+                const v = parseFloat(localStorage.getItem(STORAGE_KEYS.clickerCandy));
+                clickerCandy = isNaN(v) ? CLICKER_START_CANDY : v;
+            } catch (e) { clickerCandy = CLICKER_START_CANDY; }
+
             try {
                 secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true';
             } catch (e) { secretUnlocked = false; }
+
             try {
                 const cp = parseFloat(localStorage.getItem(STORAGE_KEYS.clickPower));
                 clickPower = isNaN(cp) ? 1 : cp;
             } catch (e) { clickPower = 1; }
+
             try {
                 const ac = parseInt(localStorage.getItem(STORAGE_KEYS.autoClickers));
                 autoClickers = isNaN(ac) ? 0 : ac;
             } catch (e) { autoClickers = 0; }
         }
 
-        function saveState() {
+        function saveCoffinCandy() {
+            try { localStorage.setItem(STORAGE_KEYS.coffinCandy, String(coffinCandy)); } catch (e) {}
+        }
+        function saveClickerState() {
             try {
-                localStorage.setItem(STORAGE_KEYS.candy, String(candy));
+                localStorage.setItem(STORAGE_KEYS.clickerCandy, String(clickerCandy));
                 localStorage.setItem(STORAGE_KEYS.clickPower, String(clickPower));
                 localStorage.setItem(STORAGE_KEYS.autoClickers, String(autoClickers));
             } catch (e) {}
         }
 
-        function setCandy(v) {
-            candy = v;
-            saveState();
-            updateAllCandyUI();
+        // ========== UI КОНФЕТ ==========
+        function setCoffinCandy(v) {
+            coffinCandy = Math.max(0, v);
+            saveCoffinCandy();
+            updateCoffinCandyUI();
+        }
+        function setClickerCandy(v) {
+            clickerCandy = v;
+            saveClickerState();
+            updateClickerCandyUI();
             renderShop();
         }
 
-        // ========== UI КОНФЕТ ==========
-        function updateAllCandyUI() {
-            const h = document.getElementById('homeCandy');
-            const g = document.getElementById('gameCandy');
+        function updateCoffinCandyUI() {
+            const el = document.getElementById('coffinCandy');
+            if (el) el.textContent = fmtCandy(coffinCandy);
             const f = document.getElementById('finalCandy');
-            const fmt = fmtCandy(candy);
-            if (h) h.textContent = fmt;
-            if (g) g.textContent = fmt;
-            if (f) f.textContent = fmt;
+            if (f) f.textContent = fmtCandy(coffinCandy);
+        }
+
+        function updateClickerCandyUI() {
+            const el = document.getElementById('gameCandy');
+            if (el) el.textContent = fmtCandy(clickerCandy);
         }
 
         function updateCpsUI() {
@@ -760,17 +771,17 @@
             if (ended) {
                 document.getElementById('event2Active').style.display = 'none';
                 document.getElementById('event2EndedMsg').style.display = 'block';
-                document.getElementById('finalCandy').textContent = fmtCandy(candy);
+                document.getElementById('finalCandy').textContent = fmtCandy(coffinCandy);
             } else {
                 document.getElementById('event2Active').style.display = 'block';
                 document.getElementById('event2EndedMsg').style.display = 'none';
-                updateAllCandyUI();
+                updateCoffinCandyUI();
                 document.getElementById('secretArea').classList.toggle('visible', secretUnlocked);
             }
             openModal('modal2');
         }
 
-        // ========== СЕКРЕТ ==========
+        // ========== СЕКРЕТ (меняет конфеты ГРОБА) ==========
         function toggleSecretPrompt() {
             const p = document.getElementById('secretPrompt');
             p.style.display = p.style.display === 'none' ? 'block' : 'none';
@@ -790,23 +801,22 @@
             }
         }
 
-        function setCandySecret() {
+        function setCoffinCandySecret() {
             if (!secretUnlocked) return;
             const input = document.getElementById('secretAmount');
             const val = parseFloat(input.value);
             if (isNaN(val)) { showToast('Введи число'); return; }
-            setCandy(val);
-            showToast(`Установлено: ${fmtCandy(val)} конфет`);
+            setCoffinCandy(val);
+            showToast(`Конфеты гроба установлены: ${fmtCandy(Math.max(val, 0))}`);
             input.value = '';
         }
 
         // ========== КЛИКЕР ==========
         function clickMainPumpkin(e) {
             const gain = clickPower;
-            setCandy(candy + gain);
+            setClickerCandy(clickerCandy + gain);
             spawnFloatText(e, `+${fmtCandy(gain)}`);
 
-            // Шанс появления бонусной тыквы
             if (Math.random() < BONUS_CHANCE) {
                 spawnBonusPumpkin();
             }
@@ -836,7 +846,6 @@
         function spawnBonusPumpkin() {
             const area = document.getElementById('clickArea');
             if (!area) return;
-            // Не спавним больше одной бонусной тыквы одновременно
             if (area.querySelector('.bonus-pumpkin')) return;
 
             const el = document.createElement('div');
@@ -849,8 +858,8 @@
             el.style.top = y + 'px';
             el.onclick = (ev) => {
                 ev.stopPropagation();
-                const bonus = 5 + Math.random() * 10; // 5–15 конфет
-                setCandy(candy + bonus);
+                const bonus = 5 + Math.random() * 10;
+                setClickerCandy(clickerCandy + bonus);
                 spawnFloatText(ev, `🎁 +${fmtCandy(bonus)}`);
                 el.remove();
                 clearTimeout(bonusTimeout);
@@ -865,8 +874,7 @@
         // Автокликеры
         setInterval(() => {
             if (autoClickers > 0) {
-                const gain = autoClickers * 0.5;
-                setCandy(candy + gain);
+                setClickerCandy(clickerCandy + autoClickers * 0.5);
             }
         }, 1000);
 
@@ -908,7 +916,7 @@
                 const level = item.getLevel();
                 const price = getPrice(item);
                 const maxed = level >= item.maxLevel;
-                const canBuy = !maxed && candy >= price;
+                const canBuy = !maxed && clickerCandy >= price;
 
                 const div = document.createElement('div');
                 div.className = 'shop-item' + (maxed ? ' owned' : '');
@@ -932,14 +940,14 @@
             const level = item.getLevel();
             if (level >= item.maxLevel) return;
             const price = getPrice(item);
-            if (candy < price) {
+            if (clickerCandy < price) {
                 showToast('❌ Недостаточно конфет');
                 return;
             }
-            candy -= price;
+            clickerCandy -= price;
             item.apply();
-            saveState();
-            updateAllCandyUI();
+            saveClickerState();
+            updateClickerCandyUI();
             updateCpsUI();
             renderShop();
             showToast(`✅ Куплено: ${item.name}`);
@@ -947,7 +955,8 @@
 
         // ========== СТАРТ ==========
         loadState();
-        updateAllCandyUI();
+        updateCoffinCandyUI();
+        updateClickerCandyUI();
         updateCpsUI();
         renderShop();
         tickTimers();
