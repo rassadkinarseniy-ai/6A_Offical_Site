@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Официальный сайт 6А класса — ГБОУ Лицей 486</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+        }
+
+        body {
+            background: #0b0b0b;
+            background-image: radial-gradient(circle at 10% 20%, #1e1a0f 0%, #0a0705 90%);
+            color: #e6e6e6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bat {
+            position: fixed;
+            color: #ffb347;
+            font-size: 2rem;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatBat 12s infinite alternate ease-in-out;
+        }
+        .bat1 { top: 15%; right: 5%; animation-duration: 15s; }
+        .bat2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
+        .bat3 { top: 60%; right: 12%; animation-duration: 14s; font-size: 2.4rem; animation-delay: -7s; }
+
+        @keyframes floatBat {
+            0% { transform: translateY(0) rotate(-5deg); }
+            100% { transform: translateY(-25px) rotate(10deg); }
+        }
+
+        .spider-web {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 140px;
+            height: 140px;
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .spider-web svg { width: 100%; height: 100%; filter: drop-shadow(0 0 4px #ff9900); }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: rgba(20, 16, 10, 0.88);
+            backdrop-filter: blur(4px);
+            border: 2px solid #e67e22;
+            border-radius: 40px 12px 40px 12px;
+            box-shadow: 0 0 35px rgba(230, 126, 34, 0.4), 0 0 15px #b85e00 inset;
+            padding: 2.5rem 2rem;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+        }
+
+        .official-stamp {
+            display: inline-block;
+            background: #2a1e0c;
+            border: 3px double #e67e22;
+            color: #f7d9a0;
+            padding: 0.4rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 20px rgba(230, 126, 34, 0.5);
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #ffb347;
+            text-shadow: 4px 4px 0 #4a2c0b, 0 0 25px #ff8c00;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        h1 span {
+            background: #ff9f1a;
+            color: #1a1207;
+            padding: 0 18px;
+            border-radius: 50px;
+            font-size: 2.2rem;
+            box-shadow: 0 0 25px #ffb347;
+        }
+
+        .subhead {
+            font-size: 1.3rem;
+            color: #e6c9a0;
+            margin: 1rem 0 2rem 0;
+        }
+        .subhead strong { color: #ffb347; }
+
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 2rem 0 1rem;
+            text-align: left;
+        }
+
+        .event-card {
+            background: #18130c;
+            border: 2px solid #d67e1e;
+            border-radius: 24px 6px 24px 6px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: 0.25s ease;
+            box-shadow: 0 0 15px #00000070;
+            position: relative;
+            user-select: none;
+        }
+        .event-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffa733;
+            box-shadow: 0 10px 25px #e67e2260, 0 0 15px #ffb347 inset;
+        }
+
+        .event-card.ended {
+            background: #2a2a2a;
+            border-color: #555;
+            cursor: default;
+            opacity: 0.75;
+        }
+        .event-card.ended:hover {
+            transform: none;
+            box-shadow: 0 0 15px #00000070;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+            color: #ffb347;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .event-card.ended .event-title { color: #999; }
+
+        .event-desc {
+            color: #ddccb0;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .timer {
+            background: #2a1e0c;
+            border: 1px solid #b8651a;
+            border-radius: 12px;
+            padding: 0.7rem 1rem;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #ffb347;
+            letter-spacing: 1px;
+            font-variant-numeric: tabular-nums;
+        }
+        .event-card.ended .timer {
+            background: #333;
+            border-color: #555;
+            color: #888;
+            display: none;
+        }
+
+        .ended-label {
+            display: none;
+            color: #ff6b6b;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1.1rem;
+            margin-top: 0.8rem;
+            text-align: center;
+        }
+        .event-card.ended .ended-label { display: block; }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+        .modal-overlay.active { display: flex; }
+
+        .modal {
+            background: #1a140c;
+            border: 2px solid #e67e22;
+            border-radius: 30px 8px 30px 8px;
+            padding: 2rem;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 0 50px #e67e2280;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            background: none;
+            border: none;
+            color: #ffb347;
+            font-size: 2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .modal-close:hover { color: #fff; }
+
+        .modal h2 {
+            color: #ffb347;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding-right: 30px;
+        }
+
+        .modal p {
+            color: #ddccb0;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .modal strong { color: #ffb347; }
+
+        .btn {
+            background: #e67e22;
+            color: #0b0b0b;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            margin: 0.3rem;
+        }
+        .btn:hover { background: #ffa733; box-shadow: 0 0 18px #ffb347; }
+        .btn:disabled { background: #555; color: #888; cursor: not-allowed; box-shadow: none; }
+
+        .coffin-box {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .coffin {
+            font-size: 5rem;
+            cursor: pointer;
+            user-select: none;
+            transition: transform 0.1s;
+            display: inline-block;
+            filter: drop-shadow(0 0 15px #e67e22);
+            touch-action: manipulation;
+        }
+        .coffin:active { transform: scale(0.9); }
+        .coffin.disabled { filter: grayscale(1); cursor: not-allowed; opacity: 0.5; }
+
+        .candy-counter {
+            font-size: 2rem;
+            color: #ffb347;
+            font-weight: 800;
+            margin: 0.5rem 0;
+            font-variant-numeric: tabular-nums;
+        }
+        .candy-counter small { font-size: 1rem; color: #e6c9a0; font-weight: 400; }
+
+        .progress-bar {
+            background: #2a1e0c;
+            border: 1px solid #b8651a;
+            border-radius: 12px;
+            height: 24px;
+            overflow: hidden;
+            margin: 0.8rem 0;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #e67e22, #ffb347);
+            width: 0%;
+            transition: width 0.3s;
+            box-shadow: 0 0 12px #ffb347;
+        }
+        .progress-text {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 0 4px #000;
+        }
+
+        .secret-area {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #4a3a25;
+            display: none;
+        }
+        .secret-area.visible { display: block; }
+        .secret-input {
+            background: #0f0b07;
+            border: 1px solid #b8651a;
+            border-radius: 12px;
+            padding: 0.6rem 1rem;
+            color: #ffb347;
+            font-size: 1rem;
+            width: 160px;
+            margin-right: 0.5rem;
+        }
+
+        footer {
+            margin-top: 2rem;
+            color: #8a7a63;
+            font-size: 0.9rem;
+            border-top: 1px solid #4a3a25;
+            padding-top: 1.2rem;
+            letter-spacing: 1px;
+            width: 100%;
+            text-align: center;
+        }
+        footer strong { color: #e67e22; }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #2a1e0c;
+            border: 2px solid #e67e22;
+            color: #ffb347;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 700;
+            z-index: 200;
+            opacity: 0;
+            transition: 0.3s;
+            box-shadow: 0 0 25px #e67e2280;
+            pointer-events: none;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            h1 span { font-size: 1.6rem; }
+            .container { padding: 1.8rem 1.2rem; }
+            .modal { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bat bat1">🦇</div>
+    <div class="bat bat2">🦇</div>
+    <div class="bat bat3">🦇</div>
+
+    <div class="spider-web">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 10 L90 90 M10 90 L90 10 M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M18 82 L82 18" stroke="#e67e22" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.8"/>
+            <circle cx="50" cy="50" r="8" stroke="#ffb347" stroke-width="1.2" fill="none"/>
+            <circle cx="50" cy="50" r="16" stroke="#e67e22" stroke-width="1.2" fill="none" stroke-dasharray="3 3"/>
+            <circle cx="50" cy="50" r="26" stroke="#b8651a" stroke-width="1.2" fill="none" stroke-dasharray="5 5"/>
+        </svg>
+    </div>
+
+    <div class="container">
+        <div class="official-stamp">🔒 Официальный сайт</div>
+
+        <h1><span>6А</span> класс</h1>
+        <div class="subhead"><strong>ГБОУ Лицей №486</strong></div>
+
+        <div class="events-grid">
+            <div class="event-card" id="card1" onclick="openEvent1()">
+                <div class="event-title">🍬 Сладость или гадость</div>
+                <div class="event-desc">
+                    Сделай своему однокласснику сладость или гадость. Одноклассник выбирается случайно!
+                </div>
+                <div class="timer" id="timer1">--:--:--</div>
+                <div class="ended-label">🔚 Ивент закончился</div>
+            </div>
+
+            <div class="event-card" id="card2" onclick="openEvent2()">
+                <div class="event-title">⚰️ Собери и укради гроб</div>
+                <div class="event-desc">
+                    За пятёрку любого ученика добавляется 0.5 конфетки. Максимум — 100 конфет.
+                </div>
+                <div class="timer" id="timer2">--:--:--</div>
+                <div class="ended-label">🔚 Ивент закончился</div>
+            </div>
+        </div>
+
+        <footer>
+            <strong>Официальный сайт 6А класса</strong> · ГБОУ Лицей №486 · 2026
+        </footer>
+    </div>
+
+    <!-- Модалка 1 -->
+    <div class="modal-overlay" id="modal1">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal1')">×</button>
+            <h2>🍬 Сладость или гадость</h2>
+            <p>
+                Сделай своему однокласснику <strong>сладость</strong> (что-то приятное) 
+                или <strong>гадость</strong> (безобидный розыгрыш). 
+                Одноклассник выбирается случайно — но это уже на твоё усмотрение!
+            </p>
+            <p>Ивент заканчивается <strong>в полночь 20 октября 2026</strong>.</p>
+            <div id="event1EndedMsg" style="display:none; color:#ff6b6b; font-weight:700; text-align:center; padding:1rem;">
+                🔚 Ивент завершён 20 октября 2026 в 00:00
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка 2 -->
+    <div class="modal-overlay" id="modal2">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('modal2')">×</button>
+            <h2>⚰️ Собери и укради гроб</h2>
+            <p>
+                За каждую <strong>пятёрку</strong> любого ученика добавляется <strong>0.5 конфетки</strong>. 
+                Максимум — <strong>100 конфет</strong>. Также можно кликать по гробу: каждое нажатие раз в секунду 
+                добавляет <strong>0.005 конфетки</strong>.
+            </p>
+            <p>Ивент заканчивается <strong>в полночь 24 октября 2026</strong>.</p>
+
+            <div id="event2Active">
+                <div class="coffin-box">
+                    <div class="coffin" id="coffin" onclick="clickCoffin(event)">⚰️</div>
+                    <div class="candy-counter">
+                        <span id="candyCount">0</span> <small>/ 100 конфет</small>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                        <div class="progress-text" id="progressText">0%</div>
+                    </div>
+                </div>
+
+                <div class="secret-area" id="secretArea">
+                    <p style="color:#e6c9a0; font-size:0.9rem; margin-bottom:0.5rem;">🔓 Секретный режим активирован:</p>
+                    <input type="number" class="secret-input" id="secretAmount" placeholder="Кол-во" step="0.1">
+                    <button class="btn" onclick="setCandySecret()">Установить</button>
+                </div>
+
+                <div style="text-align:center; margin-top:1.5rem;">
+                    <button class="btn" style="background:#4a3a25; color:#e6c9a0; font-size:0.8rem; padding:0.4rem 1rem;" onclick="toggleSecretPrompt()">🔑 Ввести пароль</button>
+                </div>
+                <div id="secretPrompt" style="display:none; text-align:center; margin-top:0.8rem;">
+                    <input type="password" class="secret-input" id="secretPassword" placeholder="Пароль">
+                    <button class="btn" onclick="checkPassword()">OK</button>
+                </div>
+            </div>
+
+            <div id="event2EndedMsg" style="display:none; color:#ff6b6b; font-weight:700; text-align:center; padding:1rem;">
+                🔚 Ивент завершён 24 октября 2026 в 00:00<br>
+                <span style="color:#ffb347;">Итог: <span id="finalCandy">0</span> конфет</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ========== КОНСТАНТЫ ==========
+        const EVENT1_END = new Date('2026-10-20T00:00:00');
+        const EVENT2_END = new Date('2026-10-24T00:00:00');
+        const MAX_CANDY = 100;
+        const CLICK_REWARD = 0.005;
+        const SECRET_PASSWORD = '03111383';
+        const CLICK_COOLDOWN_MS = 1000;
+
+        const STORAGE_KEYS = {
+            candy: '6a_candy_count',
+            lastClick: '6a_last_click_time',
+            secretUnlocked: '6a_secret_unlocked'
+        };
+
+        // ========== УТИЛИТЫ ==========
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(t._timer);
+            t._timer = setTimeout(() => t.classList.remove('show'), 1500);
+        }
+
+        function formatTime(ms) {
+            if (ms <= 0) return '00:00:00';
+            const totalSec = Math.floor(ms / 1000);
+            const d = Math.floor(totalSec / 86400);
+            const h = Math.floor((totalSec % 86400) / 3600);
+            const m = Math.floor((totalSec % 3600) / 60);
+            const s = totalSec % 60;
+            const pad = n => String(n).padStart(2, '0');
+            if (d > 0) return `${d}д ${pad(h)}:${pad(m)}:${pad(s)}`;
+            return `${pad(h)}:${pad(m)}:${pad(s)}`;
+        }
+
+        function fmtCandy(v) {
+            return parseFloat(v.toFixed(3)).toString();
+        }
+
+        // ========== СОХРАНЕНИЕ ==========
+        let candy = 0;
+        let lastClickTime = 0;
+        let secretUnlocked = false;
+
+        function loadState() {
+            try {
+                const v = parseFloat(localStorage.getItem(STORAGE_KEYS.candy));
+                candy = isNaN(v) ? 0 : Math.min(Math.max(v, 0), MAX_CANDY);
+            } catch (e) { candy = 0; }
+            try {
+                const t = parseFloat(localStorage.getItem(STORAGE_KEYS.lastClick));
+                lastClickTime = (!isNaN(t) && t <= Date.now()) ? t : 0;
+            } catch (e) { lastClickTime = 0; }
+            try {
+                secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true';
+            } catch (e) { secretUnlocked = false; }
+        }
+
+        function saveCandy() {
+            try { localStorage.setItem(STORAGE_KEYS.candy, String(candy)); } catch (e) {}
+        }
+        function saveLastClick() {
+            try { localStorage.setItem(STORAGE_KEYS.lastClick, String(lastClickTime)); } catch (e) {}
+        }
+
+        function setCandy(v) {
+            candy = Math.max(0, Math.min(v, MAX_CANDY));
+            saveCandy();
+            updateCandyUI();
+        }
+
+        // ========== UI КОНФЕТ ==========
+        function updateCandyUI() {
+            const el = document.getElementById('candyCount');
+            if (el) el.textContent = fmtCandy(candy);
+            const fill = document.getElementById('progressFill');
+            const text = document.getElementById('progressText');
+            if (fill) fill.style.width = (candy / MAX_CANDY * 100) + '%';
+            if (text) text.textContent = Math.round(candy / MAX_CANDY * 100) + '%';
+        }
+
+        // ========== ТАЙМЕРЫ ==========
+        function tick() {
+            const now = Date.now();
+
+            const card1 = document.getElementById('card1');
+            const timer1 = document.getElementById('timer1');
+            const ms1 = EVENT1_END.getTime() - now;
+            if (ms1 <= 0) {
+                card1.classList.add('ended');
+                timer1.textContent = '';
+            } else {
+                card1.classList.remove('ended');
+                timer1.textContent = formatTime(ms1);
+            }
+
+            const card2 = document.getElementById('card2');
+            const timer2 = document.getElementById('timer2');
+            const ms2 = EVENT2_END.getTime() - now;
+            if (ms2 <= 0) {
+                card2.classList.add('ended');
+                timer2.textContent = '';
+                updateCoffinState();
+            } else {
+                card2.classList.remove('ended');
+                timer2.textContent = formatTime(ms2);
+                updateCoffinState();
+            }
+        }
+
+        // ========== МОДАЛКИ ==========
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // ========== ИВЕНТ 1 ==========
+        function openEvent1() {
+            const ended = Date.now() >= EVENT1_END.getTime();
+            document.getElementById('event1EndedMsg').style.display = ended ? 'block' : 'none';
+            openModal('modal1');
+        }
+
+        // ========== ИВЕНТ 2 ==========
+        function openEvent2() {
+            const ended = Date.now() >= EVENT2_END.getTime();
+            if (ended) {
+                document.getElementById('event2Active').style.display = 'none';
+                document.getElementById('event2EndedMsg').style.display = 'block';
+                document.getElementById('finalCandy').textContent = fmtCandy(candy);
+            } else {
+                document.getElementById('event2Active').style.display = 'block';
+                document.getElementById('event2EndedMsg').style.display = 'none';
+                updateCandyUI();
+                document.getElementById('secretArea').classList.toggle('visible', secretUnlocked);
+                updateCoffinState();
+            }
+            openModal('modal2');
+        }
+
+        function clickCoffin(e) {
+            if (e) e.stopPropagation();
+            if (Date.now() >= EVENT2_END.getTime()) return;
+
+            const now = Date.now();
+            if (now - lastClickTime < CLICK_COOLDOWN_MS) {
+                const left = Math.ceil((CLICK_COOLDOWN_MS - (now - lastClickTime)) / 100) / 10;
+                showToast(`⏳ Подожди ${left.toFixed(1)} с`);
+                return;
+            }
+            lastClickTime = now;
+            saveLastClick();
+
+            setCandy(candy + CLICK_REWARD);
+            showToast(`+${CLICK_REWARD} конфетки`);
+        }
+
+        function updateCoffinState() {
+            const coffin = document.getElementById('coffin');
+            if (!coffin) return;
+            if (Date.now() >= EVENT2_END.getTime()) {
+                coffin.classList.add('disabled');
+            } else {
+                coffin.classList.remove('disabled');
+            }
+        }
+
+        // ========== СЕКРЕТ ==========
+        function toggleSecretPrompt() {
+            const p = document.getElementById('secretPrompt');
+            p.style.display = p.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('secretPassword');
+            if (input.value === SECRET_PASSWORD) {
+                secretUnlocked = true;
+                try { localStorage.setItem(STORAGE_KEYS.secretUnlocked, 'true'); } catch (e) {}
+                document.getElementById('secretArea').classList.add('visible');
+                document.getElementById('secretPrompt').style.display = 'none';
+                input.value = '';
+                showToast('🔓 Секретный режим активирован!');
+            } else {
+                showToast('❌ Неверный пароль');
+            }
+        }
+
+        function setCandySecret() {
+            if (!secretUnlocked) return;
+            const input = document.getElementById('secretAmount');
+            const val = parseFloat(input.value);
+            if (isNaN(val)) { showToast('Введи число'); return; }
+            setCandy(val);
+            showToast(`Установлено: ${fmtCandy(Math.min(Math.max(val, 0), MAX_CANDY))} конфет`);
+            input.value = '';
+        }
+
+        // ========== СТАРТ ==========
+        loadState();
+        updateCandyUI();
+        tick();
+        setInterval(tick, 1000);
+
+        document.querySelectorAll('.modal-overlay').forEach(el => {
+            el.addEventListener('click', e => {
+                if (e.target === el) closeModal(el.id);
+            });
+        });
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.active').forEach(el => closeModal(el.id));
+            }
+        });
+    </script>
+</body>
+</html>
