@@ -43,7 +43,6 @@
             100% { background: #2a0a0a; background-image: radial-gradient(circle at 10% 20%, #3a0a0a 0%, #1a0505 90%); }
         }
 
-        /* 🌈 Радужный интерфейс во время ивента */
         body.rainbow-active .container {
             animation: rainbowBorder 4s infinite linear;
         }
@@ -813,18 +812,19 @@
         const SECRET_PASSWORD = '03111383';
 
         // Настройки спавна
-        const SPAWN_INTERVAL = 2000;
+        const BASE_SPAWN_INTERVAL = 3000;    // базовый интервал 3 сек
+        const MIN_SPAWN_INTERVAL = 300;      // минимальный 0.3 сек
         const SPAWN_LIFETIME = 5000;
         const MAX_ITEMS_ON_SCREEN = 8;
 
-        // Базовые вероятности (без учёта радуги)
+        // Базовые вероятности
         const SPAWN_CHANCES = {
-            candy1: 44,   // 44%
-            candy2: 44,   // 44%
-            bucket: 10,   // 10%
-            golden: 1.99, // 1.99%
-            diamond: 0.009, // 0.009%
-            rainbow: 0.001  // 0.001% (самый редкий!)
+            candy1: 44,
+            candy2: 44,
+            bucket: 10,
+            golden: 1.99,
+            diamond: 0.009,
+            rainbow: 0.001
         };
 
         // Награды
@@ -835,13 +835,10 @@
         const RAINBOW_BASE = 1000000;
         const RAINBOW_PER_UPGRADE = 10000;
 
-        // Цветные конфеты (шанс и множитель)
-        const COLORED_CHANCE = 0.05; // 5% шанс, что конфета будет цветной
+        const COLORED_CHANCE = 0.05;
         const COLORED_MULTIPLIER = 5;
 
-        // Ивент "Радуга"
-        const RAINBOW_INTERVAL = 60 * 60 * 1000; // 1 час
-        const RAINBOW_DURATION = 3 * 60 * 1000;  // 3 минуты длится
+        const RAINBOW_DURATION = 3 * 60 * 1000; // 3 минуты
 
         const STORAGE_KEYS = {
             coffinCandy: '6a_coffin_candy_v2',
@@ -849,8 +846,9 @@
             clickPower: '6a_click_power',
             autoClickers: '6a_auto_clickers',
             luck: '6a_luck',
+            autoClickerSpeed: '6a_auto_speed',
+            spawnRate: '6a_spawn_rate',
             secretUnlocked: '6a_secret_unlocked',
-            lastRainbow: '6a_last_rainbow',
             rainbowForce: '6a_rainbow_force'
         };
 
@@ -859,12 +857,13 @@
         let clickerCandy = CLICKER_START_CANDY;
         let clickPower = 1;
         let autoClickers = 0;
-        let luck = 0; // удача в %
+        let luck = 0;
+        let autoClickerSpeed = 0;   // уровень скорости
+        let spawnRate = 0;          // уровень частоты спавна
         let secretUnlocked = false;
         let spawnTimer = null;
 
-        let lastRainbowTime = 0;
-        let rainbowForce = false; // принудительно включить ивент
+        let rainbowForce = false;
         let rainbowActive = false;
         let rainbowEndTime = 0;
 
@@ -901,6 +900,24 @@
             return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
         }
 
+        // Текущая скорость автокликера (конфет в секунду за 1 автокликер)
+        function getAutoSpeedPerUnit() {
+            // Базовая 0.5 + по 0.05 за уровень скорости
+            return 0.5 + (autoClickerSpeed * 0.05);
+        }
+
+        // Общая скорость всех автокликеров
+        function getTotalCPS() {
+            return autoClickers * getAutoSpeedPerUnit();
+        }
+
+        // Текущий интервал спавна
+        function getSpawnInterval() {
+            // Каждый уровень уменьшает интервал на 10%
+            let interval = BASE_SPAWN_INTERVAL * Math.pow(0.9, spawnRate);
+            return Math.max(MIN_SPAWN_INTERVAL, interval);
+        }
+
         // ========== СОХРАНЕНИЕ ==========
         function loadState() {
             try {
@@ -935,13 +952,18 @@
             } catch (e) { luck = 0; }
 
             try {
-                secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true';
-            } catch (e) { secretUnlocked = false; }
+                const as = parseInt(localStorage.getItem(STORAGE_KEYS.autoClickerSpeed));
+                autoClickerSpeed = isNaN(as) ? 0 : as;
+            } catch (e) { autoClickerSpeed = 0; }
 
             try {
-                const lr = parseFloat(localStorage.getItem(STORAGE_KEYS.lastRainbow));
-                lastRainbowTime = isNaN(lr) ? 0 : lr;
-            } catch (e) { lastRainbowTime = 0; }
+                const sr = parseInt(localStorage.getItem(STORAGE_KEYS.spawnRate));
+                spawnRate = isNaN(sr) ? 0 : sr;
+            } catch (e) { spawnRate = 0; }
+
+            try {
+                secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true';
+            } catch (e) { secretUnlocked = false; }
 
             try {
                 rainbowForce = localStorage.getItem(STORAGE_KEYS.rainbowForce) === 'true';
@@ -957,6 +979,8 @@
                 localStorage.setItem(STORAGE_KEYS.clickPower, String(clickPower));
                 localStorage.setItem(STORAGE_KEYS.autoClickers, String(autoClickers));
                 localStorage.setItem(STORAGE_KEYS.luck, String(luck));
+                localStorage.setItem(STORAGE_KEYS.autoClickerSpeed, String(autoClickerSpeed));
+                localStorage.setItem(STORAGE_KEYS.spawnRate, String(spawnRate));
             } catch (e) {}
         }
 
@@ -987,11 +1011,11 @@
 
         function updateCpsUI() {
             const el = document.getElementById('cpsValue');
-            if (el) el.textContent = fmtCandy(autoClickers * 0.5);
+            if (el) el.textContent = fmtCandy(getTotalCPS());
         }
 
         function getTotalUpgradeLevels() {
-            return (clickPower - 1) + autoClickers + luck;
+            return (clickPower - 1) + autoClickers + luck + autoClickerSpeed + spawnRate;
         }
 
         // ========== ВКЛАДКИ ==========
@@ -1028,14 +1052,17 @@
                 timer2.textContent = formatTime(ms2);
             }
 
-            // 🌈 Радужный таймер
+            // 🌈 Радужный таймер — до начала следующего часа
             if (rainbowForce) {
                 document.getElementById('rainbowTimerValue').textContent = 'ВКЛ';
             } else if (rainbowActive) {
                 document.getElementById('rainbowTimerValue').textContent = 'АКТИВНА!';
             } else {
-                const nextRainbow = lastRainbowTime + RAINBOW_INTERVAL;
-                const msLeft = nextRainbow - now;
+                const nowDate = new Date();
+                const nextHour = new Date(nowDate);
+                nextHour.setMinutes(0, 0, 0);
+                nextHour.setHours(nextHour.getHours() + 1);
+                const msLeft = nextHour.getTime() - now;
                 if (msLeft <= 0) {
                     document.getElementById('rainbowTimerValue').textContent = 'СКОРО!';
                 } else {
@@ -1044,17 +1071,18 @@
             }
         }
 
-        // ========== ИВЕНТ РАДУГА ==========
+        // ========== ИВЕНТ РАДУГА (по часам) ==========
         function checkRainbowEvent() {
             const now = Date.now();
+            const nowDate = new Date();
 
+            // Принудительно
             if (rainbowForce) {
-                if (!rainbowActive) {
-                    activateRainbow();
-                }
+                if (!rainbowActive) activateRainbow();
                 return;
             }
 
+            // Если радуга активна — проверяем, не закончилась ли
             if (rainbowActive) {
                 if (now >= rainbowEndTime) {
                     deactivateRainbow();
@@ -1062,26 +1090,27 @@
                 return;
             }
 
-            // Проверяем, пора ли начать
-            const nextRainbow = lastRainbowTime + RAINBOW_INTERVAL;
-            if (now >= nextRainbow) {
+            // Радуга начинается в 0 минут 0 секунд каждого часа
+            // Проверяем: если сейчас ровно начало часа (в пределах первых 2 секунд) — включаем
+            const minutes = nowDate.getMinutes();
+            const seconds = nowDate.getSeconds();
+            if (minutes === 0 && seconds <= 2) {
                 activateRainbow();
             }
         }
 
         function activateRainbow() {
+            if (rainbowActive) return;
             rainbowActive = true;
             rainbowEndTime = Date.now() + RAINBOW_DURATION;
             document.body.classList.add('rainbow-active');
-            showToast('🌈 ИВЕНТ РАДУГА НАЧАЛСЯ! Конфеты дают больше!');
+            showToast('🌈 ИВЕНТ РАДУГА НАЧАЛСЯ! Все награды ×2, шансы редких выше!');
         }
 
         function deactivateRainbow() {
             rainbowActive = false;
-            lastRainbowTime = Date.now();
-            try { localStorage.setItem(STORAGE_KEYS.lastRainbow, String(lastRainbowTime)); } catch (e) {}
             document.body.classList.remove('rainbow-active');
-            showToast('🌈 Радуга закончилась. Ждём следующую через час!');
+            showToast('🌈 Радуга закончилась. Ждём следующий час!');
         }
 
         function toggleRainbowEvent() {
@@ -1151,7 +1180,6 @@
 
         // ========== СПАВН ПРЕДМЕТОВ ==========
         function getSpawnChances() {
-            // Если радуга активна — шансы на редкие предметы увеличиваются
             if (rainbowActive) {
                 return {
                     candy1: 30,
@@ -1162,8 +1190,7 @@
                     rainbow: 0.1
                 };
             }
-            // Удача повышает шансы редких
-            const luckMult = 1 + (luck * 0.05); // каждый уровень +5% к шансу
+            const luckMult = 1 + (luck * 0.05);
             return {
                 candy1: Math.max(1, 44 - luck * 2),
                 candy2: Math.max(1, 44 - luck * 2),
@@ -1232,7 +1259,6 @@
                 return;
             }
 
-            // Цветная конфета (только для candy1/candy2)
             let colored = false;
             let colorGlow = null;
             if ((type === 'candy1' || type === 'candy2') && Math.random() < COLORED_CHANCE + luck * 0.01) {
@@ -1276,7 +1302,6 @@
                     }
                 }
 
-                // Бонус от радуги
                 if (rainbowActive) {
                     bonus *= 2;
                 }
@@ -1298,15 +1323,18 @@
 
         function startSpawnTimer() {
             if (spawnTimer) clearInterval(spawnTimer);
-            spawnTimer = setInterval(spawnRandomItem, SPAWN_INTERVAL);
+            spawnTimer = setInterval(spawnRandomItem, getSpawnInterval());
         }
 
-        // Автокликеры
+        // Автокликеры (проверяем каждые 100мс для плавности)
         setInterval(() => {
             if (autoClickers > 0) {
-                setClickerCandy(clickerCandy + autoClickers * 0.5);
+                const gainPerTick = getTotalCPS() * 0.1;
+                if (gainPerTick > 0) {
+                    setClickerCandy(clickerCandy + gainPerTick);
+                }
             }
-        }, 1000);
+        }, 100);
 
         // ========== СЕКРЕТ ==========
         function toggleSecretPrompt() {
@@ -1343,12 +1371,32 @@
             {
                 id: 'autoClicker',
                 name: '🤖 Автокликер',
-                desc: 'Автоматически добавляет +0.5 конфет/сек',
+                desc: 'Добавляет +1 автокликер (каждый даёт 0.5+ конфет/сек)',
                 basePrice: 50,
                 priceMultiplier: 1.5,
                 maxLevel: 50,
                 getLevel: () => autoClickers,
                 apply: () => { autoClickers += 1; }
+            },
+            {
+                id: 'autoSpeed',
+                name: '⚡ Скорость автокликера',
+                desc: 'Каждый уровень +0.05 конфет/сек к каждому автокликеру',
+                basePrice: 200,
+                priceMultiplier: 2.2,
+                maxLevel: 20,
+                getLevel: () => autoClickerSpeed,
+                apply: () => { autoClickerSpeed += 1; }
+            },
+            {
+                id: 'spawnRate',
+                name: '⏱️ Частота спавна',
+                desc: 'Каждый уровень ускоряет появление предметов на 10%',
+                basePrice: 150,
+                priceMultiplier: 2.0,
+                maxLevel: 15,
+                getLevel: () => spawnRate,
+                apply: () => { spawnRate += 1; }
             },
             {
                 id: 'luck',
@@ -1410,6 +1458,12 @@
             updateClickerCandyUI();
             updateCpsUI();
             renderShop();
+            
+            // Если купили скорость спавна — перезапускаем таймер
+            if (id === 'spawnRate') {
+                startSpawnTimer();
+            }
+            
             showToast(`✅ Куплено: ${item.name}`);
         }
 
