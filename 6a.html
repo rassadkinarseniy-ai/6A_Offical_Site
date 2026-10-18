@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Официальный сайт 6А класса — ГБОУ Лицей 486</title>
+
+    <!-- ✅ ИКОНКА САЙТА (favicon) -->
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/bvjmPv7j/New-Piskel-(58)-(1).png">
+
     <style>
         * {
             margin: 0;
@@ -273,24 +277,6 @@
         .btn:hover { background: #ffa733; box-shadow: 0 0 18px #ffb347; }
         .btn:disabled { background: #555; color: #888; cursor: not-allowed; box-shadow: none; }
 
-        .secret-area {
-            margin-top: 1.5rem;
-            padding-top: 1.5rem;
-            border-top: 1px dashed #4a3a25;
-            display: none;
-        }
-        .secret-area.visible { display: block; }
-        .secret-input {
-            background: #0f0b07;
-            border: 1px solid #b8651a;
-            border-radius: 12px;
-            padding: 0.6rem 1rem;
-            color: #ffb347;
-            font-size: 1rem;
-            width: 160px;
-            margin-right: 0.5rem;
-        }
-
         footer {
             margin-top: 2rem;
             color: #8a7a63;
@@ -339,8 +325,27 @@
             font-size: 1.4rem;
             font-weight: 800;
             color: #ffb347;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .clicker-balance small { font-size: 0.9rem; color: #e6c9a0; font-weight: 400; }
+
+        /* ✅ Иконка конфеты вместо эмодзи 🍬 */
+        .candy-icon {
+            width: 22px;
+            height: 22px;
+            vertical-align: middle;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 0 4px #ffb347);
+        }
+        .candy-icon-lg {
+            width: 30px;
+            height: 30px;
+            vertical-align: middle;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 0 6px #ffb347);
+        }
 
         .cps-display {
             background: #1f1a12;
@@ -360,14 +365,18 @@
             justify-content: center;
             margin: 1rem 0;
         }
+        /* ✅ Главная тыква — иконка из ссылки */
         .big-pumpkin {
-            font-size: 7rem;
+            width: 140px;
+            height: 140px;
             cursor: pointer;
             user-select: none;
             transition: transform 0.08s;
             filter: drop-shadow(0 0 25px #ff8c00);
             z-index: 2;
             touch-action: manipulation;
+            image-rendering: pixelated;
+            object-fit: contain;
         }
         .big-pumpkin:active { transform: scale(0.92); }
         .click-float {
@@ -385,17 +394,40 @@
             100% { opacity: 0; transform: translateY(-90px) scale(1.3); }
         }
 
+        /* ✅ Бонусные тыквы — иконка из ссылки */
         .bonus-pumpkin {
             position: absolute;
-            font-size: 3rem;
+            width: 70px;
+            height: 70px;
             cursor: pointer;
             z-index: 4;
             filter: drop-shadow(0 0 15px #ff5500);
             animation: popIn 0.3s ease-out, bounce 1s infinite alternate;
             user-select: none;
+            image-rendering: pixelated;
+            object-fit: contain;
         }
         @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
         @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-12px); } }
+
+        /* ✅ Золотая тыква — особая анимация */
+        .golden-pumpkin {
+            position: absolute;
+            width: 90px;
+            height: 90px;
+            cursor: pointer;
+            z-index: 5;
+            filter: drop-shadow(0 0 25px #ffd700) drop-shadow(0 0 40px #ffaa00);
+            animation: popIn 0.3s ease-out, goldenSpin 2s infinite linear;
+            user-select: none;
+            image-rendering: pixelated;
+            object-fit: contain;
+        }
+        @keyframes goldenSpin {
+            0% { transform: rotate(-5deg) scale(1); }
+            50% { transform: rotate(5deg) scale(1.15); }
+            100% { transform: rotate(-5deg) scale(1); }
+        }
 
         .shop { margin-top: 2rem; text-align: left; }
         .shop h3 {
@@ -434,6 +466,9 @@
             cursor: pointer;
             white-space: nowrap;
             transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         .buy-btn:hover:not(:disabled) { background: #ffa733; box-shadow: 0 0 18px #ffb347; }
         .buy-btn:disabled { background: #3a3a3a; color: #777; cursor: not-allowed; }
@@ -448,6 +483,10 @@
             font-size: 1.6rem;
             font-weight: 800;
             color: #ffb347;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         .coffin-candy-box small { font-size: 0.9rem; color: #e6c9a0; font-weight: 400; }
 
@@ -456,7 +495,7 @@
             h1 span { font-size: 1.6rem; }
             .container { padding: 1.8rem 1.2rem; }
             .modal { padding: 1.5rem; }
-            .big-pumpkin { font-size: 5.5rem; }
+            .big-pumpkin { width: 110px; height: 110px; }
         }
     </style>
 </head>
@@ -513,7 +552,8 @@
         <div class="tab-content" id="tab-games">
             <div class="clicker-header">
                 <div class="clicker-balance">
-                    🍬 <span id="gameCandy">0</span> <small>конфет</small>
+                    <img src="https://i.postimg.cc/9fWy1q3F/New-Piskel-(58)-(5).png" class="candy-icon-lg" alt="конфета">
+                    <span id="gameCandy">0</span> <small>конфет</small>
                 </div>
                 <div class="cps-display">
                     ⚡ <strong id="cpsValue">0</strong> конфет/сек
@@ -521,11 +561,13 @@
             </div>
 
             <div class="pumpkin-click-area" id="clickArea">
-                <div class="big-pumpkin" id="mainPumpkin" onclick="clickMainPumpkin(event)">🎃</div>
+                <!-- ✅ Главная тыква -->
+                <img src="https://i.postimg.cc/cHCwGy45/New-Piskel-(58)-(4).png" class="big-pumpkin" id="mainPumpkin" onclick="clickMainPumpkin(event)" alt="тыква">
             </div>
 
             <p style="color:#8a7a63; font-size:0.9rem; margin:0.5rem 0 1rem;">
-                Кликай по тыкве, чтобы получать конфеты. Иногда появляются бонусные тыковки — успей кликнуть!
+                Кликай по тыкве, чтобы получать конфеты. Иногда появляются бонусные тыковки — успей кликнуть!<br>
+                <span style="color:#ffd700;">✨ Очень редко выпадает ЗОЛОТАЯ тыковка — она даёт ппц много конфет!</span>
             </p>
 
             <div class="shop">
@@ -556,7 +598,7 @@
         </div>
     </div>
 
-    <!-- Модалка 2 -->
+    <!-- Модалка 2 (гроб) -->
     <div class="modal-overlay" id="modal2">
         <div class="modal">
             <button class="modal-close" onclick="closeModal('modal2')">×</button>
@@ -569,21 +611,8 @@
 
             <div id="event2Active">
                 <div class="coffin-candy-box">
-                    🍬 <span id="coffinCandy">57.5</span> <small>/ 100 конфет</small>
-                </div>
-
-                <div class="secret-area" id="secretArea">
-                    <p style="color:#e6c9a0; font-size:0.9rem; margin-bottom:0.5rem;">🔓 Секретный режим активирован:</p>
-                    <input type="number" class="secret-input" id="secretAmount" placeholder="Кол-во" step="0.1">
-                    <button class="btn" onclick="setCoffinCandySecret()">Установить</button>
-                </div>
-
-                <div style="text-align:center; margin-top:1.5rem;">
-                    <button class="btn" style="background:#4a3a25; color:#e6c9a0; font-size:0.8rem; padding:0.4rem 1rem;" onclick="toggleSecretPrompt()">🔑 Ввести пароль</button>
-                </div>
-                <div id="secretPrompt" style="display:none; text-align:center; margin-top:0.8rem;">
-                    <input type="password" class="secret-input" id="secretPassword" placeholder="Пароль">
-                    <button class="btn" onclick="checkPassword()">OK</button>
+                    <img src="https://i.postimg.cc/9fWy1q3F/New-Piskel-(58)-(5).png" class="candy-icon-lg" alt="конфета">
+                    <span id="coffinCandy">57.5</span> <small>/ 100 конфет</small>
                 </div>
             </div>
 
@@ -597,30 +626,40 @@
     <div class="toast" id="toast"></div>
 
     <script>
+        // ========== ССЫЛКИ НА ИКОНКИ ==========
+        // ✅ Все иконки вынесены сюда — меняешь только здесь
+        const ICONS = {
+            bonusPumpkin:   'https://i.postimg.cc/kX6st8Cz/New-Piskel-(58)-(2).png',   // бонусная (даёт много)
+            goldenPumpkin:  'https://i.postimg.cc/Px5zfvKF/New-Piskel-(58)-(3).png',   // золотая (ппц много)
+            mainPumpkin:    'https://i.postimg.cc/cHCwGy45/New-Piskel-(58)-(4).png',   // главная тыква
+            candy:          'https://i.postimg.cc/9fWy1q3F/New-Piskel-(58)-(5).png'    // конфетка
+        };
+
         // ========== КОНСТАНТЫ ==========
         const EVENT1_END = new Date('2026-10-20T00:00:00');
         const EVENT2_END = new Date('2026-10-24T00:00:00');
-        const COFFIN_START_CANDY = 57.5;       // ← стартовые конфеты ИВЕНТА «гроб»
-        const CLICKER_START_CANDY = 0;         // ← стартовые конфеты КЛИКЕРА
-        const SECRET_PASSWORD = '03111383';
-        const BONUS_CHANCE = 0.08;
-        const BONUS_LIFETIME = 4000;
+        const COFFIN_START_CANDY = 57.5;
+        const CLICKER_START_CANDY = 0;
+
+        const BONUS_CHANCE = 0.08;          // шанс бонусной тыквы
+        const BONUS_LIFETIME = 4000;        // 4 сек
+        const GOLDEN_CHANCE = 0.005;        // 0.5% — очень редкая золотая тыква
+        const GOLDEN_LIFETIME = 3000;       // 3 сек
 
         const STORAGE_KEYS = {
-            coffinCandy: '6a_coffin_candy',    // конфеты гроба (отдельно!)
-            clickerCandy: '6a_clicker_candy',  // конфеты кликера (отдельно!)
-            secretUnlocked: '6a_secret_unlocked',
+            coffinCandy: '6a_coffin_candy_v2',
+            clickerCandy: '6a_clicker_candy',
             clickPower: '6a_click_power',
             autoClickers: '6a_auto_clickers'
         };
 
         // ========== СОСТОЯНИЕ ==========
-        let coffinCandy = COFFIN_START_CANDY;  // счётчик для ивента «гроб»
-        let clickerCandy = CLICKER_START_CANDY; // счётчик для кликера
-        let secretUnlocked = false;
+        let coffinCandy = COFFIN_START_CANDY;
+        let clickerCandy = CLICKER_START_CANDY;
         let clickPower = 1;
         let autoClickers = 0;
         let bonusTimeout = null;
+        let goldenTimeout = null;
 
         // ========== УТИЛИТЫ ==========
         function showToast(msg) {
@@ -650,18 +689,20 @@
         // ========== СОХРАНЕНИЕ ==========
         function loadState() {
             try {
-                const v = parseFloat(localStorage.getItem(STORAGE_KEYS.coffinCandy));
-                coffinCandy = isNaN(v) ? COFFIN_START_CANDY : v;
+                const raw = localStorage.getItem(STORAGE_KEYS.coffinCandy);
+                if (raw === null) {
+                    coffinCandy = COFFIN_START_CANDY;
+                    localStorage.setItem(STORAGE_KEYS.coffinCandy, String(COFFIN_START_CANDY));
+                } else {
+                    const v = parseFloat(raw);
+                    coffinCandy = isNaN(v) ? COFFIN_START_CANDY : v;
+                }
             } catch (e) { coffinCandy = COFFIN_START_CANDY; }
 
             try {
                 const v = parseFloat(localStorage.getItem(STORAGE_KEYS.clickerCandy));
                 clickerCandy = isNaN(v) ? CLICKER_START_CANDY : v;
             } catch (e) { clickerCandy = CLICKER_START_CANDY; }
-
-            try {
-                secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true';
-            } catch (e) { secretUnlocked = false; }
 
             try {
                 const cp = parseFloat(localStorage.getItem(STORAGE_KEYS.clickPower));
@@ -776,39 +817,8 @@
                 document.getElementById('event2Active').style.display = 'block';
                 document.getElementById('event2EndedMsg').style.display = 'none';
                 updateCoffinCandyUI();
-                document.getElementById('secretArea').classList.toggle('visible', secretUnlocked);
             }
             openModal('modal2');
-        }
-
-        // ========== СЕКРЕТ (меняет конфеты ГРОБА) ==========
-        function toggleSecretPrompt() {
-            const p = document.getElementById('secretPrompt');
-            p.style.display = p.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function checkPassword() {
-            const input = document.getElementById('secretPassword');
-            if (input.value === SECRET_PASSWORD) {
-                secretUnlocked = true;
-                try { localStorage.setItem(STORAGE_KEYS.secretUnlocked, 'true'); } catch (e) {}
-                document.getElementById('secretArea').classList.add('visible');
-                document.getElementById('secretPrompt').style.display = 'none';
-                input.value = '';
-                showToast('🔓 Секретный режим активирован!');
-            } else {
-                showToast('❌ Неверный пароль');
-            }
-        }
-
-        function setCoffinCandySecret() {
-            if (!secretUnlocked) return;
-            const input = document.getElementById('secretAmount');
-            const val = parseFloat(input.value);
-            if (isNaN(val)) { showToast('Введи число'); return; }
-            setCoffinCandy(val);
-            showToast(`Конфеты гроба установлены: ${fmtCandy(Math.max(val, 0))}`);
-            input.value = '';
         }
 
         // ========== КЛИКЕР ==========
@@ -817,7 +827,10 @@
             setClickerCandy(clickerCandy + gain);
             spawnFloatText(e, `+${fmtCandy(gain)}`);
 
-            if (Math.random() < BONUS_CHANCE) {
+            // Сначала проверяем золотую (очень редкую), потом обычную бонусную
+            if (Math.random() < GOLDEN_CHANCE) {
+                spawnGoldenPumpkin();
+            } else if (Math.random() < BONUS_CHANCE) {
                 spawnBonusPumpkin();
             }
         }
@@ -848,9 +861,10 @@
             if (!area) return;
             if (area.querySelector('.bonus-pumpkin')) return;
 
-            const el = document.createElement('div');
+            const el = document.createElement('img');
             el.className = 'bonus-pumpkin';
-            el.textContent = '🎃';
+            el.src = ICONS.bonusPumpkin;
+            el.alt = 'бонусная тыква';
             const pad = 40;
             const x = pad + Math.random() * (area.clientWidth - pad * 2);
             const y = pad + Math.random() * (area.clientHeight - pad * 2);
@@ -869,6 +883,36 @@
             bonusTimeout = setTimeout(() => {
                 if (el.parentNode) el.remove();
             }, BONUS_LIFETIME);
+        }
+
+        function spawnGoldenPumpkin() {
+            const area = document.getElementById('clickArea');
+            if (!area) return;
+            if (area.querySelector('.golden-pumpkin')) return;
+
+            const el = document.createElement('img');
+            el.className = 'golden-pumpkin';
+            el.src = ICONS.goldenPumpkin;
+            el.alt = 'золотая тыква';
+            const pad = 50;
+            const x = pad + Math.random() * (area.clientWidth - pad * 2);
+            const y = pad + Math.random() * (area.clientHeight - pad * 2);
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            el.onclick = (ev) => {
+                ev.stopPropagation();
+                const bonus = 50 + Math.random() * 100; // 50–150 конфет!
+                setClickerCandy(clickerCandy + bonus);
+                spawnFloatText(ev, `🌟 +${fmtCandy(bonus)}`);
+                showToast(`✨ ЗОЛОТАЯ ТЫКВА! +${fmtCandy(bonus)} конфет`);
+                el.remove();
+                clearTimeout(goldenTimeout);
+            };
+            area.appendChild(el);
+
+            goldenTimeout = setTimeout(() => {
+                if (el.parentNode) el.remove();
+            }, GOLDEN_LIFETIME);
         }
 
         // Автокликеры
@@ -927,7 +971,7 @@
                         <div class="shop-item-level">Уровень: ${level} / ${item.maxLevel}</div>
                     </div>
                     <button class="buy-btn" ${maxed || !canBuy ? 'disabled' : ''} onclick="buyItem('${item.id}')">
-                        ${maxed ? '✅ Максимум' : `Купить за ${price} 🍬`}
+                        ${maxed ? '✅ Максимум' : `Купить за ${price} <img src="${ICONS.candy}" class="candy-icon" alt="">`}
                     </button>
                 `;
                 list.appendChild(div);
