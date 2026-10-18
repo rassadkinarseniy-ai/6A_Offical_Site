@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Официальный сайт 6А класса — ГБОУ Лицей 486</title>
 
-    <!-- ✅ Локальная иконка сайта -->
     <link rel="icon" type="image/x-icon" href="logo.ico">
 
     <style>
@@ -331,7 +330,6 @@
         }
         .clicker-balance small { font-size: 0.9rem; color: #e6c9a0; font-weight: 400; }
 
-        /* ✅ Иконка конфеты */
         .candy-icon {
             width: 22px;
             height: 22px;
@@ -359,16 +357,19 @@
 
         .pumpkin-click-area {
             position: relative;
-            height: 220px;
+            height: 280px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 1rem 0;
+            background: #110d08;
+            border: 2px dashed #4a3a25;
+            border-radius: 20px;
+            overflow: hidden;
         }
-        /* ✅ Главная тыква */
         .big-pumpkin {
-            width: 140px;
-            height: 140px;
+            width: 120px;
+            height: 120px;
             cursor: pointer;
             user-select: none;
             transition: transform 0.08s;
@@ -394,40 +395,72 @@
             100% { opacity: 0; transform: translateY(-90px) scale(1.3); }
         }
 
-        /* ✅ Бонусная тыква */
-        .bonus-pumpkin {
+        /* ===== СПАВН-ПРЕДМЕТЫ ===== */
+        .spawn-item {
             position: absolute;
-            width: 70px;
-            height: 70px;
             cursor: pointer;
             z-index: 4;
-            filter: drop-shadow(0 0 15px #ff5500);
-            animation: popIn 0.3s ease-out, bounce 1s infinite alternate;
             user-select: none;
             image-rendering: pixelated;
             object-fit: contain;
+            transition: transform 0.1s;
+            animation: popIn 0.3s ease-out;
         }
+        .spawn-item:hover { transform: scale(1.1); }
+        .spawn-item:active { transform: scale(0.9); }
         @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
-        @keyframes bounce { 0% { transform: translateY(0); } 100% { transform: translateY(-12px); } }
 
-        /* ✅ Золотая тыква */
-        .golden-pumpkin {
-            position: absolute;
-            width: 90px;
-            height: 90px;
-            cursor: pointer;
-            z-index: 5;
-            filter: drop-shadow(0 0 25px #ffd700) drop-shadow(0 0 40px #ffaa00);
-            animation: popIn 0.3s ease-out, goldenSpin 2s infinite linear;
-            user-select: none;
-            image-rendering: pixelated;
-            object-fit: contain;
-        }
+        /* Размеры для разных предметов */
+        .spawn-candy1 { width: 50px; height: 50px; filter: drop-shadow(0 0 8px #ff8c00); }
+        .spawn-candy2 { width: 50px; height: 50px; filter: drop-shadow(0 0 8px #ff5500); }
+        .spawn-bucket { width: 80px; height: 80px; filter: drop-shadow(0 0 12px #ff8c00); }
+        .spawn-golden { width: 90px; height: 90px; filter: drop-shadow(0 0 20px #ffd700) drop-shadow(0 0 35px #ffaa00); animation: popIn 0.3s ease-out, goldenSpin 2s infinite linear; }
+
         @keyframes goldenSpin {
             0% { transform: rotate(-5deg) scale(1); }
-            50% { transform: rotate(5deg) scale(1.15); }
+            50% { transform: rotate(5deg) scale(1.1); }
             100% { transform: rotate(-5deg) scale(1); }
         }
+
+        /* ===== СЕКРЕТНАЯ ПАНЕЛЬ ===== */
+        .secret-panel {
+            display: none;
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #1f1a12;
+            border: 2px dashed #ffb347;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .secret-panel.visible { display: block; }
+        .secret-panel h3 {
+            color: #ffb347;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        .secret-spawn-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+        .secret-spawn-btn {
+            background: #2a1e0c;
+            border: 2px solid #b8651a;
+            border-radius: 16px;
+            padding: 0.8rem 1.2rem;
+            color: #e6c9a0;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            min-width: 110px;
+        }
+        .secret-spawn-btn:hover { border-color: #ffb347; background: #3a2a14; box-shadow: 0 0 15px #e67e2250; }
+        .secret-spawn-btn img { width: 40px; height: 40px; image-rendering: pixelated; }
 
         .shop { margin-top: 2rem; text-align: left; }
         .shop h3 {
@@ -495,7 +528,8 @@
             h1 span { font-size: 1.6rem; }
             .container { padding: 1.8rem 1.2rem; }
             .modal { padding: 1.5rem; }
-            .big-pumpkin { width: 110px; height: 110px; }
+            .big-pumpkin { width: 100px; height: 100px; }
+            .pumpkin-click-area { height: 240px; }
         }
     </style>
 </head>
@@ -561,14 +595,40 @@
             </div>
 
             <div class="pumpkin-click-area" id="clickArea">
-                <!-- ✅ Главная тыква -->
                 <img src="pumpkin_bucket.png" class="big-pumpkin" id="mainPumpkin" onclick="clickMainPumpkin(event)" alt="тыква">
             </div>
 
             <p style="color:#8a7a63; font-size:0.9rem; margin:0.5rem 0 1rem;">
-                Кликай по тыкве, чтобы получать конфеты. Иногда появляются бонусные тыковки — успей кликнуть!<br>
-                <span style="color:#ffd700;">✨ Очень редко выпадает ЗОЛОТАЯ тыковка — она даёт ппц много конфет!</span>
+                Кликай по главной тыкве, чтобы получать конфеты. На поле сами появляются конфеты и вёдра — успей кликнуть по ним, они дают столько же!
             </p>
+
+            <!-- 🔑 Секретная кнопка -->
+            <div style="text-align:center; margin-top:1rem;">
+                <button class="btn" style="background:#4a3a25; color:#e6c9a0; font-size:0.8rem; padding:0.4rem 1rem;" onclick="toggleSecretPrompt()">🔑 Ввести пароль</button>
+            </div>
+            <div id="secretPrompt" style="display:none; text-align:center; margin-top:0.8rem;">
+                <input type="password" id="secretPassword" placeholder="Пароль" style="background:#0f0b07; border:1px solid #b8651a; border-radius:12px; padding:0.6rem 1rem; color:#ffb347; font-size:1rem; width:160px; margin-right:0.5rem;">
+                <button class="btn" onclick="checkPassword()">OK</button>
+            </div>
+
+            <!-- 🔓 Секретная панель спавна -->
+            <div class="secret-panel" id="secretPanel">
+                <h3>🔓 Секретный спавн предметов</h3>
+                <div class="secret-spawn-grid">
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('candy1')">
+                        <img src="candy1.png" alt=""> Конфета 1
+                    </button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('candy2')">
+                        <img src="candy2.png" alt=""> Конфета 2
+                    </button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('bucket')">
+                        <img src="pumpkin_bucket.png" alt=""> Ведро тыкв
+                    </button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('golden')">
+                        <img src="golden_pumpkin_bucket.png" alt=""> Золотое ведро
+                    </button>
+                </div>
+            </div>
 
             <div class="shop">
                 <h3>🛒 Прокачка</h3>
@@ -628,10 +688,11 @@
     <script>
         // ========== ПУТИ К ЛОКАЛЬНЫМ ИКОНКАМ ==========
         const ICONS = {
-            bonusPumpkin:  'candy2.png',
-            goldenPumpkin: 'golden_pumpkin_bucket.png',
-            mainPumpkin:   'pumpkin_bucket.png',
-            candy:         'candy1.png'
+            candy1: 'candy1.png',
+            candy2: 'candy2.png',
+            bucket: 'pumpkin_bucket.png',
+            golden: 'golden_pumpkin_bucket.png',
+            main:   'pumpkin_bucket.png'
         };
 
         // ========== КОНСТАНТЫ ==========
@@ -639,17 +700,18 @@
         const EVENT2_END = new Date('2026-10-24T00:00:00');
         const COFFIN_START_CANDY = 57.5;
         const CLICKER_START_CANDY = 0;
+        const SECRET_PASSWORD = '03111383';
 
-        const BONUS_CHANCE = 0.08;          // шанс бонусной тыквы
-        const BONUS_LIFETIME = 4000;        // 4 сек
-        const GOLDEN_CHANCE = 0.005;        // 0.5% — очень редкая золотая тыква
-        const GOLDEN_LIFETIME = 3000;       // 3 сек
+        const SPAWN_INTERVAL = 2500;        // как часто спавнятся предметы (мс)
+        const SPAWN_LIFETIME = 6000;        // сколько живёт предмет (мс)
+        const MAX_ITEMS_ON_SCREEN = 6;      // макс. предметов на поле
 
         const STORAGE_KEYS = {
             coffinCandy: '6a_coffin_candy_v2',
             clickerCandy: '6a_clicker_candy',
             clickPower: '6a_click_power',
-            autoClickers: '6a_auto_clickers'
+            autoClickers: '6a_auto_clickers',
+            secretUnlocked: '6a_secret_unlocked'
         };
 
         // ========== СОСТОЯНИЕ ==========
@@ -657,8 +719,8 @@
         let clickerCandy = CLICKER_START_CANDY;
         let clickPower = 1;
         let autoClickers = 0;
-        let bonusTimeout = null;
-        let goldenTimeout = null;
+        let secretUnlocked = false;
+        let spawnTimer = null;
 
         // ========== УТИЛИТЫ ==========
         function showToast(msg) {
@@ -712,6 +774,10 @@
                 const ac = parseInt(localStorage.getItem(STORAGE_KEYS.autoClickers));
                 autoClickers = isNaN(ac) ? 0 : ac;
             } catch (e) { autoClickers = 0; }
+
+            try {
+                secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true';
+            } catch (e) { secretUnlocked = false; }
         }
 
         function saveCoffinCandy() {
@@ -825,13 +891,6 @@
             const gain = clickPower;
             setClickerCandy(clickerCandy + gain);
             spawnFloatText(e, `+${fmtCandy(gain)}`);
-
-            // Сначала проверяем золотую, потом бонусную
-            if (Math.random() < GOLDEN_CHANCE) {
-                spawnGoldenPumpkin();
-            } else if (Math.random() < BONUS_CHANCE) {
-                spawnBonusPumpkin();
-            }
         }
 
         function spawnFloatText(e, text) {
@@ -855,63 +914,79 @@
             setTimeout(() => el.remove(), 900);
         }
 
-        function spawnBonusPumpkin() {
+        // ========== СПАВН ПРЕДМЕТОВ ==========
+        function spawnRandomItem() {
             const area = document.getElementById('clickArea');
             if (!area) return;
-            if (area.querySelector('.bonus-pumpkin')) return;
+            if (area.querySelectorAll('.spawn-item').length >= MAX_ITEMS_ON_SCREEN) return;
 
-            const el = document.createElement('img');
-            el.className = 'bonus-pumpkin';
-            el.src = ICONS.bonusPumpkin;
-            el.alt = 'бонусная тыква';
-            const pad = 40;
-            const x = pad + Math.random() * (area.clientWidth - pad * 2);
-            const y = pad + Math.random() * (area.clientHeight - pad * 2);
-            el.style.left = x + 'px';
-            el.style.top = y + 'px';
-            el.onclick = (ev) => {
-                ev.stopPropagation();
-                const bonus = 5 + Math.random() * 10;
-                setClickerCandy(clickerCandy + bonus);
-                spawnFloatText(ev, `🎁 +${fmtCandy(bonus)}`);
-                el.remove();
-                clearTimeout(bonusTimeout);
-            };
-            area.appendChild(el);
-
-            bonusTimeout = setTimeout(() => {
-                if (el.parentNode) el.remove();
-            }, BONUS_LIFETIME);
+            const types = ['candy1', 'candy2', 'bucket', 'golden'];
+            const type = types[Math.floor(Math.random() * types.length)];
+            spawnItem(type);
         }
 
-        function spawnGoldenPumpkin() {
+        function spawnSpecific(type) {
             const area = document.getElementById('clickArea');
             if (!area) return;
-            if (area.querySelector('.golden-pumpkin')) return;
+            if (area.querySelectorAll('.spawn-item').length >= MAX_ITEMS_ON_SCREEN) {
+                showToast('⚠️ Слишком много предметов на поле');
+                return;
+            }
+            spawnItem(type);
+        }
+
+        function spawnItem(type) {
+            const area = document.getElementById('clickArea');
+            if (!area) return;
 
             const el = document.createElement('img');
-            el.className = 'golden-pumpkin';
-            el.src = ICONS.goldenPumpkin;
-            el.alt = 'золотая тыква';
+            el.className = 'spawn-item';
+            el.dataset.type = type;
+            el.alt = type;
+
+            if (type === 'candy1') {
+                el.src = ICONS.candy1;
+                el.classList.add('spawn-candy1');
+            } else if (type === 'candy2') {
+                el.src = ICONS.candy2;
+                el.classList.add('spawn-candy2');
+            } else if (type === 'bucket') {
+                el.src = ICONS.bucket;
+                el.classList.add('spawn-bucket');
+            } else if (type === 'golden') {
+                el.src = ICONS.golden;
+                el.classList.add('spawn-golden');
+            } else {
+                return;
+            }
+
             const pad = 50;
             const x = pad + Math.random() * (area.clientWidth - pad * 2);
             const y = pad + Math.random() * (area.clientHeight - pad * 2);
             el.style.left = x + 'px';
             el.style.top = y + 'px';
+
             el.onclick = (ev) => {
                 ev.stopPropagation();
-                const bonus = 50 + Math.random() * 100;
+                // Все предметы дают столько же, сколько клик по главной тыкве
+                const bonus = clickPower;
                 setClickerCandy(clickerCandy + bonus);
-                spawnFloatText(ev, `🌟 +${fmtCandy(bonus)}`);
-                showToast(`✨ ЗОЛОТАЯ ТЫКВА! +${fmtCandy(bonus)} конфет`);
+                spawnFloatText(ev, `+${fmtCandy(bonus)}`);
                 el.remove();
-                clearTimeout(goldenTimeout);
             };
+
             area.appendChild(el);
 
-            goldenTimeout = setTimeout(() => {
+            // Удаляем через время
+            setTimeout(() => {
                 if (el.parentNode) el.remove();
-            }, GOLDEN_LIFETIME);
+            }, SPAWN_LIFETIME);
+        }
+
+        // Запуск автоспавна
+        function startSpawnTimer() {
+            if (spawnTimer) clearInterval(spawnTimer);
+            spawnTimer = setInterval(spawnRandomItem, SPAWN_INTERVAL);
         }
 
         // Автокликеры
@@ -920,6 +995,26 @@
                 setClickerCandy(clickerCandy + autoClickers * 0.5);
             }
         }, 1000);
+
+        // ========== СЕКРЕТ ==========
+        function toggleSecretPrompt() {
+            const p = document.getElementById('secretPrompt');
+            p.style.display = p.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function checkPassword() {
+            const input = document.getElementById('secretPassword');
+            if (input.value === SECRET_PASSWORD) {
+                secretUnlocked = true;
+                try { localStorage.setItem(STORAGE_KEYS.secretUnlocked, 'true'); } catch (e) {}
+                document.getElementById('secretPanel').classList.add('visible');
+                document.getElementById('secretPrompt').style.display = 'none';
+                input.value = '';
+                showToast('🔓 Секретный режим активирован!');
+            } else {
+                showToast('❌ Неверный пароль');
+            }
+        }
 
         // ========== МАГАЗИН ==========
         const SHOP_ITEMS = [
@@ -970,7 +1065,7 @@
                         <div class="shop-item-level">Уровень: ${level} / ${item.maxLevel}</div>
                     </div>
                     <button class="buy-btn" ${maxed || !canBuy ? 'disabled' : ''} onclick="buyItem('${item.id}')">
-                        ${maxed ? '✅ Максимум' : `Купить за ${price} <img src="${ICONS.candy}" class="candy-icon" alt="">`}
+                        ${maxed ? '✅ Максимум' : `Купить за ${price} <img src="${ICONS.candy1}" class="candy-icon" alt="">`}
                     </button>
                 `;
                 list.appendChild(div);
@@ -1004,6 +1099,12 @@
         renderShop();
         tickTimers();
         setInterval(tickTimers, 1000);
+        startSpawnTimer();
+
+        // Показ секретной панели, если пароль уже был введён
+        if (secretUnlocked) {
+            document.getElementById('secretPanel').classList.add('visible');
+        }
 
         document.querySelectorAll('.modal-overlay').forEach(el => {
             el.addEventListener('click', e => {
