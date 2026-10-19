@@ -10,54 +10,19 @@
         
         body { background: #0b0b0b; background-image: radial-gradient(circle at 10% 20%, #1e1a0f 0%, #0a0705 90%); color: #e6e6e6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; position: relative; overflow-x: hidden; transition: background 0.8s, color 0.5s; }
         
-        /* 👻 Призрачный ивент */
-        body.ghost-active {
-            background: #121212;
-            background-image: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #0a0a0a 90%);
-            color: #d0e0ff;
-        }
-        body.ghost-active::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(136, 204, 255, 0.08) 0%, transparent 70%);
-            animation: ghostPulse 4s infinite alternate;
-        }
-        @keyframes ghostPulse {
-            0% { opacity: 0.3; transform: scale(1); }
-            100% { opacity: 0.8; transform: scale(1.1); }
-        }
-        body.ghost-active .container {
-            background: rgba(20, 20, 25, 0.92);
-            border-color: #88ccff;
-            box-shadow: 0 0 40px #88ccff66, 0 0 20px #88ccff inset;
-            animation: ghostContainerGlow 3s infinite alternate;
-        }
-        @keyframes ghostContainerGlow {
-            0% { box-shadow: 0 0 25px #88ccff44, 0 0 15px #88ccff inset; }
-            100% { box-shadow: 0 0 55px #88ccffaa, 0 0 25px #88ccff inset; }
-        }
-        
+        /* ===== ИВЕНТЫ ===== */
+        /* 👻 Призрачный */
+        body.ghost-active { background: #121212; background-image: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #0a0a0a 90%); color: #d0e0ff; }
+        body.ghost-active::before { content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 0; background: radial-gradient(circle at 50% 50%, rgba(136, 204, 255, 0.08) 0%, transparent 70%); animation: ghostPulse 4s infinite alternate; }
+        @keyframes ghostPulse { 0% { opacity: 0.3; transform: scale(1); } 100% { opacity: 0.8; transform: scale(1.1); } }
+        body.ghost-active .container { background: rgba(20, 20, 25, 0.92); border-color: #88ccff; box-shadow: 0 0 40px #88ccff66, 0 0 20px #88ccff inset; animation: ghostContainerGlow 3s infinite alternate; }
+        @keyframes ghostContainerGlow { 0% { box-shadow: 0 0 25px #88ccff44, 0 0 15px #88ccff inset; } 100% { box-shadow: 0 0 55px #88ccffaa, 0 0 25px #88ccff inset; } }
         body.ghost-active .bat { display: none !important; }
         body.ghost-active .ghost-decor { display: block !important; }
-        
-        .ghost-decor {
-            display: none;
-            position: fixed;
-            color: #88ccff;
-            font-size: 2rem;
-            opacity: 0.7;
-            pointer-events: none;
-            z-index: 0;
-            text-shadow: 0 0 15px #88ccff, 0 0 30px #88ccff;
-            animation: floatBat 12s infinite alternate ease-in-out;
-        }
+        .ghost-decor { display: none; position: fixed; color: #88ccff; font-size: 2rem; opacity: 0.7; pointer-events: none; z-index: 0; text-shadow: 0 0 15px #88ccff, 0 0 30px #88ccff; animation: floatBat 12s infinite alternate ease-in-out; }
         .ghost-decor.g1 { top: 15%; right: 5%; animation-duration: 15s; }
         .ghost-decor.g2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
         .ghost-decor.g3 { top: 60%; right: 12%; animation-duration: 14s; font-size: 2.4rem; animation-delay: -7s; }
-        
         body.ghost-active .spider-web svg { filter: drop-shadow(0 0 8px #88ccff); opacity: 0.4; }
         body.ghost-active h1 { color: #aaddff; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #88ccff, 0 0 50px #88ccff; }
         body.ghost-active h1 span { background: #88ccff; color: #0a0a1a; box-shadow: 0 0 30px #88ccff; }
@@ -93,6 +58,8 @@
         body.ghost-active .chat-link-card { background: #1a1a1f; border-color: #88ccff; }
         body.ghost-active .chat-link-card h3 { color: #aaddff; }
         body.ghost-active .chat-link-card p { color: #99aabb; }
+        body.ghost-active .path-item { background: #1a1a1f; border-color: #4a4a5a; }
+        body.ghost-active .path-item.owned { border-color: #88ccff; background: #0f1a1f; }
 
         /* 🌈 Радужный фон */
         body.rainbow-active { animation: rainbowBg 8s infinite linear; }
@@ -103,32 +70,13 @@
         body.rainbow-active h1 { animation: rainbowText 4s infinite linear; }
         @keyframes rainbowText { 0% { color: #ff0000; } 16% { color: #ff8800; } 33% { color: #ffff00; } 50% { color: #00ff00; } 66% { color: #0088ff; } 83% { color: #8800ff; } 100% { color: #ff0000; } }
 
-        /* 🌈👻 Комбинированная тема (Радуга + Призрак) */
+        /* 🌈👻 Комбинированная тема */
         body.rainbow-active.ghost-active { animation: rainbowGhostBg 12s infinite alternate; }
-        @keyframes rainbowGhostBg {
-            0% { background: #1a0a0a; }
-            20% { background: #0a0a1a; }
-            40% { background: #1a0a1a; }
-            60% { background: #0a1a1a; }
-            80% { background: #0a0a0a; }
-            100% { background: #1a0a0a; }
-        }
-        body.rainbow-active.ghost-active .container {
-            animation: rainbowGhostBorder 6s infinite alternate;
-        }
-        @keyframes rainbowGhostBorder {
-            0% { border-color: #8844aa; box-shadow: 0 0 30px #8844aa88, 0 0 15px #8844aa inset; }
-            50% { border-color: #44aaaa; box-shadow: 0 0 30px #44aaaa88, 0 0 15px #44aaaa inset; }
-            100% { border-color: #aa8844; box-shadow: 0 0 30px #aa884488, 0 0 15px #aa8844 inset; }
-        }
-        body.rainbow-active.ghost-active h1 {
-            animation: rainbowGhostText 6s infinite alternate;
-        }
-        @keyframes rainbowGhostText {
-            0% { color: #aa88ff; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #8844aa; }
-            50% { color: #88aaff; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #44aaaa; }
-            100% { color: #ffaa88; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #aa8844; }
-        }
+        @keyframes rainbowGhostBg { 0% { background: #1a0a0a; } 20% { background: #0a0a1a; } 40% { background: #1a0a1a; } 60% { background: #0a1a1a; } 80% { background: #0a0a0a; } 100% { background: #1a0a0a; } }
+        body.rainbow-active.ghost-active .container { animation: rainbowGhostBorder 6s infinite alternate; }
+        @keyframes rainbowGhostBorder { 0% { border-color: #8844aa; box-shadow: 0 0 30px #8844aa88, 0 0 15px #8844aa inset; } 50% { border-color: #44aaaa; box-shadow: 0 0 30px #44aaaa88, 0 0 15px #44aaaa inset; } 100% { border-color: #aa8844; box-shadow: 0 0 30px #aa884488, 0 0 15px #aa8844 inset; } }
+        body.rainbow-active.ghost-active h1 { animation: rainbowGhostText 6s infinite alternate; }
+        @keyframes rainbowGhostText { 0% { color: #aa88ff; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #8844aa; } 50% { color: #88aaff; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #44aaaa; } 100% { color: #ffaa88; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #aa8844; } }
         body.rainbow-active.ghost-active .bat { display: none !important; }
         body.rainbow-active.ghost-active .ghost-decor { display: block !important; color: #aa88ff; text-shadow: 0 0 15px #aa88ff; }
 
@@ -234,7 +182,7 @@
         .coffin-candy-box { background: #2a1e0c; border: 2px solid #b8651a; border-radius: 16px; padding: 1rem 1.5rem; text-align: center; margin: 1rem 0; font-size: 1.6rem; font-weight: 800; color: #ffb347; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .coffin-candy-box small { font-size: 0.9rem; color: #e6c9a0; font-weight: 400; }
 
-        /* 📚 Стили для вкладки ДЗ */
+        /* 📚 ДЗ */
         .hw-day-header { display: flex; justify-content: space-between; align-items: center; background: #2a1e0c; border: 2px solid #b8651a; border-radius: 16px; padding: 0.8rem 1.2rem; margin-bottom: 1.5rem; text-align: left; }
         .hw-date-big { color: #ffb347; font-weight: 800; font-size: 1.2rem; }
         .hw-date-small { color: #8a7a63; font-size: 0.9rem; }
@@ -252,7 +200,7 @@
         .hw-check:hover { border-color: #4caf50; color: #4caf50; }
         .hw-item.done .hw-check { border-color: #4caf50; color: #4caf50; }
 
-        /* 💬 Стили для вкладки Чат */
+        /* 💬 Чат и команда */
         .chat-grid { display: flex; flex-direction: column; gap: 20px; text-align: left; }
         .chat-link-card { background: #18130c; border: 2px solid #d67e1e; border-radius: 20px; padding: 1.5rem; display: flex; flex-direction: column; gap: 10px; transition: 0.2s; }
         .chat-link-card:hover { border-color: #ffb347; box-shadow: 0 0 20px #e67e2244; }
@@ -260,13 +208,41 @@
         .chat-link-card p { color: #b8a88a; font-size: 0.95rem; }
         .chat-link-btn { display: inline-block; background: #e67e22; color: #0b0b0b; text-decoration: none; padding: 0.7rem 1.5rem; border-radius: 30px; font-weight: 700; text-align: center; transition: 0.2s; margin-top: 10px; }
         .chat-link-btn:hover { background: #ffa733; box-shadow: 0 0 18px #ffb347; }
-        .support-box { margin-top: 30px; padding: 1.5rem; background: #1a140c; border: 2px solid #b8651a; border-radius: 20px; text-align: center; }
-        .support-box h3 { color: #ffb347; font-size: 1.3rem; margin-bottom: 10px; }
-        .support-box p { color: #ddccb0; font-size: 1rem; margin-bottom: 5px; }
-        .support-phone { color: #ffb347; font-weight: 800; font-size: 1.4rem; text-decoration: none; display: inline-block; margin-top: 5px; }
-        .support-phone:hover { text-shadow: 0 0 15px #ffb347; }
+        
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 10px; }
+        .team-card { background: #1a140c; border: 1px solid #4a3a25; border-radius: 16px; padding: 1rem; text-align: center; }
+        .team-role { font-size: 0.8rem; color: #e67e22; text-transform: uppercase; font-weight: 700; margin-bottom: 5px; }
+        .team-name { font-size: 1.1rem; font-weight: 700; color: #ffb347; margin-bottom: 5px; }
+        .team-contact { font-size: 0.85rem; color: #a89a88; text-decoration: none; display: block; }
+        .team-contact:hover { color: #ffb347; }
 
-        @media (max-width: 600px) { h1 { font-size: 2rem; } h1 span { font-size: 1.6rem; } .container { padding: 1.8rem 1.2rem; } .modal { padding: 1.5rem; } .pumpkin-click-area { height: 260px; } }
+        /* 🎨 Стили для путей */
+        .path-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; text-align: left; margin-top: 15px; }
+        .path-item { background: #18130c; border: 2px solid #4a3a25; border-radius: 16px; padding: 1rem; display: flex; flex-direction: column; gap: 10px; transition: 0.2s; position: relative; overflow: hidden; }
+        .path-item:hover { border-color: #ffb347; }
+        .path-item.owned { border-color: #4caf50; background: #14200f; }
+        .path-item.event-only { border-style: dashed; border-color: #888; }
+        .path-item.event-only.rainbow-path { border-color: #ff0000; background: linear-gradient(135deg, #2a0a0a, #0a2a0a, #0a0a2a); animation: rainbowBorder 4s infinite linear; }
+        .path-item.event-only.ghost-path { border-color: #88ccff; background: linear-gradient(135deg, #1a1a2a, #2a2a3a, #1a1a2a); animation: ghostPulse 3s infinite alternate; }
+        
+        .path-title { font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
+        .path-desc { font-size: 0.85rem; color: #a89a88; }
+        .path-stats { font-size: 0.8rem; color: #4caf50; font-weight: 700; }
+        .path-lock { font-size: 0.75rem; color: #ff6b6b; font-weight: 700; text-transform: uppercase; }
+        .buy-path-btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.6rem; border-radius: 30px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: auto; }
+        .buy-path-btn:hover:not(:disabled) { background: #ffa733; }
+        .buy-path-btn:disabled { background: #555; color: #888; cursor: not-allowed; }
+        .path-color-dot { width: 15px; height: 15px; border-radius: 50%; display: inline-block; box-shadow: 0 0 10px currentColor; }
+
+        /* Эффект следа */
+        .trail-particle {
+            position: fixed; pointer-events: none; z-index: 9999;
+            border-radius: 50%; transform: translate(-50%, -50%);
+            animation: trailFade 0.8s ease-out forwards;
+        }
+        @keyframes trailFade { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); } }
+
+        @media (max-width: 600px) { h1 { font-size: 2rem; } h1 span { font-size: 1.6rem; } .container { padding: 1.8rem 1.2rem; } .modal { padding: 1.5rem; } .pumpkin-click-area { height: 260px; } .path-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -304,6 +280,7 @@
             <button class="tab-btn" onclick="switchTab('games', this)">🎮 Игры</button>
             <button class="tab-btn" onclick="switchTab('homework', this)">📚 ДЗ</button>
             <button class="tab-btn" onclick="switchTab('chat', this)">💬 Чат</button>
+            <button class="tab-btn" onclick="switchTab('team', this)">👑 Команда</button>
         </div>
 
         <!-- ===== ГЛАВНАЯ ===== -->
@@ -343,6 +320,12 @@
                 <span style="color:#88ccff;">👻 Во время призрачного ивента появляются призрачные конфеты (×10), но остерегайтесь призрачного ведра — оно <strong>забирает</strong> конфеты!</span>
             </p>
 
+            <!-- 🎨 Магазин путей -->
+            <div class="shop" style="margin-top:2rem;">
+                <h3>🎨 Магазин Путей (след за курсором и при нажатиях)</h3>
+                <div class="path-grid" id="pathShopList"></div>
+            </div>
+
             <div style="text-align:center; margin-top:1rem;">
                 <button class="btn" style="background:#4a3a25; color:#e6c9a0; font-size:0.8rem; padding:0.4rem 1rem;" onclick="toggleSecretPrompt()">🔑 Ввести пароль</button>
             </div>
@@ -376,49 +359,60 @@
 
         <!-- ===== ДЗ ===== -->
         <div class="tab-content" id="tab-homework">
-            <div class="hw-day-header">
-                <div>
-                    <div class="hw-date-small">Вторник</div>
-                    <div class="hw-date-big">20 октября</div>
+            <div id="hwLocked" style="display:block;">
+                <h2 style="color:#ffb347; margin-bottom:1rem;">📚 Домашнее задание</h2>
+                <p style="color:#ddccb0; margin-bottom:1.5rem;">Раздел с домашним заданием станет доступен совсем скоро!</p>
+                <div style="background:#1a140c; border:2px solid #b8651a; border-radius:20px; padding:2rem; display:inline-block;">
+                    <div style="font-size:1.2rem; color:#8a7a63; margin-bottom:0.5rem;">Доступ откроется через:</div>
+                    <div style="font-size:2.5rem; font-weight:800; color:#ffb347; font-variant-numeric:tabular-nums;" id="hwTimer">--:--:--</div>
                 </div>
-                <div class="hw-date-small">на 13.10.2026 — 19.10.2026</div>
             </div>
-
-            <div class="hw-list">
-                <div class="hw-item" id="hw-1">
-                    <div class="hw-top">
-                        <div class="hw-subject">Биология</div>
-                        <div class="hw-date">13.10.2026</div>
+            
+            <div id="hwContent" style="display:none;">
+                <div class="hw-day-header">
+                    <div>
+                        <div class="hw-date-small">Вторник</div>
+                        <div class="hw-date-big">20 октября</div>
                     </div>
-                    <div class="hw-label">задано</div>
-                    <div class="hw-text">
-                        Домашнее задание в тетради составить конспект параграфа 7. в лабораторной тетради сделать табличку и заполнить стр.32
-                    </div>
-                    <button class="hw-check" onclick="toggleHw(1)">✓ Готово</button>
+                    <div class="hw-date-small">на 13.10.2026 — 19.10.2026</div>
                 </div>
 
-                <div class="hw-item" id="hw-2">
-                    <div class="hw-top">
-                        <div class="hw-subject">Математика</div>
-                        <div class="hw-date">19.10.2026</div>
+                <div class="hw-list">
+                    <div class="hw-item" id="hw-1">
+                        <div class="hw-top">
+                            <div class="hw-subject">Биология</div>
+                            <div class="hw-date">13.10.2026</div>
+                        </div>
+                        <div class="hw-label">задано</div>
+                        <div class="hw-text">
+                            Домашнее задание в тетради составить конспект параграфа 7. в лабораторной тетради сделать табличку и заполнить стр.32
+                        </div>
+                        <button class="hw-check" onclick="toggleHw(1)">✓ Готово</button>
                     </div>
-                    <div class="hw-label">задано</div>
-                    <div class="hw-text">
-                        с.63, № 2.143, 2.144, 2.145
-                    </div>
-                    <button class="hw-check" onclick="toggleHw(2)">✓ Готово</button>
-                </div>
 
-                <div class="hw-item" id="hw-3">
-                    <div class="hw-top">
-                        <div class="hw-subject">Иностранный язык (английский)</div>
-                        <div class="hw-date">16.10.2026</div>
+                    <div class="hw-item" id="hw-2">
+                        <div class="hw-top">
+                            <div class="hw-subject">Математика</div>
+                            <div class="hw-date">19.10.2026</div>
+                        </div>
+                        <div class="hw-label">задано</div>
+                        <div class="hw-text">
+                            с.63, № 2.143, 2.144, 2.145
+                        </div>
+                        <button class="hw-check" onclick="toggleHw(2)">✓ Готово</button>
                     </div>
-                    <div class="hw-label">задано</div>
-                    <div class="hw-text">
-                        уч. стр. 26
+
+                    <div class="hw-item" id="hw-3">
+                        <div class="hw-top">
+                            <div class="hw-subject">Иностранный язык (английский)</div>
+                            <div class="hw-date">16.10.2026</div>
+                        </div>
+                        <div class="hw-label">задано</div>
+                        <div class="hw-text">
+                            уч. стр. 26
+                        </div>
+                        <button class="hw-check" onclick="toggleHw(3)">✓ Готово</button>
                     </div>
-                    <button class="hw-check" onclick="toggleHw(3)">✓ Готово</button>
                 </div>
             </div>
         </div>
@@ -442,6 +436,34 @@
                     <h3>🆘 Поддержка</h3>
                     <p>Если возникли вопросы или проблемы с сайтом — звоните:</p>
                     <a href="tel:+79944346499" class="support-phone">+7 (994) 434-64-99</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== КОМАНДА ===== -->
+        <div class="tab-content" id="tab-team">
+            <h2 style="color:#ffb347; margin-bottom:1.5rem; text-align:left;">👑 Команда сайта</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-role">Главный админ и создатель</div>
+                    <div class="team-name">Рассадкин Арсений</div>
+                    <a href="tel:+79944346499" class="team-contact">+7 (994) 434-64-99</a>
+                    <a href="https://max.ru/u/79944346499" target="_blank" class="team-contact" style="margin-top:5px; font-size:0.75rem;">Профиль в MAX</a>
+                </div>
+                <div class="team-card">
+                    <div class="team-role">Дружеская атмосфера</div>
+                    <div class="team-name">Пашкова Рита</div>
+                    <a href="https://web.max.ru/314909703" target="_blank" class="team-contact">Контакт в MAX</a>
+                </div>
+                <div class="team-card">
+                    <div class="team-role">Админ</div>
+                    <div class="team-name">Батрутдинов Рома</div>
+                    <a href="tel:+79315806804" class="team-contact">+7 931 580 68 04</a>
+                </div>
+                <div class="team-card">
+                    <div class="team-role">Ответственная за ДЗ</div>
+                    <div class="team-name">Даша Васильева</div>
+                    <a href="tel:+79602477126" class="team-contact">+7 960 247 71 26</a>
                 </div>
             </div>
         </div>
@@ -494,7 +516,8 @@
 
         const EVENT1_END = new Date('2026-10-20T00:00:00');
         const EVENT2_END = new Date('2026-10-24T00:00:00');
-        const COFFIN_START_CANDY = 65.5; // Изменено на 65.5
+        const HW_UNLOCK_DATE = new Date('2026-11-05T00:00:00');
+        const COFFIN_START_CANDY = 65.5;
         const CLICKER_START_CANDY = 0;
         const SECRET_PASSWORD = '03111383';
 
@@ -522,10 +545,9 @@
             coffinCandy: '6a_coffin_candy_v3', clickerCandy: '6a_clicker_candy',
             clickPower: '6a_click_power', autoClickers: '6a_auto_clickers',
             luck: '6a_luck', autoClickerSpeed: '6a_auto_speed', spawnRate: '6a_spawn_rate',
-            multiplier: '6a_multiplier',
+            multiplier: '6a_multiplier', paths: '6a_paths', activePath: '6a_active_path',
             secretUnlocked: '6a_secret_unlocked', rainbowForce: '6a_rainbow_force',
-            ghostForce: '6a_ghost_force',
-            hwDone: '6a_hw_done'
+            ghostForce: '6a_ghost_force', hwDone: '6a_hw_done'
         };
 
         let coffinCandy = COFFIN_START_CANDY;
@@ -549,6 +571,10 @@
 
         let shopCardsBuilt = false;
         let hwDone = {};
+        
+        // Пути
+        let ownedPaths = [];
+        let activePath = null;
 
         function showToast(msg) {
             const t = document.getElementById('toast');
@@ -580,11 +606,9 @@
             const base = autoClickers * getAutoSpeedPerUnit();
             return base * (1 + multiplier * MULTIPLIER_PER_LEVEL);
         }
-        
         function getClickPower() {
             return clickPower * (1 + multiplier * MULTIPLIER_PER_LEVEL);
         }
-        
         function getSpawnInterval() { return Math.max(MIN_SPAWN_INTERVAL, BASE_SPAWN_INTERVAL * Math.pow(0.9, spawnRate)); }
 
         function loadState() {
@@ -596,14 +620,13 @@
             try { const as = parseInt(localStorage.getItem(STORAGE_KEYS.autoClickerSpeed)); autoClickerSpeed = isNaN(as) ? 0 : as; } catch (e) { autoClickerSpeed = 0; }
             try { const sr = parseInt(localStorage.getItem(STORAGE_KEYS.spawnRate)); spawnRate = isNaN(sr) ? 0 : sr; } catch (e) { spawnRate = 0; }
             try { const m = parseInt(localStorage.getItem(STORAGE_KEYS.multiplier)); multiplier = isNaN(m) ? 0 : m; } catch (e) { multiplier = 0; }
+            try { const p = JSON.parse(localStorage.getItem(STORAGE_KEYS.paths)); ownedPaths = p || []; } catch (e) { ownedPaths = []; }
+            try { const ap = localStorage.getItem(STORAGE_KEYS.activePath); activePath = ap || null; } catch (e) { activePath = null; }
+            
             try { secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true'; } catch (e) { secretUnlocked = false; }
             try { rainbowForce = localStorage.getItem(STORAGE_KEYS.rainbowForce) === 'true'; } catch (e) { rainbowForce = false; }
             try { ghostForce = localStorage.getItem(STORAGE_KEYS.ghostForce) === 'true'; } catch (e) { ghostForce = false; }
-            
-            try {
-                const saved = localStorage.getItem(STORAGE_KEYS.hwDone);
-                if (saved) hwDone = JSON.parse(saved);
-            } catch (e) { hwDone = {}; }
+            try { const saved = localStorage.getItem(STORAGE_KEYS.hwDone); if (saved) hwDone = JSON.parse(saved); } catch (e) { hwDone = {}; }
         }
 
         function saveCoffinCandy() { try { localStorage.setItem(STORAGE_KEYS.coffinCandy, String(coffinCandy)); } catch (e) {} }
@@ -618,8 +641,12 @@
                 localStorage.setItem(STORAGE_KEYS.multiplier, String(multiplier));
             } catch (e) {}
         }
-        function saveHwState() {
-            try { localStorage.setItem(STORAGE_KEYS.hwDone, JSON.stringify(hwDone)); } catch (e) {}
+        function saveHwState() { try { localStorage.setItem(STORAGE_KEYS.hwDone, JSON.stringify(hwDone)); } catch (e) {} }
+        function savePathState() {
+            try {
+                localStorage.setItem(STORAGE_KEYS.paths, JSON.stringify(ownedPaths));
+                localStorage.setItem(STORAGE_KEYS.activePath, activePath);
+            } catch (e) {}
         }
 
         function setCoffinCandy(v) { coffinCandy = Math.max(0, v); saveCoffinCandy(); updateCoffinCandyUI(); }
@@ -642,6 +669,19 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('tab-' + name).classList.add('active');
             btn.classList.add('active');
+            
+            if (name === 'homework') checkHwAvailability();
+        }
+
+        function checkHwAvailability() {
+            const now = Date.now();
+            if (now >= HW_UNLOCK_DATE.getTime()) {
+                document.getElementById('hwLocked').style.display = 'none';
+                document.getElementById('hwContent').style.display = 'block';
+            } else {
+                document.getElementById('hwLocked').style.display = 'block';
+                document.getElementById('hwContent').style.display = 'none';
+            }
         }
 
         // 📚 ДЗ
@@ -650,7 +690,6 @@
             saveHwState();
             updateHwUI();
         }
-
         function updateHwUI() {
             for (let i = 1; i <= 3; i++) {
                 const item = document.getElementById('hw-' + i);
@@ -701,6 +740,18 @@
                 const msLeft = nextHour.getTime() - now;
                 document.getElementById('ghostTimerValue').textContent = (msLeft <= 0) ? 'СКОРО!' : formatShort(msLeft);
             }
+
+            // Таймер ДЗ
+            const hwEl = document.getElementById('hwTimer');
+            if (hwEl) {
+                const msHw = HW_UNLOCK_DATE.getTime() - now;
+                if (msHw <= 0) {
+                    hwEl.textContent = 'Открыто!';
+                    if (document.getElementById('tab-homework').classList.contains('active')) checkHwAvailability();
+                } else {
+                    hwEl.textContent = formatTime(msHw);
+                }
+            }
         }
 
         function checkEvents() {
@@ -728,7 +779,6 @@
             if (rainbowActive) return;
             rainbowActive = true;
             rainbowEndTime = Date.now() + EVENT_DURATION;
-            // Если призрак активен — добавляем класс, чтобы включилась комбинированная тема
             document.body.classList.add('rainbow-active');
             showToast('🌈 ИВЕНТ РАДУГА НАЧАЛСЯ! Все награды ×2!');
         }
@@ -748,7 +798,6 @@
             if (ghostActive) return;
             ghostActive = true;
             ghostEndTime = Date.now() + EVENT_DURATION;
-            // Если радуга активна — комбинированная тема включится через CSS (body.rainbow-active.ghost-active)
             document.body.classList.add('ghost-active');
             showToast('👻 ПРИЗРАЧНЫЙ ИВЕНТ! Появились призрачные конфеты ×10, но остерегайтесь призрачных вёдер!');
         }
@@ -788,7 +837,6 @@
         function getSpawnChances() {
             let chances = { candy1: 44, candy2: 44, bucket: 10, golden: 1.99, diamond: 0.009, rainbow: 0.001 };
             if (rainbowActive && ghostActive) {
-                // При двух ивентах шансы суммируем
                 chances = { candy1: 20, candy2: 20, bucket: 15, golden: 8, diamond: 3, rainbow: 0.05, ghost: 15 };
             } else if (rainbowActive) {
                 chances = { candy1: 30, candy2: 30, bucket: 20, golden: 10, diamond: 5, rainbow: 0.1 };
@@ -881,6 +929,16 @@
                     }
                 }
                 if (rainbowActive) bonus *= 2;
+                
+                // Бонус от пути
+                if (activePath && PATHS[activePath]) {
+                    const path = PATHS[activePath];
+                    if (path.bonus === 'clickPower') bonus += path.val;
+                    else if (path.bonus === 'chance') {
+                        // просто логика на удачу уже встроена через luck
+                    }
+                }
+                
                 setClickerCandy(clickerCandy + bonus);
                 spawnFloatText(ev, `+${fmtCandy(bonus)}`, color);
                 el.remove();
@@ -912,6 +970,149 @@
             } else showToast('❌ Неверный пароль');
         }
 
+        // ===== ПУТИ =====
+        const PATHS = {
+            red:    { name: '🔴 Красный путь', color: '#ff0000', price: 1000, desc: '+1 к силе клика', bonus: 'clickPower', val: 1 },
+            orange: { name: '🟠 Оранжевый путь', color: '#ff8800', price: 2000, desc: '+2 к силе клика', bonus: 'clickPower', val: 2 },
+            yellow: { name: '🟡 Жёлтый путь', color: '#ffff00', price: 3000, desc: '+3 к силе клика', bonus: 'clickPower', val: 3 },
+            green:  { name: '🟢 Зелёный путь', color: '#00ff00', price: 5000, desc: '+5 к силе клика', bonus: 'clickPower', val: 5 },
+            blue:   { name: '🔵 Синий путь', color: '#0088ff', price: 7500, desc: '+8 к силе клика', bonus: 'clickPower', val: 8 },
+            indigo: { name: '🟣 Индиго путь', color: '#8800ff', price: 10000, desc: '+12 к силе клика', bonus: 'clickPower', val: 12 },
+            violet: { name: '🟪 Фиолетовый путь', color: '#ff00ff', price: 15000, desc: '+20 к силе клика', bonus: 'clickPower', val: 20 },
+            // Ивентовые
+            rainbow: { name: '🌈 Радужный путь', color: 'rainbow', price: 50000, desc: '×2 ко всему доходу (только при Радуге)', bonus: 'mult', val: 2, event: 'rainbow' },
+            ghost:   { name: '👻 Призрачный путь', color: '#88ccff', price: 50000, desc: 'Призрачные конфеты падают чаще (только при Призраке)', bonus: 'ghost', val: 0.2, event: 'ghost' }
+        };
+
+        function renderPaths() {
+            const list = document.getElementById('pathShopList');
+            if (!list) return;
+            list.innerHTML = '';
+            
+            Object.keys(PATHS).forEach(key => {
+                const p = PATHS[key];
+                const owned = ownedPaths.includes(key);
+                const isEventOnly = !!p.event;
+                
+                // Проверка на ивент
+                let canBuy = true;
+                let lockReason = '';
+                if (isEventOnly) {
+                    if (p.event === 'rainbow' && !rainbowActive) { canBuy = false; lockReason = 'Только во время Радуги'; }
+                    if (p.event === 'ghost' && !ghostActive) { canBuy = false; lockReason = 'Только во время Призрака'; }
+                }
+                
+                const div = document.createElement('div');
+                div.className = 'path-item' + (owned ? ' owned' : '') + (isEventOnly ? ' event-only' : '') + (isEventOnly && p.event === 'rainbow' ? ' rainbow-path' : '') + (isEventOnly && p.event === 'ghost' ? ' ghost-path' : '');
+                
+                let colorDot = '';
+                if (p.color === 'rainbow') {
+                    colorDot = `<span style="background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff, #ff00ff); width:15px; height:15px; border-radius:50%; display:inline-block;"></span>`;
+                } else {
+                    colorDot = `<span class="path-color-dot" style="background:${p.color}; color:${p.color};"></span>`;
+                }
+                
+                div.innerHTML = `
+                    <div class="path-title">${colorDot} ${p.name}</div>
+                    <div class="path-desc">${p.desc}</div>
+                    ${owned ? '<div class="path-stats">✅ Куплено</div>' : 
+                        (isEventOnly && !canBuy ? `<div class="path-lock">⚠️ ${lockReason}</div>` : 
+                        `<button class="buy-path-btn" onclick="buyPath('${key}')">Купить за ${p.price} 🍬</button>`)}
+                    ${owned ? `<button class="buy-path-btn" style="background:#4caf50; margin-top:5px;" onclick="setActivePath('${key}')">${activePath === key ? '✅ Активен' : 'Активировать'}</button>` : ''}
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function buyPath(key) {
+            const p = PATHS[key];
+            if (!p) return;
+            if (ownedPaths.includes(key)) return;
+            
+            if (p.event === 'rainbow' && !rainbowActive) { showToast('❌ Доступно только во время Радуги!'); return; }
+            if (p.event === 'ghost' && !ghostActive) { showToast('❌ Доступно только во время Призрака!'); return; }
+            
+            if (clickerCandy < p.price) { showToast('❌ Недостаточно конфет!'); return; }
+            
+            clickerCandy -= p.price;
+            ownedPaths.push(key);
+            saveClickerState();
+            savePathState();
+            setClickerCandy(clickerCandy); // обновит UI
+            renderPaths();
+            showToast(`✅ Куплен: ${p.name}`);
+        }
+
+        function setActivePath(key) {
+            if (!ownedPaths.includes(key)) return;
+            activePath = key;
+            savePathState();
+            renderPaths();
+            showToast(`🎨 Активирован: ${PATHS[key].name}`);
+        }
+
+        // ===== СЛЕД КУРСОРА =====
+        let lastTrailTime = 0;
+        function spawnTrailParticle(x, y) {
+            if (!activePath) return;
+            const p = PATHS[activePath];
+            if (!p) return;
+            
+            const el = document.createElement('div');
+            el.className = 'trail-particle';
+            el.style.left = x + 'px';
+            el.style.top = y + 'px';
+            
+            // Размер и цвет
+            let size = 12;
+            let color = p.color;
+            
+            if (color === 'rainbow') {
+                const colors = ['#ff0000', '#ff8800', '#ffff00', '#00ff00', '#0088ff', '#8800ff', '#ff00ff'];
+                color = colors[Math.floor(Math.random() * colors.length)];
+                size = 15;
+            }
+            
+            el.style.width = size + 'px';
+            el.style.height = size + 'px';
+            el.style.background = color;
+            el.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`;
+            
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), 800);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastTrailTime > 30) { // частота следа
+                spawnTrailParticle(e.clientX, e.clientY);
+                lastTrailTime = now;
+            }
+        });
+
+        document.addEventListener('touchstart', (e) => {
+            for (let i = 0; i < e.touches.length; i++) {
+                spawnTrailParticle(e.touches[i].clientX, e.touches[i].clientY);
+                // Дополнительный взрыв частиц при тапе
+                for(let j=0; j<3; j++) {
+                    setTimeout(() => {
+                        spawnTrailParticle(e.touches[i].clientX + (Math.random()*40-20), e.touches[i].clientY + (Math.random()*40-20));
+                    }, j*50);
+                }
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            const now = Date.now();
+            if (now - lastTrailTime > 30) {
+                for (let i = 0; i < e.touches.length; i++) {
+                    spawnTrailParticle(e.touches[i].clientX, e.touches[i].clientY);
+                }
+                lastTrailTime = now;
+            }
+        }, { passive: true });
+
+        // ===== МАГАЗИН ПРОКАЧКИ =====
         const SHOP_ITEMS = [
             { id: 'clickPower', name: '💪 Сила клика', desc: 'Увеличивает конфеты за клик на +1', basePrice: 25, priceMultiplier: 1.8, maxLevel: 20, getLevel: () => clickPower - 1, apply: () => { clickPower += 1; } },
             { id: 'autoClicker', name: '🤖 Автокликер', desc: 'Добавляет +1 автокликер (каждый даёт +2.5 конфет/сек)', basePrice: 50, priceMultiplier: 1.5, maxLevel: 50, getLevel: () => autoClickers, apply: () => { autoClickers += 1; } },
@@ -993,10 +1194,12 @@
         updateCpsUI();
         updateHwUI();
         buildShop();
+        renderPaths();
         tickTimers();
         setInterval(tickTimers, 1000);
         startSpawnTimer();
         setInterval(checkEvents, 1000);
+        setInterval(() => { renderPaths(); }, 1000); // обновляем пути чтобы блокировка ивентов была актуальной
         checkEvents();
         if (secretUnlocked) document.getElementById('secretPanel').classList.add('visible');
 
@@ -1018,6 +1221,8 @@
         window.toggleRainbowEvent = toggleRainbowEvent;
         window.toggleGhostEvent = toggleGhostEvent;
         window.toggleHw = toggleHw;
+        window.buyPath = buyPath;
+        window.setActivePath = setActivePath;
     </script>
 </body>
 </html>
