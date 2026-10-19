@@ -453,6 +453,7 @@
         function getClickPower() {
             return clickPower * (1 + multiplier * MULTIPLIER_PER_LEVEL);
         }
+        
         function getSpawnInterval() { return Math.max(MIN_SPAWN_INTERVAL, BASE_SPAWN_INTERVAL * Math.pow(0.9, spawnRate)); }
 
         function loadState() {
@@ -623,7 +624,7 @@
             area.appendChild(el); setTimeout(() => el.remove(), 900);
         }
 
-        function getSpawnChances
+        function getSpawnChances() {
             let chances = { candy1: 44, candy2: 44, bucket: 10, golden: 1.99, diamond: 0.009, rainbow: 0.001 };
             if (rainbowActive) {
                 chances = { candy1: 30, candy2: 30, bucket: 20, golden: 10, diamond: 5, rainbow: 0.1 };
@@ -747,6 +748,7 @@
                 showToast('🔓 Секретный режим активирован!');
             } else showToast('❌ Неверный пароль');
         }
+
         const SHOP_ITEMS = [
             { id: 'clickPower', name: '💪 Сила клика', desc: 'Увеличивает конфеты за клик на +1', basePrice: 25, priceMultiplier: 1.8, maxLevel: 20, getLevel: () => clickPower - 1, apply: () => { clickPower += 1; } },
             { id: 'autoClicker', name: '🤖 Автокликер', desc: 'Добавляет +1 автокликер (каждый даёт +2.5 конфет/сек)', basePrice: 50, priceMultiplier: 1.5, maxLevel: 50, getLevel: () => autoClickers, apply: () => { autoClickers += 1; } },
