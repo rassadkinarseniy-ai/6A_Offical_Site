@@ -10,7 +10,7 @@
         
         body { background: #0b0b0b; background-image: radial-gradient(circle at 10% 20%, #1e1a0f 0%, #0a0705 90%); color: #e6e6e6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; position: relative; overflow-x: hidden; transition: background 0.8s, color 0.5s; }
         
-        /* 👻 Призрачный ивент — тёмно-серый фон с голубым свечением */
+        /* 👻 Призрачный ивент */
         body.ghost-active {
             background: #121212;
             background-image: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #0a0a0a 90%);
@@ -29,7 +29,6 @@
             0% { opacity: 0.3; transform: scale(1); }
             100% { opacity: 0.8; transform: scale(1.1); }
         }
-        
         body.ghost-active .container {
             background: rgba(20, 20, 25, 0.92);
             border-color: #88ccff;
@@ -41,16 +40,29 @@
             100% { box-shadow: 0 0 55px #88ccffaa, 0 0 25px #88ccff inset; }
         }
         
-        body.ghost-active .bat {
+        /* Заменяем мышек на призраков */
+        body.ghost-active .bat { display: none !important; }
+        body.ghost-active .ghost-decor { display: block !important; }
+        
+        .ghost-decor {
+            display: none;
+            position: fixed;
             color: #88ccff;
+            font-size: 2rem;
             opacity: 0.7;
+            pointer-events: none;
+            z-index: 0;
             text-shadow: 0 0 15px #88ccff, 0 0 30px #88ccff;
+            animation: floatBat 12s infinite alternate ease-in-out;
         }
+        .ghost-decor.g1 { top: 15%; right: 5%; animation-duration: 15s; }
+        .ghost-decor.g2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
+        .ghost-decor.g3 { top: 60%; right: 12%; animation-duration: 14s; font-size: 2.4rem; animation-delay: -7s; }
+        
         body.ghost-active .spider-web svg {
             filter: drop-shadow(0 0 8px #88ccff);
             opacity: 0.4;
         }
-        
         body.ghost-active h1 {
             color: #aaddff;
             text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #88ccff, 0 0 50px #88ccff;
@@ -60,85 +72,30 @@
             color: #0a0a1a;
             box-shadow: 0 0 30px #88ccff;
         }
-        body.ghost-active .subhead {
-            color: #aaccff;
-        }
-        body.ghost-active .subhead strong {
-            color: #88ccff;
-            text-shadow: 0 0 10px #88ccff;
-        }
-        body.ghost-active .official-stamp {
-            border-color: #88ccff;
-            color: #aaddff;
-            box-shadow: 0 0 25px #88ccff66;
-        }
-        body.ghost-active .tab-btn {
-            border-color: #4a4a5a;
-            color: #aaccff;
-        }
-        body.ghost-active .tab-btn.active {
-            background: #88ccff;
-            border-color: #88ccff;
-            color: #0a0a1a;
-            box-shadow: 0 0 25px #88ccff;
-        }
-        body.ghost-active .event-card {
-            border-color: #4a4a5a;
-            background: #1a1a1f;
-        }
-        body.ghost-active .event-card:hover {
-            border-color: #88ccff;
-            box-shadow: 0 0 25px #88ccff44;
-        }
+        body.ghost-active .subhead { color: #aaccff; }
+        body.ghost-active .subhead strong { color: #88ccff; text-shadow: 0 0 10px #88ccff; }
+        body.ghost-active .official-stamp { border-color: #88ccff; color: #aaddff; box-shadow: 0 0 25px #88ccff66; }
+        body.ghost-active .tab-btn { border-color: #4a4a5a; color: #aaccff; }
+        body.ghost-active .tab-btn.active { background: #88ccff; border-color: #88ccff; color: #0a0a1a; box-shadow: 0 0 25px #88ccff; }
+        body.ghost-active .event-card { border-color: #4a4a5a; background: #1a1a1f; }
+        body.ghost-active .event-card:hover { border-color: #88ccff; box-shadow: 0 0 25px #88ccff44; }
         body.ghost-active .event-title { color: #aaddff; }
         body.ghost-active .event-desc { color: #99aabb; }
-        body.ghost-active .timer {
-            background: #1a1a1f;
-            border-color: #4a4a5a;
-            color: #aaddff;
-        }
-        body.ghost-active .clicker-balance {
-            background: #1a1a1f;
-            border-color: #88ccff;
-            color: #aaddff;
-            box-shadow: 0 0 15px #88ccff44;
-        }
-        body.ghost-active .cps-display {
-            background: #1a1a1f;
-            border-color: #4a4a5a;
-            color: #99aabb;
-        }
+        body.ghost-active .timer { background: #1a1a1f; border-color: #4a4a5a; color: #aaddff; }
+        body.ghost-active .clicker-balance { background: #1a1a1f; border-color: #88ccff; color: #aaddff; box-shadow: 0 0 15px #88ccff44; }
+        body.ghost-active .cps-display { background: #1a1a1f; border-color: #4a4a5a; color: #99aabb; }
         body.ghost-active .cps-display strong { color: #88ccff; }
-        body.ghost-active .pumpkin-click-area {
-            background: #0f0f14;
-            border-color: #4a4a5a;
-        }
+        body.ghost-active .pumpkin-click-area { background: #0f0f14; border-color: #4a4a5a; }
         body.ghost-active .shop h3 { color: #aaddff; border-color: #88ccff; }
-        body.ghost-active .shop-item {
-            background: #1a1a1f;
-            border-color: #4a4a5a;
-        }
+        body.ghost-active .shop-item { background: #1a1a1f; border-color: #4a4a5a; }
         body.ghost-active .shop-item-name { color: #aaddff; }
         body.ghost-active .shop-item-desc { color: #8899aa; }
-        body.ghost-active .buy-btn {
-            background: #88ccff;
-            color: #0a0a1a;
-        }
-        body.ghost-active .buy-btn:hover:not(:disabled) {
-            background: #aaddff;
-            box-shadow: 0 0 25px #88ccff;
-        }
-        body.ghost-active .buy-btn:disabled {
-            background: #333344;
-            color: #666688;
-        }
+        body.ghost-active .buy-btn { background: #88ccff; color: #0a0a1a; }
+        body.ghost-active .buy-btn:hover:not(:disabled) { background: #aaddff; box-shadow: 0 0 25px #88ccff; }
+        body.ghost-active .buy-btn:disabled { background: #333344; color: #666688; }
         body.ghost-active footer { color: #667788; border-color: #333344; }
         body.ghost-active footer strong { color: #88ccff; }
-        body.ghost-active .event-timer-side {
-            background: #1a1a1f;
-            border-color: #88ccff;
-            box-shadow: 0 0 25px #88ccff44;
-        }
+        body.ghost-active .event-timer-side { background: #1a1a1f; border-color: #88ccff; box-shadow: 0 0 25px #88ccff44; }
         body.ghost-active .event-timer-side .timer-value { color: #aaddff; }
 
         /* 🌈 Радужный фон */
@@ -155,6 +112,7 @@
         .bat2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
         .bat3 { top: 60%; right: 12%; animation-duration: 14s; font-size: 2.4rem; animation-delay: -7s; }
         @keyframes floatBat { 0% { transform: translateY(0) rotate(-5deg); } 100% { transform: translateY(-25px) rotate(10deg); } }
+        
         .spider-web { position: fixed; top: 0; left: 0; width: 140px; height: 140px; opacity: 0.25; pointer-events: none; z-index: 1; }
         .spider-web svg { width: 100%; height: 100%; filter: drop-shadow(0 0 4px #ff9900); }
         .container { max-width: 900px; width: 100%; background: rgba(20, 16, 10, 0.88); backdrop-filter: blur(4px); border: 2px solid #e67e22; border-radius: 40px 12px 40px 12px; box-shadow: 0 0 35px rgba(230, 126, 34, 0.4), 0 0 15px #b85e00 inset; padding: 2.5rem 2rem; position: relative; z-index: 10; text-align: center; transition: border-color 0.3s, background 0.5s, box-shadow 0.5s; }
@@ -255,9 +213,15 @@
 </head>
 <body>
 
+    <!-- Мышки (обычные) -->
     <div class="bat bat1">🦇</div>
     <div class="bat bat2">🦇</div>
     <div class="bat bat3">🦇</div>
+    
+    <!-- Призраки (появляются во время ивента) -->
+    <div class="ghost-decor g1">👻</div>
+    <div class="ghost-decor g2">👻</div>
+    <div class="ghost-decor g3">👻</div>
 
     <div class="spider-web">
         <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -416,12 +380,15 @@
         const GHOST_CANDY_CHANCE = 0.10;
         const GHOST_STEAL_PERCENT = 0.1;
 
+        const AUTO_TO_MULTIPLIER = 2.5; // +2.5 конфет/сек к множителю за каждый автокликер
+
         const EVENT_DURATION = 10 * 60 * 1000;
 
         const STORAGE_KEYS = {
             coffinCandy: '6a_coffin_candy_v2', clickerCandy: '6a_clicker_candy',
             clickPower: '6a_click_power', autoClickers: '6a_auto_clickers',
             luck: '6a_luck', autoClickerSpeed: '6a_auto_speed', spawnRate: '6a_spawn_rate',
+            multiplier: '6a_multiplier',
             secretUnlocked: '6a_secret_unlocked', rainbowForce: '6a_rainbow_force',
             ghostForce: '6a_ghost_force'
         };
@@ -433,6 +400,7 @@
         let luck = 0;
         let autoClickerSpeed = 0;
         let spawnRate = 0;
+        let multiplier = 0; // уровень "Умножения дохода"
         let secretUnlocked = false;
         let spawnTimer = null;
 
@@ -471,7 +439,14 @@
             return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
         }
         function getAutoSpeedPerUnit() { return 0.5 + (autoClickerSpeed * 0.05); }
-        function getTotalCPS() { return autoClickers * getAutoSpeedPerUnit(); }
+        
+        // Общий CPS = автокликеры + бонус от множителя
+        function getTotalCPS() {
+            const base = autoClickers * getAutoSpeedPerUnit();
+            const multBonus = autoClickers * AUTO_TO_MULTIPLIER * multiplier;
+            return base + multBonus;
+        }
+        
         function getSpawnInterval() { return Math.max(MIN_SPAWN_INTERVAL, BASE_SPAWN_INTERVAL * Math.pow(0.9, spawnRate)); }
 
         function loadState() {
@@ -482,6 +457,7 @@
             try { const l = parseFloat(localStorage.getItem(STORAGE_KEYS.luck)); luck = isNaN(l) ? 0 : l; } catch (e) { luck = 0; }
             try { const as = parseInt(localStorage.getItem(STORAGE_KEYS.autoClickerSpeed)); autoClickerSpeed = isNaN(as) ? 0 : as; } catch (e) { autoClickerSpeed = 0; }
             try { const sr = parseInt(localStorage.getItem(STORAGE_KEYS.spawnRate)); spawnRate = isNaN(sr) ? 0 : sr; } catch (e) { spawnRate = 0; }
+            try { const m = parseInt(localStorage.getItem(STORAGE_KEYS.multiplier)); multiplier = isNaN(m) ? 0 : m; } catch (e) { multiplier = 0; }
             try { secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true'; } catch (e) { secretUnlocked = false; }
             try { rainbowForce = localStorage.getItem(STORAGE_KEYS.rainbowForce) === 'true'; } catch (e) { rainbowForce = false; }
             try { ghostForce = localStorage.getItem(STORAGE_KEYS.ghostForce) === 'true'; } catch (e) { ghostForce = false; }
@@ -496,6 +472,7 @@
                 localStorage.setItem(STORAGE_KEYS.luck, String(luck));
                 localStorage.setItem(STORAGE_KEYS.autoClickerSpeed, String(autoClickerSpeed));
                 localStorage.setItem(STORAGE_KEYS.spawnRate, String(spawnRate));
+                localStorage.setItem(STORAGE_KEYS.multiplier, String(multiplier));
             } catch (e) {}
         }
 
@@ -512,7 +489,7 @@
         }
         function updateClickerCandyUI() { const el = document.getElementById('gameCandy'); if (el) el.textContent = fmtCandy(clickerCandy); }
         function updateCpsUI() { const el = document.getElementById('cpsValue'); if (el) el.textContent = fmtCandy(getTotalCPS()); }
-        function getTotalUpgradeLevels() { return (clickPower - 1) + autoClickers + luck + autoClickerSpeed + spawnRate; }
+        function getTotalUpgradeLevels() { return (clickPower - 1) + autoClickers + luck + autoClickerSpeed + spawnRate + multiplier; }
 
         function switchTab(name, btn) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -744,10 +721,11 @@
 
         function startSpawnTimer() { if (spawnTimer) clearInterval(spawnTimer); spawnTimer = setInterval(spawnRandomItem, getSpawnInterval()); }
 
+        // Автокликеры + множитель
         setInterval(() => {
-            if (autoClickers > 0) {
-                const gainPerTick = getTotalCPS() * 0.1;
-                if (gainPerTick > 0) setClickerCandy(clickerCandy + gainPerTick);
+            const cps = getTotalCPS();
+            if (cps > 0) {
+                setClickerCandy(clickerCandy + cps * 0.1);
             }
         }, 100);
 
@@ -769,7 +747,8 @@
             { id: 'autoClicker', name: '🤖 Автокликер', desc: 'Добавляет +1 автокликер (каждый даёт 0.5+ конфет/сек)', basePrice: 50, priceMultiplier: 1.5, maxLevel: 50, getLevel: () => autoClickers, apply: () => { autoClickers += 1; } },
             { id: 'autoSpeed', name: '⚡ Скорость автокликера', desc: 'Каждый уровень +0.05 конфет/сек к каждому автокликеру', basePrice: 200, priceMultiplier: 2.2, maxLevel: 20, getLevel: () => autoClickerSpeed, apply: () => { autoClickerSpeed += 1; } },
             { id: 'spawnRate', name: '⏱️ Частота спавна', desc: 'Каждый уровень ускоряет появление предметов на 10%', basePrice: 150, priceMultiplier: 2.0, maxLevel: 15, getLevel: () => spawnRate, apply: () => { spawnRate += 1; } },
-            { id: 'luck', name: '🍀 Удача', desc: 'Повышает шанс редких предметов и цветных конфет', basePrice: 100, priceMultiplier: 2.0, maxLevel: 15, getLevel: () => luck, apply: () => { luck += 1; } }
+            { id: 'luck', name: '🍀 Удача', desc: 'Повышает шанс редких предметов и цветных конфет', basePrice: 100, priceMultiplier: 2.0, maxLevel: 15, getLevel: () => luck, apply: () => { luck += 1; } },
+            { id: 'multiplier', name: '💰 Умножение дохода', desc: 'Каждый уровень: +2.5 конфет/сек к каждому автокликеру. Очень дорого!', basePrice: 5000, priceMultiplier: 3.5, maxLevel: 10, getLevel: () => multiplier, apply: () => { multiplier += 1; } }
         ];
 
         function getPrice(item) { return Math.ceil(item.basePrice * Math.pow(item.priceMultiplier, item.getLevel())); }
