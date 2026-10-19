@@ -86,6 +86,13 @@
         body.ghost-active footer strong { color: #88ccff; }
         body.ghost-active .event-timer-side { background: #1a1a1f; border-color: #88ccff; box-shadow: 0 0 25px #88ccff44; }
         body.ghost-active .event-timer-side .timer-value { color: #aaddff; }
+        body.ghost-active .hw-day-header { background: #1a1a1f; border-color: #4a4a5a; }
+        body.ghost-active .hw-item { background: #1a1a1f; border-color: #4a4a5a; }
+        body.ghost-active .hw-subject { color: #aaddff; }
+        body.ghost-active .hw-label { color: #88ccff; }
+        body.ghost-active .chat-link-card { background: #1a1a1f; border-color: #88ccff; }
+        body.ghost-active .chat-link-card h3 { color: #aaddff; }
+        body.ghost-active .chat-link-card p { color: #99aabb; }
 
         /* 🌈 Радужный фон */
         body.rainbow-active { animation: rainbowBg 8s infinite linear; }
@@ -95,6 +102,35 @@
         body.rainbow-active .tab-btn.active { animation: rainbowBorder 4s infinite linear; }
         body.rainbow-active h1 { animation: rainbowText 4s infinite linear; }
         @keyframes rainbowText { 0% { color: #ff0000; } 16% { color: #ff8800; } 33% { color: #ffff00; } 50% { color: #00ff00; } 66% { color: #0088ff; } 83% { color: #8800ff; } 100% { color: #ff0000; } }
+
+        /* 🌈👻 Комбинированная тема (Радуга + Призрак) */
+        body.rainbow-active.ghost-active { animation: rainbowGhostBg 12s infinite alternate; }
+        @keyframes rainbowGhostBg {
+            0% { background: #1a0a0a; }
+            20% { background: #0a0a1a; }
+            40% { background: #1a0a1a; }
+            60% { background: #0a1a1a; }
+            80% { background: #0a0a0a; }
+            100% { background: #1a0a0a; }
+        }
+        body.rainbow-active.ghost-active .container {
+            animation: rainbowGhostBorder 6s infinite alternate;
+        }
+        @keyframes rainbowGhostBorder {
+            0% { border-color: #8844aa; box-shadow: 0 0 30px #8844aa88, 0 0 15px #8844aa inset; }
+            50% { border-color: #44aaaa; box-shadow: 0 0 30px #44aaaa88, 0 0 15px #44aaaa inset; }
+            100% { border-color: #aa8844; box-shadow: 0 0 30px #aa884488, 0 0 15px #aa8844 inset; }
+        }
+        body.rainbow-active.ghost-active h1 {
+            animation: rainbowGhostText 6s infinite alternate;
+        }
+        @keyframes rainbowGhostText {
+            0% { color: #aa88ff; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #8844aa; }
+            50% { color: #88aaff; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #44aaaa; }
+            100% { color: #ffaa88; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #aa8844; }
+        }
+        body.rainbow-active.ghost-active .bat { display: none !important; }
+        body.rainbow-active.ghost-active .ghost-decor { display: block !important; color: #aa88ff; text-shadow: 0 0 15px #aa88ff; }
 
         .bat { position: fixed; color: #ffb347; font-size: 2rem; opacity: 0.5; pointer-events: none; z-index: 0; animation: floatBat 12s infinite alternate ease-in-out; }
         .bat1 { top: 15%; right: 5%; animation-duration: 15s; }
@@ -199,103 +235,36 @@
         .coffin-candy-box small { font-size: 0.9rem; color: #e6c9a0; font-weight: 400; }
 
         /* 📚 Стили для вкладки ДЗ */
-        .hw-day-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: #2a1e0c;
-            border: 2px solid #b8651a;
-            border-radius: 16px;
-            padding: 0.8rem 1.2rem;
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-        .hw-date-big {
-            color: #ffb347;
-            font-weight: 800;
-            font-size: 1.2rem;
-        }
-        .hw-date-small {
-            color: #8a7a63;
-            font-size: 0.9rem;
-        }
-        .hw-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            text-align: left;
-        }
-        .hw-item {
-            background: #18130c;
-            border: 1px solid #4a3a25;
-            border-radius: 16px;
-            padding: 1rem 1.2rem;
-            position: relative;
-            transition: 0.2s;
-        }
-        .hw-item:hover {
-            border-color: #b8651a;
-        }
-        .hw-item.done {
-            opacity: 0.5;
-            border-color: #4caf50;
-        }
-        .hw-item.done .hw-subject {
-            text-decoration: line-through;
-            color: #777;
-        }
-        .hw-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.4rem;
-        }
-        .hw-subject {
-            color: #e6e6e6;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        .hw-date {
-            color: #8a7a63;
-            font-size: 0.85rem;
-        }
-        .hw-label {
-            color: #ffb347;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 0.4rem;
-            text-transform: uppercase;
-        }
-        .hw-text {
-            color: #ddccb0;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        .hw-check {
-            position: absolute;
-            bottom: 1rem;
-            right: 1.2rem;
-            background: none;
-            border: 2px solid #4a3a25;
-            color: #8a7a63;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: 0.2s;
-        }
-        .hw-check:hover {
-            border-color: #4caf50;
-            color: #4caf50;
-        }
-        .hw-item.done .hw-check {
-            border-color: #4caf50;
-            color: #4caf50;
-        }
-        body.ghost-active .hw-day-header { background: #1a1a1f; border-color: #4a4a5a; }
-        body.ghost-active .hw-item { background: #1a1a1f; border-color: #4a4a5a; }
-        body.ghost-active .hw-subject { color: #aaddff; }
-        body.ghost-active .hw-label { color: #88ccff; }
+        .hw-day-header { display: flex; justify-content: space-between; align-items: center; background: #2a1e0c; border: 2px solid #b8651a; border-radius: 16px; padding: 0.8rem 1.2rem; margin-bottom: 1.5rem; text-align: left; }
+        .hw-date-big { color: #ffb347; font-weight: 800; font-size: 1.2rem; }
+        .hw-date-small { color: #8a7a63; font-size: 0.9rem; }
+        .hw-list { display: flex; flex-direction: column; gap: 15px; text-align: left; }
+        .hw-item { background: #18130c; border: 1px solid #4a3a25; border-radius: 16px; padding: 1rem 1.2rem; position: relative; transition: 0.2s; }
+        .hw-item:hover { border-color: #b8651a; }
+        .hw-item.done { opacity: 0.5; border-color: #4caf50; }
+        .hw-item.done .hw-subject { text-decoration: line-through; color: #777; }
+        .hw-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; }
+        .hw-subject { color: #e6e6e6; font-weight: 700; font-size: 1.1rem; }
+        .hw-date { color: #8a7a63; font-size: 0.85rem; }
+        .hw-label { color: #ffb347; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; text-transform: uppercase; }
+        .hw-text { color: #ddccb0; font-size: 1rem; line-height: 1.5; }
+        .hw-check { position: absolute; bottom: 1rem; right: 1.2rem; background: none; border: 2px solid #4a3a25; color: #8a7a63; padding: 0.3rem 0.8rem; border-radius: 20px; cursor: pointer; font-size: 0.85rem; transition: 0.2s; }
+        .hw-check:hover { border-color: #4caf50; color: #4caf50; }
+        .hw-item.done .hw-check { border-color: #4caf50; color: #4caf50; }
+
+        /* 💬 Стили для вкладки Чат */
+        .chat-grid { display: flex; flex-direction: column; gap: 20px; text-align: left; }
+        .chat-link-card { background: #18130c; border: 2px solid #d67e1e; border-radius: 20px; padding: 1.5rem; display: flex; flex-direction: column; gap: 10px; transition: 0.2s; }
+        .chat-link-card:hover { border-color: #ffb347; box-shadow: 0 0 20px #e67e2244; }
+        .chat-link-card h3 { color: #ffb347; font-size: 1.3rem; }
+        .chat-link-card p { color: #b8a88a; font-size: 0.95rem; }
+        .chat-link-btn { display: inline-block; background: #e67e22; color: #0b0b0b; text-decoration: none; padding: 0.7rem 1.5rem; border-radius: 30px; font-weight: 700; text-align: center; transition: 0.2s; margin-top: 10px; }
+        .chat-link-btn:hover { background: #ffa733; box-shadow: 0 0 18px #ffb347; }
+        .support-box { margin-top: 30px; padding: 1.5rem; background: #1a140c; border: 2px solid #b8651a; border-radius: 20px; text-align: center; }
+        .support-box h3 { color: #ffb347; font-size: 1.3rem; margin-bottom: 10px; }
+        .support-box p { color: #ddccb0; font-size: 1rem; margin-bottom: 5px; }
+        .support-phone { color: #ffb347; font-weight: 800; font-size: 1.4rem; text-decoration: none; display: inline-block; margin-top: 5px; }
+        .support-phone:hover { text-shadow: 0 0 15px #ffb347; }
 
         @media (max-width: 600px) { h1 { font-size: 2rem; } h1 span { font-size: 1.6rem; } .container { padding: 1.8rem 1.2rem; } .modal { padding: 1.5rem; } .pumpkin-click-area { height: 260px; } }
     </style>
@@ -334,6 +303,7 @@
             <button class="tab-btn active" onclick="switchTab('home', this)">🏠 Главная</button>
             <button class="tab-btn" onclick="switchTab('games', this)">🎮 Игры</button>
             <button class="tab-btn" onclick="switchTab('homework', this)">📚 ДЗ</button>
+            <button class="tab-btn" onclick="switchTab('chat', this)">💬 Чат</button>
         </div>
 
         <!-- ===== ГЛАВНАЯ ===== -->
@@ -415,7 +385,6 @@
             </div>
 
             <div class="hw-list">
-                <!-- Биология -->
                 <div class="hw-item" id="hw-1">
                     <div class="hw-top">
                         <div class="hw-subject">Биология</div>
@@ -428,7 +397,6 @@
                     <button class="hw-check" onclick="toggleHw(1)">✓ Готово</button>
                 </div>
 
-                <!-- Математика -->
                 <div class="hw-item" id="hw-2">
                     <div class="hw-top">
                         <div class="hw-subject">Математика</div>
@@ -441,7 +409,6 @@
                     <button class="hw-check" onclick="toggleHw(2)">✓ Готово</button>
                 </div>
 
-                <!-- Английский -->
                 <div class="hw-item" id="hw-3">
                     <div class="hw-top">
                         <div class="hw-subject">Иностранный язык (английский)</div>
@@ -456,8 +423,32 @@
             </div>
         </div>
 
+        <!-- ===== ЧАТ ===== -->
+        <div class="tab-content" id="tab-chat">
+            <div class="chat-grid">
+                <div class="chat-link-card">
+                    <h3>👩‍🏫 Чат с учителем</h3>
+                    <p>Официальный чат класса с классным руководителем. Здесь обсуждаются важные вопросы, объявления и учебные темы.</p>
+                    <a href="https://max.ru/join/V2B5tL1BaqdCUuMW34gv32wSURG1loEZ_qh8jpoCnkQ" target="_blank" class="chat-link-btn">Войти в чат</a>
+                </div>
+
+                <div class="chat-link-card">
+                    <h3>👥 Чат без учителя</h3>
+                    <p>Неофициальный чат для общения одноклассников. Здесь можно обсудить что угодно без присутствия взрослых.</p>
+                    <a href="https://max.ru/join/oyIjaHVrv3TGWLYjDW-vLe1MTDsH2jMM8f7BYk7L87k" target="_blank" class="chat-link-btn">Войти в чат</a>
+                </div>
+
+                <div class="support-box">
+                    <h3>🆘 Поддержка</h3>
+                    <p>Если возникли вопросы или проблемы с сайтом — звоните:</p>
+                    <a href="tel:+79944346499" class="support-phone">+7 (994) 434-64-99</a>
+                </div>
+            </div>
+        </div>
+
         <footer>
-            <strong>Официальный сайт 6А класса</strong> · ГБОУ Лицей №486 · 2026
+            <strong>Официальный сайт 6А класса</strong> · ГБОУ Лицей №486 · 2026<br>
+            <span style="font-size:0.8rem;">Поддержка: <a href="tel:+79944346499" style="color:#e67e22; text-decoration:none;">+7 (994) 434-64-99</a></span>
         </footer>
     </div>
 
@@ -481,13 +472,13 @@
             <div id="event2Active">
                 <div class="coffin-candy-box">
                     <img src="candy1.png" class="candy-icon-lg" alt="конфета">
-                    <span id="coffinCandy">57.5</span> <small>/ 100 конфет</small>
+                    <span id="coffinCandy">65.5</span> <small>/ 100 конфет</small>
                 </div>
             </div>
 
             <div id="event2EndedMsg" style="display:none; color:#ff6b6b; font-weight:700; text-align:center; padding:1rem;">
                 🔚 Ивент завершён 24 октября 2026 в 00:00<br>
-                <span style="color:#ffb347;">Итог: <span id="finalCandy">57.5</span> конфет</span>
+                <span style="color:#ffb347;">Итог: <span id="finalCandy">65.5</span> конфет</span>
             </div>
         </div>
     </div>
@@ -503,7 +494,7 @@
 
         const EVENT1_END = new Date('2026-10-20T00:00:00');
         const EVENT2_END = new Date('2026-10-24T00:00:00');
-        const COFFIN_START_CANDY = 57.5;
+        const COFFIN_START_CANDY = 65.5; // Изменено на 65.5
         const CLICKER_START_CANDY = 0;
         const SECRET_PASSWORD = '03111383';
 
@@ -528,7 +519,7 @@
         const EVENT_DURATION = 10 * 60 * 1000;
 
         const STORAGE_KEYS = {
-            coffinCandy: '6a_coffin_candy_v2', clickerCandy: '6a_clicker_candy',
+            coffinCandy: '6a_coffin_candy_v3', clickerCandy: '6a_clicker_candy',
             clickPower: '6a_click_power', autoClickers: '6a_auto_clickers',
             luck: '6a_luck', autoClickerSpeed: '6a_auto_speed', spawnRate: '6a_spawn_rate',
             multiplier: '6a_multiplier',
@@ -557,8 +548,6 @@
         let ghostEndTime = 0;
 
         let shopCardsBuilt = false;
-        
-        // ДЗ: состояние выполненных заданий
         let hwDone = {};
 
         function showToast(msg) {
@@ -611,7 +600,6 @@
             try { rainbowForce = localStorage.getItem(STORAGE_KEYS.rainbowForce) === 'true'; } catch (e) { rainbowForce = false; }
             try { ghostForce = localStorage.getItem(STORAGE_KEYS.ghostForce) === 'true'; } catch (e) { ghostForce = false; }
             
-            // Загрузка ДЗ
             try {
                 const saved = localStorage.getItem(STORAGE_KEYS.hwDone);
                 if (saved) hwDone = JSON.parse(saved);
@@ -656,7 +644,7 @@
             btn.classList.add('active');
         }
 
-        // 📚 Логика ДЗ
+        // 📚 ДЗ
         function toggleHw(id) {
             hwDone[id] = !hwDone[id];
             saveHwState();
@@ -740,7 +728,7 @@
             if (rainbowActive) return;
             rainbowActive = true;
             rainbowEndTime = Date.now() + EVENT_DURATION;
-            document.body.classList.remove('ghost-active');
+            // Если призрак активен — добавляем класс, чтобы включилась комбинированная тема
             document.body.classList.add('rainbow-active');
             showToast('🌈 ИВЕНТ РАДУГА НАЧАЛСЯ! Все награды ×2!');
         }
@@ -760,7 +748,7 @@
             if (ghostActive) return;
             ghostActive = true;
             ghostEndTime = Date.now() + EVENT_DURATION;
-            document.body.classList.remove('rainbow-active');
+            // Если радуга активна — комбинированная тема включится через CSS (body.rainbow-active.ghost-active)
             document.body.classList.add('ghost-active');
             showToast('👻 ПРИЗРАЧНЫЙ ИВЕНТ! Появились призрачные конфеты ×10, но остерегайтесь призрачных вёдер!');
         }
@@ -799,7 +787,10 @@
 
         function getSpawnChances() {
             let chances = { candy1: 44, candy2: 44, bucket: 10, golden: 1.99, diamond: 0.009, rainbow: 0.001 };
-            if (rainbowActive) {
+            if (rainbowActive && ghostActive) {
+                // При двух ивентах шансы суммируем
+                chances = { candy1: 20, candy2: 20, bucket: 15, golden: 8, diamond: 3, rainbow: 0.05, ghost: 15 };
+            } else if (rainbowActive) {
                 chances = { candy1: 30, candy2: 30, bucket: 20, golden: 10, diamond: 5, rainbow: 0.1 };
             } else if (ghostActive) {
                 chances = { candy1: 15, candy2: 15, bucket: 10, golden: 5, diamond: 1, rainbow: 0.001, ghost: 15 }; 
