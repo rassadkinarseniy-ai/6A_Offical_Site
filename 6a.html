@@ -40,7 +40,6 @@
             100% { box-shadow: 0 0 55px #88ccffaa, 0 0 25px #88ccff inset; }
         }
         
-        /* Заменяем мышек на призраков */
         body.ghost-active .bat { display: none !important; }
         body.ghost-active .ghost-decor { display: block !important; }
         
@@ -59,19 +58,9 @@
         .ghost-decor.g2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
         .ghost-decor.g3 { top: 60%; right: 12%; animation-duration: 14s; font-size: 2.4rem; animation-delay: -7s; }
         
-        body.ghost-active .spider-web svg {
-            filter: drop-shadow(0 0 8px #88ccff);
-            opacity: 0.4;
-        }
-        body.ghost-active h1 {
-            color: #aaddff;
-            text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #88ccff, 0 0 50px #88ccff;
-        }
-        body.ghost-active h1 span {
-            background: #88ccff;
-            color: #0a0a1a;
-            box-shadow: 0 0 30px #88ccff;
-        }
+        body.ghost-active .spider-web svg { filter: drop-shadow(0 0 8px #88ccff); opacity: 0.4; }
+        body.ghost-active h1 { color: #aaddff; text-shadow: 4px 4px 0 #1a1a2a, 0 0 25px #88ccff, 0 0 50px #88ccff; }
+        body.ghost-active h1 span { background: #88ccff; color: #0a0a1a; box-shadow: 0 0 30px #88ccff; }
         body.ghost-active .subhead { color: #aaccff; }
         body.ghost-active .subhead strong { color: #88ccff; text-shadow: 0 0 10px #88ccff; }
         body.ghost-active .official-stamp { border-color: #88ccff; color: #aaddff; box-shadow: 0 0 25px #88ccff66; }
@@ -208,17 +197,115 @@
         .buy-btn:disabled { background: #3a3a3a; color: #777; cursor: not-allowed; }
         .coffin-candy-box { background: #2a1e0c; border: 2px solid #b8651a; border-radius: 16px; padding: 1rem 1.5rem; text-align: center; margin: 1rem 0; font-size: 1.6rem; font-weight: 800; color: #ffb347; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .coffin-candy-box small { font-size: 0.9rem; color: #e6c9a0; font-weight: 400; }
+
+        /* 📚 Стили для вкладки ДЗ */
+        .hw-day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #2a1e0c;
+            border: 2px solid #b8651a;
+            border-radius: 16px;
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .hw-date-big {
+            color: #ffb347;
+            font-weight: 800;
+            font-size: 1.2rem;
+        }
+        .hw-date-small {
+            color: #8a7a63;
+            font-size: 0.9rem;
+        }
+        .hw-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+        }
+        .hw-item {
+            background: #18130c;
+            border: 1px solid #4a3a25;
+            border-radius: 16px;
+            padding: 1rem 1.2rem;
+            position: relative;
+            transition: 0.2s;
+        }
+        .hw-item:hover {
+            border-color: #b8651a;
+        }
+        .hw-item.done {
+            opacity: 0.5;
+            border-color: #4caf50;
+        }
+        .hw-item.done .hw-subject {
+            text-decoration: line-through;
+            color: #777;
+        }
+        .hw-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.4rem;
+        }
+        .hw-subject {
+            color: #e6e6e6;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .hw-date {
+            color: #8a7a63;
+            font-size: 0.85rem;
+        }
+        .hw-label {
+            color: #ffb347;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+        .hw-text {
+            color: #ddccb0;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        .hw-check {
+            position: absolute;
+            bottom: 1rem;
+            right: 1.2rem;
+            background: none;
+            border: 2px solid #4a3a25;
+            color: #8a7a63;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .hw-check:hover {
+            border-color: #4caf50;
+            color: #4caf50;
+        }
+        .hw-item.done .hw-check {
+            border-color: #4caf50;
+            color: #4caf50;
+        }
+        body.ghost-active .hw-day-header { background: #1a1a1f; border-color: #4a4a5a; }
+        body.ghost-active .hw-item { background: #1a1a1f; border-color: #4a4a5a; }
+        body.ghost-active .hw-subject { color: #aaddff; }
+        body.ghost-active .hw-label { color: #88ccff; }
+
         @media (max-width: 600px) { h1 { font-size: 2rem; } h1 span { font-size: 1.6rem; } .container { padding: 1.8rem 1.2rem; } .modal { padding: 1.5rem; } .pumpkin-click-area { height: 260px; } }
     </style>
 </head>
 <body>
 
-    <!-- Мышки (обычные) -->
     <div class="bat bat1">🦇</div>
     <div class="bat bat2">🦇</div>
     <div class="bat bat3">🦇</div>
     
-    <!-- Призраки (появляются во время ивента) -->
     <div class="ghost-decor g1">👻</div>
     <div class="ghost-decor g2">👻</div>
     <div class="ghost-decor g3">👻</div>
@@ -246,8 +333,10 @@
         <div class="tabs">
             <button class="tab-btn active" onclick="switchTab('home', this)">🏠 Главная</button>
             <button class="tab-btn" onclick="switchTab('games', this)">🎮 Игры</button>
+            <button class="tab-btn" onclick="switchTab('homework', this)">📚 ДЗ</button>
         </div>
 
+        <!-- ===== ГЛАВНАЯ ===== -->
         <div class="tab-content active" id="tab-home">
             <div class="events-grid">
                 <div class="event-card" id="card1" onclick="openEvent1()">
@@ -265,6 +354,7 @@
             </div>
         </div>
 
+        <!-- ===== ИГРЫ ===== -->
         <div class="tab-content" id="tab-games">
             <div class="clicker-header">
                 <div class="clicker-balance">
@@ -314,6 +404,58 @@
             </div>
         </div>
 
+        <!-- ===== ДЗ ===== -->
+        <div class="tab-content" id="tab-homework">
+            <div class="hw-day-header">
+                <div>
+                    <div class="hw-date-small">Вторник</div>
+                    <div class="hw-date-big">20 октября</div>
+                </div>
+                <div class="hw-date-small">на 13.10.2026 — 19.10.2026</div>
+            </div>
+
+            <div class="hw-list">
+                <!-- Биология -->
+                <div class="hw-item" id="hw-1">
+                    <div class="hw-top">
+                        <div class="hw-subject">Биология</div>
+                        <div class="hw-date">13.10.2026</div>
+                    </div>
+                    <div class="hw-label">задано</div>
+                    <div class="hw-text">
+                        Домашнее задание в тетради составить конспект параграфа 7. в лабораторной тетради сделать табличку и заполнить стр.32
+                    </div>
+                    <button class="hw-check" onclick="toggleHw(1)">✓ Готово</button>
+                </div>
+
+                <!-- Математика -->
+                <div class="hw-item" id="hw-2">
+                    <div class="hw-top">
+                        <div class="hw-subject">Математика</div>
+                        <div class="hw-date">19.10.2026</div>
+                    </div>
+                    <div class="hw-label">задано</div>
+                    <div class="hw-text">
+                        с.63, № 2.143, 2.144, 2.145
+                    </div>
+                    <button class="hw-check" onclick="toggleHw(2)">✓ Готово</button>
+                </div>
+
+                <!-- Английский -->
+                <div class="hw-item" id="hw-3">
+                    <div class="hw-top">
+                        <div class="hw-subject">Иностранный язык (английский)</div>
+                        <div class="hw-date">16.10.2026</div>
+                    </div>
+                    <div class="hw-label">задано</div>
+                    <div class="hw-text">
+                        уч. стр. 26
+                    </div>
+                    <button class="hw-check" onclick="toggleHw(3)">✓ Готово</button>
+                </div>
+            </div>
+        </div>
+
         <footer>
             <strong>Официальный сайт 6А класса</strong> · ГБОУ Лицей №486 · 2026
         </footer>
@@ -339,7 +481,7 @@
             <div id="event2Active">
                 <div class="coffin-candy-box">
                     <img src="candy1.png" class="candy-icon-lg" alt="конфета">
-                    <span id="coffinCandy">64.5</span> <small>/ 100 конфет</small>
+                    <span id="coffinCandy">57.5</span> <small>/ 100 конфет</small>
                 </div>
             </div>
 
@@ -380,9 +522,7 @@
         const GHOST_CANDY_CHANCE = 0.10;
         const GHOST_STEAL_PERCENT = 0.1;
 
-        // Автокликер теперь даёт +2.5 конфет/сек
         const AUTO_PER_CLICKER = 2.5;
-        // Множитель дохода: каждый уровень +10% ко всему доходу
         const MULTIPLIER_PER_LEVEL = 0.10;
 
         const EVENT_DURATION = 10 * 60 * 1000;
@@ -393,7 +533,8 @@
             luck: '6a_luck', autoClickerSpeed: '6a_auto_speed', spawnRate: '6a_spawn_rate',
             multiplier: '6a_multiplier',
             secretUnlocked: '6a_secret_unlocked', rainbowForce: '6a_rainbow_force',
-            ghostForce: '6a_ghost_force'
+            ghostForce: '6a_ghost_force',
+            hwDone: '6a_hw_done'
         };
 
         let coffinCandy = COFFIN_START_CANDY;
@@ -416,6 +557,9 @@
         let ghostEndTime = 0;
 
         let shopCardsBuilt = false;
+        
+        // ДЗ: состояние выполненных заданий
+        let hwDone = {};
 
         function showToast(msg) {
             const t = document.getElementById('toast');
@@ -443,13 +587,11 @@
         }
         function getAutoSpeedPerUnit() { return AUTO_PER_CLICKER; }
         
-        // Общий CPS = (автокликеры × 2.5) × (1 + multiplier × 0.1)
         function getTotalCPS() {
             const base = autoClickers * getAutoSpeedPerUnit();
             return base * (1 + multiplier * MULTIPLIER_PER_LEVEL);
         }
         
-        // Сила клика с учётом множителя
         function getClickPower() {
             return clickPower * (1 + multiplier * MULTIPLIER_PER_LEVEL);
         }
@@ -468,6 +610,12 @@
             try { secretUnlocked = localStorage.getItem(STORAGE_KEYS.secretUnlocked) === 'true'; } catch (e) { secretUnlocked = false; }
             try { rainbowForce = localStorage.getItem(STORAGE_KEYS.rainbowForce) === 'true'; } catch (e) { rainbowForce = false; }
             try { ghostForce = localStorage.getItem(STORAGE_KEYS.ghostForce) === 'true'; } catch (e) { ghostForce = false; }
+            
+            // Загрузка ДЗ
+            try {
+                const saved = localStorage.getItem(STORAGE_KEYS.hwDone);
+                if (saved) hwDone = JSON.parse(saved);
+            } catch (e) { hwDone = {}; }
         }
 
         function saveCoffinCandy() { try { localStorage.setItem(STORAGE_KEYS.coffinCandy, String(coffinCandy)); } catch (e) {} }
@@ -481,6 +629,9 @@
                 localStorage.setItem(STORAGE_KEYS.spawnRate, String(spawnRate));
                 localStorage.setItem(STORAGE_KEYS.multiplier, String(multiplier));
             } catch (e) {}
+        }
+        function saveHwState() {
+            try { localStorage.setItem(STORAGE_KEYS.hwDone, JSON.stringify(hwDone)); } catch (e) {}
         }
 
         function setCoffinCandy(v) { coffinCandy = Math.max(0, v); saveCoffinCandy(); updateCoffinCandyUI(); }
@@ -503,6 +654,28 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('tab-' + name).classList.add('active');
             btn.classList.add('active');
+        }
+
+        // 📚 Логика ДЗ
+        function toggleHw(id) {
+            hwDone[id] = !hwDone[id];
+            saveHwState();
+            updateHwUI();
+        }
+
+        function updateHwUI() {
+            for (let i = 1; i <= 3; i++) {
+                const item = document.getElementById('hw-' + i);
+                if (!item) continue;
+                const btn = item.querySelector('.hw-check');
+                if (hwDone[i]) {
+                    item.classList.add('done');
+                    btn.textContent = '✓ Выполнено';
+                } else {
+                    item.classList.remove('done');
+                    btn.textContent = '✓ Готово';
+                }
+            }
         }
 
         function tickTimers() {
@@ -705,7 +878,7 @@
                 else if (type === 'diamond') { bonus = DIAMOND_BASE + (getTotalUpgradeLevels() * DIAMOND_PER_UPGRADE); color = '#00ffff'; showToast(`💎 АЛМАЗНОЕ ВЕДРО! +${fmtCandy(bonus)} конфет!`); }
                 else if (type === 'rainbow') { bonus = RAINBOW_BASE + (getTotalUpgradeLevels() * RAINBOW_PER_UPGRADE); color = '#ff00ff'; showToast(`🌈 РАДУЖНОЕ ВЕДРО! +${fmtCandy(bonus)} КОНФЕТ!!!`); }
                 else {
-                    bonus = getClickPower(); // ✅ клик с учётом множителя
+                    bonus = getClickPower();
                     if (isGhostCandy) {
                         bonus *= GHOST_MULTIPLIER;
                         color = '#88ccff';
@@ -728,7 +901,6 @@
 
         function startSpawnTimer() { if (spawnTimer) clearInterval(spawnTimer); spawnTimer = setInterval(spawnRandomItem, getSpawnInterval()); }
 
-        // Автокликеры
         setInterval(() => {
             const cps = getTotalCPS();
             if (cps > 0) {
@@ -828,6 +1000,7 @@
         updateCoffinCandyUI();
         updateClickerCandyUI();
         updateCpsUI();
+        updateHwUI();
         buildShop();
         tickTimers();
         setInterval(tickTimers, 1000);
@@ -853,6 +1026,7 @@
         window.spawnSpecific = spawnSpecific;
         window.toggleRainbowEvent = toggleRainbowEvent;
         window.toggleGhostEvent = toggleGhostEvent;
+        window.toggleHw = toggleHw;
     </script>
 </body>
 </html>
