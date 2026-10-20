@@ -72,6 +72,7 @@
         .event-timer-side { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); background: #1a140c; border: 2px solid #e67e22; border-radius: 20px; padding: 1rem 0.8rem; z-index: 50; text-align: center; box-shadow: 0 0 20px #e67e2280; font-weight: 700; color: #ffb347; font-size: 0.9rem; }
         @media (max-width: 700px) { .event-timer-side { position: static; margin-bottom: 1rem; width: 100%; } }
 
+        /* Старое оформление для ивентов на главной */
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 2rem 0 1rem; text-align: left; }
         .event-card { background: #18130c; border: 2px solid #d67e1e; border-radius: 24px 6px 24px 6px; padding: 1.5rem; cursor: pointer; transition: 0.25s; position: relative; }
         .event-card:hover { transform: translateY(-5px); }
@@ -81,6 +82,14 @@
         .event-card.ended .timer { display: none; }
         .ended-label { display: none; color: #ff6b6b; font-weight: 800; margin-top: 0.8rem; text-align: center; }
         .event-card.ended .ended-label { display: block; }
+
+        /* Команда (старое оформление) */
+        .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .team-card { background: #1a140c; border: 1px solid #4a3a25; border-radius: 16px; padding: 1rem; text-align: center; }
+        .team-card b { color: #ffb347; }
+        .team-card small { color: #8a7a63; }
+        .team-card a { color: #e67e22; text-decoration: none; }
+        .team-card a:hover { color: #ffb347; }
 
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
         .modal-overlay.active { display: flex; }
@@ -209,6 +218,7 @@
             <button class="tab-btn" onclick="switchTab('team', this)">👑 Команда</button>
         </div>
 
+        <!-- ===== ГЛАВНАЯ (старое оформление) ===== -->
         <div class="tab-content active" id="tab-home">
             <div class="events-grid">
                 <div class="event-card" id="card1" onclick="openEvent1()">
@@ -314,19 +324,20 @@
             </div>
         </div>
 
+        <!-- ===== КОМАНДА (старое оформление) ===== -->
         <div class="tab-content" id="tab-team">
-            <div class="team-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
-                <div class="shop-item">
-                    <div><b>Рассадкин Арсений</b><br><small>Главный админ</small><br><a href="tel:+79944346499">+7 (994) 434-64-99</a></div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <b>Рассадкин Арсений</b><br><small>Главный админ</small><br><a href="tel:+79944346499">+7 (994) 434-64-99</a>
                 </div>
-                <div class="shop-item">
-                    <div><b>Пашкова Рита</b><br><small>Дружеская атмосфера</small><br><a href="https://web.max.ru/314909703">Контакт в MAX</a></div>
+                <div class="team-card">
+                    <b>Пашкова Рита</b><br><small>Дружеская атмосфера</small><br><a href="https://web.max.ru/314909703">Контакт в MAX</a>
                 </div>
-                <div class="shop-item">
-                    <div><b>Батрутдинов Рома</b><br><small>Админ</small><br><a href="tel:+79315806804">+7 931 580 68 04</a></div>
+                <div class="team-card">
+                    <b>Батрутдинов Рома</b><br><small>Админ</small><br><a href="tel:+79315806804">+7 931 580 68 04</a>
                 </div>
-                <div class="shop-item">
-                    <div><b>Даша Васильева</b><br><small>Ответственная за ДЗ</small><br><a href="tel:+79602477126">+7 960 247 71 26</a></div>
+                <div class="team-card">
+                    <b>Даша Васильева</b><br><small>Ответственная за ДЗ</small><br><a href="tel:+79602477126">+7 960 247 71 26</a>
                 </div>
             </div>
         </div>
@@ -410,10 +421,9 @@
             return h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
         }
 
-        // Модификаторы от пути (радужный ослаблен)
         function getPathMod(key) {
             if (activePath === key) return 1;
-            if (isRainbowActive() && isColorPath(key)) return 0.33; // Радужный даёт 1/3 силы
+            if (isRainbowActive() && isColorPath(key)) return 0.33;
             return 0;
         }
 
@@ -427,7 +437,6 @@
             return clickPower * (1 + multiplier * 0.10);
         }
 
-        // ==================== ОБНОВЛЕНИЕ ИНТЕРФЕЙСА ====================
         function updateUI() {
             document.getElementById('gameCandy').textContent = fmtCandy(clickerCandy);
             document.getElementById('cpsValue').textContent = fmtCandy(getTotalCPS());
@@ -499,7 +508,7 @@
 
         function saveState() {
             try {
-                localStorage.setItem('6a_state_v14', JSON.stringify({
+                localStorage.setItem('6a_state_v16', JSON.stringify({
                     coffinCandy, clickerCandy, clickPower, autoClickers, luck, autoClickerSpeed, spawnRate, multiplier,
                     ownedPaths, activePath, diamondCodeUsed
                 }));
@@ -508,7 +517,7 @@
 
         function loadState() {
             try {
-                const s = JSON.parse(localStorage.getItem('6a_state_v14'));
+                const s = JSON.parse(localStorage.getItem('6a_state_v16'));
                 if (s) {
                     coffinCandy = s.coffinCandy ?? COFFIN_START_CANDY;
                     clickerCandy = s.clickerCandy ?? 0;
@@ -704,7 +713,6 @@
             if (activeEvents.chernobyl && Math.random() < 0.15) { mult *= 15; colorGlow = '#55ff00'; }
             if (activeEvents.rainbow) mult *= 2;
 
-            // Оранжевый путь (с учётом радужного 1/3)
             const orangeMod = getPathMod('orange');
             if (forceMutations || (orangeMod > 0 && Math.random() < 0.05 * orangeMod)) { mult *= 8; colorGlow = '#ff5500'; }
             
@@ -827,7 +835,6 @@
                             setTimeout(() => { 
                                 if (target.parentNode) {
                                     target.classList.add('star-hit');
-                                    // Эффект ×50 при клике
                                     const oldOnclick = target.onclick;
                                     target.onclick = (ev) => {
                                         ev.stopPropagation();
@@ -874,7 +881,6 @@
 
                             setTimeout(() => {
                                 if (target.parentNode) {
-                                    // Призрак забирает конфету и даёт ×5
                                     const reward = getClickPower() * 5;
                                     clickerCandy += reward;
                                     updateUI(); saveState();
@@ -1094,6 +1100,38 @@
         }, 100);
         setInterval(() => { renderPaths(); renderShop(); }, 1000);
         checkEvents();
+
+        // Таймеры ивентов на главной
+        setInterval(() => {
+            const now = Date.now();
+            const timer1 = document.getElementById('timer1');
+            const timer2 = document.getElementById('timer2');
+            if (!timer1 || !timer2) return;
+            
+            // Ивент 1 (Сладость или гадость) - до 20 октября
+            const end1 = new Date('2026-10-20T00:00:00').getTime();
+            const ms1 = end1 - now;
+            if (ms1 <= 0) { timer1.textContent = 'Завершён'; timer1.style.color = '#ff6b6b'; }
+            else { 
+                const totalSec = Math.floor(ms1 / 1000);
+                const d = Math.floor(totalSec / 86400);
+                const h = Math.floor((totalSec % 86400) / 3600);
+                const m = Math.floor((totalSec % 3600) / 60);
+                timer1.textContent = `${d}д ${h}ч ${m}м`;
+            }
+
+            // Ивент 2 (Гроб) - до 24 октября
+            const end2 = new Date('2026-10-24T00:00:00').getTime();
+            const ms2 = end2 - now;
+            if (ms2 <= 0) { timer2.textContent = 'Завершён'; timer2.style.color = '#ff6b6b'; }
+            else {
+                const totalSec = Math.floor(ms2 / 1000);
+                const d = Math.floor(totalSec / 86400);
+                const h = Math.floor((totalSec % 86400) / 3600);
+                const m = Math.floor((totalSec % 3600) / 60);
+                timer2.textContent = `${d}д ${h}ч ${m}м`;
+            }
+        }, 1000);
 
         // След за курсором
         document.addEventListener('mousemove', (e) => {
