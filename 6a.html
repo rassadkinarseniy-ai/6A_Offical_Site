@@ -28,13 +28,29 @@
         body.chernobyl-active h1 { color: #aaffaa; }
         body.chernobyl-active h1 span { background: #55ff00; color: #0a0a1a; }
 
-        body.space-active { animation: spaceBg 20s infinite linear; overflow: hidden; }
-        @keyframes spaceBg { 0% { background: #000010; } 50% { background: #000020; } 100% { background: #000010; } }
-        body.space-active .container { border-color: #ffffff; box-shadow: 0 0 40px #ffffff66; animation: spaceFloat 6s infinite alternate ease-in-out; }
-        @keyframes spaceFloat { 0% { transform: translateY(0); } 100% { transform: translateY(-10px); } }
+        /* 🚀 КОСМОС */
+        body.space-active { background: #000; }
+        body.space-active .bat { display: none !important; }
+        body.space-active .container { 
+            background: transparent; border-color: transparent; box-shadow: none;
+            opacity: 0.6;
+        }
+        body.space-active .container > * { animation: floatElement 10s infinite alternate ease-in-out; }
+        body.space-active .container > *:nth-child(odd) { animation-duration: 12s; }
+        body.space-active .container > *:nth-child(even) { animation-duration: 8s; }
+        body.space-active .tab-btn { animation: floatBtn 6s infinite alternate ease-in-out; }
+        body.space-active .tab-btn:nth-child(1) { animation-duration: 7s; }
+        body.space-active .tab-btn:nth-child(2) { animation-duration: 9s; }
+        body.space-active .tab-btn:nth-child(3) { animation-duration: 5s; }
+        body.space-active .tab-btn:nth-child(4) { animation-duration: 8s; }
+        body.space-active .tab-btn:nth-child(5) { animation-duration: 6s; }
+        
+        @keyframes floatElement { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(15px, -15px) rotate(2deg); } }
+        @keyframes floatBtn { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(10px, -10px) rotate(-3deg); } }
         body.space-active h1 { color: #fff; }
         body.space-active h1 span { background: #fff; color: #000; }
-
+        body.space-active .tab-btn.active { background: #fff; border-color: #fff; color: #000; }
+        
         .bat { position: fixed; color: #ffb347; font-size: 2rem; opacity: 0.5; pointer-events: none; z-index: 0; animation: floatBat 12s infinite alternate ease-in-out; }
         .bat1 { top: 15%; right: 5%; animation-duration: 15s; }
         .bat2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
@@ -72,7 +88,7 @@
         .modal-close { position: absolute; top: 12px; right: 18px; background: none; border: none; color: #ffb347; font-size: 2rem; cursor: pointer; }
         .modal h2 { color: #ffb347; font-size: 1.8rem; margin-bottom: 1rem; }
         .modal p { color: #ddccb0; line-height: 1.6; margin-bottom: 1rem; font-size: 1.05rem; }
-        .btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.7rem 1.5rem; border-radius: 30px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s; margin: 0.3rem; }
+        .btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.7rem 1.5rem; border-radius: 30px; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s; margin: 0.3rem; pointer-events: auto; }
         .btn:hover { background: #ffa733; }
         .btn:disabled { background: #555; color: #888; cursor: not-allowed; }
         footer { margin-top: 2rem; color: #8a7a63; font-size: 0.9rem; border-top: 1px solid #4a3a25; padding-top: 1.2rem; width: 100%; text-align: center; }
@@ -86,17 +102,18 @@
         .candy-icon-lg { width: 30px; height: 30px; vertical-align: middle; image-rendering: pixelated; }
         
         .pumpkin-click-area { position: relative; height: 350px; margin: 1rem 0; background: #110d08; border: 2px dashed #4a3a25; border-radius: 20px; overflow: hidden; }
-        body.space-active .pumpkin-click-area { position: fixed; inset: 0; z-index: 5; border: none; background: transparent; pointer-events: none; }
-        body.space-active .pumpkin-click-area .spawn-item { pointer-events: auto; }
-
-        .click-float { position: absolute; color: #ffb347; font-weight: 800; font-size: 1.4rem; pointer-events: none; animation: floatUp 0.9s ease-out forwards; z-index: 6; text-shadow: 0 0 10px #000; }
+        
+        .click-float { position: absolute; color: #ffb347; font-weight: 800; font-size: 1.4rem; pointer-events: none; animation: floatUp 0.9s ease-out forwards; z-index: 9999; text-shadow: 0 0 10px #000; }
         @keyframes floatUp { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-90px); } }
         
-        .spawn-item { position: absolute; cursor: pointer; z-index: 4; user-select: none; image-rendering: pixelated; transition: transform 0.1s; animation: popIn 0.3s ease-out; }
+        .spawn-item { position: absolute; cursor: pointer; z-index: 999; user-select: none; image-rendering: pixelated; transition: transform 0.1s; animation: popIn 0.3s ease-out; pointer-events: auto; }
         .spawn-item:hover { transform: scale(1.1); }
         .spawn-item:active { transform: scale(0.9); }
         @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
         
+        body.space-active .spawn-item { position: fixed; animation: spaceFloatItem 8s infinite alternate ease-in-out !important; }
+        @keyframes spaceFloatItem { 0% { transform: translate(0, 0) rotate(0deg); } 100% { transform: translate(30px, -30px) rotate(15deg); } }
+
         .spawn-candy1 { width: 50px; height: 50px; filter: drop-shadow(0 0 8px #ff8c00); }
         .spawn-candy2 { width: 50px; height: 50px; filter: drop-shadow(0 0 8px #ff5500); }
         .spawn-bucket { width: 80px; height: 80px; filter: drop-shadow(0 0 12px #ff8c00); }
@@ -121,7 +138,7 @@
         .secret-panel.visible { display: block; }
         .secret-panel h3 { color: #ffb347; margin-bottom: 1rem; font-size: 1.3rem; }
         .secret-spawn-grid { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; }
-        .secret-spawn-btn { background: #2a1e0c; border: 2px solid #b8651a; border-radius: 16px; padding: 0.8rem 1.2rem; color: #e6c9a0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; font-weight: 700; min-width: 110px; }
+        .secret-spawn-btn { background: #2a1e0c; border: 2px solid #b8651a; border-radius: 16px; padding: 0.8rem 1.2rem; color: #e6c9a0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; font-weight: 700; min-width: 110px; pointer-events: auto; }
         .secret-spawn-btn img { width: 40px; height: 40px; image-rendering: pixelated; }
         
         .shop { margin-top: 2rem; text-align: left; }
@@ -132,7 +149,7 @@
         .shop-item-name { color: #ffb347; font-weight: 700; font-size: 1.1rem; }
         .shop-item-desc { color: #b8a88a; font-size: 0.9rem; margin-top: 4px; }
         .shop-item-level { color: #4caf50; font-size: 0.9rem; font-weight: 700; margin-top: 4px; }
-        .buy-btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.6rem 1.2rem; border-radius: 30px; font-weight: 700; font-size: 0.95rem; cursor: pointer; }
+        .buy-btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.6rem 1.2rem; border-radius: 30px; font-weight: 700; font-size: 0.95rem; cursor: pointer; pointer-events: auto; }
         .buy-btn:hover:not(:disabled) { background: #ffa733; }
         .buy-btn:disabled { background: #3a3a3a; color: #777; cursor: not-allowed; }
 
@@ -140,7 +157,7 @@
         .path-title { font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
         .path-desc { font-size: 0.85rem; color: #a89a88; }
         .path-lock { font-size: 0.75rem; color: #ff6b6b; font-weight: 700; text-transform: uppercase; }
-        .buy-path-btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.6rem; border-radius: 30px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: auto; width: 100%; }
+        .buy-path-btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.6rem; border-radius: 30px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: auto; width: 100%; pointer-events: auto; }
         .buy-path-btn:hover:not(:disabled) { background: #ffa733; }
         .buy-path-btn:disabled { background: #555; color: #888; cursor: not-allowed; }
         .path-color-dot { width: 15px; height: 15px; border-radius: 50%; display: inline-block; }
@@ -148,11 +165,21 @@
         .trail-particle { position: fixed; pointer-events: none; z-index: 9999; border-radius: 50%; transform: translate(-50%, -50%); animation: trailFade 0.8s ease-out forwards; }
         @keyframes trailFade { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.2); } }
 
-        .space-star { position: absolute; color: #fff; font-size: 1.5rem; z-index: 7; pointer-events: none; text-shadow: 0 0 10px #fff; }
+        .space-star { position: absolute; color: #fff; font-size: 1.5rem; z-index: 1000; pointer-events: none; text-shadow: 0 0 10px #fff; }
         @keyframes starMove { 0% { transform: translate(0, 0) rotate(0); } 100% { transform: translate(var(--dx), var(--dy)) rotate(360deg); } }
         
-        .space-meteor { position: absolute; width: 80px; height: 80px; z-index: 8; pointer-events: none; animation: meteorMove 2s linear forwards; }
+        .space-meteor { position: absolute; width: 80px; height: 80px; z-index: 1001; pointer-events: none; animation: meteorMove 2s linear forwards; }
         @keyframes meteorMove { 0% { transform: translate(0, 0) rotate(0); } 100% { transform: translate(var(--dx), var(--dy)) rotate(720deg); } }
+
+        /* 🎃 Призраки для призрачного пути */
+        .ghost-flyer {
+            position: fixed;
+            font-size: 2rem;
+            z-index: 1002;
+            pointer-events: none;
+            text-shadow: 0 0 15px #88ccff;
+            transition: left 1.5s linear, top 1.5s linear, transform 1.5s linear;
+        }
 
         @media (max-width: 600px) { h1 { font-size: 2rem; } .container { padding: 1.8rem 1.2rem; } .path-grid { grid-template-columns: 1fr; } }
     </style>
@@ -164,7 +191,8 @@
     <div class="bat bat3">🦇</div>
 
     <div class="event-timer-side" id="eventTimerSide">
-        Ближайший ивент:<br><span id="nearestEventName" style="color:#ffb347; font-size:1.1rem;">--</span><br>через <span id="nearestEventTime">--:--</span>
+        <span id="nearestEventName" style="color:#ffb347; font-size:1.1rem; display:block; margin-bottom:4px;">--</span>
+        <span id="nearestEventTime">--:--</span>
     </div>
 
     <div class="container">
@@ -219,17 +247,15 @@
                 <h3>🔓 Секретный режим <span id="secretModeName"></span></h3>
                 
                 <div id="adminSpawnGrid" class="secret-spawn-grid">
-                    <!-- Базовые конфетки (без задержки) -->
                     <button class="secret-spawn-btn" onclick="spawnSpecific('candy1')"><img src="candy1.png"> Конфета 1</button>
                     <button class="secret-spawn-btn" onclick="spawnSpecific('candy2')"><img src="candy2.png"> Конфета 2</button>
                     
-                    <!-- Остальное с задержкой -->
-                    <button class="secret-spawn-btn" onclick="spawnWithCooldown('bucket')"><img src="pumpkin_bucket.png"> Ведро</button>
-                    <button class="secret-spawn-btn" onclick="spawnWithCooldown('golden')"><img src="golden_pumpkin_bucket.png"> Золотое</button>
-                    <button class="secret-spawn-btn" onclick="spawnWithCooldown('diamond')"><img src="diamond_pumpkin_bucket.png"> Алмазное</button>
-                    <button class="secret-spawn-btn" onclick="spawnWithCooldown('rainbow')"><img src="rainbow_pumpkin_bucket.png"> Радужное</button>
-                    <button class="secret-spawn-btn" onclick="spawnWithCooldown('meteor')"><img src="meteor_pumpkin_bucket.png"> Метеор</button>
-                    <button class="secret-spawn-btn" onclick="spawnWithCooldown('radioctive')"><img src="radioctive_pumpkin_bucket.png"> Радиоактивное</button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('bucket')"><img src="pumpkin_bucket.png"> Ведро</button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('golden')"><img src="golden_pumpkin_bucket.png"> Золотое</button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('diamond')"><img src="diamond_pumpkin_bucket.png"> Алмазное</button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('rainbow')"><img src="rainbow_pumpkin_bucket.png"> Радужное</button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('meteor')"><img src="meteor_pumpkin_bucket.png"> Метеор</button>
+                    <button class="secret-spawn-btn" onclick="spawnSpecific('radioctive')"><img src="radioctive_pumpkin_bucket.png"> Радиоактивное</button>
                 </div>
 
                 <div style="margin-top:1.5rem; border-top:1px solid #4a3a25; padding-top:1.5rem;">
@@ -237,6 +263,15 @@
                     <input type="number" id="addCandyInput" placeholder="Сумма" style="padding:0.6rem; border-radius:12px; border:1px solid #b8651a; background:#0f0b07; color:#ffb347; width:120px;">
                     <button class="btn" onclick="addCandySecret()" id="addCandyBtn">Добавить</button>
                     <span id="addCandyTimer" style="color:#ff6b6b; font-size:0.9rem; margin-left:10px;"></span>
+                </div>
+
+                <div id="eventAdminPanel" style="margin-top:1.5rem; border-top:1px solid #4a3a25; padding-top:1.5rem; display:none;">
+                    <h4 style="color:#ffb347; margin-bottom:0.5rem;">Управление ивентами (10 мин)</h4>
+                    <button class="btn" style="background:#88ccff; color:#000;" onclick="forceEvent('ghost')">👻 Призрак</button>
+                    <button class="btn" style="background:#ff00ff; color:#fff;" onclick="forceEvent('rainbow')">🌈 Радуга</button>
+                    <button class="btn" style="background:#ffffff; color:#000;" onclick="forceEvent('space')">🚀 Космос</button>
+                    <button class="btn" style="background:#55ff00; color:#000;" onclick="forceEvent('chernobyl')">☢️ Чернобыль</button>
+                    <button class="btn" style="background:#ff4444; color:#fff;" onclick="forceEvent('none')">❌ Выключить все</button>
                 </div>
 
                 <div style="margin-top:1rem;"><button class="btn" style="background:#555;" onclick="closeSecretPanel()">Выйти</button></div>
@@ -296,7 +331,7 @@
             </div>
         </div>
 
-        <footer><strong>Официальный сайт 6А класса</strong> · ГБОУ Лицей №486 · 2026</footer>
+        <footer><strong>Официальный сайт 6А класса</strong> · ГБОУ Лицей 486 · 2026</footer>
     </div>
 
     <div class="modal-overlay" id="modal1">
@@ -327,10 +362,11 @@
         };
 
         const COFFIN_START_CANDY = 65.5;
-        const SECRET_PASSWORD_ADMIN = 'АДМИНКА12'; // урезанный
-        const SECRET_PASSWORD_FULL = '03111383';    // полный (с задержкой)
+        const SECRET_PASSWORD_ADMIN = 'АДМИНКА12';
+        const SECRET_PASSWORD_FULL = '03111383';
         const SECRET_PASSWORD_DIAMOND = 'АЛМАЗНОЕВЕДЁРКО';
         const HW_UNLOCK_DATE = new Date('2026-11-06T00:00:00');
+        const EVENT_DURATION = 10 * 60 * 1000; // 10 минут
 
         let coffinCandy = COFFIN_START_CANDY;
         let clickerCandy = 0;
@@ -348,13 +384,14 @@
         let radioCooldownEnd = 0;
 
         let secretModeActive = false;
-        let secretModeType = null; // 'admin' или 'full'
+        let secretModeType = null;
         let addCandyCooldownEnd = 0;
-        let actionCooldownEnd = 0; // 10 минутная задержка для полного режима
         let diamondCodeUsed = false;
 
         let activeEvents = { ghost: false, rainbow: false, chernobyl: false, space: false };
+        let eventEndTimes = { ghost: 0, rainbow: 0, chernobyl: 0, space: 0 };
         let spaceRAF = null;
+        let ghostInterval = null;
 
         // ==================== УТИЛИТЫ ====================
         function showToast(msg) {
@@ -373,6 +410,13 @@
             return h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
         }
 
+        // Модификаторы от пути (радужный ослаблен)
+        function getPathMod(key) {
+            if (activePath === key) return 1;
+            if (isRainbowActive() && isColorPath(key)) return 0.33; // Радужный даёт 1/3 силы
+            return 0;
+        }
+
         function getTotalCPS() {
             let cps = autoClickers * (2.5 + autoClickerSpeed * 0.5);
             cps *= (1 + multiplier * 0.10);
@@ -383,36 +427,52 @@
             return clickPower * (1 + multiplier * 0.10);
         }
 
+        // ==================== ОБНОВЛЕНИЕ ИНТЕРФЕЙСА ====================
         function updateUI() {
             document.getElementById('gameCandy').textContent = fmtCandy(clickerCandy);
             document.getElementById('cpsValue').textContent = fmtCandy(getTotalCPS());
             document.getElementById('coffinCandy').textContent = fmtCandy(coffinCandy);
             
-            const now = new Date();
+            const now = Date.now();
             const nextHour = new Date(); nextHour.setHours(nextHour.getHours() + 1, 0, 0, 0);
-            const timeToNextHour = nextHour.getTime() - now.getTime();
+            const timeToNextHour = nextHour.getTime() - now;
 
-            // Ближайший ивент
             let nearestEvent = '';
             let minTime = Infinity;
-            const currentHour = now.getHours();
-            const slot = currentHour % 4;
-            const eventNames = ['Призрак', 'Радуга', 'Космос', 'Чернобыль'];
-            
-            if (activeEvents.ghost) { nearestEvent = '👻 Призрак (идёт)'; minTime = 0; }
-            else if (activeEvents.rainbow) { nearestEvent = '🌈 Радуга (идёт)'; minTime = 0; }
-            else if (activeEvents.space) { nearestEvent = '🚀 Космос (идёт)'; minTime = 0; }
-            else if (activeEvents.chernobyl) { nearestEvent = '☢️ Чернобыль (идёт)'; minTime = 0; }
-            else {
+            let isActive = false;
+
+            if (activeEvents.ghost) {
+                nearestEvent = '👻 Призрак';
+                minTime = eventEndTimes.ghost - now;
+                isActive = true;
+            } else if (activeEvents.rainbow) {
+                nearestEvent = '🌈 Радуга';
+                minTime = eventEndTimes.rainbow - now;
+                isActive = true;
+            } else if (activeEvents.space) {
+                nearestEvent = '🚀 Космос';
+                minTime = eventEndTimes.space - now;
+                isActive = true;
+            } else if (activeEvents.chernobyl) {
+                nearestEvent = '☢️ Чернобыль';
+                minTime = eventEndTimes.chernobyl - now;
+                isActive = true;
+            } else {
+                const slot = new Date().getHours() % 4;
+                const eventNames = ['👻 Призрак', '🌈 Радуга', '🚀 Космос', '☢️ Чернобыль'];
                 let nextSlot = (slot + 1) % 4;
                 nearestEvent = eventNames[nextSlot];
                 minTime = timeToNextHour;
             }
 
             document.getElementById('nearestEventName').textContent = nearestEvent;
-            document.getElementById('nearestEventTime').textContent = minTime === 0 ? 'сейчас' : formatTime(minTime);
+            
+            if (isActive) {
+                document.getElementById('nearestEventTime').textContent = 'идёт, осталось: ' + formatTime(minTime);
+            } else {
+                document.getElementById('nearestEventTime').textContent = 'через ' + formatTime(minTime);
+            }
 
-            // ДЗ
             const hwEl = document.getElementById('hwTimer');
             if (hwEl) {
                 const msHw = HW_UNLOCK_DATE.getTime() - Date.now();
@@ -426,40 +486,12 @@
                 }
             }
 
-            // КД
-            const nowTime = Date.now();
-            if (nowTime < addCandyCooldownEnd) {
-                document.getElementById('addCandyTimer').textContent = `⏳ ${Math.ceil((addCandyCooldownEnd - nowTime)/1000)}с`;
+            if (Date.now() < addCandyCooldownEnd) {
+                document.getElementById('addCandyTimer').textContent = `⏳ ${Math.ceil((addCandyCooldownEnd - Date.now())/1000)}с`;
                 document.getElementById('addCandyBtn').disabled = true;
             } else {
                 document.getElementById('addCandyTimer').textContent = '';
                 document.getElementById('addCandyBtn').disabled = false;
-            }
-
-            // Если активен полный режим и есть задержка
-            if (secretModeType === 'full') {
-                const actionBtns = document.querySelectorAll('.secret-spawn-btn');
-                actionBtns.forEach(btn => {
-                    // Пропускаем первые две кнопки (candy1, candy2)
-                    if (btn.innerText.includes('Конфета 1') || btn.innerText.includes('Конфета 2')) {
-                        btn.disabled = false;
-                        btn.style.opacity = '1';
-                        return;
-                    }
-                    if (nowTime < actionCooldownEnd) {
-                        btn.disabled = true;
-                        btn.style.opacity = '0.5';
-                    } else {
-                        btn.disabled = false;
-                        btn.style.opacity = '1';
-                    }
-                });
-            } else {
-                // Для админки всё доступно
-                document.querySelectorAll('.secret-spawn-btn').forEach(btn => {
-                    btn.disabled = false;
-                    btn.style.opacity = '1';
-                });
             }
         }
 
@@ -467,7 +499,7 @@
 
         function saveState() {
             try {
-                localStorage.setItem('6a_state_v6', JSON.stringify({
+                localStorage.setItem('6a_state_v14', JSON.stringify({
                     coffinCandy, clickerCandy, clickPower, autoClickers, luck, autoClickerSpeed, spawnRate, multiplier,
                     ownedPaths, activePath, diamondCodeUsed
                 }));
@@ -476,7 +508,7 @@
 
         function loadState() {
             try {
-                const s = JSON.parse(localStorage.getItem('6a_state_v6'));
+                const s = JSON.parse(localStorage.getItem('6a_state_v14'));
                 if (s) {
                     coffinCandy = s.coffinCandy ?? COFFIN_START_CANDY;
                     clickerCandy = s.clickerCandy ?? 0;
@@ -502,18 +534,26 @@
 
         // ==================== ПУТИ ====================
         const PATHS = {
-            red:    { name: '🔴 Красный', color: '#ff0000', price: 100000, desc: '10% шанс собрать все предметы' },
-            orange: { name: '🟠 Оранжевый', color: '#ff8800', price: 250000, desc: '5% шанс мутации огня (×8)' },
-            yellow: { name: '🟡 Жёлтый', color: '#ffff00', price: 500000, desc: '+50% ко всему доходу' },
-            green:  { name: '🟢 Зелёный', color: '#00ff00', price: 750000, desc: '+30% к удаче' },
-            blue:   { name: '🔵 Синий', color: '#0088ff', price: 1500000, desc: 'Притягивает предметы' },
-            indigo: { name: '🟣 Индиго', color: '#8800ff', price: 2500000, desc: 'Скидка -20% на всё' },
-            violet: { name: '🟪 Фиолетовый', color: '#ff00ff', price: 4000000, desc: 'Омни-спавн раз в 30 мин', ability: true },
-            rainbow:{ name: '🌈 Радужный', color: 'rainbow', price: 750000, desc: 'Усиливает способности цветных', event: 'rainbow' },
-            ghost:  { name: '👻 Призрачный', color: '#88ccff', price: 2500000, desc: 'Мутация призрака', event: 'ghost' },
-            space:  { name: '🚀 Звёздный', color: '#ffffff', price: 10000000, desc: 'Звёзды дают ×50', event: 'space' },
-            radio:  { name: '☢️ Радиоактивный', color: '#55ff00', price: 5000000, desc: 'Бесплатные товары раз в 30 мин', event: 'chernobyl' }
+            red:    { name: '🔴 Красный', color: '#ff0000', price: 100000, desc: '10% шанс собрать все предметы', type: 'color' },
+            orange: { name: '🟠 Оранжевый', color: '#ff8800', price: 250000, desc: '5% шанс мутации огня (×8)', type: 'color' },
+            yellow: { name: '🟡 Жёлтый', color: '#ffff00', price: 500000, desc: '+50% ко всему доходу', type: 'color' },
+            green:  { name: '🟢 Зелёный', color: '#00ff00', price: 750000, desc: '+30% к удаче', type: 'color' },
+            blue:   { name: '🔵 Синий', color: '#0088ff', price: 1500000, desc: 'Притягивает предметы', type: 'color' },
+            indigo: { name: '🟣 Индиго', color: '#8800ff', price: 2500000, desc: 'Скидка -20% на всё', type: 'color' },
+            violet: { name: '🟪 Фиолетовый', color: '#ff00ff', price: 4000000, desc: 'Омни-спавн раз в 30 мин', type: 'color' },
+            rainbow:{ name: '🌈 Радужный', color: 'rainbow', price: 750000, desc: 'Даёт ослабленные (1/3) способности всех цветных путей', type: 'special' },
+            ghost:  { name: '👻 Призрачный', color: '#88ccff', price: 2500000, desc: 'Призраки воруют конфеты и дают ×5 (только при экипировке)', type: 'event', event: 'ghost' },
+            space:  { name: '🚀 Звёздный', color: '#ffffff', price: 10000000, desc: 'Всегда падают звёзды ×50 (только при экипировке)', type: 'event', event: 'space' },
+            radio:  { name: '☢️ Радиоактивный', color: '#55ff00', price: 5000000, desc: 'Раз в 30 мин делает 1 предмет/улучшение бесплатным (только при экипировке)', type: 'event', event: 'chernobyl' }
         };
+
+        function isRainbowActive() {
+            return activePath === 'rainbow' && ownedPaths.includes('rainbow');
+        }
+
+        function isColorPath(key) {
+            return PATHS[key] && PATHS[key].type === 'color';
+        }
 
         function renderPaths() {
             const list = document.getElementById('pathShopList');
@@ -528,7 +568,7 @@
                 if (p.event && !activeEvents[p.event]) { canBuy = false; lockReason = `Только при ${p.event === 'rainbow' ? 'Радуге' : p.event === 'ghost' ? 'Призраке' : p.event === 'space' ? 'Космосе' : 'Чернобыле'}`; }
                 
                 let price = p.price;
-                if (activePath === 'indigo' || (activePath === 'rainbow' && ownedPaths.includes('indigo'))) price *= 0.8;
+                if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
                 if (radioCooldownEnd > Date.now() && !owned) price = 0;
 
                 const div = document.createElement('div');
@@ -553,12 +593,20 @@
 
             const spCont = document.getElementById('specialPathBtnContainer');
             spCont.innerHTML = '';
-            if (ownedPaths.includes('violet') && (activePath === 'violet' || activePath === 'rainbow')) {
+            if (ownedPaths.includes('violet') && (activePath === 'violet' || (isRainbowActive() && isColorPath('violet')))) {
                 const cd = violetCooldownEnd - Date.now();
                 if (cd > 0) {
                     spCont.innerHTML = `<button class="btn" disabled>Перезарядка: ${Math.ceil(cd/1000)}с</button>`;
                 } else {
                     spCont.innerHTML = `<button class="btn" style="background:#ff00ff; color:white;" onclick="spawnOmniItem()">🎲 Спавн Омни-предмета</button>`;
+                }
+            }
+            if (ownedPaths.includes('radio') && (activePath === 'radio' || (isRainbowActive() && isColorPath('radio')))) {
+                const cd = radioCooldownEnd - Date.now();
+                if (cd > 0) {
+                    spCont.innerHTML += `<button class="btn" disabled>Радио: перезарядка ${Math.ceil(cd/1000)}с</button>`;
+                } else {
+                    spCont.innerHTML += `<button class="btn" style="background:#55ff00; color:#000;" onclick="activateRadioFree()">☢️ Сделать 1 предмет бесплатным (30 мин)</button>`;
                 }
             }
         }
@@ -569,7 +617,7 @@
             if (p.event && !activeEvents[p.event]) { showToast('Ивент не активен!'); return; }
             
             let price = p.price;
-            if (activePath === 'indigo' || (activePath === 'rainbow' && ownedPaths.includes('indigo'))) price *= 0.8;
+            if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
             if (radioCooldownEnd > Date.now()) price = 0;
 
             if (clickerCandy < price) { showToast('Недостаточно конфет'); return; }
@@ -577,6 +625,8 @@
             ownedPaths.push(key);
             saveState(); updateUI(); renderPaths();
             showToast(`Куплен: ${p.name}`);
+            updateGhosts();
+            updateStars();
         }
 
         function setActivePath(key) {
@@ -584,7 +634,34 @@
             activePath = key;
             saveState(); renderPaths();
             showToast(`Активирован: ${PATHS[key].name}`);
-            if (key === 'blue') startMagnet(); else stopMagnet();
+            if (key === 'blue' || (isRainbowActive() && isColorPath('blue'))) startMagnet(); else stopMagnet();
+            updateGhosts();
+            updateStars();
+        }
+
+        // ==================== РАДИО ====================
+        function activateRadioFree() {
+            if (radioCooldownEnd > Date.now()) return;
+            const isItem = Math.random() < 0.5;
+            if (isItem) {
+                const items = ['candy1', 'candy2', 'bucket', 'golden', 'diamond', 'rainbow', 'ghost', 'meteor', 'radioctive'];
+                const item = items[Math.floor(Math.random() * items.length)];
+                spawnItem(item);
+                showToast(`☢️ Бесплатный предмет: ${item}`);
+            } else {
+                const idx = Math.floor(Math.random() * SHOP_ITEMS.length);
+                const item = SHOP_ITEMS[idx];
+                if (item.getLevel() < item.maxLevel) {
+                    item.apply();
+                    showToast(`☢️ Бесплатный уровень: ${item.name}`);
+                    saveState(); updateUI(); renderShop();
+                } else {
+                    showToast('☢️ Улучшение уже максимум, спавним предмет');
+                    spawnItem('golden');
+                }
+            }
+            radioCooldownEnd = Date.now() + 30 * 60 * 1000;
+            renderPaths();
         }
 
         // ==================== СПАВН ====================
@@ -602,15 +679,17 @@
 
             let x, y;
             if (isSpace) {
-                x = Math.random() * window.innerWidth;
-                y = Math.random() * window.innerHeight;
+                x = 50 + Math.random() * (window.innerWidth - 100);
+                y = 50 + Math.random() * (window.innerHeight - 100);
                 el.style.position = 'fixed';
             } else {
-                const pad = 50;
+                el.style.position = 'absolute';
+                const pad = 40;
                 x = pad + Math.random() * (area.clientWidth - pad * 2);
                 y = pad + Math.random() * (area.clientHeight - pad * 2);
             }
-            el.style.left = x + 'px'; el.style.top = y + 'px';
+            el.style.left = x + 'px'; 
+            el.style.top = y + 'px';
 
             let mult = 1;
             let colorGlow = null;
@@ -625,7 +704,10 @@
             if (activeEvents.chernobyl && Math.random() < 0.15) { mult *= 15; colorGlow = '#55ff00'; }
             if (activeEvents.rainbow) mult *= 2;
 
-            if (forceMutations || (activePath === 'orange' && Math.random() < 0.05) || (activePath === 'rainbow' && ownedPaths.includes('orange') && Math.random() < 0.15)) { mult *= 8; colorGlow = '#ff5500'; }
+            // Оранжевый путь (с учётом радужного 1/3)
+            const orangeMod = getPathMod('orange');
+            if (forceMutations || (orangeMod > 0 && Math.random() < 0.05 * orangeMod)) { mult *= 8; colorGlow = '#ff5500'; }
+            
             if (forceMutations || (activeEvents.ghost && Math.random() < 0.1)) { mult *= 10; colorGlow = '#88ccff'; }
 
             if (colorGlow) {
@@ -635,10 +717,12 @@
 
             el.onclick = (ev) => {
                 ev.stopPropagation();
-                if ((activePath === 'red' || (activePath === 'rainbow' && ownedPaths.includes('red'))) && Math.random() < 0.1) { collectAllItems(); return; }
+                const redMod = getPathMod('red');
+                if (redMod > 0 && Math.random() < 0.1 * redMod) { collectAllItems(); return; }
                 
                 let reward = getClickPower() * mult;
-                if (activePath === 'yellow' || (activePath === 'rainbow' && ownedPaths.includes('yellow'))) reward *= 1.5;
+                const yellowMod = getPathMod('yellow');
+                if (yellowMod > 0) reward *= (1 + 0.5 * yellowMod);
                 if (el.classList.contains('star-hit')) reward *= 7;
 
                 clickerCandy += reward;
@@ -647,19 +731,10 @@
                 el.remove();
             };
 
-            document.body.appendChild(el);
+            if (isSpace) document.body.appendChild(el);
+            else area.appendChild(el);
+            
             setTimeout(() => { if (el.parentNode) el.remove(); }, 8000);
-        }
-
-        function spawnWithCooldown(type) {
-            if (secretModeType === 'full') {
-                if (Date.now() < actionCooldownEnd) {
-                    showToast('⏳ Действие на перезарядке!');
-                    return;
-                }
-                actionCooldownEnd = Date.now() + 10 * 60 * 1000; // 10 минут
-            }
-            spawnItem(type);
         }
 
         function collectAllItems() {
@@ -685,6 +760,19 @@
                     lastSpawn = t;
                     if (activeEvents.space) {
                         spawnItem(Math.random() > 0.5 ? 'candy1' : 'candy2');
+                        if (Math.random() < 0.002) {
+                            const meteor = document.createElement('img');
+                            meteor.src = ICONS.meteor; meteor.className = 'space-meteor';
+                            meteor.style.left = '0px'; meteor.style.top = Math.random() * window.innerHeight + 'px';
+                            meteor.style.setProperty('--dx', window.innerWidth + 'px'); meteor.style.setProperty('--dy', (Math.random() - 0.5) * window.innerHeight + 'px');
+                            document.body.appendChild(meteor);
+                            setTimeout(() => {
+                                meteor.remove();
+                                clickerCandy /= 1.2;
+                                showToast('💥 Метеорит!');
+                                spawnItem('meteor');
+                            }, 2000);
+                        }
                     } else {
                         const types = ['candy1', 'candy2', 'bucket'];
                         spawnItem(types[Math.floor(Math.random() * types.length)]);
@@ -705,10 +793,11 @@
         function startMagnet() {
             if (magnetInterval) clearInterval(magnetInterval);
             magnetInterval = setInterval(() => {
-                if (activePath !== 'blue' && activePath !== 'rainbow') return;
+                const blueMod = getPathMod('blue');
+                if (blueMod <= 0) return;
                 document.querySelectorAll('.spawn-item').forEach(item => {
                     item.style.transition = 'left 0.5s linear, top 0.5s linear';
-                    if (Math.random() < 0.1) {
+                    if (Math.random() < 0.1 * blueMod) {
                         const targetX = window.innerWidth / 2, targetY = window.innerHeight / 2;
                         item.style.left = targetX + 'px'; item.style.top = targetY + 'px';
                         setTimeout(() => item.onclick(new MouseEvent('click', { clientX: targetX, clientY: targetY })), 500);
@@ -718,78 +807,164 @@
         }
         function stopMagnet() { if (magnetInterval) clearInterval(magnetInterval); }
 
+        // ==================== ЗВЁЗДНЫЙ ПУТЬ (ВСЕГДА) ====================
+        let starInterval = null;
+        function updateStars() {
+            const spaceMod = getPathMod('space');
+            if (spaceMod > 0) {
+                if (!starInterval) {
+                    starInterval = setInterval(() => {
+                        const items = document.querySelectorAll('.spawn-item');
+                        if (items.length > 0 && Math.random() < 0.3) {
+                            const target = items[Math.floor(Math.random() * items.length)];
+                            const tRect = target.getBoundingClientRect();
+                            const star = document.createElement('div');
+                            star.className = 'space-star'; star.textContent = '✦';
+                            star.style.left = '0px'; star.style.top = Math.random() * window.innerHeight + 'px';
+                            star.style.setProperty('--dx', tRect.left + 'px'); star.style.setProperty('--dy', tRect.top + 'px');
+                            star.style.animation = 'starMove 2s linear forwards';
+                            document.body.appendChild(star);
+                            setTimeout(() => { 
+                                if (target.parentNode) {
+                                    target.classList.add('star-hit');
+                                    // Эффект ×50 при клике
+                                    const oldOnclick = target.onclick;
+                                    target.onclick = (ev) => {
+                                        ev.stopPropagation();
+                                        let reward = getClickPower() * 50;
+                                        clickerCandy += reward;
+                                        updateUI(); saveState();
+                                        spawnFloatText(ev.clientX, ev.clientY, `+${fmtCandy(reward)}`);
+                                        target.remove();
+                                    };
+                                }
+                                star.remove(); 
+                            }, 2000);
+                        }
+                    }, 1500);
+                }
+            } else {
+                if (starInterval) { clearInterval(starInterval); starInterval = null; }
+            }
+        }
+
+        // ==================== ПРИЗРАЧНЫЙ ПУТЬ (ПРИЗРАКИ) ====================
+        function updateGhosts() {
+            const ghostMod = getPathMod('ghost');
+            if (ghostMod > 0) {
+                if (!ghostInterval) {
+                    ghostInterval = setInterval(() => {
+                        const items = document.querySelectorAll('.spawn-item');
+                        if (items.length > 0 && Math.random() < 0.4) {
+                            const target = items[Math.floor(Math.random() * items.length)];
+                            const tRect = target.getBoundingClientRect();
+                            
+                            const ghost = document.createElement('div');
+                            ghost.className = 'ghost-flyer';
+                            ghost.textContent = '👻';
+                            ghost.style.left = (tRect.left - 100) + 'px';
+                            ghost.style.top = (tRect.top + 50) + 'px';
+                            document.body.appendChild(ghost);
+
+                            setTimeout(() => {
+                                ghost.style.left = tRect.left + 'px';
+                                ghost.style.top = tRect.top + 'px';
+                                ghost.style.transform = 'scale(1.5)';
+                            }, 100);
+
+                            setTimeout(() => {
+                                if (target.parentNode) {
+                                    // Призрак забирает конфету и даёт ×5
+                                    const reward = getClickPower() * 5;
+                                    clickerCandy += reward;
+                                    updateUI(); saveState();
+                                    spawnFloatText(tRect.left, tRect.top, `+${fmtCandy(reward)}`);
+                                    target.remove();
+                                }
+                                ghost.remove();
+                            }, 1500);
+                        }
+                    }, 1000);
+                }
+            } else {
+                if (ghostInterval) { clearInterval(ghostInterval); ghostInterval = null; }
+            }
+        }
+
         // ==================== КОСМОС ====================
         function startSpaceEvent() {
             activeEvents.space = true;
+            eventEndTimes.space = Date.now() + EVENT_DURATION;
             document.body.classList.add('space-active');
-            showToast('🚀 КОСМОС!');
-            spaceRAF = setInterval(() => {
-                if (!activeEvents.space) return;
-                if (Math.random() < 0.3) {
-                    const items = document.querySelectorAll('.spawn-item');
-                    if (items.length > 0) {
-                        const target = items[Math.floor(Math.random() * items.length)];
-                        const tRect = target.getBoundingClientRect();
-                        const star = document.createElement('div');
-                        star.className = 'space-star'; star.textContent = '✦';
-                        star.style.left = '0px'; star.style.top = Math.random() * window.innerHeight + 'px';
-                        star.style.setProperty('--dx', tRect.left + 'px'); star.style.setProperty('--dy', tRect.top + 'px');
-                        star.style.animation = 'starMove 2s linear forwards';
-                        document.body.appendChild(star);
-                        setTimeout(() => { if (target.parentNode) target.classList.add('star-hit'); star.remove(); }, 2000);
-                    }
-                }
-                if (Math.random() < 0.05) {
-                    const meteor = document.createElement('img');
-                    meteor.src = ICONS.meteor; meteor.className = 'space-meteor';
-                    meteor.style.left = '0px'; meteor.style.top = Math.random() * window.innerHeight + 'px';
-                    meteor.style.setProperty('--dx', window.innerWidth + 'px'); meteor.style.setProperty('--dy', (Math.random() - 0.5) * window.innerHeight + 'px');
-                    document.body.appendChild(meteor);
-                    setTimeout(() => {
-                        meteor.remove();
-                        clickerCandy /= 1.2;
-                        showToast('💥 Метеорит!');
-                        spawnItem('meteor');
-                    }, 2000);
-                }
-            }, 1000);
+            showToast('🚀 КОСМОС! 10 минут.');
         }
         function stopSpaceEvent() {
             activeEvents.space = false;
             document.body.classList.remove('space-active');
             if (spaceRAF) clearInterval(spaceRAF);
             document.querySelectorAll('.space-star, .space-meteor').forEach(e => e.remove());
+            document.querySelectorAll('.spawn-item').forEach(e => {
+                if (e.parentNode === document.body) e.remove();
+            });
         }
 
         // ==================== ИВЕНТЫ ====================
+        function activateEvent(type) {
+            deactivateAllEvents();
+            const now = Date.now();
+            activeEvents[type] = true;
+            eventEndTimes[type] = now + EVENT_DURATION;
+
+            if (type === 'ghost') {
+                document.body.classList.add('ghost-active');
+                showToast('👻 ПРИЗРАК! 10 минут.');
+            } else if (type === 'rainbow') {
+                document.body.classList.add('rainbow-active');
+                showToast('🌈 РАДУГА! 10 минут.');
+            } else if (type === 'space') {
+                startSpaceEvent();
+            } else if (type === 'chernobyl') {
+                document.body.classList.add('chernobyl-active');
+                radioCooldownEnd = Date.now() + 30 * 60 * 1000;
+                showToast('☢️ ЧЕРНОБЫЛЬ! 10 минут.');
+            }
+            renderPaths();
+        }
+
+        function deactivateAllEvents() {
+            if (activeEvents.ghost) { activeEvents.ghost = false; document.body.classList.remove('ghost-active'); }
+            if (activeEvents.rainbow) { activeEvents.rainbow = false; document.body.classList.remove('rainbow-active'); }
+            if (activeEvents.chernobyl) { activeEvents.chernobyl = false; document.body.classList.remove('chernobyl-active'); }
+            if (activeEvents.space) stopSpaceEvent();
+            renderPaths();
+        }
+
+        function forceEvent(type) {
+            if (type === 'none') {
+                deactivateAllEvents();
+                showToast('Все ивенты выключены');
+            } else {
+                activateEvent(type);
+            }
+        }
+
         function checkEvents() {
             const now = new Date();
             const h = now.getHours();
             const m = now.getMinutes();
-            
-            if (m === 0) {
-                if (activeEvents.ghost) { activeEvents.ghost = false; document.body.classList.remove('ghost-active'); }
-                if (activeEvents.rainbow) { activeEvents.rainbow = false; document.body.classList.remove('rainbow-active'); }
-                if (activeEvents.chernobyl) { activeEvents.chernobyl = false; document.body.classList.remove('chernobyl-active'); }
-                if (activeEvents.space) stopSpaceEvent();
+            const currentTime = Date.now();
 
+            if (activeEvents.ghost && currentTime >= eventEndTimes.ghost) deactivateAllEvents();
+            if (activeEvents.rainbow && currentTime >= eventEndTimes.rainbow) deactivateAllEvents();
+            if (activeEvents.space && currentTime >= eventEndTimes.space) deactivateAllEvents();
+            if (activeEvents.chernobyl && currentTime >= eventEndTimes.chernobyl) deactivateAllEvents();
+
+            if (m === 0) {
                 const slot = h % 4;
-                if (slot === 0) {
-                    activeEvents.ghost = true;
-                    document.body.classList.add('ghost-active');
-                    showToast('👻 ПРИЗРАК!');
-                } else if (slot === 1) {
-                    activeEvents.rainbow = true;
-                    document.body.classList.add('rainbow-active');
-                    showToast('🌈 РАДУГА!');
-                } else if (slot === 2) {
-                    startSpaceEvent();
-                } else if (slot === 3) {
-                    activeEvents.chernobyl = true;
-                    document.body.classList.add('chernobyl-active');
-                    radioCooldownEnd = Date.now() + 30 * 60 * 1000;
-                    showToast('☢️ ЧЕРНОБЫЛЬ!');
-                }
+                if (slot === 0) activateEvent('ghost');
+                else if (slot === 1) activateEvent('rainbow');
+                else if (slot === 2) activateEvent('space');
+                else if (slot === 3) activateEvent('chernobyl');
             }
             renderPaths();
         }
@@ -809,13 +984,15 @@
                 secretModeType = 'full';
                 document.getElementById('secretPanel').classList.add('visible');
                 document.getElementById('secretModeName').textContent = '(ПОЛНЫЙ)';
+                document.getElementById('eventAdminPanel').style.display = 'block';
                 document.getElementById('secretPrompt').style.display = 'none';
-                showToast('🔓 Вход в ПОЛНЫЙ режим. Задержка 10 минут на действия.');
+                showToast('🔓 Вход в ПОЛНЫЙ режим.');
             } else if (val === SECRET_PASSWORD_ADMIN) {
                 secretModeActive = true;
                 secretModeType = 'admin';
                 document.getElementById('secretPanel').classList.add('visible');
                 document.getElementById('secretModeName').textContent = '(АДМИН)';
+                document.getElementById('eventAdminPanel').style.display = 'none';
                 document.getElementById('secretPrompt').style.display = 'none';
                 showToast('🔓 Вход в режим АДМИНКА');
             } else if (val === SECRET_PASSWORD_DIAMOND && !diamondCodeUsed) {
@@ -830,24 +1007,12 @@
         }
 
         function addCandySecret() {
-            if (!secretModeActive || Date.now() < addCandyCooldownEnd) return;
+            if (!secretModeActive) return;
             let val = parseFloat(document.getElementById('addCandyInput').value);
             if (isNaN(val)) return;
-            
-            // В полном режиме нет ограничения, в админке - 50к
             if (secretModeType === 'admin' && val > 50000) val = 50000;
             
-            // В полном режиме тоже ставим задержку 10 минут
-            if (secretModeType === 'full') {
-                if (Date.now() < actionCooldownEnd) {
-                    showToast('⏳ Действие на перезарядке!');
-                    return;
-                }
-                actionCooldownEnd = Date.now() + 10 * 60 * 1000;
-            }
-            
             clickerCandy += val;
-            addCandyCooldownEnd = Date.now() + 5000;
             updateUI(); saveState();
             showToast(`Начислено: ${val}`);
         }
@@ -856,6 +1021,7 @@
             secretModeActive = false;
             secretModeType = null;
             document.getElementById('secretPanel').classList.remove('visible');
+            document.getElementById('eventAdminPanel').style.display = 'none';
             document.getElementById('secretPassword').value = '';
         }
 
@@ -877,7 +1043,7 @@
                 const level = item.getLevel();
                 const maxed = level >= item.maxLevel;
                 let price = Math.ceil(item.basePrice * Math.pow(1.5, level));
-                if (activePath === 'indigo' || (activePath === 'rainbow' && ownedPaths.includes('indigo'))) price *= 0.8;
+                if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
                 if (radioCooldownEnd > Date.now() && !maxed) price = 0;
 
                 const div = document.createElement('div');
@@ -900,7 +1066,7 @@
             const level = item.getLevel();
             if (level >= item.maxLevel) return;
             let price = Math.ceil(item.basePrice * Math.pow(1.5, level));
-            if (activePath === 'indigo' || (activePath === 'rainbow' && ownedPaths.includes('indigo'))) price *= 0.8;
+            if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
             if (radioCooldownEnd > Date.now()) price = 0;
             if (clickerCandy < price) { showToast('Нет конфет'); return; }
             clickerCandy -= price;
@@ -964,16 +1130,12 @@
         window.addCandySecret = addCandySecret;
         window.closeSecretPanel = closeSecretPanel;
         window.buyItem = buyItem;
-        window.spawnSpecific = (type) => {
-            // Прямой спавн (для candy1/candy2 без задержки)
-            if (type === 'candy1' || type === 'candy2') {
-                spawnItem(type);
-            } else {
-                // Для остальных - через функцию с задержкой
-                spawnWithCooldown(type);
-            }
-        };
+        window.spawnSpecific = (type) => spawnItem(type);
         window.spawnOmniItem = spawnOmniItem;
+        window.forceEvent = forceEvent;
+        window.activateRadioFree = activateRadioFree;
+        window.updateStars = updateStars;
+        window.updateGhosts = updateGhosts;
     </script>
 </body>
 </html>
