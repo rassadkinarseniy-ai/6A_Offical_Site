@@ -50,12 +50,26 @@
         body.space-active h1 { color: #fff; }
         body.space-active h1 span { background: #fff; color: #000; }
         body.space-active .tab-btn.active { background: #fff; border-color: #fff; color: #000; }
+
+        /* Призраки вместо мышек */
+        body.ghost-active .bat { display: none !important; }
+        .ghost-decor { display: none; position: fixed; color: #88ccff; font-size: 2rem; opacity: 0.7; pointer-events: none; z-index: 0; text-shadow: 0 0 15px #88ccff; animation: floatBat 12s infinite alternate ease-in-out; }
+        .ghost-decor.g1 { top: 15%; right: 5%; animation-duration: 15s; }
+        .ghost-decor.g2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
+        .ghost-decor.g3 { top: 60%; right: 12%; animation-duration: 14s; font-size: 2.4rem; animation-delay: -7s; }
+        body.ghost-active .ghost-decor { display: block !important; }
         
         .bat { position: fixed; color: #ffb347; font-size: 2rem; opacity: 0.5; pointer-events: none; z-index: 0; animation: floatBat 12s infinite alternate ease-in-out; }
         .bat1 { top: 15%; right: 5%; animation-duration: 15s; }
         .bat2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
         .bat3 { top: 60%; right: 12%; animation-duration: 14s; font-size: 2.4rem; animation-delay: -7s; }
         @keyframes floatBat { 0% { transform: translateY(0) rotate(-5deg); } 100% { transform: translateY(-25px) rotate(10deg); } }
+
+        /* Комбинированные темы */
+        body.rainbow-active.ghost-active .container { animation: rainbowGhostBorder 6s infinite alternate; }
+        @keyframes rainbowGhostBorder { 0% { border-color: #8844aa; } 50% { border-color: #44aaaa; } 100% { border-color: #aa8844; } }
+        body.rainbow-active.ghost-active { animation: rainbowGhostBg 12s infinite alternate; }
+        @keyframes rainbowGhostBg { 0% { background: #1a0a0a; } 20% { background: #0a0a1a; } 40% { background: #1a0a1a; } 60% { background: #0a1a1a; } 80% { background: #0a0a0a; } 100% { background: #1a0a0a; } }
 
         .container { max-width: 900px; width: 100%; background: rgba(20, 16, 10, 0.88); backdrop-filter: blur(4px); border: 2px solid #e67e22; border-radius: 40px 12px 40px 12px; box-shadow: 0 0 35px rgba(230, 126, 34, 0.4); padding: 2.5rem 2rem; position: relative; z-index: 10; text-align: center; transition: 0.5s; }
         h1 { font-size: 2.6rem; font-weight: 800; color: #ffb347; text-shadow: 4px 4px 0 #4a2c0b; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 12px; }
@@ -72,7 +86,6 @@
         .event-timer-side { position: fixed; right: 15px; top: 50%; transform: translateY(-50%); background: #1a140c; border: 2px solid #e67e22; border-radius: 20px; padding: 1rem 0.8rem; z-index: 50; text-align: center; box-shadow: 0 0 20px #e67e2280; font-weight: 700; color: #ffb347; font-size: 0.9rem; }
         @media (max-width: 700px) { .event-timer-side { position: static; margin-bottom: 1rem; width: 100%; } }
 
-        /* Старое оформление для ивентов на главной */
         .events-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; margin: 2rem 0 1rem; text-align: left; }
         .event-card { background: #18130c; border: 2px solid #d67e1e; border-radius: 24px 6px 24px 6px; padding: 1.5rem; cursor: pointer; transition: 0.25s; position: relative; }
         .event-card:hover { transform: translateY(-5px); }
@@ -83,13 +96,11 @@
         .ended-label { display: none; color: #ff6b6b; font-weight: 800; margin-top: 0.8rem; text-align: center; }
         .event-card.ended .ended-label { display: block; }
 
-        /* Команда (старое оформление) */
         .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
         .team-card { background: #1a140c; border: 1px solid #4a3a25; border-radius: 16px; padding: 1rem; text-align: center; }
         .team-card b { color: #ffb347; }
         .team-card small { color: #8a7a63; }
         .team-card a { color: #e67e22; text-decoration: none; }
-        .team-card a:hover { color: #ffb347; }
 
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 100; align-items: center; justify-content: center; padding: 20px; }
         .modal-overlay.active { display: flex; }
@@ -143,6 +154,12 @@
         .star-hit { animation: starHit 1s infinite alternate !important; }
         @keyframes starHit { 0% { filter: drop-shadow(0 0 20px #fff) brightness(1); } 100% { filter: drop-shadow(0 0 50px #fff) brightness(2); } }
 
+        /* Мутации */
+        .mutation-fire { filter: drop-shadow(0 0 15px #ff5500) drop-shadow(0 0 30px #ff0000) !important; }
+        .mutation-star { filter: drop-shadow(0 0 15px #fff) drop-shadow(0 0 30px #fff) !important; }
+        .mutation-ghost { filter: drop-shadow(0 0 15px #88ccff) drop-shadow(0 0 30px #88ccff) !important; }
+        .mutation-radio { filter: drop-shadow(0 0 15px #55ff00) drop-shadow(0 0 30px #55ff00) !important; }
+
         .secret-panel { display: none; margin-top: 2rem; padding: 1.5rem; background: #1f1a12; border: 2px dashed #ffb347; border-radius: 20px; text-align: center; }
         .secret-panel.visible { display: block; }
         .secret-panel h3 { color: #ffb347; margin-bottom: 1rem; font-size: 1.3rem; }
@@ -152,8 +169,8 @@
         
         .shop { margin-top: 2rem; text-align: left; }
         .shop h3 { color: #ffb347; font-size: 1.4rem; margin-bottom: 1rem; border-bottom: 2px dotted #b8651a; padding-bottom: 6px; }
-        .shop-item, .path-item { background: #18130c; border: 1px solid #4a3a25; border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
-        .shop-item.owned, .path-item.owned { border-color: #4caf50; background: #14200f; }
+        .shop-item, .path-item, .achievement-item { background: #18130c; border: 1px solid #4a3a25; border-radius: 16px; padding: 1rem 1.2rem; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+        .shop-item.owned, .path-item.owned, .achievement-item.owned { border-color: #4caf50; background: #14200f; }
         .shop-item-info { flex: 1; min-width: 180px; }
         .shop-item-name { color: #ffb347; font-weight: 700; font-size: 1.1rem; }
         .shop-item-desc { color: #b8a88a; font-size: 0.9rem; margin-top: 4px; }
@@ -180,17 +197,26 @@
         .space-meteor { position: absolute; width: 80px; height: 80px; z-index: 1001; pointer-events: none; animation: meteorMove 2s linear forwards; }
         @keyframes meteorMove { 0% { transform: translate(0, 0) rotate(0); } 100% { transform: translate(var(--dx), var(--dy)) rotate(720deg); } }
 
-        /* 🎃 Призраки для призрачного пути */
-        .ghost-flyer {
-            position: fixed;
-            font-size: 2rem;
-            z-index: 1002;
-            pointer-events: none;
-            text-shadow: 0 0 15px #88ccff;
-            transition: left 1.5s linear, top 1.5s linear, transform 1.5s linear;
-        }
+        .ghost-flyer { position: fixed; font-size: 2rem; z-index: 1002; pointer-events: none; text-shadow: 0 0 15px #88ccff; transition: left 1.5s linear, top 1.5s linear, transform 1.5s linear; }
 
-        @media (max-width: 600px) { h1 { font-size: 2rem; } .container { padding: 1.8rem 1.2rem; } .path-grid { grid-template-columns: 1fr; } }
+        .mutation-icon { position: absolute; font-size: 1.2rem; pointer-events: none; z-index: 1001; animation: orbit 2s linear infinite; }
+        @keyframes orbit { 0% { transform: rotate(0deg) translateX(30px) rotate(0deg); } 100% { transform: rotate(360deg) translateX(30px) rotate(-360deg); } }
+
+        /* Достижения */
+        .achievement-item { padding: 1rem; }
+        .achievement-icon { font-size: 1.8rem; margin-right: 10px; }
+        .achievement-info { flex: 1; min-width: 150px; }
+        .achievement-name { color: #ffb347; font-weight: 700; font-size: 1.1rem; }
+        .achievement-desc { color: #b8a88a; font-size: 0.9rem; margin-top: 4px; }
+        .achievement-status { font-size: 0.85rem; font-weight: 700; margin-top: 4px; }
+        .achievement-status.unlocked { color: #4caf50; }
+        .achievement-status.locked { color: #ff6b6b; }
+        .achievement-reward { color: #ffb347; font-size: 0.9rem; font-weight: 700; white-space: nowrap; }
+
+        .coin-display { background: #2a1e0c; border: 2px solid #ffd700; border-radius: 16px; padding: 0.6rem 1.4rem; font-size: 1.2rem; font-weight: 800; color: #ffd700; display: flex; align-items: center; gap: 8px; }
+        .coin-icon { font-size: 1.5rem; }
+
+        @media (max-width: 600px) { h1 { font-size: 2rem; } .container { padding: 1.8rem 1.2rem; } .path-grid { grid-template-columns: 1fr; } .team-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -198,6 +224,10 @@
     <div class="bat bat1">🦇</div>
     <div class="bat bat2">🦇</div>
     <div class="bat bat3">🦇</div>
+    
+    <div class="ghost-decor g1">👻</div>
+    <div class="ghost-decor g2">👻</div>
+    <div class="ghost-decor g3">👻</div>
 
     <div class="event-timer-side" id="eventTimerSide">
         <span id="nearestEventName" style="color:#ffb347; font-size:1.1rem; display:block; margin-bottom:4px;">--</span>
@@ -216,9 +246,9 @@
             <button class="tab-btn" onclick="switchTab('homework', this)">📚 ДЗ</button>
             <button class="tab-btn" onclick="switchTab('chat', this)">💬 Чат</button>
             <button class="tab-btn" onclick="switchTab('team', this)">👑 Команда</button>
+            <button class="tab-btn" onclick="switchTab('site-achievements', this)">🏆 Достижения сайта</button>
         </div>
 
-        <!-- ===== ГЛАВНАЯ (старое оформление) ===== -->
         <div class="tab-content active" id="tab-home">
             <div class="events-grid">
                 <div class="event-card" id="card1" onclick="openEvent1()">
@@ -241,9 +271,16 @@
                     <span id="gameCandy">0</span> <small>конфет</small>
                 </div>
                 <div class="cps-display">⚡ <strong id="cpsValue">0</strong> конфет/сек</div>
+                <div class="coin-display"><span class="coin-icon">💰</span> <span id="coinCount">0</span></div>
             </div>
 
             <div class="pumpkin-click-area" id="clickArea"></div>
+
+            <!-- МАГАЗИН МОНЕТОК -->
+            <div class="shop">
+                <h3>💰 Магазин монеток (валюта сайта)</h3>
+                <div id="coinShopList"></div>
+            </div>
 
             <div style="text-align:center; margin-top:1rem;">
                 <button class="btn" style="background:#4a3a25;" onclick="toggleSecretPrompt()">🔑 Ввести пароль</button>
@@ -277,11 +314,16 @@
 
                 <div id="eventAdminPanel" style="margin-top:1.5rem; border-top:1px solid #4a3a25; padding-top:1.5rem; display:none;">
                     <h4 style="color:#ffb347; margin-bottom:0.5rem;">Управление ивентами (10 мин)</h4>
-                    <button class="btn" style="background:#88ccff; color:#000;" onclick="forceEvent('ghost')">👻 Призрак</button>
-                    <button class="btn" style="background:#ff00ff; color:#fff;" onclick="forceEvent('rainbow')">🌈 Радуга</button>
-                    <button class="btn" style="background:#ffffff; color:#000;" onclick="forceEvent('space')">🚀 Космос</button>
-                    <button class="btn" style="background:#55ff00; color:#000;" onclick="forceEvent('chernobyl')">☢️ Чернобыль</button>
-                    <button class="btn" style="background:#ff4444; color:#fff;" onclick="forceEvent('none')">❌ Выключить все</button>
+                    <div style="display:flex; flex-wrap:wrap; gap:5px; justify-content:center;">
+                        <button class="btn" style="background:#88ccff; color:#000;" onclick="forceEvent('ghost')">👻 Вкл</button>
+                        <button class="btn" style="background:#555; color:#fff;" onclick="deactivateEvent('ghost')">👻 Выкл</button>
+                        <button class="btn" style="background:#ff00ff; color:#fff;" onclick="forceEvent('rainbow')">🌈 Вкл</button>
+                        <button class="btn" style="background:#555; color:#fff;" onclick="deactivateEvent('rainbow')">🌈 Выкл</button>
+                        <button class="btn" style="background:#ffffff; color:#000;" onclick="forceEvent('space')">🚀 Вкл</button>
+                        <button class="btn" style="background:#555; color:#fff;" onclick="deactivateEvent('space')">🚀 Выкл</button>
+                        <button class="btn" style="background:#55ff00; color:#000;" onclick="forceEvent('chernobyl')">☢️ Вкл</button>
+                        <button class="btn" style="background:#555; color:#fff;" onclick="deactivateEvent('chernobyl')">☢️ Выкл</button>
+                    </div>
                 </div>
 
                 <div style="margin-top:1rem;"><button class="btn" style="background:#555;" onclick="closeSecretPanel()">Выйти</button></div>
@@ -296,6 +338,11 @@
             <div class="shop">
                 <h3>🛒 Прокачка</h3>
                 <div id="shopList"></div>
+            </div>
+
+            <div class="shop">
+                <h3>🎮 Достижения игры</h3>
+                <div id="gameAchievementsList"></div>
             </div>
         </div>
 
@@ -315,16 +362,15 @@
             <div style="text-align:left;">
                 <div class="shop-item" style="margin-bottom:15px;">
                     <h3>👩‍🏫 Чат с учителем</h3>
-                    <a href="https://max.ru/join/V2B5tL1BaqdCUuMW34gv32wSURG1loEZ_qh8jpoCnkQ" target="_blank" class="btn">Войти</a>
+                    <a href="https://max.ru/join/V2B5tL1BaqdCUuMW34gv32wSURG1loEZ_qh8jpoCnkQ" target="_blank" class="btn" onclick="unlockAchievement('chat_teacher')">Войти</a>
                 </div>
                 <div class="shop-item">
                     <h3>👥 Чат без учителя</h3>
-                    <a href="https://max.ru/join/oyIjaHVrv3TGWLYjDW-vLe1MTDsH2jMM8f7BYk7L87k" target="_blank" class="btn">Войти</a>
+                    <a href="https://max.ru/join/oyIjaHVrv3TGWLYjDW-vLe1MTDsH2jMM8f7BYk7L87k" target="_blank" class="btn" onclick="unlockAchievement('chat_students')">Войти</a>
                 </div>
             </div>
         </div>
 
-        <!-- ===== КОМАНДА (старое оформление) ===== -->
         <div class="tab-content" id="tab-team">
             <div class="team-grid">
                 <div class="team-card">
@@ -342,6 +388,11 @@
             </div>
         </div>
 
+        <div class="tab-content" id="tab-site-achievements">
+            <h2 style="color:#ffb347; margin-bottom:1.5rem;">🏆 Достижения сайта</h2>
+            <div style="text-align:left;" id="siteAchievementsList"></div>
+        </div>
+
         <footer><strong>Официальный сайт 6А класса</strong> · ГБОУ Лицей 486 · 2026</footer>
     </div>
 
@@ -350,6 +401,7 @@
             <button class="modal-close" onclick="closeModal('modal1')">×</button>
             <h2>🍬 Сладость или гадость</h2>
             <p>Сделай своему однокласснику сладость или гадость.</p>
+            <button class="btn" onclick="unlockAchievement('read_event1')">Прочитано</button>
         </div>
     </div>
     <div class="modal-overlay" id="modal2">
@@ -360,6 +412,7 @@
             <div style="background:#2a1e0c; padding: 1rem; border-radius: 16px; border: 2px solid #b8651a;">
                 <span id="coffinCandy">65.5</span> <small>/ 100</small>
             </div>
+            <button class="btn" onclick="unlockAchievement('read_event2')">Прочитано</button>
         </div>
     </div>
 
@@ -377,7 +430,7 @@
         const SECRET_PASSWORD_FULL = '03111383';
         const SECRET_PASSWORD_DIAMOND = 'АЛМАЗНОЕВЕДЁРКО';
         const HW_UNLOCK_DATE = new Date('2026-11-06T00:00:00');
-        const EVENT_DURATION = 10 * 60 * 1000; // 10 минут
+        const EVENT_DURATION = 10 * 60 * 1000;
 
         let coffinCandy = COFFIN_START_CANDY;
         let clickerCandy = 0;
@@ -387,12 +440,15 @@
         let autoClickerSpeed = 0;
         let spawnRate = 0;
         let multiplier = 0;
+        let coins = 0;
         
         let ownedPaths = [];
         let activePath = null;
         
         let violetCooldownEnd = 0;
         let radioCooldownEnd = 0;
+        let boostActive = false;
+        let boostEndTime = 0;
 
         let secretModeActive = false;
         let secretModeType = null;
@@ -403,6 +459,169 @@
         let eventEndTimes = { ghost: 0, rainbow: 0, chernobyl: 0, space: 0 };
         let spaceRAF = null;
         let ghostInterval = null;
+
+        // ==================== ДОСТИЖЕНИЯ ====================
+        let siteAchievements = {
+            chat_teacher: { name: '👩‍🏫 В гостях у учителя', desc: 'Зайти в чат с учителем', reward: 1, unlocked: false },
+            chat_students: { name: '👥 Свой среди своих', desc: 'Зайти в чат без учителя', reward: 1, unlocked: false },
+            read_event1: { name: '📖 Читатель', desc: 'Прочитать про ивент "Сладость или гадость"', reward: 1, unlocked: false },
+            read_event2: { name: '⚰️ Гробовщик', desc: 'Прочитать про ивент "Собери гроб"', reward: 1, unlocked: false },
+            team_view: { name: '👑 Знакомство', desc: 'Посмотреть команду сайта', reward: 1, unlocked: false }
+        };
+
+        let gameAchievements = {
+            first_click: { name: '👆 Первый клик', desc: 'Кликнуть по конфетке', reward: 1, unlocked: false },
+            first_purchase: { name: '🛒 Первая покупка', desc: 'Купить любое улучшение', reward: 2, unlocked: false },
+            first_path: { name: '🎨 Первый путь', desc: 'Купить первый путь', reward: 3, unlocked: false },
+            path_master: { name: '🌈 Мастер путей', desc: 'Купить 5 путей', reward: 5, unlocked: false },
+            ghost_path: { name: '👻 Призрачный', desc: 'Купить призрачный путь', reward: 10, unlocked: false },
+            space_path: { name: '🚀 Звёздный', desc: 'Купить звёздный путь', reward: 10, unlocked: false },
+            radio_path: { name: '☢️ Радиоактивный', desc: 'Купить радиоактивный путь', reward: 10, unlocked: false },
+            mutation_collect: { name: '✨ Мутант', desc: 'Собрать предмет с мутацией', reward: 2, unlocked: false }
+        };
+
+        function unlockAchievement(id) {
+            if (siteAchievements[id] && !siteAchievements[id].unlocked) {
+                siteAchievements[id].unlocked = true;
+                coins += siteAchievements[id].reward;
+                showToast(`🏆 Достижение: ${siteAchievements[id].name} (+${siteAchievements[id].reward} 💰)`);
+                updateCoinsUI();
+                renderSiteAchievements();
+                renderCoinShop();
+                saveState();
+            }
+            if (gameAchievements[id] && !gameAchievements[id].unlocked) {
+                gameAchievements[id].unlocked = true;
+                coins += gameAchievements[id].reward;
+                showToast(`🏆 Достижение: ${gameAchievements[id].name} (+${gameAchievements[id].reward} 💰)`);
+                updateCoinsUI();
+                renderGameAchievements();
+                renderCoinShop();
+                saveState();
+            }
+        }
+
+        function renderSiteAchievements() {
+            const list = document.getElementById('siteAchievementsList');
+            if (!list) return;
+            list.innerHTML = '';
+            
+            Object.keys(siteAchievements).forEach(key => {
+                const ach = siteAchievements[key];
+                const div = document.createElement('div');
+                div.className = 'achievement-item' + (ach.unlocked ? ' owned' : '');
+                div.innerHTML = `
+                    <div class="achievement-icon">${ach.unlocked ? '✅' : '🔒'}</div>
+                    <div class="achievement-info">
+                        <div class="achievement-name">${ach.name}</div>
+                        <div class="achievement-desc">${ach.desc}</div>
+                        <div class="achievement-status ${ach.unlocked ? 'unlocked' : 'locked'}">${ach.unlocked ? 'Выполнено' : 'Не выполнено'}</div>
+                    </div>
+                    <div class="achievement-reward">+${ach.reward} 💰</div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function renderGameAchievements() {
+            const list = document.getElementById('gameAchievementsList');
+            if (!list) return;
+            list.innerHTML = '';
+            
+            Object.keys(gameAchievements).forEach(key => {
+                const ach = gameAchievements[key];
+                const div = document.createElement('div');
+                div.className = 'achievement-item' + (ach.unlocked ? ' owned' : '');
+                div.innerHTML = `
+                    <div class="achievement-icon">${ach.unlocked ? '✅' : '🔒'}</div>
+                    <div class="achievement-info">
+                        <div class="achievement-name">${ach.name}</div>
+                        <div class="achievement-desc">${ach.desc}</div>
+                        <div class="achievement-status ${ach.unlocked ? 'unlocked' : 'locked'}">${ach.unlocked ? 'Выполнено' : 'Не выполнено'}</div>
+                    </div>
+                    <div class="achievement-reward">+${ach.reward} 💰</div>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function updateCoinsUI() {
+            const el = document.getElementById('coinCount');
+            if (el) el.textContent = coins;
+        }
+
+        // ==================== МАГАЗИН МОНЕТОК ====================
+        function renderCoinShop() {
+            const list = document.getElementById('coinShopList');
+            if (!list) return;
+            list.innerHTML = '';
+
+            const div1 = document.createElement('div');
+            div1.className = 'shop-item';
+            div1.innerHTML = `
+                <div class="shop-item-info">
+                    <div class="shop-item-name">🍬 Обменять на конфеты</div>
+                    <div class="shop-item-desc">1 💰 → 1000 конфет</div>
+                </div>
+                <button class="buy-btn" onclick="exchangeCoins()">Обменять (1 💰)</button>
+            `;
+            list.appendChild(div1);
+
+            const div2 = document.createElement('div');
+            div2.className = 'shop-item';
+            div2.innerHTML = `
+                <div class="shop-item-info">
+                    <div class="shop-item-name">⚡ ×2 ко всему (5 мин)</div>
+                    <div class="shop-item-desc">Удваивает доход от кликов и CPS на 5 минут</div>
+                </div>
+                <button class="buy-btn" ${coins < 5 ? 'disabled' : ''} onclick="buyBoost()">Купить (5 💰)</button>
+            `;
+            list.appendChild(div2);
+
+            const events = [
+                { id: 'ghost', name: '👻 Призрак', icon: '👻' },
+                { id: 'rainbow', name: '🌈 Радуга', icon: '🌈' },
+                { id: 'space', name: '🚀 Космос', icon: '🚀' },
+                { id: 'chernobyl', name: '☢️ Чернобыль', icon: '☢️' }
+            ];
+            events.forEach(ev => {
+                const div = document.createElement('div');
+                div.className = 'shop-item';
+                div.innerHTML = `
+                    <div class="shop-item-info">
+                        <div class="shop-item-name">${ev.name} (3 мин)</div>
+                        <div class="shop-item-desc">Запустить ивент на 3 минуты</div>
+                    </div>
+                    <button class="buy-btn" ${coins < 10 ? 'disabled' : ''} onclick="buyEvent('${ev.id}')">Купить (10 💰)</button>
+                `;
+                list.appendChild(div);
+            });
+        }
+
+        function exchangeCoins() {
+            if (coins < 1) { showToast('Нет монеток'); return; }
+            coins -= 1;
+            clickerCandy += 1000;
+            updateCoinsUI(); updateUI(); saveState(); renderCoinShop();
+            showToast('Обменяно: 1 💰 → 1000 конфет');
+        }
+
+        function buyBoost() {
+            if (coins < 5) { showToast('Нужно 5 монеток'); return; }
+            coins -= 5;
+            boostActive = true;
+            boostEndTime = Date.now() + 5 * 60 * 1000;
+            updateCoinsUI(); saveState(); renderCoinShop();
+            showToast('⚡ ×2 ко всему на 5 минут!');
+        }
+
+        function buyEvent(eventName) {
+            if (coins < 10) { showToast('Нужно 10 монеток'); return; }
+            coins -= 10;
+            activateEvent(eventName);
+            updateCoinsUI(); saveState(); renderCoinShop();
+            showToast(`Запущен ивент: ${eventName}`);
+        }
 
         // ==================== УТИЛИТЫ ====================
         function showToast(msg) {
@@ -430,11 +649,14 @@
         function getTotalCPS() {
             let cps = autoClickers * (2.5 + autoClickerSpeed * 0.5);
             cps *= (1 + multiplier * 0.10);
+            if (boostActive && Date.now() < boostEndTime) cps *= 2;
             return cps;
         }
         
         function getClickPower() {
-            return clickPower * (1 + multiplier * 0.10);
+            let power = clickPower * (1 + multiplier * 0.10);
+            if (boostActive && Date.now() < boostEndTime) power *= 2;
+            return power;
         }
 
         function updateUI() {
@@ -502,22 +724,27 @@
                 document.getElementById('addCandyTimer').textContent = '';
                 document.getElementById('addCandyBtn').disabled = false;
             }
+
+            if (boostActive && Date.now() >= boostEndTime) {
+                boostActive = false;
+                showToast('⚡ Бум закончился');
+            }
         }
 
         setInterval(updateUI, 200);
 
         function saveState() {
             try {
-                localStorage.setItem('6a_state_v16', JSON.stringify({
-                    coffinCandy, clickerCandy, clickPower, autoClickers, luck, autoClickerSpeed, spawnRate, multiplier,
-                    ownedPaths, activePath, diamondCodeUsed
+                localStorage.setItem('6a_state_v19', JSON.stringify({
+                    coffinCandy, clickerCandy, clickPower, autoClickers, luck, autoClickerSpeed, spawnRate, multiplier, coins,
+                    ownedPaths, activePath, diamondCodeUsed, siteAchievements, gameAchievements
                 }));
             } catch (e) {}
         }
 
         function loadState() {
             try {
-                const s = JSON.parse(localStorage.getItem('6a_state_v16'));
+                const s = JSON.parse(localStorage.getItem('6a_state_v19'));
                 if (s) {
                     coffinCandy = s.coffinCandy ?? COFFIN_START_CANDY;
                     clickerCandy = s.clickerCandy ?? 0;
@@ -527,9 +754,12 @@
                     autoClickerSpeed = s.autoClickerSpeed ?? 0;
                     spawnRate = s.spawnRate ?? 0;
                     multiplier = s.multiplier ?? 0;
+                    coins = s.coins ?? 0;
                     ownedPaths = s.ownedPaths || [];
                     activePath = s.activePath || null;
                     diamondCodeUsed = s.diamondCodeUsed || false;
+                    if (s.siteAchievements) siteAchievements = s.siteAchievements;
+                    if (s.gameAchievements) gameAchievements = s.gameAchievements;
                 }
             } catch (e) {}
         }
@@ -539,6 +769,10 @@
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('tab-' + name).classList.add('active');
             btn.classList.add('active');
+            
+            if (name === 'team') unlockAchievement('team_view');
+            if (name === 'site-achievements') renderSiteAchievements();
+            if (name === 'games') { renderGameAchievements(); renderCoinShop(); }
         }
 
         // ==================== ПУТИ ====================
@@ -550,6 +784,9 @@
             blue:   { name: '🔵 Синий', color: '#0088ff', price: 1500000, desc: 'Притягивает предметы', type: 'color' },
             indigo: { name: '🟣 Индиго', color: '#8800ff', price: 2500000, desc: 'Скидка -20% на всё', type: 'color' },
             violet: { name: '🟪 Фиолетовый', color: '#ff00ff', price: 4000000, desc: 'Омни-спавн раз в 30 мин', type: 'color' },
+            cyan:   { name: '🩵 Голубой', color: '#00ffff', price: 1000000, desc: '10% шанс удвоить доход (×2)', type: 'color' },
+            lilac:  { name: '💜 Сиреневый', color: '#c8a2c8', price: 1200000, desc: '+20% к длительности ивентов', type: 'color' },
+            pink:   { name: '🌸 Розовый', color: '#ff69b4', price: 800000, desc: '5% шанс случайной мутации', type: 'color' },
             rainbow:{ name: '🌈 Радужный', color: 'rainbow', price: 750000, desc: 'Даёт ослабленные (1/3) способности всех цветных путей', type: 'special' },
             ghost:  { name: '👻 Призрачный', color: '#88ccff', price: 2500000, desc: 'Призраки воруют конфеты и дают ×5 (только при экипировке)', type: 'event', event: 'ghost' },
             space:  { name: '🚀 Звёздный', color: '#ffffff', price: 10000000, desc: 'Всегда падают звёзды ×50 (только при экипировке)', type: 'event', event: 'space' },
@@ -634,6 +871,11 @@
             ownedPaths.push(key);
             saveState(); updateUI(); renderPaths();
             showToast(`Куплен: ${p.name}`);
+            unlockAchievement('first_path');
+            if (ownedPaths.length >= 5) unlockAchievement('path_master');
+            if (key === 'ghost') unlockAchievement('ghost_path');
+            if (key === 'space') unlockAchievement('space_path');
+            if (key === 'radio') unlockAchievement('radio_path');
             updateGhosts();
             updateStars();
         }
@@ -702,6 +944,7 @@
 
             let mult = 1;
             let colorGlow = null;
+            let mutationType = null;
 
             if (type === 'golden') { mult = 5000; colorGlow = '#ffd700'; }
             else if (type === 'diamond') { mult = 25000; colorGlow = '#00ffff'; }
@@ -709,18 +952,38 @@
             else if (type === 'meteor') { mult = 500000; colorGlow = '#ff4400'; }
             else if (type === 'radioctive') { mult = 15000000; colorGlow = '#55ff00'; }
 
-            if (activeEvents.ghost && (type === 'candy1' || type === 'candy2') && Math.random() < 0.3) { mult *= 10; colorGlow = '#88ccff'; }
-            if (activeEvents.chernobyl && Math.random() < 0.15) { mult *= 15; colorGlow = '#55ff00'; }
+            if (activeEvents.ghost && (type === 'candy1' || type === 'candy2') && Math.random() < 0.3) { mult *= 10; colorGlow = '#88ccff'; mutationType = 'ghost'; }
+            if (activeEvents.chernobyl && Math.random() < 0.15) { mult *= 15; colorGlow = '#55ff00'; mutationType = 'radio'; }
             if (activeEvents.rainbow) mult *= 2;
 
             const orangeMod = getPathMod('orange');
-            if (forceMutations || (orangeMod > 0 && Math.random() < 0.05 * orangeMod)) { mult *= 8; colorGlow = '#ff5500'; }
+            if (forceMutations || (orangeMod > 0 && Math.random() < 0.05 * orangeMod)) { mult *= 8; colorGlow = '#ff5500'; mutationType = 'fire'; }
             
-            if (forceMutations || (activeEvents.ghost && Math.random() < 0.1)) { mult *= 10; colorGlow = '#88ccff'; }
+            const pinkMod = getPathMod('pink');
+            if (pinkMod > 0 && Math.random() < 0.05 * pinkMod) {
+                const muts = ['fire', 'star', 'ghost', 'radio'];
+                mutationType = muts[Math.floor(Math.random() * muts.length)];
+                mult *= (mutationType === 'fire' ? 8 : mutationType === 'star' ? 50 : mutationType === 'ghost' ? 10 : 15);
+                colorGlow = mutationType === 'fire' ? '#ff5500' : mutationType === 'star' ? '#fff' : mutationType === 'ghost' ? '#88ccff' : '#55ff00';
+            }
+
+            if (forceMutations || (activeEvents.ghost && Math.random() < 0.1)) { mult *= 10; colorGlow = '#88ccff'; mutationType = 'ghost'; }
 
             if (colorGlow) {
                 if (colorGlow === 'rainbow') el.style.animation = 'rainbowSpin 2s infinite linear';
                 else el.style.filter = `drop-shadow(0 0 15px ${colorGlow})`;
+            }
+
+            if (mutationType) {
+                el.classList.add('mutation-' + mutationType);
+                for (let i = 0; i < 3; i++) {
+                    const icon = document.createElement('div');
+                    icon.className = 'mutation-icon';
+                    icon.textContent = mutationType === 'fire' ? '🔥' : mutationType === 'star' ? '✦' : mutationType === 'ghost' ? '👻' : '☢️';
+                    icon.style.left = '50%'; icon.style.top = '50%';
+                    icon.style.animationDelay = (i * 0.6) + 's';
+                    el.appendChild(icon);
+                }
             }
 
             el.onclick = (ev) => {
@@ -731,11 +994,19 @@
                 let reward = getClickPower() * mult;
                 const yellowMod = getPathMod('yellow');
                 if (yellowMod > 0) reward *= (1 + 0.5 * yellowMod);
+                const cyanMod = getPathMod('cyan');
+                if (cyanMod > 0 && Math.random() < 0.1 * cyanMod) { reward *= 2; showToast('🩵 Удвоение дохода!'); }
                 if (el.classList.contains('star-hit')) reward *= 7;
 
                 clickerCandy += reward;
                 updateUI(); saveState();
                 spawnFloatText(ev.clientX, ev.clientY, `+${fmtCandy(reward)}`);
+                
+                if (mutationType) {
+                    unlockAchievement('mutation_collect');
+                    showToast(`✨ Мутация: ${mutationType === 'fire' ? 'Огонь' : mutationType === 'star' ? 'Звезда' : mutationType === 'ghost' ? 'Призрак' : 'Радиация'}! ×${mult}`);
+                }
+                
                 el.remove();
             };
 
@@ -815,7 +1086,7 @@
         }
         function stopMagnet() { if (magnetInterval) clearInterval(magnetInterval); }
 
-        // ==================== ЗВЁЗДНЫЙ ПУТЬ (ВСЕГДА) ====================
+        // ==================== ЗВЁЗДНЫЙ ПУТЬ ====================
         let starInterval = null;
         function updateStars() {
             const spaceMod = getPathMod('space');
@@ -855,7 +1126,7 @@
             }
         }
 
-        // ==================== ПРИЗРАЧНЫЙ ПУТЬ (ПРИЗРАКИ) ====================
+        // ==================== ПРИЗРАЧНЫЙ ПУТЬ ====================
         function updateGhosts() {
             const ghostMod = getPathMod('ghost');
             if (ghostMod > 0) {
@@ -900,9 +1171,10 @@
         // ==================== КОСМОС ====================
         function startSpaceEvent() {
             activeEvents.space = true;
-            eventEndTimes.space = Date.now() + EVENT_DURATION;
+            const duration = activePath === 'lilac' || (isRainbowActive() && isColorPath('lilac')) ? EVENT_DURATION * 1.2 : EVENT_DURATION;
+            eventEndTimes.space = Date.now() + duration;
             document.body.classList.add('space-active');
-            showToast('🚀 КОСМОС! 10 минут.');
+            showToast('🚀 КОСМОС!');
         }
         function stopSpaceEvent() {
             activeEvents.space = false;
@@ -916,33 +1188,54 @@
 
         // ==================== ИВЕНТЫ ====================
         function activateEvent(type) {
-            deactivateAllEvents();
+            if (type === 'none') {
+                deactivateAllEvents();
+                return;
+            }
+            
             const now = Date.now();
+            const duration = activePath === 'lilac' || (isRainbowActive() && isColorPath('lilac')) ? EVENT_DURATION * 1.2 : EVENT_DURATION;
+            
             activeEvents[type] = true;
-            eventEndTimes[type] = now + EVENT_DURATION;
+            eventEndTimes[type] = now + duration;
 
             if (type === 'ghost') {
                 document.body.classList.add('ghost-active');
-                showToast('👻 ПРИЗРАК! 10 минут.');
+                showToast('👻 ПРИЗРАК!');
             } else if (type === 'rainbow') {
                 document.body.classList.add('rainbow-active');
-                showToast('🌈 РАДУГА! 10 минут.');
+                showToast('🌈 РАДУГА!');
             } else if (type === 'space') {
                 startSpaceEvent();
             } else if (type === 'chernobyl') {
                 document.body.classList.add('chernobyl-active');
                 radioCooldownEnd = Date.now() + 30 * 60 * 1000;
-                showToast('☢️ ЧЕРНОБЫЛЬ! 10 минут.');
+                showToast('☢️ ЧЕРНОБЫЛЬ!');
+            }
+            renderPaths();
+        }
+
+        function deactivateEvent(type) {
+            if (type === 'ghost') {
+                activeEvents.ghost = false;
+                document.body.classList.remove('ghost-active');
+            } else if (type === 'rainbow') {
+                activeEvents.rainbow = false;
+                document.body.classList.remove('rainbow-active');
+            } else if (type === 'space') {
+                stopSpaceEvent();
+            } else if (type === 'chernobyl') {
+                activeEvents.chernobyl = false;
+                document.body.classList.remove('chernobyl-active');
             }
             renderPaths();
         }
 
         function deactivateAllEvents() {
-            if (activeEvents.ghost) { activeEvents.ghost = false; document.body.classList.remove('ghost-active'); }
-            if (activeEvents.rainbow) { activeEvents.rainbow = false; document.body.classList.remove('rainbow-active'); }
-            if (activeEvents.chernobyl) { activeEvents.chernobyl = false; document.body.classList.remove('chernobyl-active'); }
-            if (activeEvents.space) stopSpaceEvent();
-            renderPaths();
+            deactivateEvent('ghost');
+            deactivateEvent('rainbow');
+            deactivateEvent('chernobyl');
+            deactivateEvent('space');
         }
 
         function forceEvent(type) {
@@ -960,18 +1253,16 @@
             const m = now.getMinutes();
             const currentTime = Date.now();
 
-            if (activeEvents.ghost && currentTime >= eventEndTimes.ghost) deactivateAllEvents();
-            if (activeEvents.rainbow && currentTime >= eventEndTimes.rainbow) deactivateAllEvents();
-            if (activeEvents.space && currentTime >= eventEndTimes.space) deactivateAllEvents();
-            if (activeEvents.chernobyl && currentTime >= eventEndTimes.chernobyl) deactivateAllEvents();
+            if (activeEvents.ghost && currentTime >= eventEndTimes.ghost) deactivateEvent('ghost');
+            if (activeEvents.rainbow && currentTime >= eventEndTimes.rainbow) deactivateEvent('rainbow');
+            if (activeEvents.space && currentTime >= eventEndTimes.space) deactivateEvent('space');
+            if (activeEvents.chernobyl && currentTime >= eventEndTimes.chernobyl) deactivateEvent('chernobyl');
 
-            if (m === 0) {
-                const slot = h % 4;
-                if (slot === 0) activateEvent('ghost');
-                else if (slot === 1) activateEvent('rainbow');
-                else if (slot === 2) activateEvent('space');
-                else if (slot === 3) activateEvent('chernobyl');
-            }
+            if (m === 0 && h % 4 === 0) activateEvent('ghost');
+            if (m === 0 && h % 4 === 1) activateEvent('rainbow');
+            if (m === 0 && h % 4 === 2) activateEvent('space');
+            if (m === 0 && h % 4 === 3) activateEvent('chernobyl');
+            
             renderPaths();
         }
 
@@ -1077,6 +1368,7 @@
             if (clickerCandy < price) { showToast('Нет конфет'); return; }
             clickerCandy -= price;
             item.apply();
+            unlockAchievement('first_purchase');
             saveState(); updateUI(); renderShop();
         }
 
@@ -1093,12 +1385,16 @@
         // ==================== СТАРТ ====================
         loadState();
         updateUI();
+        updateCoinsUI();
         startSpawnLoop();
+        renderSiteAchievements();
+        renderGameAchievements();
+        renderCoinShop();
         setInterval(() => {
             clickerCandy += getTotalCPS() * 0.1;
             updateUI(); saveState();
         }, 100);
-        setInterval(() => { renderPaths(); renderShop(); }, 1000);
+        setInterval(() => { renderPaths(); renderShop(); renderCoinShop(); }, 1000);
         checkEvents();
 
         // Таймеры ивентов на главной
@@ -1108,7 +1404,6 @@
             const timer2 = document.getElementById('timer2');
             if (!timer1 || !timer2) return;
             
-            // Ивент 1 (Сладость или гадость) - до 20 октября
             const end1 = new Date('2026-10-20T00:00:00').getTime();
             const ms1 = end1 - now;
             if (ms1 <= 0) { timer1.textContent = 'Завершён'; timer1.style.color = '#ff6b6b'; }
@@ -1120,7 +1415,6 @@
                 timer1.textContent = `${d}д ${h}ч ${m}м`;
             }
 
-            // Ивент 2 (Гроб) - до 24 октября
             const end2 = new Date('2026-10-24T00:00:00').getTime();
             const ms2 = end2 - now;
             if (ms2 <= 0) { timer2.textContent = 'Завершён'; timer2.style.color = '#ff6b6b'; }
@@ -1171,9 +1465,14 @@
         window.spawnSpecific = (type) => spawnItem(type);
         window.spawnOmniItem = spawnOmniItem;
         window.forceEvent = forceEvent;
+        window.deactivateEvent = deactivateEvent;
         window.activateRadioFree = activateRadioFree;
         window.updateStars = updateStars;
         window.updateGhosts = updateGhosts;
+        window.unlockAchievement = unlockAchievement;
+        window.exchangeCoins = exchangeCoins;
+        window.buyBoost = buyBoost;
+        window.buyEvent = buyEvent;
     </script>
 </body>
 </html>
