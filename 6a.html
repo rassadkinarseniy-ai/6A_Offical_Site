@@ -470,6 +470,35 @@
         let mixingInProgress = false;
         let mixingEndTime = 0;
 
+        // ==================== СМЕШИВАНИЕ ЦВЕТОВ ====================
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : { r: 255, g: 0, b: 255 };
+        }
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(x => {
+                const hex = Math.round(x).toString(16);
+                return hex.length === 1 ? '0' + hex : hex;
+            }).join('');
+        }
+        function interpolateColor(c1, c2, factor) {
+            const rgb1 = hexToRgb(c1); const rgb2 = hexToRgb(c2);
+            return rgbToHex(rgb1.r + (rgb2.r - rgb1.r) * factor, rgb1.g + (rgb2.g - rgb1.g) * factor, rgb1.b + (rgb2.b - rgb1.b) * factor);
+        }
+        function createSmoothGradient(colors) {
+            if (colors.length === 0) return '#ff00ff';
+            if (colors.length === 1) return colors[0];
+            const result = [];
+            for (let i = 0; i < colors.length; i++) {
+                result.push(colors[i]);
+                if (i < colors.length - 1) {
+                    result.push(interpolateColor(colors[i], colors[i + 1], 0.33));
+                    result.push(interpolateColor(colors[i], colors[i + 1], 0.66));
+                }
+            }
+            return 'linear-gradient(90deg, ' + result.join(', ') + ')';
+        }
+
         let siteAchievements = {
             chat_teacher: { name: '👩‍🏫 В гостях у учителя', desc: 'Зайти в чат с учителем', reward: 1, unlocked: false },
             chat_students: { name: '👥 Свой среди своих', desc: 'Зайти в чат без учителя', reward: 1, unlocked: false },
@@ -545,9 +574,7 @@
             });
         }
 
-        function updateCoinsUI() {
-            const el = document.getElementById('coinCount'); if (el) el.textContent = coins;
-        }
+        function updateCoinsUI() { const el = document.getElementById('coinCount'); if (el) el.textContent = coins; }
 
         // ==================== МАГАЗИН МОНЕТОК ====================
         function renderCoinShop() {
@@ -609,25 +636,21 @@
 
         function exchangeCoins() {
             if (coins < 1) { showToast('Нет монеток'); return; }
-            coins -= 1;
-            clickerCandy += 1000;
+            coins -= 1; clickerCandy += 1000;
             updateCoinsUI(); updateUI(); saveState(); renderCoinShop();
             showToast('Обменяно: 1 💰 → 1000 конфет');
         }
 
         function buyBoost() {
             if (coins < 5) { showToast('Нужно 5 монеток'); return; }
-            coins -= 5;
-            boostActive = true;
-            boostEndTime = Date.now() + 5 * 60 * 1000;
+            coins -= 5; boostActive = true; boostEndTime = Date.now() + 5 * 60 * 1000;
             updateCoinsUI(); saveState(); renderCoinShop();
             showToast('⚡ ×2 ко всему на 5 минут!');
         }
 
         function buyEvent(eventName) {
             if (coins < 10) { showToast('Нужно 10 монеток'); return; }
-            coins -= 10;
-            activateEvent(eventName);
+            coins -= 10; activateEvent(eventName);
             updateCoinsUI(); saveState(); renderCoinShop();
             showToast(`Запущен ивент: ${eventName}`);
         }
@@ -635,8 +658,7 @@
         function buySkipMix() {
             if (coins < 10) { showToast('Нужно 10 монеток'); return; }
             if (!mixingInProgress) { showToast('Смешивание не идёт'); return; }
-            coins -= 10;
-            skipMixTime();
+            coins -= 10; skipMixTime();
             updateCoinsUI(); saveState(); renderCoinShop();
         }
 
@@ -657,8 +679,26 @@
             return h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
         }
 
+        // ВАЖНО: все активные пути
+        function getActivePaths() {
+            const active = new Set();
+            if (!activePath) return active;
+            const p = PATHS[activePath];
+            if (!p) return active;
+            if (p.mixedFrom && p.mixedFrom.length > 0) {
+                p.mixedFrom.forEach(k => { if (PATHS[k]) active.add(k); });
+            } else {
+                active.add(activePath);
+            }
+            return active;
+        }
+
+        function hasActivePath(key) {
+            return getActivePaths().has(key);
+        }
+
         function getPathMod(key) {
-            if (activePath === key) return 1;
+            if (hasActivePath(key)) return 1;
             if (isRainbowActive() && isColorPath(key)) return 0.33;
             return 0;
         }
@@ -786,9 +826,7 @@
                     if (s.mixingInProgress) mixingInProgress = s.mixingInProgress;
                     if (s.mixingEndTime) mixingEndTime = s.mixingEndTime;
                     if (s.mixedPaths) {
-                        s.mixedPaths.forEach(mp => {
-                            PATHS[mp.key] = mp.data;
-                        });
+                        s.mixedPaths.forEach(mp => { PATHS[mp.key] = mp.data; });
                     }
                 }
             } catch (e) {}
@@ -817,9 +855,7 @@
                     const p = PATHS[key];
                     const div = document.createElement('div');
                     div.className = 'mixer-slot';
-                    let colorDot = p.color === 'rainbow' 
-                        ? `<span style="background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); width:15px; height:15px; border-radius:50%; display:inline-block;"></span>`
-                        : `<span class="path-color-dot" style="background:${p.color};"></span>`;
+                    let colorDot = getColorDotForPath(p);
                     div.innerHTML = `${colorDot} ${p.name} <button class="mixer-slot-remove" onclick="removeFromMixer(${i})">×</button>`;
                     slots.appendChild(div);
                 });
@@ -843,11 +879,19 @@
                 if (mixingInProgress) {
                     btnCont.innerHTML = `<button class="btn" style="background:#555;" disabled>⏳ Смешивание идёт...</button>`;
                 } else {
-                    btnCont.innerHTML = `
-                        <button class="btn" style="background:#ffa733;" onclick="startMixing()">🧪 Начать смешивание</button>
-                    `;
+                    btnCont.innerHTML = `<button class="btn" style="background:#ffa733;" onclick="startMixing()">🧪 Начать смешивание</button>`;
                 }
             }
+        }
+
+        function getColorDotForPath(p) {
+            if (typeof p.color === 'string' && p.color.startsWith('linear-gradient')) {
+                return `<span style="background: ${p.color}; width:15px; height:15px; border-radius:50%; display:inline-block;"></span>`;
+            }
+            if (p.color === 'rainbow') {
+                return `<span style="background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); width:15px; height:15px; border-radius:50%; display:inline-block;"></span>`;
+            }
+            return `<span class="path-color-dot" style="background:${p.color};"></span>`;
         }
 
         function addToMixerFromPath(key) {
@@ -897,17 +941,22 @@
             const uniqueKey = 'mixed_' + Date.now();
             const mixedName = '🧪 Смешанный (' + mixerSlots.map(k => PATHS[k].name.split(' ').slice(1).join(' ') || PATHS[k].name).join(' + ') + ')';
             
-            // Собираем цвета из вложенных путей
-            const colors = mixerSlots.map(k => PATHS[k].color).filter(c => c && c !== 'rainbow');
+            let colors = [];
+            mixerSlots.forEach(k => {
+                const p = PATHS[k];
+                if (typeof p.color === 'string' && p.color.startsWith('linear-gradient')) {
+                    const inner = p.color.replace('linear-gradient(90deg, ', '').replace(')', '');
+                    inner.split(',').forEach(c => colors.push(c.trim()));
+                } else if (p.color && p.color !== 'rainbow') {
+                    colors.push(p.color);
+                }
+            });
+            colors = [...new Set(colors)];
+            
             let mixedColor;
-            if (colors.length >= 2) {
-                // Создаём градиент из всех цветов
-                mixedColor = 'linear-gradient(90deg, ' + colors.join(', ') + ')';
-            } else if (colors.length === 1) {
-                mixedColor = colors[0];
-            } else {
-                mixedColor = '#ff00ff';
-            }
+            if (colors.length >= 2) mixedColor = createSmoothGradient(colors);
+            else if (colors.length === 1) mixedColor = colors[0];
+            else mixedColor = '#ff00ff';
             
             PATHS[uniqueKey] = {
                 name: mixedName,
@@ -915,11 +964,11 @@
                 price: 0,
                 desc: 'Объединяет способности всех вложенных путей',
                 type: 'color',
-                mixedFrom: [...mixerSlots]
+                mixedFrom: [...mixerSlots],
+                gradientColors: colors
             };
             
             ownedPaths.push(uniqueKey);
-            
             mixerSlots.forEach(k => {
                 const idx = ownedPaths.indexOf(k);
                 if (idx > -1) ownedPaths.splice(idx, 1);
@@ -953,7 +1002,7 @@
         };
 
         function isRainbowActive() {
-            return activePath === 'rainbow' && ownedPaths.includes('rainbow');
+            return hasActivePath('rainbow');
         }
 
         function isColorPath(key) {
@@ -972,15 +1021,11 @@
                 if (p.event && !activeEvents[p.event]) { canBuy = false; lockReason = `Только при ${p.event === 'rainbow' ? 'Радуге' : p.event === 'ghost' ? 'Призраке' : p.event === 'space' ? 'Космосе' : 'Чернобыле'}`; }
                 
                 let price = p.price;
-                if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
+                if (hasActivePath('indigo') || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
 
                 const div = document.createElement('div');
                 div.className = 'path-item' + (owned ? ' owned' : '');
-                let colorDot = p.color === 'rainbow' 
-                    ? `<span style="background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); width:15px; height:15px; border-radius:50%; display:inline-block;"></span>`
-                    : (typeof p.color === 'string' && p.color.startsWith('linear-gradient')
-                        ? `<span style="background: ${p.color}; width:15px; height:15px; border-radius:50%; display:inline-block;"></span>`
-                        : `<span class="path-color-dot" style="background:${p.color};"></span>`);
+                let colorDot = getColorDotForPath(p);
                 
                 const inMixer = mixerSlots.includes(key);
                 const showMixerBtn = owned && !mixingInProgress && !inMixer && !key.startsWith('mixed_');
@@ -1003,7 +1048,7 @@
 
             const spCont = document.getElementById('specialPathBtnContainer');
             spCont.innerHTML = '';
-            if (ownedPaths.includes('violet') && (activePath === 'violet' || (isRainbowActive() && isColorPath('violet')))) {
+            if (ownedPaths.includes('violet') && hasActivePath('violet')) {
                 const cd = violetCooldownEnd - Date.now();
                 if (cd > 0) {
                     spCont.innerHTML = `<button class="btn" disabled>Перезарядка: ${Math.ceil(cd/1000)}с</button>`;
@@ -1011,7 +1056,7 @@
                     spCont.innerHTML = `<button class="btn" style="background:#ff00ff; color:white;" onclick="spawnOmniItem()">🎲 Спавн Омни-предмета</button>`;
                 }
             }
-            if (ownedPaths.includes('radio') && (activePath === 'radio' || (isRainbowActive() && isColorPath('radio')))) {
+            if (ownedPaths.includes('radio') && hasActivePath('radio')) {
                 const cd = radioCooldownEnd - Date.now();
                 if (cd > 0) {
                     spCont.innerHTML += `<button class="btn" disabled>Радио: перезарядка ${Math.ceil(cd/1000)}с</button>`;
@@ -1026,7 +1071,7 @@
             if (p.event && !activeEvents[p.event]) { showToast('Ивент не активен!'); return; }
             
             let price = p.price;
-            if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
+            if (hasActivePath('indigo') || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
 
             if (clickerCandy < price) { showToast('Недостаточно конфет'); return; }
             clickerCandy -= price;
@@ -1046,7 +1091,8 @@
             activePath = key;
             saveState(); renderPaths();
             showToast(`Активирован: ${PATHS[key].name}`);
-            if (key === 'blue' || (isRainbowActive() && isColorPath('blue'))) startMagnet(); else stopMagnet();
+            
+            if (hasActivePath('blue') || (isRainbowActive() && isColorPath('blue'))) startMagnet(); else stopMagnet();
             updateGhosts(); updateStars();
         }
 
@@ -1316,7 +1362,7 @@
 
         function startSpaceEvent() {
             activeEvents.space = true;
-            const duration = activePath === 'lilac' || (isRainbowActive() && isColorPath('lilac')) ? EVENT_DURATION * 1.2 : EVENT_DURATION;
+            const duration = hasActivePath('lilac') ? EVENT_DURATION * 1.2 : EVENT_DURATION;
             eventEndTimes.space = Date.now() + duration;
             document.body.classList.add('space-active');
             showToast('🚀 КОСМОС!');
@@ -1332,7 +1378,7 @@
         function activateEvent(type) {
             if (type === 'none') { deactivateAllEvents(); return; }
             const now = Date.now();
-            const duration = activePath === 'lilac' || (isRainbowActive() && isColorPath('lilac')) ? EVENT_DURATION * 1.2 : EVENT_DURATION;
+            const duration = hasActivePath('lilac') ? EVENT_DURATION * 1.2 : EVENT_DURATION;
             
             activeEvents[type] = true;
             eventEndTimes[type] = now + duration;
@@ -1439,7 +1485,7 @@
                 const level = item.getLevel();
                 const maxed = level >= item.maxLevel;
                 let price = Math.ceil(item.basePrice * Math.pow(1.5, level));
-                if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
+                if (hasActivePath('indigo') || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
 
                 const div = document.createElement('div');
                 div.className = 'shop-item' + (maxed ? ' owned' : '');
@@ -1461,7 +1507,7 @@
             const level = item.getLevel();
             if (level >= item.maxLevel) return;
             let price = Math.ceil(item.basePrice * Math.pow(1.5, level));
-            if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
+            if (hasActivePath('indigo') || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
             if (clickerCandy < price) { showToast('Нет конфет'); return; }
             clickerCandy -= price;
             item.apply();
@@ -1518,10 +1564,12 @@
                 const el = document.createElement('div'); el.className = 'trail-particle';
                 el.style.left = e.clientX + 'px'; el.style.top = e.clientY + 'px';
                 let color = p.color;
-                if (color === 'rainbow') color = `hsl(${Math.random()*360}, 100%, 50%)`;
-                else if (typeof color === 'string' && color.startsWith('linear-gradient')) {
-                    const parts = color.replace('linear-gradient(90deg, ', '').replace(')', '').split(',');
-                    color = parts[Math.floor(Math.random() * parts.length)].trim();
+                if (color === 'rainbow') {
+                    color = `hsl(${Math.random()*360}, 100%, 50%)`;
+                } else if (typeof color === 'string' && color.startsWith('linear-gradient')) {
+                    const inner = color.replace('linear-gradient(90deg, ', '').replace(')', '');
+                    const colors = inner.split(',').map(c => c.trim());
+                    color = colors[Math.floor(Math.random() * colors.length)];
                 }
                 el.style.background = color; el.style.boxShadow = `0 0 10px ${color}`;
                 el.style.width = '10px'; el.style.height = '10px';
