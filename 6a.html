@@ -31,10 +31,7 @@
         /* 🚀 КОСМОС */
         body.space-active { background: #000; }
         body.space-active .bat { display: none !important; }
-        body.space-active .container { 
-            background: transparent; border-color: transparent; box-shadow: none;
-            opacity: 0.6;
-        }
+        body.space-active .container { background: transparent; border-color: transparent; box-shadow: none; opacity: 0.6; }
         body.space-active .container > * { animation: floatElement 10s infinite alternate ease-in-out; }
         body.space-active .container > *:nth-child(odd) { animation-duration: 12s; }
         body.space-active .container > *:nth-child(even) { animation-duration: 8s; }
@@ -64,12 +61,6 @@
         .bat2 { bottom: 20%; left: 3%; animation-duration: 18s; font-size: 1.8rem; animation-delay: -3s; }
         .bat3 { top: 60%; right: 12%; animation-duration: 14s; font-size: 2.4rem; animation-delay: -7s; }
         @keyframes floatBat { 0% { transform: translateY(0) rotate(-5deg); } 100% { transform: translateY(-25px) rotate(10deg); } }
-
-        /* Комбинированные темы */
-        body.rainbow-active.ghost-active .container { animation: rainbowGhostBorder 6s infinite alternate; }
-        @keyframes rainbowGhostBorder { 0% { border-color: #8844aa; } 50% { border-color: #44aaaa; } 100% { border-color: #aa8844; } }
-        body.rainbow-active.ghost-active { animation: rainbowGhostBg 12s infinite alternate; }
-        @keyframes rainbowGhostBg { 0% { background: #1a0a0a; } 20% { background: #0a0a1a; } 40% { background: #1a0a1a; } 60% { background: #0a1a1a; } 80% { background: #0a0a0a; } 100% { background: #1a0a0a; } }
 
         .container { max-width: 900px; width: 100%; background: rgba(20, 16, 10, 0.88); backdrop-filter: blur(4px); border: 2px solid #e67e22; border-radius: 40px 12px 40px 12px; box-shadow: 0 0 35px rgba(230, 126, 34, 0.4); padding: 2.5rem 2rem; position: relative; z-index: 10; text-align: center; transition: 0.5s; }
         h1 { font-size: 2.6rem; font-weight: 800; color: #ffb347; text-shadow: 4px 4px 0 #4a2c0b; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 12px; }
@@ -154,7 +145,6 @@
         .star-hit { animation: starHit 1s infinite alternate !important; }
         @keyframes starHit { 0% { filter: drop-shadow(0 0 20px #fff) brightness(1); } 100% { filter: drop-shadow(0 0 50px #fff) brightness(2); } }
 
-        /* Мутации */
         .mutation-fire { filter: drop-shadow(0 0 15px #ff5500) drop-shadow(0 0 30px #ff0000) !important; }
         .mutation-star { filter: drop-shadow(0 0 15px #fff) drop-shadow(0 0 30px #fff) !important; }
         .mutation-ghost { filter: drop-shadow(0 0 15px #88ccff) drop-shadow(0 0 30px #88ccff) !important; }
@@ -183,7 +173,7 @@
         .path-title { font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
         .path-desc { font-size: 0.85rem; color: #a89a88; }
         .path-lock { font-size: 0.75rem; color: #ff6b6b; font-weight: 700; text-transform: uppercase; }
-        .buy-path-btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.6rem; border-radius: 30px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: auto; width: 100%; pointer-events: auto; }
+        .buy-path-btn { background: #e67e22; color: #0b0b0b; border: none; padding: 0.6rem; border-radius: 30px; font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: auto; width: 100%; pointer-events: auto; margin-bottom: 4px; }
         .buy-path-btn:hover:not(:disabled) { background: #ffa733; }
         .buy-path-btn:disabled { background: #555; color: #888; cursor: not-allowed; }
         .path-color-dot { width: 15px; height: 15px; border-radius: 50%; display: inline-block; }
@@ -202,7 +192,6 @@
         .mutation-icon { position: absolute; font-size: 1.2rem; pointer-events: none; z-index: 1001; animation: orbit 2s linear infinite; }
         @keyframes orbit { 0% { transform: rotate(0deg) translateX(30px) rotate(0deg); } 100% { transform: rotate(360deg) translateX(30px) rotate(-360deg); } }
 
-        /* Достижения */
         .achievement-item { padding: 1rem; }
         .achievement-icon { font-size: 1.8rem; margin-right: 10px; }
         .achievement-info { flex: 1; min-width: 150px; }
@@ -215,6 +204,9 @@
 
         .coin-display { background: #2a1e0c; border: 2px solid #ffd700; border-radius: 16px; padding: 0.6rem 1.4rem; font-size: 1.2rem; font-weight: 800; color: #ffd700; display: flex; align-items: center; gap: 8px; }
         .coin-icon { font-size: 1.5rem; }
+
+        .mixer-slot { display: inline-flex; align-items: center; gap: 8px; background: #2a1e0c; padding: 0.5rem 1rem; border-radius: 16px; border: 2px solid #b8651a; }
+        .mixer-slot-remove { background: none; border: none; color: #ff6b6b; cursor: pointer; font-size: 1.1rem; font-weight: 700; pointer-events: auto; }
 
         @media (max-width: 600px) { h1 { font-size: 2rem; } .container { padding: 1.8rem 1.2rem; } .path-grid { grid-template-columns: 1fr; } .team-grid { grid-template-columns: 1fr; } }
     </style>
@@ -276,9 +268,17 @@
 
             <div class="pumpkin-click-area" id="clickArea"></div>
 
-            <!-- МАГАЗИН МОНЕТОК -->
             <div class="shop">
-                <h3>💰 Магазин монеток (валюта сайта)</h3>
+                <h3>🧪 Машина смешивания путей</h3>
+                <p style="color:#8a7a63; font-size:0.9rem; margin-bottom:10px;">Положи 2+ пути + доплати 20% от их стоимости, и через 10 минут получи уникальный путь.</p>
+                <div id="mixerSlots" style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:10px;"></div>
+                <div id="mixerCost" style="color:#ffb347; font-weight:700; margin-bottom:10px;"></div>
+                <div id="mixerButtons"></div>
+                <div id="mixerStatus" style="margin-top:10px;"></div>
+            </div>
+
+            <div class="shop">
+                <h3>💰 Магазин монеток</h3>
                 <div id="coinShopList"></div>
             </div>
 
@@ -296,7 +296,6 @@
                 <div id="adminSpawnGrid" class="secret-spawn-grid">
                     <button class="secret-spawn-btn" onclick="spawnSpecific('candy1')"><img src="candy1.png"> Конфета 1</button>
                     <button class="secret-spawn-btn" onclick="spawnSpecific('candy2')"><img src="candy2.png"> Конфета 2</button>
-                    
                     <button class="secret-spawn-btn" onclick="spawnSpecific('bucket')"><img src="pumpkin_bucket.png"> Ведро</button>
                     <button class="secret-spawn-btn" onclick="spawnSpecific('golden')"><img src="golden_pumpkin_bucket.png"> Золотое</button>
                     <button class="secret-spawn-btn" onclick="spawnSpecific('diamond')"><img src="diamond_pumpkin_bucket.png"> Алмазное</button>
@@ -324,6 +323,11 @@
                         <button class="btn" style="background:#55ff00; color:#000;" onclick="forceEvent('chernobyl')">☢️ Вкл</button>
                         <button class="btn" style="background:#555; color:#fff;" onclick="deactivateEvent('chernobyl')">☢️ Выкл</button>
                     </div>
+                </div>
+
+                <div style="margin-top:1.5rem; border-top:1px solid #4a3a25; padding-top:1.5rem; display:none;" id="adminMixerPanel">
+                    <h4 style="color:#ffb347; margin-bottom:0.5rem;">⏩ Пропустить время смешивания</h4>
+                    <button class="btn" style="background:#ffa733;" onclick="skipMixTime()">⏩ Пропустить (админ)</button>
                 </div>
 
                 <div style="margin-top:1rem;"><button class="btn" style="background:#555;" onclick="closeSecretPanel()">Выйти</button></div>
@@ -419,6 +423,7 @@
     <div class="toast" id="toast"></div>
 
     <script>
+        const STORAGE_KEY = '6a_state_main';
         const ICONS = {
             candy1: 'candy1.png', candy2: 'candy2.png', bucket: 'pumpkin_bucket.png',
             golden: 'golden_pumpkin_bucket.png', diamond: 'diamond_pumpkin_bucket.png', rainbow: 'rainbow_pumpkin_bucket.png',
@@ -431,6 +436,7 @@
         const SECRET_PASSWORD_DIAMOND = 'АЛМАЗНОЕВЕДЁРКО';
         const HW_UNLOCK_DATE = new Date('2026-11-06T00:00:00');
         const EVENT_DURATION = 10 * 60 * 1000;
+        const MIX_DURATION = 10 * 60 * 1000;
 
         let coffinCandy = COFFIN_START_CANDY;
         let clickerCandy = 0;
@@ -460,7 +466,10 @@
         let spaceRAF = null;
         let ghostInterval = null;
 
-        // ==================== ДОСТИЖЕНИЯ ====================
+        let mixerSlots = [];
+        let mixingInProgress = false;
+        let mixingEndTime = 0;
+
         let siteAchievements = {
             chat_teacher: { name: '👩‍🏫 В гостях у учителя', desc: 'Зайти в чат с учителем', reward: 1, unlocked: false },
             chat_students: { name: '👥 Свой среди своих', desc: 'Зайти в чат без учителя', reward: 1, unlocked: false },
@@ -477,7 +486,8 @@
             ghost_path: { name: '👻 Призрачный', desc: 'Купить призрачный путь', reward: 10, unlocked: false },
             space_path: { name: '🚀 Звёздный', desc: 'Купить звёздный путь', reward: 10, unlocked: false },
             radio_path: { name: '☢️ Радиоактивный', desc: 'Купить радиоактивный путь', reward: 10, unlocked: false },
-            mutation_collect: { name: '✨ Мутант', desc: 'Собрать предмет с мутацией', reward: 2, unlocked: false }
+            mutation_collect: { name: '✨ Мутант', desc: 'Собрать предмет с мутацией', reward: 2, unlocked: false },
+            mixer_first: { name: '🧪 Алхимик', desc: 'Смешать первый путь', reward: 15, unlocked: false }
         };
 
         function unlockAchievement(id) {
@@ -485,27 +495,19 @@
                 siteAchievements[id].unlocked = true;
                 coins += siteAchievements[id].reward;
                 showToast(`🏆 Достижение: ${siteAchievements[id].name} (+${siteAchievements[id].reward} 💰)`);
-                updateCoinsUI();
-                renderSiteAchievements();
-                renderCoinShop();
-                saveState();
+                updateCoinsUI(); renderSiteAchievements(); renderCoinShop(); saveState();
             }
             if (gameAchievements[id] && !gameAchievements[id].unlocked) {
                 gameAchievements[id].unlocked = true;
                 coins += gameAchievements[id].reward;
                 showToast(`🏆 Достижение: ${gameAchievements[id].name} (+${gameAchievements[id].reward} 💰)`);
-                updateCoinsUI();
-                renderGameAchievements();
-                renderCoinShop();
-                saveState();
+                updateCoinsUI(); renderGameAchievements(); renderCoinShop(); saveState();
             }
         }
 
         function renderSiteAchievements() {
-            const list = document.getElementById('siteAchievementsList');
-            if (!list) return;
+            const list = document.getElementById('siteAchievementsList'); if (!list) return;
             list.innerHTML = '';
-            
             Object.keys(siteAchievements).forEach(key => {
                 const ach = siteAchievements[key];
                 const div = document.createElement('div');
@@ -524,10 +526,8 @@
         }
 
         function renderGameAchievements() {
-            const list = document.getElementById('gameAchievementsList');
-            if (!list) return;
+            const list = document.getElementById('gameAchievementsList'); if (!list) return;
             list.innerHTML = '';
-            
             Object.keys(gameAchievements).forEach(key => {
                 const ach = gameAchievements[key];
                 const div = document.createElement('div');
@@ -546,14 +546,12 @@
         }
 
         function updateCoinsUI() {
-            const el = document.getElementById('coinCount');
-            if (el) el.textContent = coins;
+            const el = document.getElementById('coinCount'); if (el) el.textContent = coins;
         }
 
         // ==================== МАГАЗИН МОНЕТОК ====================
         function renderCoinShop() {
-            const list = document.getElementById('coinShopList');
-            if (!list) return;
+            const list = document.getElementById('coinShopList'); if (!list) return;
             list.innerHTML = '';
 
             const div1 = document.createElement('div');
@@ -572,17 +570,28 @@
             div2.innerHTML = `
                 <div class="shop-item-info">
                     <div class="shop-item-name">⚡ ×2 ко всему (5 мин)</div>
-                    <div class="shop-item-desc">Удваивает доход от кликов и CPS на 5 минут</div>
+                    <div class="shop-item-desc">Удваивает доход на 5 минут</div>
                 </div>
                 <button class="buy-btn" ${coins < 5 ? 'disabled' : ''} onclick="buyBoost()">Купить (5 💰)</button>
             `;
             list.appendChild(div2);
 
+            const div3 = document.createElement('div');
+            div3.className = 'shop-item';
+            div3.innerHTML = `
+                <div class="shop-item-info">
+                    <div class="shop-item-name">⏩ Пропустить смешивание</div>
+                    <div class="shop-item-desc">Мгновенно завершить смешивание путей</div>
+                </div>
+                <button class="buy-btn" ${coins < 10 || !mixingInProgress ? 'disabled' : ''} onclick="buySkipMix()">Купить (10 💰)</button>
+            `;
+            list.appendChild(div3);
+
             const events = [
-                { id: 'ghost', name: '👻 Призрак', icon: '👻' },
-                { id: 'rainbow', name: '🌈 Радуга', icon: '🌈' },
-                { id: 'space', name: '🚀 Космос', icon: '🚀' },
-                { id: 'chernobyl', name: '☢️ Чернобыль', icon: '☢️' }
+                { id: 'ghost', name: '👻 Призрак' },
+                { id: 'rainbow', name: '🌈 Радуга' },
+                { id: 'space', name: '🚀 Космос' },
+                { id: 'chernobyl', name: '☢️ Чернобыль' }
             ];
             events.forEach(ev => {
                 const div = document.createElement('div');
@@ -621,6 +630,14 @@
             activateEvent(eventName);
             updateCoinsUI(); saveState(); renderCoinShop();
             showToast(`Запущен ивент: ${eventName}`);
+        }
+
+        function buySkipMix() {
+            if (coins < 10) { showToast('Нужно 10 монеток'); return; }
+            if (!mixingInProgress) { showToast('Смешивание не идёт'); return; }
+            coins -= 10;
+            skipMixTime();
+            updateCoinsUI(); saveState(); renderCoinShop();
         }
 
         // ==================== УТИЛИТЫ ====================
@@ -672,23 +689,11 @@
             let minTime = Infinity;
             let isActive = false;
 
-            if (activeEvents.ghost) {
-                nearestEvent = '👻 Призрак';
-                minTime = eventEndTimes.ghost - now;
-                isActive = true;
-            } else if (activeEvents.rainbow) {
-                nearestEvent = '🌈 Радуга';
-                minTime = eventEndTimes.rainbow - now;
-                isActive = true;
-            } else if (activeEvents.space) {
-                nearestEvent = '🚀 Космос';
-                minTime = eventEndTimes.space - now;
-                isActive = true;
-            } else if (activeEvents.chernobyl) {
-                nearestEvent = '☢️ Чернобыль';
-                minTime = eventEndTimes.chernobyl - now;
-                isActive = true;
-            } else {
+            if (activeEvents.ghost) { nearestEvent = '👻 Призрак'; minTime = eventEndTimes.ghost - now; isActive = true; }
+            else if (activeEvents.rainbow) { nearestEvent = '🌈 Радуга'; minTime = eventEndTimes.rainbow - now; isActive = true; }
+            else if (activeEvents.space) { nearestEvent = '🚀 Космос'; minTime = eventEndTimes.space - now; isActive = true; }
+            else if (activeEvents.chernobyl) { nearestEvent = '☢️ Чернобыль'; minTime = eventEndTimes.chernobyl - now; isActive = true; }
+            else {
                 const slot = new Date().getHours() % 4;
                 const eventNames = ['👻 Призрак', '🌈 Радуга', '🚀 Космос', '☢️ Чернобыль'];
                 let nextSlot = (slot + 1) % 4;
@@ -729,22 +734,39 @@
                 boostActive = false;
                 showToast('⚡ Бум закончился');
             }
+
+            const mixerStatus = document.getElementById('mixerStatus');
+            if (mixerStatus) {
+                if (mixingInProgress) {
+                    const left = mixingEndTime - Date.now();
+                    if (left <= 0) {
+                        finishMixing();
+                    } else {
+                        mixerStatus.innerHTML = `<span style="color:#ffb347;">⏳ Смешивание... осталось ${formatTime(left)}</span>`;
+                    }
+                } else {
+                    mixerStatus.innerHTML = '';
+                }
+            }
         }
 
         setInterval(updateUI, 200);
 
         function saveState() {
             try {
-                localStorage.setItem('6a_state_v19', JSON.stringify({
+                const state = {
                     coffinCandy, clickerCandy, clickPower, autoClickers, luck, autoClickerSpeed, spawnRate, multiplier, coins,
-                    ownedPaths, activePath, diamondCodeUsed, siteAchievements, gameAchievements
-                }));
+                    ownedPaths, activePath, diamondCodeUsed, siteAchievements, gameAchievements,
+                    mixerSlots, mixingInProgress, mixingEndTime,
+                    mixedPaths: Object.keys(PATHS).filter(k => k.startsWith('mixed_')).map(k => ({ key: k, data: PATHS[k] }))
+                };
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
             } catch (e) {}
         }
 
         function loadState() {
             try {
-                const s = JSON.parse(localStorage.getItem('6a_state_v19'));
+                const s = JSON.parse(localStorage.getItem(STORAGE_KEY));
                 if (s) {
                     coffinCandy = s.coffinCandy ?? COFFIN_START_CANDY;
                     clickerCandy = s.clickerCandy ?? 0;
@@ -760,6 +782,14 @@
                     diamondCodeUsed = s.diamondCodeUsed || false;
                     if (s.siteAchievements) siteAchievements = s.siteAchievements;
                     if (s.gameAchievements) gameAchievements = s.gameAchievements;
+                    if (s.mixerSlots) mixerSlots = s.mixerSlots;
+                    if (s.mixingInProgress) mixingInProgress = s.mixingInProgress;
+                    if (s.mixingEndTime) mixingEndTime = s.mixingEndTime;
+                    if (s.mixedPaths) {
+                        s.mixedPaths.forEach(mp => {
+                            PATHS[mp.key] = mp.data;
+                        });
+                    }
                 }
             } catch (e) {}
         }
@@ -772,7 +802,136 @@
             
             if (name === 'team') unlockAchievement('team_view');
             if (name === 'site-achievements') renderSiteAchievements();
-            if (name === 'games') { renderGameAchievements(); renderCoinShop(); }
+            if (name === 'games') { renderGameAchievements(); renderCoinShop(); renderMixer(); }
+        }
+
+        // ==================== МАШИНА СМЕШИВАНИЯ ====================
+        function renderMixer() {
+            const slots = document.getElementById('mixerSlots'); if (!slots) return;
+            slots.innerHTML = '';
+            
+            if (mixerSlots.length === 0) {
+                slots.innerHTML = '<span style="color:#8a7a63;">Пока пусто. Добавь пути.</span>';
+            } else {
+                mixerSlots.forEach((key, i) => {
+                    const p = PATHS[key];
+                    const div = document.createElement('div');
+                    div.className = 'mixer-slot';
+                    let colorDot = p.color === 'rainbow' 
+                        ? `<span style="background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); width:15px; height:15px; border-radius:50%; display:inline-block;"></span>`
+                        : `<span class="path-color-dot" style="background:${p.color};"></span>`;
+                    div.innerHTML = `${colorDot} ${p.name} <button class="mixer-slot-remove" onclick="removeFromMixer(${i})">×</button>`;
+                    slots.appendChild(div);
+                });
+            }
+
+            const costEl = document.getElementById('mixerCost');
+            if (costEl) {
+                if (mixerSlots.length >= 2) {
+                    const totalCost = mixerSlots.reduce((sum, key) => sum + (PATHS[key].price || 0), 0);
+                    const extra = Math.ceil(totalCost * 0.2);
+                    costEl.textContent = `Доплата за смешивание: ${extra} 🍬`;
+                    costEl.dataset.cost = extra;
+                } else {
+                    costEl.textContent = 'Нужно минимум 2 пути';
+                    costEl.dataset.cost = 0;
+                }
+            }
+
+            const btnCont = document.getElementById('mixerButtons');
+            if (btnCont) {
+                if (mixingInProgress) {
+                    btnCont.innerHTML = `<button class="btn" style="background:#555;" disabled>⏳ Смешивание идёт...</button>`;
+                } else {
+                    btnCont.innerHTML = `
+                        <button class="btn" style="background:#ffa733;" onclick="startMixing()">🧪 Начать смешивание</button>
+                    `;
+                }
+            }
+        }
+
+        function addToMixerFromPath(key) {
+            if (mixingInProgress) { showToast('Смешивание уже идёт'); return; }
+            if (mixerSlots.length >= 5) { showToast('Максимум 5 путей в машине'); return; }
+            if (mixerSlots.includes(key)) { showToast('Этот путь уже в машине'); return; }
+            if (!ownedPaths.includes(key)) { showToast('Сначала купи этот путь'); return; }
+            
+            mixerSlots.push(key);
+            saveState(); renderMixer(); renderPaths();
+            showToast(`Добавлен в машину: ${PATHS[key].name}`);
+        }
+
+        function removeFromMixer(index) {
+            if (mixingInProgress) { showToast('Смешивание уже идёт'); return; }
+            mixerSlots.splice(index, 1);
+            saveState(); renderMixer(); renderPaths();
+        }
+
+        function startMixing() {
+            if (mixingInProgress) { showToast('Уже идёт смешивание'); return; }
+            if (mixerSlots.length < 2) { showToast('Нужно минимум 2 пути'); return; }
+            
+            const totalCost = mixerSlots.reduce((sum, key) => sum + (PATHS[key].price || 0), 0);
+            const extra = Math.ceil(totalCost * 0.2);
+            
+            if (clickerCandy < extra) { showToast(`Нужно ${extra} 🍬 для смешивания`); return; }
+            
+            clickerCandy -= extra;
+            mixingInProgress = true;
+            mixingEndTime = Date.now() + MIX_DURATION;
+            
+            saveState(); updateUI(); renderMixer(); renderPaths(); renderCoinShop();
+            showToast(`🧪 Смешивание началось! Через 10 минут получишь новый путь.`);
+        }
+
+        function skipMixTime() {
+            if (!mixingInProgress) { showToast('Смешивание не идёт'); return; }
+            mixingEndTime = Date.now() - 1;
+            finishMixing();
+            showToast('⏩ Время смешивания пропущено!');
+        }
+
+        function finishMixing() {
+            if (!mixingInProgress) return;
+            
+            const uniqueKey = 'mixed_' + Date.now();
+            const mixedName = '🧪 Смешанный (' + mixerSlots.map(k => PATHS[k].name.split(' ').slice(1).join(' ') || PATHS[k].name).join(' + ') + ')';
+            
+            // Собираем цвета из вложенных путей
+            const colors = mixerSlots.map(k => PATHS[k].color).filter(c => c && c !== 'rainbow');
+            let mixedColor;
+            if (colors.length >= 2) {
+                // Создаём градиент из всех цветов
+                mixedColor = 'linear-gradient(90deg, ' + colors.join(', ') + ')';
+            } else if (colors.length === 1) {
+                mixedColor = colors[0];
+            } else {
+                mixedColor = '#ff00ff';
+            }
+            
+            PATHS[uniqueKey] = {
+                name: mixedName,
+                color: mixedColor,
+                price: 0,
+                desc: 'Объединяет способности всех вложенных путей',
+                type: 'color',
+                mixedFrom: [...mixerSlots]
+            };
+            
+            ownedPaths.push(uniqueKey);
+            
+            mixerSlots.forEach(k => {
+                const idx = ownedPaths.indexOf(k);
+                if (idx > -1) ownedPaths.splice(idx, 1);
+            });
+            
+            mixerSlots = [];
+            mixingInProgress = false;
+            mixingEndTime = 0;
+            
+            unlockAchievement('mixer_first');
+            saveState(); renderPaths(); renderMixer(); updateUI(); renderCoinShop();
+            showToast(`🎉 Готово! Получен уникальный путь: ${mixedName}`);
         }
 
         // ==================== ПУТИ ====================
@@ -802,8 +961,7 @@
         }
 
         function renderPaths() {
-            const list = document.getElementById('pathShopList');
-            if (!list) return;
+            const list = document.getElementById('pathShopList'); if (!list) return;
             list.innerHTML = '';
             
             Object.keys(PATHS).forEach(key => {
@@ -815,13 +973,17 @@
                 
                 let price = p.price;
                 if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
-                if (radioCooldownEnd > Date.now() && !owned) price = 0;
 
                 const div = document.createElement('div');
                 div.className = 'path-item' + (owned ? ' owned' : '');
                 let colorDot = p.color === 'rainbow' 
                     ? `<span style="background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet); width:15px; height:15px; border-radius:50%; display:inline-block;"></span>`
-                    : `<span class="path-color-dot" style="background:${p.color};"></span>`;
+                    : (typeof p.color === 'string' && p.color.startsWith('linear-gradient')
+                        ? `<span style="background: ${p.color}; width:15px; height:15px; border-radius:50%; display:inline-block;"></span>`
+                        : `<span class="path-color-dot" style="background:${p.color};"></span>`);
+                
+                const inMixer = mixerSlots.includes(key);
+                const showMixerBtn = owned && !mixingInProgress && !inMixer && !key.startsWith('mixed_');
                 
                 div.innerHTML = `
                     <div class="path-title">${colorDot} ${p.name}</div>
@@ -829,10 +991,12 @@
                     ${owned 
                         ? `<div style="color:#4caf50; font-weight:700; font-size:0.9rem; margin-top:5px;">✅ Куплено</div>`
                         : (canBuy 
-                            ? `<button class="buy-path-btn" onclick="buyPath('${key}')">${price === 0 ? 'БЕСПЛАТНО' : `Купить за ${fmtCandy(price)}`}</button>`
+                            ? `<button class="buy-path-btn" onclick="buyPath('${key}')">Купить за ${fmtCandy(price)}</button>`
                             : `<div class="path-lock" style="margin-top:5px;">⚠️ ${lockReason}</div>`)
                     }
-                    ${owned ? `<button class="buy-path-btn" style="background:#4caf50; margin-top:5px;" onclick="setActivePath('${key}')">${activePath === key ? '✅ Активен' : 'Активировать'}</button>` : ''}
+                    ${owned ? `<button class="buy-path-btn" style="background:#4caf50;" onclick="setActivePath('${key}')">${activePath === key ? '✅ Активен' : 'Активировать'}</button>` : ''}
+                    ${showMixerBtn ? `<button class="buy-path-btn" style="background:#ff00ff; color:#fff;" onclick="addToMixerFromPath('${key}')">➕ В машину</button>` : ''}
+                    ${inMixer ? `<div style="color:#ff00ff; font-weight:700; font-size:0.85rem; margin-top:4px; text-align:center;">🧪 В машине</div>` : ''}
                 `;
                 list.appendChild(div);
             });
@@ -858,26 +1022,23 @@
         }
 
         function buyPath(key) {
-            const p = PATHS[key];
-            if (ownedPaths.includes(key)) return;
+            const p = PATHS[key]; if (ownedPaths.includes(key)) return;
             if (p.event && !activeEvents[p.event]) { showToast('Ивент не активен!'); return; }
             
             let price = p.price;
             if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
-            if (radioCooldownEnd > Date.now()) price = 0;
 
             if (clickerCandy < price) { showToast('Недостаточно конфет'); return; }
             clickerCandy -= price;
             ownedPaths.push(key);
-            saveState(); updateUI(); renderPaths();
+            saveState(); updateUI(); renderPaths(); renderMixer();
             showToast(`Куплен: ${p.name}`);
             unlockAchievement('first_path');
             if (ownedPaths.length >= 5) unlockAchievement('path_master');
             if (key === 'ghost') unlockAchievement('ghost_path');
             if (key === 'space') unlockAchievement('space_path');
             if (key === 'radio') unlockAchievement('radio_path');
-            updateGhosts();
-            updateStars();
+            updateGhosts(); updateStars();
         }
 
         function setActivePath(key) {
@@ -886,8 +1047,7 @@
             saveState(); renderPaths();
             showToast(`Активирован: ${PATHS[key].name}`);
             if (key === 'blue' || (isRainbowActive() && isColorPath('blue'))) startMagnet(); else stopMagnet();
-            updateGhosts();
-            updateStars();
+            updateGhosts(); updateStars();
         }
 
         // ==================== РАДИО ====================
@@ -917,9 +1077,7 @@
 
         // ==================== СПАВН ====================
         function spawnItem(type, forceMutations = false) {
-            const area = document.getElementById('clickArea');
-            if (!area) return;
-            
+            const area = document.getElementById('clickArea'); if (!area) return;
             const isSpace = activeEvents.space;
             if (!isSpace && area.querySelectorAll('.spawn-item').length >= 15) return;
 
@@ -939,12 +1097,9 @@
                 x = pad + Math.random() * (area.clientWidth - pad * 2);
                 y = pad + Math.random() * (area.clientHeight - pad * 2);
             }
-            el.style.left = x + 'px'; 
-            el.style.top = y + 'px';
+            el.style.left = x + 'px'; el.style.top = y + 'px';
 
-            let mult = 1;
-            let colorGlow = null;
-            let mutationType = null;
+            let mult = 1; let colorGlow = null; let mutationType = null;
 
             if (type === 'golden') { mult = 5000; colorGlow = '#ffd700'; }
             else if (type === 'diamond') { mult = 25000; colorGlow = '#00ffff'; }
@@ -967,8 +1122,6 @@
                 colorGlow = mutationType === 'fire' ? '#ff5500' : mutationType === 'star' ? '#fff' : mutationType === 'ghost' ? '#88ccff' : '#55ff00';
             }
 
-            if (forceMutations || (activeEvents.ghost && Math.random() < 0.1)) { mult *= 10; colorGlow = '#88ccff'; mutationType = 'ghost'; }
-
             if (colorGlow) {
                 if (colorGlow === 'rainbow') el.style.animation = 'rainbowSpin 2s infinite linear';
                 else el.style.filter = `drop-shadow(0 0 15px ${colorGlow})`;
@@ -988,6 +1141,8 @@
 
             el.onclick = (ev) => {
                 ev.stopPropagation();
+                unlockAchievement('first_click');
+                
                 const redMod = getPathMod('red');
                 if (redMod > 0 && Math.random() < 0.1 * redMod) { collectAllItems(); return; }
                 
@@ -1086,7 +1241,6 @@
         }
         function stopMagnet() { if (magnetInterval) clearInterval(magnetInterval); }
 
-        // ==================== ЗВЁЗДНЫЙ ПУТЬ ====================
         let starInterval = null;
         function updateStars() {
             const spaceMod = getPathMod('space');
@@ -1106,7 +1260,6 @@
                             setTimeout(() => { 
                                 if (target.parentNode) {
                                     target.classList.add('star-hit');
-                                    const oldOnclick = target.onclick;
                                     target.onclick = (ev) => {
                                         ev.stopPropagation();
                                         let reward = getClickPower() * 50;
@@ -1126,7 +1279,6 @@
             }
         }
 
-        // ==================== ПРИЗРАЧНЫЙ ПУТЬ ====================
         function updateGhosts() {
             const ghostMod = getPathMod('ghost');
             if (ghostMod > 0) {
@@ -1138,17 +1290,11 @@
                             const tRect = target.getBoundingClientRect();
                             
                             const ghost = document.createElement('div');
-                            ghost.className = 'ghost-flyer';
-                            ghost.textContent = '👻';
-                            ghost.style.left = (tRect.left - 100) + 'px';
-                            ghost.style.top = (tRect.top + 50) + 'px';
+                            ghost.className = 'ghost-flyer'; ghost.textContent = '👻';
+                            ghost.style.left = (tRect.left - 100) + 'px'; ghost.style.top = (tRect.top + 50) + 'px';
                             document.body.appendChild(ghost);
 
-                            setTimeout(() => {
-                                ghost.style.left = tRect.left + 'px';
-                                ghost.style.top = tRect.top + 'px';
-                                ghost.style.transform = 'scale(1.5)';
-                            }, 100);
+                            setTimeout(() => { ghost.style.left = tRect.left + 'px'; ghost.style.top = tRect.top + 'px'; ghost.style.transform = 'scale(1.5)'; }, 100);
 
                             setTimeout(() => {
                                 if (target.parentNode) {
@@ -1168,7 +1314,6 @@
             }
         }
 
-        // ==================== КОСМОС ====================
         function startSpaceEvent() {
             activeEvents.space = true;
             const duration = activePath === 'lilac' || (isRainbowActive() && isColorPath('lilac')) ? EVENT_DURATION * 1.2 : EVENT_DURATION;
@@ -1181,77 +1326,38 @@
             document.body.classList.remove('space-active');
             if (spaceRAF) clearInterval(spaceRAF);
             document.querySelectorAll('.space-star, .space-meteor').forEach(e => e.remove());
-            document.querySelectorAll('.spawn-item').forEach(e => {
-                if (e.parentNode === document.body) e.remove();
-            });
+            document.querySelectorAll('.spawn-item').forEach(e => { if (e.parentNode === document.body) e.remove(); });
         }
 
-        // ==================== ИВЕНТЫ ====================
         function activateEvent(type) {
-            if (type === 'none') {
-                deactivateAllEvents();
-                return;
-            }
-            
+            if (type === 'none') { deactivateAllEvents(); return; }
             const now = Date.now();
             const duration = activePath === 'lilac' || (isRainbowActive() && isColorPath('lilac')) ? EVENT_DURATION * 1.2 : EVENT_DURATION;
             
             activeEvents[type] = true;
             eventEndTimes[type] = now + duration;
 
-            if (type === 'ghost') {
-                document.body.classList.add('ghost-active');
-                showToast('👻 ПРИЗРАК!');
-            } else if (type === 'rainbow') {
-                document.body.classList.add('rainbow-active');
-                showToast('🌈 РАДУГА!');
-            } else if (type === 'space') {
-                startSpaceEvent();
-            } else if (type === 'chernobyl') {
-                document.body.classList.add('chernobyl-active');
-                radioCooldownEnd = Date.now() + 30 * 60 * 1000;
-                showToast('☢️ ЧЕРНОБЫЛЬ!');
-            }
+            if (type === 'ghost') { document.body.classList.add('ghost-active'); showToast('👻 ПРИЗРАК!'); }
+            else if (type === 'rainbow') { document.body.classList.add('rainbow-active'); showToast('🌈 РАДУГА!'); }
+            else if (type === 'space') { startSpaceEvent(); }
+            else if (type === 'chernobyl') { document.body.classList.add('chernobyl-active'); radioCooldownEnd = Date.now() + 30 * 60 * 1000; showToast('☢️ ЧЕРНОБЫЛЬ!'); }
             renderPaths();
         }
 
         function deactivateEvent(type) {
-            if (type === 'ghost') {
-                activeEvents.ghost = false;
-                document.body.classList.remove('ghost-active');
-            } else if (type === 'rainbow') {
-                activeEvents.rainbow = false;
-                document.body.classList.remove('rainbow-active');
-            } else if (type === 'space') {
-                stopSpaceEvent();
-            } else if (type === 'chernobyl') {
-                activeEvents.chernobyl = false;
-                document.body.classList.remove('chernobyl-active');
-            }
+            if (type === 'ghost') { activeEvents.ghost = false; document.body.classList.remove('ghost-active'); }
+            else if (type === 'rainbow') { activeEvents.rainbow = false; document.body.classList.remove('rainbow-active'); }
+            else if (type === 'space') { stopSpaceEvent(); }
+            else if (type === 'chernobyl') { activeEvents.chernobyl = false; document.body.classList.remove('chernobyl-active'); }
             renderPaths();
         }
 
-        function deactivateAllEvents() {
-            deactivateEvent('ghost');
-            deactivateEvent('rainbow');
-            deactivateEvent('chernobyl');
-            deactivateEvent('space');
-        }
-
-        function forceEvent(type) {
-            if (type === 'none') {
-                deactivateAllEvents();
-                showToast('Все ивенты выключены');
-            } else {
-                activateEvent(type);
-            }
-        }
+        function deactivateAllEvents() { deactivateEvent('ghost'); deactivateEvent('rainbow'); deactivateEvent('chernobyl'); deactivateEvent('space'); }
+        function forceEvent(type) { if (type === 'none') { deactivateAllEvents(); showToast('Все ивенты выключены'); } else { activateEvent(type); } }
 
         function checkEvents() {
             const now = new Date();
-            const h = now.getHours();
-            const m = now.getMinutes();
-            const currentTime = Date.now();
+            const h = now.getHours(); const m = now.getMinutes(); const currentTime = Date.now();
 
             if (activeEvents.ghost && currentTime >= eventEndTimes.ghost) deactivateEvent('ghost');
             if (activeEvents.rainbow && currentTime >= eventEndTimes.rainbow) deactivateEvent('rainbow');
@@ -1269,27 +1375,24 @@
         setInterval(checkEvents, 10000);
 
         // ==================== СЕКРЕТНЫЙ РЕЖИМ ====================
-        function toggleSecretPrompt() { 
-            const p = document.getElementById('secretPrompt'); 
-            p.style.display = p.style.display === 'none' ? 'block' : 'none'; 
-        }
+        function toggleSecretPrompt() { const p = document.getElementById('secretPrompt'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
 
         function checkPassword() {
             const val = document.getElementById('secretPassword').value;
             if (val === SECRET_PASSWORD_FULL) {
-                secretModeActive = true;
-                secretModeType = 'full';
+                secretModeActive = true; secretModeType = 'full';
                 document.getElementById('secretPanel').classList.add('visible');
                 document.getElementById('secretModeName').textContent = '(ПОЛНЫЙ)';
                 document.getElementById('eventAdminPanel').style.display = 'block';
+                document.getElementById('adminMixerPanel').style.display = 'block';
                 document.getElementById('secretPrompt').style.display = 'none';
                 showToast('🔓 Вход в ПОЛНЫЙ режим.');
             } else if (val === SECRET_PASSWORD_ADMIN) {
-                secretModeActive = true;
-                secretModeType = 'admin';
+                secretModeActive = true; secretModeType = 'admin';
                 document.getElementById('secretPanel').classList.add('visible');
                 document.getElementById('secretModeName').textContent = '(АДМИН)';
                 document.getElementById('eventAdminPanel').style.display = 'none';
+                document.getElementById('adminMixerPanel').style.display = 'none';
                 document.getElementById('secretPrompt').style.display = 'none';
                 showToast('🔓 Вход в режим АДМИНКА');
             } else if (val === SECRET_PASSWORD_DIAMOND && !diamondCodeUsed) {
@@ -1297,9 +1400,7 @@
                 for (let i = 0; i < 3; i++) setTimeout(() => spawnItem('diamond'), i * 500);
                 document.getElementById('secretPrompt').style.display = 'none';
                 showToast('💎 Промокод активирован!');
-            } else {
-                showToast('❌ Неверный пароль');
-            }
+            } else { showToast('❌ Неверный пароль'); }
             document.getElementById('secretPassword').value = '';
         }
 
@@ -1308,17 +1409,16 @@
             let val = parseFloat(document.getElementById('addCandyInput').value);
             if (isNaN(val)) return;
             if (secretModeType === 'admin' && val > 50000) val = 50000;
-            
             clickerCandy += val;
             updateUI(); saveState();
             showToast(`Начислено: ${val}`);
         }
 
         function closeSecretPanel() {
-            secretModeActive = false;
-            secretModeType = null;
+            secretModeActive = false; secretModeType = null;
             document.getElementById('secretPanel').classList.remove('visible');
             document.getElementById('eventAdminPanel').style.display = 'none';
+            document.getElementById('adminMixerPanel').style.display = 'none';
             document.getElementById('secretPassword').value = '';
         }
 
@@ -1333,15 +1433,13 @@
         ];
 
         function renderShop() {
-            const list = document.getElementById('shopList');
-            if (!list) return;
+            const list = document.getElementById('shopList'); if (!list) return;
             list.innerHTML = '';
             SHOP_ITEMS.forEach(item => {
                 const level = item.getLevel();
                 const maxed = level >= item.maxLevel;
                 let price = Math.ceil(item.basePrice * Math.pow(1.5, level));
                 if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
-                if (radioCooldownEnd > Date.now() && !maxed) price = 0;
 
                 const div = document.createElement('div');
                 div.className = 'shop-item' + (maxed ? ' owned' : '');
@@ -1351,7 +1449,7 @@
                         <div class="shop-item-level">Ур: ${level}/${item.maxLevel}</div>
                     </div>
                     <button class="buy-btn" ${maxed ? 'disabled' : ''} onclick="buyItem('${item.id}')">
-                        ${maxed ? '✅' : `${price === 0 ? 'БЕСПЛАТНО' : price} 🍬`}
+                        ${maxed ? '✅' : `${price} 🍬`}
                     </button>
                 `;
                 list.appendChild(div);
@@ -1364,7 +1462,6 @@
             if (level >= item.maxLevel) return;
             let price = Math.ceil(item.basePrice * Math.pow(1.5, level));
             if (activePath === 'indigo' || (isRainbowActive() && isColorPath('indigo'))) price *= 0.8;
-            if (radioCooldownEnd > Date.now()) price = 0;
             if (clickerCandy < price) { showToast('Нет конфет'); return; }
             clickerCandy -= price;
             item.apply();
@@ -1372,7 +1469,6 @@
             saveState(); updateUI(); renderShop();
         }
 
-        // ==================== ФИОЛЕТОВЫЙ ====================
         function spawnOmniItem() {
             if (violetCooldownEnd > Date.now()) return;
             const types = ['golden', 'diamond', 'rainbow', 'ghost', 'meteor', 'radioctive'];
@@ -1390,6 +1486,7 @@
         renderSiteAchievements();
         renderGameAchievements();
         renderCoinShop();
+        renderMixer();
         setInterval(() => {
             clickerCandy += getTotalCPS() * 0.1;
             updateUI(); saveState();
@@ -1397,7 +1494,6 @@
         setInterval(() => { renderPaths(); renderShop(); renderCoinShop(); }, 1000);
         checkEvents();
 
-        // Таймеры ивентов на главной
         setInterval(() => {
             const now = Date.now();
             const timer1 = document.getElementById('timer1');
@@ -1407,42 +1503,29 @@
             const end1 = new Date('2026-10-20T00:00:00').getTime();
             const ms1 = end1 - now;
             if (ms1 <= 0) { timer1.textContent = 'Завершён'; timer1.style.color = '#ff6b6b'; }
-            else { 
-                const totalSec = Math.floor(ms1 / 1000);
-                const d = Math.floor(totalSec / 86400);
-                const h = Math.floor((totalSec % 86400) / 3600);
-                const m = Math.floor((totalSec % 3600) / 60);
-                timer1.textContent = `${d}д ${h}ч ${m}м`;
-            }
+            else { const totalSec = Math.floor(ms1 / 1000); const d = Math.floor(totalSec / 86400); const h = Math.floor((totalSec % 86400) / 3600); const m = Math.floor((totalSec % 3600) / 60); timer1.textContent = `${d}д ${h}ч ${m}м`; }
 
             const end2 = new Date('2026-10-24T00:00:00').getTime();
             const ms2 = end2 - now;
             if (ms2 <= 0) { timer2.textContent = 'Завершён'; timer2.style.color = '#ff6b6b'; }
-            else {
-                const totalSec = Math.floor(ms2 / 1000);
-                const d = Math.floor(totalSec / 86400);
-                const h = Math.floor((totalSec % 86400) / 3600);
-                const m = Math.floor((totalSec % 3600) / 60);
-                timer2.textContent = `${d}д ${h}ч ${m}м`;
-            }
+            else { const totalSec = Math.floor(ms2 / 1000); const d = Math.floor(totalSec / 86400); const h = Math.floor((totalSec % 86400) / 3600); const m = Math.floor((totalSec % 3600) / 60); timer2.textContent = `${d}д ${h}ч ${m}м`; }
         }, 1000);
 
-        // След за курсором
         document.addEventListener('mousemove', (e) => {
             if (!activePath || activePath === 'blue') return;
-            const p = PATHS[activePath];
-            if (!p) return;
+            const p = PATHS[activePath]; if (!p) return;
             if (Math.random() < 0.3) {
-                const el = document.createElement('div');
-                el.className = 'trail-particle';
+                const el = document.createElement('div'); el.className = 'trail-particle';
                 el.style.left = e.clientX + 'px'; el.style.top = e.clientY + 'px';
                 let color = p.color;
                 if (color === 'rainbow') color = `hsl(${Math.random()*360}, 100%, 50%)`;
-                el.style.background = color;
-                el.style.boxShadow = `0 0 10px ${color}`;
+                else if (typeof color === 'string' && color.startsWith('linear-gradient')) {
+                    const parts = color.replace('linear-gradient(90deg, ', '').replace(')', '').split(',');
+                    color = parts[Math.floor(Math.random() * parts.length)].trim();
+                }
+                el.style.background = color; el.style.boxShadow = `0 0 10px ${color}`;
                 el.style.width = '10px'; el.style.height = '10px';
-                document.body.appendChild(el);
-                setTimeout(() => el.remove(), 800);
+                document.body.appendChild(el); setTimeout(() => el.remove(), 800);
             }
         });
 
@@ -1473,6 +1556,11 @@
         window.exchangeCoins = exchangeCoins;
         window.buyBoost = buyBoost;
         window.buyEvent = buyEvent;
+        window.addToMixerFromPath = addToMixerFromPath;
+        window.removeFromMixer = removeFromMixer;
+        window.startMixing = startMixing;
+        window.skipMixTime = skipMixTime;
+        window.buySkipMix = buySkipMix;
     </script>
 </body>
 </html>
