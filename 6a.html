@@ -10,7 +10,6 @@
         
         body { background: #0b0b0b; background-image: radial-gradient(circle at 10% 20%, #1e1a0f 0%, #0a0705 90%); color: #e6e6e6; min-height: 100vh; display: flex; flex-direction: column; align-items: center; padding: 20px; position: relative; overflow-x: hidden; transition: background 0.8s, color 0.5s; }
         
-        /* ===== ИВЕНТЫ ===== */
         body.ghost-active { background: #121212; color: #d0e0ff; }
         body.ghost-active .container { background: rgba(20, 20, 25, 0.92); border-color: #88ccff; box-shadow: 0 0 40px #88ccff66; }
         body.ghost-active h1 { color: #aaddff; }
@@ -28,7 +27,6 @@
         body.chernobyl-active h1 { color: #aaffaa; }
         body.chernobyl-active h1 span { background: #55ff00; color: #0a0a1a; }
 
-        /* 🚀 КОСМОС */
         body.space-active { background: #000; }
         body.space-active .bat { display: none !important; }
         body.space-active .container { background: transparent; border-color: transparent; box-shadow: none; opacity: 0.6; }
@@ -48,7 +46,6 @@
         body.space-active h1 span { background: #fff; color: #000; }
         body.space-active .tab-btn.active { background: #fff; border-color: #fff; color: #000; }
 
-        /* Призраки вместо мышек */
         body.ghost-active .bat { display: none !important; }
         .ghost-decor { display: none; position: fixed; color: #88ccff; font-size: 2rem; opacity: 0.7; pointer-events: none; z-index: 0; text-shadow: 0 0 15px #88ccff; animation: floatBat 12s infinite alternate ease-in-out; }
         .ghost-decor.g1 { top: 15%; right: 5%; animation-duration: 15s; }
@@ -302,6 +299,8 @@
                     <button class="secret-spawn-btn" onclick="spawnSpecific('rainbow')"><img src="rainbow_pumpkin_bucket.png"> Радужное</button>
                     <button class="secret-spawn-btn" onclick="spawnSpecific('meteor')"><img src="meteor_pumpkin_bucket.png"> Метеор</button>
                     <button class="secret-spawn-btn" onclick="spawnSpecific('radioctive')"><img src="radioctive_pumpkin_bucket.png"> Радиоактивное</button>
+                    <button class="secret-spawn-btn" onclick="spawnStarAdmin()"><div style="font-size:2rem;">✦</div> Звезда</button>
+                    <button class="secret-spawn-btn" onclick="spawnMeteorAdmin()"><div style="font-size:2rem;">☄️</div> Метеорит</button>
                 </div>
 
                 <div style="margin-top:1.5rem; border-top:1px solid #4a3a25; padding-top:1.5rem;">
@@ -464,13 +463,14 @@
         let activeEvents = { ghost: false, rainbow: false, chernobyl: false, space: false };
         let eventEndTimes = { ghost: 0, rainbow: 0, chernobyl: 0, space: 0 };
         let spaceRAF = null;
+        let spaceStarRAF = null;
         let ghostInterval = null;
+        let starInterval = null;
 
         let mixerSlots = [];
         let mixingInProgress = false;
         let mixingEndTime = 0;
 
-        // ==================== СМЕШИВАНИЕ ЦВЕТОВ ====================
         function hexToRgb(hex) {
             const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
             return result ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) } : { r: 255, g: 0, b: 255 };
@@ -576,7 +576,6 @@
 
         function updateCoinsUI() { const el = document.getElementById('coinCount'); if (el) el.textContent = coins; }
 
-        // ==================== МАГАЗИН МОНЕТОК ====================
         function renderCoinShop() {
             const list = document.getElementById('coinShopList'); if (!list) return;
             list.innerHTML = '';
@@ -662,7 +661,6 @@
             updateCoinsUI(); saveState(); renderCoinShop();
         }
 
-        // ==================== УТИЛИТЫ ====================
         function showToast(msg) {
             const t = document.getElementById('toast');
             t.textContent = msg; t.classList.add('show');
@@ -679,7 +677,6 @@
             return h > 0 ? `${pad(h)}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
         }
 
-        // ВАЖНО: все активные пути
         function getActivePaths() {
             const active = new Set();
             if (!activePath) return active;
@@ -697,10 +694,18 @@
             return getActivePaths().has(key);
         }
 
+        function isRainbowActive() {
+            return hasActivePath('rainbow');
+        }
+
         function getPathMod(key) {
             if (hasActivePath(key)) return 1;
             if (isRainbowActive() && isColorPath(key)) return 0.33;
             return 0;
+        }
+
+        function isColorPath(key) {
+            return PATHS[key] && PATHS[key].type === 'color';
         }
 
         function getTotalCPS() {
@@ -843,7 +848,6 @@
             if (name === 'games') { renderGameAchievements(); renderCoinShop(); renderMixer(); }
         }
 
-        // ==================== МАШИНА СМЕШИВАНИЯ ====================
         function renderMixer() {
             const slots = document.getElementById('mixerSlots'); if (!slots) return;
             slots.innerHTML = '';
@@ -980,10 +984,10 @@
             
             unlockAchievement('mixer_first');
             saveState(); renderPaths(); renderMixer(); updateUI(); renderCoinShop();
+            updateGhosts(); updateStars(); updateMagnetState();
             showToast(`🎉 Готово! Получен уникальный путь: ${mixedName}`);
         }
 
-        // ==================== ПУТИ ====================
         const PATHS = {
             red:    { name: '🔴 Красный', color: '#ff0000', price: 100000, desc: '10% шанс собрать все предметы', type: 'color' },
             orange: { name: '🟠 Оранжевый', color: '#ff8800', price: 250000, desc: '5% шанс мутации огня (×8)', type: 'color' },
@@ -1000,14 +1004,6 @@
             space:  { name: '🚀 Звёздный', color: '#ffffff', price: 10000000, desc: 'Всегда падают звёзды ×50 (только при экипировке)', type: 'event', event: 'space' },
             radio:  { name: '☢️ Радиоактивный', color: '#55ff00', price: 5000000, desc: 'Раз в 30 мин делает 1 предмет/улучшение бесплатным (только при экипировке)', type: 'event', event: 'chernobyl' }
         };
-
-        function isRainbowActive() {
-            return hasActivePath('rainbow');
-        }
-
-        function isColorPath(key) {
-            return PATHS[key] && PATHS[key].type === 'color';
-        }
 
         function renderPaths() {
             const list = document.getElementById('pathShopList'); if (!list) return;
@@ -1048,7 +1044,7 @@
 
             const spCont = document.getElementById('specialPathBtnContainer');
             spCont.innerHTML = '';
-            if (ownedPaths.includes('violet') && hasActivePath('violet')) {
+            if (hasActivePath('violet')) {
                 const cd = violetCooldownEnd - Date.now();
                 if (cd > 0) {
                     spCont.innerHTML = `<button class="btn" disabled>Перезарядка: ${Math.ceil(cd/1000)}с</button>`;
@@ -1056,7 +1052,7 @@
                     spCont.innerHTML = `<button class="btn" style="background:#ff00ff; color:white;" onclick="spawnOmniItem()">🎲 Спавн Омни-предмета</button>`;
                 }
             }
-            if (ownedPaths.includes('radio') && hasActivePath('radio')) {
+            if (hasActivePath('radio')) {
                 const cd = radioCooldownEnd - Date.now();
                 if (cd > 0) {
                     spCont.innerHTML += `<button class="btn" disabled>Радио: перезарядка ${Math.ceil(cd/1000)}с</button>`;
@@ -1086,17 +1082,20 @@
             updateGhosts(); updateStars();
         }
 
+        function updateMagnetState() {
+            if (hasActivePath('blue') || (isRainbowActive() && isColorPath('blue'))) startMagnet(); else stopMagnet();
+        }
+
         function setActivePath(key) {
             if (!ownedPaths.includes(key)) return;
             activePath = key;
             saveState(); renderPaths();
             showToast(`Активирован: ${PATHS[key].name}`);
             
-            if (hasActivePath('blue') || (isRainbowActive() && isColorPath('blue'))) startMagnet(); else stopMagnet();
+            updateMagnetState();
             updateGhosts(); updateStars();
         }
 
-        // ==================== РАДИО ====================
         function activateRadioFree() {
             if (radioCooldownEnd > Date.now()) return;
             const isItem = Math.random() < 0.5;
@@ -1121,7 +1120,6 @@
             renderPaths();
         }
 
-        // ==================== СПАВН ====================
         function spawnItem(type, forceMutations = false) {
             const area = document.getElementById('clickArea'); if (!area) return;
             const isSpace = activeEvents.space;
@@ -1241,17 +1239,7 @@
                     if (activeEvents.space) {
                         spawnItem(Math.random() > 0.5 ? 'candy1' : 'candy2');
                         if (Math.random() < 0.002) {
-                            const meteor = document.createElement('img');
-                            meteor.src = ICONS.meteor; meteor.className = 'space-meteor';
-                            meteor.style.left = '0px'; meteor.style.top = Math.random() * window.innerHeight + 'px';
-                            meteor.style.setProperty('--dx', window.innerWidth + 'px'); meteor.style.setProperty('--dy', (Math.random() - 0.5) * window.innerHeight + 'px');
-                            document.body.appendChild(meteor);
-                            setTimeout(() => {
-                                meteor.remove();
-                                clickerCandy /= 1.2;
-                                showToast('💥 Метеорит!');
-                                spawnItem('meteor');
-                            }, 2000);
+                            spawnMeteorFalling();
                         }
                     } else {
                         const types = ['candy1', 'candy2', 'bucket'];
@@ -1268,7 +1256,62 @@
             requestAnimationFrame(loop);
         }
 
-        // ==================== СПОСОБНОСТИ ====================
+        function spawnMeteorFalling() {
+            const meteor = document.createElement('img');
+            meteor.src = ICONS.meteor; meteor.className = 'space-meteor';
+            meteor.style.left = '0px'; meteor.style.top = Math.random() * window.innerHeight + 'px';
+            meteor.style.setProperty('--dx', window.innerWidth + 'px'); meteor.style.setProperty('--dy', (Math.random() - 0.5) * window.innerHeight + 'px');
+            document.body.appendChild(meteor);
+            setTimeout(() => {
+                meteor.remove();
+                clickerCandy /= 1.2;
+                showToast('💥 Метеорит!');
+                spawnItem('meteor');
+            }, 2000);
+        }
+
+        function spawnStarAdmin() {
+            const items = document.querySelectorAll('.spawn-item');
+            let target = null;
+            if (items.length > 0) {
+                target = items[Math.floor(Math.random() * items.length)];
+            }
+            const star = document.createElement('div');
+            star.className = 'space-star'; star.textContent = '✦';
+            star.style.left = '0px'; star.style.top = Math.random() * window.innerHeight + 'px';
+            if (target) {
+                const tRect = target.getBoundingClientRect();
+                star.style.setProperty('--dx', tRect.left + 'px');
+                star.style.setProperty('--dy', tRect.top + 'px');
+            } else {
+                star.style.setProperty('--dx', (Math.random() * window.innerWidth) + 'px');
+                star.style.setProperty('--dy', (Math.random() * window.innerHeight) + 'px');
+            }
+            star.style.animation = 'starMove 2s linear forwards';
+            document.body.appendChild(star);
+            setTimeout(() => {
+                if (target && target.parentNode) {
+                    target.classList.add('star-hit');
+                    target.onclick = (ev) => {
+                        ev.stopPropagation();
+                        let reward = getClickPower() * 50;
+                        clickerCandy += reward;
+                        updateUI(); saveState();
+                        spawnFloatText(ev.clientX, ev.clientY, `+${fmtCandy(reward)}`);
+                        target.remove();
+                    };
+                    showToast('⭐ Звезда попала в конфетку! ×50');
+                }
+                star.remove();
+            }, 2000);
+            showToast('✦ Звезда заспавнена!');
+        }
+
+        function spawnMeteorAdmin() {
+            spawnMeteorFalling();
+            showToast('☄️ Метеорит заспавнен!');
+        }
+
         let magnetInterval = null;
         function startMagnet() {
             if (magnetInterval) clearInterval(magnetInterval);
@@ -1287,76 +1330,69 @@
         }
         function stopMagnet() { if (magnetInterval) clearInterval(magnetInterval); }
 
-        let starInterval = null;
         function updateStars() {
+            if (starInterval) { clearInterval(starInterval); starInterval = null; }
             const spaceMod = getPathMod('space');
             if (spaceMod > 0) {
-                if (!starInterval) {
-                    starInterval = setInterval(() => {
-                        const items = document.querySelectorAll('.spawn-item');
-                        if (items.length > 0 && Math.random() < 0.3) {
-                            const target = items[Math.floor(Math.random() * items.length)];
-                            const tRect = target.getBoundingClientRect();
-                            const star = document.createElement('div');
-                            star.className = 'space-star'; star.textContent = '✦';
-                            star.style.left = '0px'; star.style.top = Math.random() * window.innerHeight + 'px';
-                            star.style.setProperty('--dx', tRect.left + 'px'); star.style.setProperty('--dy', tRect.top + 'px');
-                            star.style.animation = 'starMove 2s linear forwards';
-                            document.body.appendChild(star);
-                            setTimeout(() => { 
-                                if (target.parentNode) {
-                                    target.classList.add('star-hit');
-                                    target.onclick = (ev) => {
-                                        ev.stopPropagation();
-                                        let reward = getClickPower() * 50;
-                                        clickerCandy += reward;
-                                        updateUI(); saveState();
-                                        spawnFloatText(ev.clientX, ev.clientY, `+${fmtCandy(reward)}`);
-                                        target.remove();
-                                    };
-                                }
-                                star.remove(); 
-                            }, 2000);
-                        }
-                    }, 1500);
-                }
-            } else {
-                if (starInterval) { clearInterval(starInterval); starInterval = null; }
+                starInterval = setInterval(() => {
+                    const items = document.querySelectorAll('.spawn-item');
+                    if (items.length > 0 && Math.random() < 0.3) {
+                        const target = items[Math.floor(Math.random() * items.length)];
+                        const tRect = target.getBoundingClientRect();
+                        const star = document.createElement('div');
+                        star.className = 'space-star'; star.textContent = '✦';
+                        star.style.left = '0px'; star.style.top = Math.random() * window.innerHeight + 'px';
+                        star.style.setProperty('--dx', tRect.left + 'px'); star.style.setProperty('--dy', tRect.top + 'px');
+                        star.style.animation = 'starMove 2s linear forwards';
+                        document.body.appendChild(star);
+                        setTimeout(() => { 
+                            if (target.parentNode) {
+                                target.classList.add('star-hit');
+                                target.onclick = (ev) => {
+                                    ev.stopPropagation();
+                                    let reward = getClickPower() * 50;
+                                    clickerCandy += reward;
+                                    updateUI(); saveState();
+                                    spawnFloatText(ev.clientX, ev.clientY, `+${fmtCandy(reward)}`);
+                                    target.remove();
+                                };
+                            }
+                            star.remove(); 
+                        }, 2000);
+                    }
+                }, 1500);
             }
         }
 
         function updateGhosts() {
+            if (ghostInterval) { clearInterval(ghostInterval); ghostInterval = null; }
             const ghostMod = getPathMod('ghost');
             if (ghostMod > 0) {
-                if (!ghostInterval) {
-                    ghostInterval = setInterval(() => {
-                        const items = document.querySelectorAll('.spawn-item');
-                        if (items.length > 0 && Math.random() < 0.4) {
-                            const target = items[Math.floor(Math.random() * items.length)];
-                            const tRect = target.getBoundingClientRect();
-                            
-                            const ghost = document.createElement('div');
-                            ghost.className = 'ghost-flyer'; ghost.textContent = '👻';
-                            ghost.style.left = (tRect.left - 100) + 'px'; ghost.style.top = (tRect.top + 50) + 'px';
-                            document.body.appendChild(ghost);
+                ghostInterval = setInterval(() => {
+                    const items = document.querySelectorAll('.spawn-item');
+                    if (items.length > 0 && Math.random() < 0.4) {
+                        const target = items[Math.floor(Math.random() * items.length)];
+                        const tRect = target.getBoundingClientRect();
+                        
+                        const ghost = document.createElement('div');
+                        ghost.className = 'ghost-flyer'; ghost.textContent = '👻';
+                        ghost.style.left = (tRect.left - 100) + 'px'; ghost.style.top = (tRect.top + 50) + 'px';
+                        document.body.appendChild(ghost);
 
-                            setTimeout(() => { ghost.style.left = tRect.left + 'px'; ghost.style.top = tRect.top + 'px'; ghost.style.transform = 'scale(1.5)'; }, 100);
+                        setTimeout(() => { ghost.style.left = tRect.left + 'px'; ghost.style.top = tRect.top + 'px'; ghost.style.transform = 'scale(1.5)'; }, 100);
 
-                            setTimeout(() => {
-                                if (target.parentNode) {
-                                    const reward = getClickPower() * 5;
-                                    clickerCandy += reward;
-                                    updateUI(); saveState();
-                                    spawnFloatText(tRect.left, tRect.top, `+${fmtCandy(reward)}`);
-                                    target.remove();
-                                }
-                                ghost.remove();
-                            }, 1500);
-                        }
-                    }, 1000);
-                }
-            } else {
-                if (ghostInterval) { clearInterval(ghostInterval); ghostInterval = null; }
+                        setTimeout(() => {
+                            if (target.parentNode) {
+                                const reward = getClickPower() * 5;
+                                clickerCandy += reward;
+                                updateUI(); saveState();
+                                spawnFloatText(tRect.left, tRect.top, `+${fmtCandy(reward)}`);
+                                target.remove();
+                            }
+                            ghost.remove();
+                        }, 1500);
+                    }
+                }, 1000);
             }
         }
 
@@ -1366,11 +1402,42 @@
             eventEndTimes.space = Date.now() + duration;
             document.body.classList.add('space-active');
             showToast('🚀 КОСМОС!');
+            
+            if (spaceStarRAF) clearInterval(spaceStarRAF);
+            spaceStarRAF = setInterval(() => {
+                if (!activeEvents.space) return;
+                const items = document.querySelectorAll('.spawn-item');
+                if (items.length > 0 && Math.random() < 0.4) {
+                    const target = items[Math.floor(Math.random() * items.length)];
+                    const tRect = target.getBoundingClientRect();
+                    const star = document.createElement('div');
+                    star.className = 'space-star'; star.textContent = '✦';
+                    star.style.left = '0px'; star.style.top = Math.random() * window.innerHeight + 'px';
+                    star.style.setProperty('--dx', tRect.left + 'px'); star.style.setProperty('--dy', tRect.top + 'px');
+                    star.style.animation = 'starMove 2s linear forwards';
+                    document.body.appendChild(star);
+                    setTimeout(() => { 
+                        if (target.parentNode) {
+                            target.classList.add('star-hit');
+                            target.onclick = (ev) => {
+                                ev.stopPropagation();
+                                let reward = getClickPower() * 50;
+                                clickerCandy += reward;
+                                updateUI(); saveState();
+                                spawnFloatText(ev.clientX, ev.clientY, `+${fmtCandy(reward)}`);
+                                target.remove();
+                            };
+                        }
+                        star.remove(); 
+                    }, 2000);
+                }
+            }, 1500);
         }
         function stopSpaceEvent() {
             activeEvents.space = false;
             document.body.classList.remove('space-active');
             if (spaceRAF) clearInterval(spaceRAF);
+            if (spaceStarRAF) { clearInterval(spaceStarRAF); spaceStarRAF = null; }
             document.querySelectorAll('.space-star, .space-meteor').forEach(e => e.remove());
             document.querySelectorAll('.spawn-item').forEach(e => { if (e.parentNode === document.body) e.remove(); });
         }
@@ -1420,7 +1487,6 @@
 
         setInterval(checkEvents, 10000);
 
-        // ==================== СЕКРЕТНЫЙ РЕЖИМ ====================
         function toggleSecretPrompt() { const p = document.getElementById('secretPrompt'); p.style.display = p.style.display === 'none' ? 'block' : 'none'; }
 
         function checkPassword() {
@@ -1468,7 +1534,6 @@
             document.getElementById('secretPassword').value = '';
         }
 
-        // ==================== МАГАЗИН ====================
         const SHOP_ITEMS = [
             { id: 'clickPower', name: '💪 Сила клика', basePrice: 25, maxLevel: 20, getLevel: () => clickPower - 1, apply: () => { clickPower += 1; } },
             { id: 'autoClicker', name: '🤖 Автокликер', basePrice: 50, maxLevel: 50, getLevel: () => autoClickers, apply: () => { autoClickers += 1; } },
@@ -1524,7 +1589,6 @@
             showToast('🎲 Омни-предмет!');
         }
 
-        // ==================== СТАРТ ====================
         loadState();
         updateUI();
         updateCoinsUI();
@@ -1533,6 +1597,9 @@
         renderGameAchievements();
         renderCoinShop();
         renderMixer();
+        updateMagnetState();
+        updateGhosts();
+        updateStars();
         setInterval(() => {
             clickerCandy += getTotalCPS() * 0.1;
             updateUI(); saveState();
@@ -1581,7 +1648,6 @@
             el.addEventListener('click', e => { if (e.target === el) el.classList.remove('active'); });
         });
 
-        // Экспорт
         window.switchTab = switchTab;
         window.openEvent1 = () => document.getElementById('modal1').classList.add('active');
         window.openEvent2 = () => document.getElementById('modal2').classList.add('active');
@@ -1594,6 +1660,8 @@
         window.closeSecretPanel = closeSecretPanel;
         window.buyItem = buyItem;
         window.spawnSpecific = (type) => spawnItem(type);
+        window.spawnStarAdmin = spawnStarAdmin;
+        window.spawnMeteorAdmin = spawnMeteorAdmin;
         window.spawnOmniItem = spawnOmniItem;
         window.forceEvent = forceEvent;
         window.deactivateEvent = deactivateEvent;
