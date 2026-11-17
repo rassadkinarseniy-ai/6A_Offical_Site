@@ -13,9 +13,8 @@ body.autumn-active .container{background:rgba(40,22,8,.94);border-color:#d98c3f;
 body.autumn-active h1{color:#ffb347;text-shadow:3px 3px 0 #4a2c0b}
 body.autumn-active h1 span{background:#e67e22;color:#1a1207}
 body.autumn-active .tab-btn.active{background:#e67e22;border-color:#ffb347;color:#1a1207}
-.leaf{position:fixed;top:-50px;font-size:1.5rem;opacity:.5;pointer-events:none;z-index:0;animation:fall linear infinite}
-@keyframes fall{to{transform:translateY(105vh) rotate(360deg)}}
 .autumn-leaf{position:fixed;top:-50px;font-size:1.7rem;opacity:.85;pointer-events:none;z-index:1;animation:fall linear infinite;filter:drop-shadow(0 0 6px rgba(255,140,0,.6))}
+@keyframes fall{to{transform:translateY(105vh) rotate(360deg)}}
 .container{max-width:950px;width:100%;background:rgba(22,27,35,.94);backdrop-filter:blur(6px);border:2px solid #33404f;border-radius:28px 12px 28px 12px;box-shadow:0 0 40px rgba(120,150,180,.12);padding:2rem 1.6rem;position:relative;z-index:10;text-align:center;transition:background .5s,border-color .5s}
 h1{font-size:2.4rem;color:#e8b04b;text-shadow:3px 3px 0 #2a2418;margin-bottom:.4rem;display:flex;align-items:center;justify-content:center;gap:10px;transition:color .5s}
 h1 span{background:#d98c3f;color:#1a1408;padding:0 16px;border-radius:50px;font-size:2rem;transition:background .5s}
@@ -38,42 +37,29 @@ body.autumn-active .coming-soon{background:#2a1a0c;border-color:#8a5a1e}
 .currency{background:#222b38;border:2px solid #33404f;border-radius:14px;padding:.5rem 1.1rem;font-size:1.2rem;font-weight:800;display:flex;align-items:center;gap:6px;transition:.4s}
 body.autumn-active .currency{background:#3a240c;border-color:#8a5a1e}
 .currency.leaves{color:#e0b15a}.currency.coins{color:#e8c65a;border-color:#6a5a2a}
-.grid{display:grid;gap:10px}
-.garden-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr))}
-.seed-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
-.inv-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
-.plot{background:#222b38;border:2px solid #33404f;border-radius:14px;padding:.8rem .5rem;text-align:center;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:.2s}
-body.autumn-active .plot{background:#3a240c;border-color:#8a5a1e}
-.plot.empty{border-style:dashed;color:#9aa3b0;cursor:pointer}
-.plot.empty:hover{border-color:#d98c3f;color:#e6e8ec}
-.plot.growing{border-color:#8a9a5b}
-.plot.ready{border-color:#6fa86f;box-shadow:0 0 18px rgba(111,168,111,.35);cursor:pointer}
-.plot.ready:hover{transform:translateY(-3px)}
-.plot.mutated{border-color:#ff8c00;box-shadow:0 0 22px rgba(255,140,0,.6)}
-.plot .emoji{font-size:2rem}.plot .nm{font-size:.78rem;color:#9aa3b0}
-.plot .tm{font-size:.82rem;font-weight:700;color:#e8b04b}
-.plot .mut{font-size:.7rem;font-weight:800;color:#ffb347;text-shadow:0 0 6px #ff8c00}
-.progress{width:100%;height:7px;background:#0e1319;border-radius:6px;overflow:hidden;margin-top:3px}
-.progress>div{height:100%;background:linear-gradient(90deg,#c05a3a,#e8b04b);width:0;transition:width .3s}
-.seed-card,.inv-card,.shop-item,.upgrade-item,.achievement-item,.chat-card{background:#222b38;border:1px solid #33404f;border-radius:14px;padding:.8rem;text-align:center;display:flex;flex-direction:column;gap:5px;align-items:center;transition:.4s}
-body.autumn-active .seed-card,body.autumn-active .inv-card,body.autumn-active .shop-item,body.autumn-active .upgrade-item,body.autumn-active .achievement-item,body.autumn-active .chat-card{background:#3a240c;border-color:#8a5a1e}
-.shop-item,.upgrade-item,.achievement-item,.chat-card{flex-direction:row;justify-content:space-between;align-items:center;flex-wrap:wrap;text-align:left;margin-bottom:10px}
-.seed-card .emoji,.inv-card .emoji{font-size:1.7rem}
-.seed-card .name,.inv-card .name{font-size:.88rem;font-weight:700;color:#e6e8ec}
-.seed-card .info{font-size:.75rem;color:#9aa3b0}
-.seed-card .price{color:#e8b04b;font-weight:700;font-size:.85rem}
-.seed-card .left{font-size:.78rem;font-weight:800;color:#ffb347}
-.rarity{font-size:.72rem;font-weight:700}
-.rarity-common{color:#9aa3b0}.rarity-uncommon{color:#7fc98a}.rarity-rare{color:#7aa7c7}.rarity-epic{color:#b58ad9}.rarity-legend{color:#e8b04b}
-.inv-card .count{font-weight:800;color:#e8b04b}
-.btn{background:#d98c3f;color:#1a1408;border:none;padding:.55rem 1.1rem;border-radius:30px;font-weight:700;font-size:.9rem;cursor:pointer;transition:.2s}
-.btn:hover:not(:disabled){background:#e8b04b}
-.btn:disabled{background:#3a424d;color:#6b7480;cursor:not-allowed}
-.btn.small{padding:.35rem .8rem;font-size:.8rem}
-.btn.green{background:#6fa86f;color:#0e1a0e}
-.btn.gray{background:#3a424d;color:#cfd6df}
-.btn.blue{background:#7aa7c7;color:#0a141a}
-.btn.orange{background:#e67e22;color:#1a1207}
+.tree-area{background:#222b38;border:2px solid #33404f;border-radius:18px;padding:1rem;margin-bottom:14px;position:relative;transition:.4s;overflow:hidden}
+body.autumn-active .tree-area{background:#3a240c;border-color:#8a5a1e}
+.tree-area h3{color:#e8b04b;font-size:1.15rem;margin-bottom:.5rem;text-align:left}
+.tree-canvas{position:relative;width:100%;height:360px;background:radial-gradient(ellipse at 50% 100%,#243024,#12181a 70%);border-radius:14px;overflow:hidden}
+body.autumn-active .tree-canvas{background:radial-gradient(ellipse at 50% 100%,#3a2a10,#1a0c04 70%)}
+.tree-svg{width:100%;height:100%;display:block}
+.basket-svg{position:absolute;right:10px;bottom:6px;width:90px;height:90px;cursor:pointer;transition:transform .15s}
+.basket-svg.bump{transform:scale(1.15)}
+.basket-count{position:absolute;right:18px;bottom:100px;color:#e8b04b;font-weight:700;font-size:.85rem;text-align:right;background:rgba(0,0,0,.35);padding:2px 8px;border-radius:8px}
+.tree-leaf{cursor:pointer}
+.tree-leaf path{transition:filter .15s}
+.tree-leaf:hover path{filter:brightness(1.3) drop-shadow(0 0 4px rgba(232,176,75,.6))}
+.tree-leaf.yellow{animation:yellowPulse 1s infinite alternate}
+@keyframes yellowPulse{0%{opacity:.8}100%{opacity:1}}
+.tree-leaf.golden{filter:drop-shadow(0 0 6px #ffd700)}
+.tree-leaf.mutated{filter:drop-shadow(0 0 6px #ff5500)}
+.branch-line{stroke-linecap:round;fill:none;animation:branchGrow .8s ease-out forwards}
+@keyframes branchGrow{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
+.leaf-grow{transform-origin:center;animation:leafGrow .4s ease-out}
+@keyframes leafGrow{0%{transform:scale(0)}80%{transform:scale(1.15)}100%{transform:scale(1)}}
+.bud{fill:#4a7a3a}
+.shop-item,.upgrade-item,.achievement-item,.chat-card,.consumable-item,.quest-item,.pass-level-item{background:#222b38;border:1px solid #33404f;border-radius:14px;padding:.8rem;transition:.4s;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;text-align:left;margin-bottom:10px;gap:10px}
+body.autumn-active .shop-item,body.autumn-active .upgrade-item,body.autumn-active .achievement-item,body.autumn-active .chat-card,body.autumn-active .consumable-item,body.autumn-active .quest-item,body.autumn-active .pass-level-item{background:#3a240c;border-color:#8a5a1e}
 .info-block{flex:1;min-width:160px}
 .info-name{color:#e8b04b;font-weight:700}
 .info-desc{color:#9aa3b0;font-size:.84rem;margin-top:3px}
@@ -84,11 +70,16 @@ body.autumn-active .seed-card,body.autumn-active .inv-card,body.autumn-active .s
 .ach-status{font-size:.78rem;font-weight:700;margin-top:3px}
 .ach-status.unlocked{color:#6fa86f}.ach-status.locked{color:#c96a6a}
 .ach-reward{color:#e8b04b;font-weight:800;white-space:nowrap}
-.stock-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px}
-.stock-timer{color:#e8b04b;font-weight:700;font-size:.9rem}
-.hw-box{background:#222b38;border:2px solid #33404f;border-radius:18px;padding:1.8rem;display:inline-block;margin-top:1rem;transition:.4s}
-body.autumn-active .hw-box{background:#3a240c;border-color:#8a5a1e}
-.hw-big{font-size:2.2rem;font-weight:800;color:#e8b04b;font-variant-numeric:tabular-nums}
+.btn{background:#d98c3f;color:#1a1408;border:none;padding:.55rem 1.1rem;border-radius:30px;font-weight:700;font-size:.9rem;cursor:pointer;transition:.2s}
+.btn:hover:not(:disabled){background:#e8b04b}
+.btn:disabled{background:#3a424d;color:#6b7480;cursor:not-allowed}
+.btn.small{padding:.35rem .8rem;font-size:.8rem}
+.btn.green{background:#6fa86f;color:#0e1a0e}
+.btn.gray{background:#3a424d;color:#cfd6df}
+.btn.blue{background:#7aa7c7;color:#0a141a}
+.btn.orange{background:#e67e22;color:#1a1207}
+.btn.red{background:#c96a6a;color:#1a0a0a}
+.effect-timer{color:#6fa86f;font-weight:700;font-size:.85rem}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .team-card{background:#222b38;border:1px solid #33404f;border-radius:14px;padding:.9rem;text-align:center;transition:.4s}
 body.autumn-active .team-card{background:#3a240c;border-color:#8a5a1e}
@@ -96,15 +87,61 @@ body.autumn-active .team-card{background:#3a240c;border-color:#8a5a1e}
 .secret-panel{display:none;margin-top:1.2rem;padding:1.2rem;background:#222b38;border:2px dashed #d98c3f;border-radius:18px;text-align:center}
 .secret-panel.visible{display:block}
 .secret-panel h3{color:#e8b04b;margin-bottom:.8rem}
-.secret-grid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.secret-btn{background:#1b222d;border:2px solid #33404f;border-radius:12px;padding:.6rem .9rem;color:#e6e8ec;cursor:pointer;font-weight:700;font-size:.82rem}
-.secret-btn:hover{border-color:#d98c3f}
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#222b38;border:2px solid #d98c3f;color:#e6e8ec;padding:.7rem 1.3rem;border-radius:30px;font-weight:700;z-index:200;opacity:0;transition:.3s;pointer-events:none;max-width:90vw;text-align:center}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 .event-timer-side{position:fixed;right:12px;top:50%;transform:translateY(-50%);background:#1b222d;border:2px solid #33404f;border-radius:16px;padding:.9rem .7rem;z-index:50;text-align:center;font-weight:700;color:#e8b04b;font-size:.85rem;max-width:170px;transition:.4s}
 body.autumn-active .event-timer-side{background:#3a1e08;border-color:#e67e22;color:#ffb347;box-shadow:0 0 20px rgba(230,126,34,.6)}
 footer{margin-top:1.6rem;color:#9aa3b0;font-size:.88rem;border-top:1px solid #33404f;padding-top:1rem;width:100%;text-align:center}
-input[type=password],input[type=number]{padding:.5rem;border-radius:10px;border:1px solid #33404f;background:#0f1318;color:#e6e8ec}
+input[type=password],input[type=number],input[type=text],input[type=url]{padding:.5rem;border-radius:10px;border:1px solid #33404f;background:#0f1318;color:#e6e8ec;width:100%;max-width:280px}
+.profile-card{background:#222b38;border:2px solid #33404f;border-radius:20px;padding:1.5rem;margin-bottom:1rem;transition:.4s;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:center}
+body.autumn-active .profile-card{background:#3a240c;border-color:#8a5a1e}
+.avatar-wrap{width:96px;height:96px;border-radius:50%;overflow:hidden;background:#0f1318;display:flex;align-items:center;justify-content:center;font-size:2.5rem;flex-shrink:0;position:relative}
+.avatar-wrap img{width:100%;height:100%;object-fit:cover}
+.frame-leaves{padding:4px;background:linear-gradient(135deg,#4a8a3a,#e8c84a,#4a8a3a);border-radius:50%;box-shadow:0 0 15px rgba(232,200,74,.5)}
+.frame-fire{padding:4px;background:linear-gradient(135deg,#ff4500,#ffd700,#ff4500,#ff8c00);background-size:300% 300%;border-radius:50%;animation:fireGlow 2s linear infinite;box-shadow:0 0 20px rgba(255,100,0,.7)}
+@keyframes fireGlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.frame-gold{padding:4px;background:linear-gradient(135deg,#ffd700,#fff8b0,#ffd700);background-size:200% 200%;border-radius:50%;box-shadow:0 0 25px rgba(255,215,0,.8);animation:goldShine 2.5s linear infinite}
+@keyframes goldShine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.frame-ice{padding:4px;background:linear-gradient(135deg,#7ad7f0,#e0f7ff,#7ad7f0);border-radius:50%;box-shadow:0 0 20px rgba(122,215,240,.7);animation:icePulse 2s ease-in-out infinite alternate}
+@keyframes icePulse{from{box-shadow:0 0 15px rgba(122,215,240,.5)}to{box-shadow:0 0 30px rgba(122,215,240,.9)}}
+.title-badge{padding:.3rem .9rem;border-radius:20px;font-weight:800;font-size:.85rem;display:inline-block;margin-top:.4rem}
+.title-red{background:#c0392b;color:#fff;text-shadow:1px 1px 2px #000}
+.title-imperial{background:linear-gradient(90deg,#c0392b,#e67e22,#f1c40f,#e67e22,#c0392b);background-size:300% 100%;color:#1a1207;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;animation:imperialShift 3s linear infinite}
+@keyframes imperialShift{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+.title-autumn{background:#e67e22;color:#1a1207}
+.title-frost{background:#7ad7f0;color:#0a1a1f}
+.pass-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:1rem;padding:1rem;background:#222b38;border:2px solid #d98c3f;border-radius:18px}
+body.autumn-active .pass-header{background:#3a240c;border-color:#e67e22}
+.pass-timer{font-size:1.1rem;font-weight:800;color:#e8b04b;font-variant-numeric:tabular-nums}
+.xp-bar{width:100%;height:18px;background:#0f1318;border-radius:10px;overflow:hidden;margin-top:8px;border:1px solid #33404f}
+.xp-fill{height:100%;background:linear-gradient(90deg,#6fa86f,#e8b04b);transition:width .4s;border-radius:10px}
+.pass-branches{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:1rem 0}
+@media(max-width:600px){.pass-branches{grid-template-columns:1fr}}
+.pass-branch{background:#222b38;border:2px solid #33404f;border-radius:16px;padding:1rem;text-align:left;max-height:500px;overflow-y:auto}
+body.autumn-active .pass-branch{background:#3a240c;border-color:#8a5a1e}
+.pass-branch.paid{border-color:#d98c3f}
+.pass-level-item{font-size:.85rem;padding:.55rem .8rem}
+.pass-level-item.claimed{opacity:.7;border-color:#6fa86f;background:#17211a}
+.pass-level-item.claimed .info-name{color:#6fa86f}
+.pass-level-item.locked{opacity:.6}
+.claimed-badge{color:#6fa86f;font-weight:800;font-size:.85rem;white-space:nowrap}
+.test-subject{background:#222b38;border:1px solid #33404f;border-radius:14px;padding:1rem;margin-bottom:10px;cursor:pointer;transition:.2s;text-align:left}
+.test-subject:hover{border-color:#d98c3f}
+.test-q{background:#1b222d;border:1px solid #33404f;border-radius:12px;padding:1rem;margin-bottom:10px;text-align:left}
+.test-q h4{color:#e8b04b;margin-bottom:.6rem;font-size:1rem}
+.test-opt{display:block;width:100%;text-align:left;background:#0f1318;border:1px solid #33404f;color:#e6e8ec;padding:.6rem .8rem;border-radius:10px;margin-bottom:6px;cursor:pointer;transition:.15s;font-size:.9rem}
+.test-opt:hover{border-color:#d98c3f}
+.test-opt.correct{background:#1a3a1a;border-color:#6fa86f}
+.test-opt.wrong{background:#3a1a1a;border-color:#c96a6a}
+.update-item{background:#222b38;border-left:4px solid #d98c3f;border-radius:10px;padding:1rem;margin-bottom:10px;text-align:left}
+body.autumn-active .update-item{background:#3a240c;border-color:#e67e22}
+.update-ver{color:#e8b04b;font-weight:900;font-size:1.1rem;margin-bottom:.3rem}
+.update-date{color:#9aa3b0;font-size:.8rem;margin-bottom:.5rem}
+.update-item ul{margin-left:1.2rem;color:#cfd6df;font-size:.88rem;line-height:1.6}
+body.imperial-theme{background:radial-gradient(circle at 15% 10%,#5a2a08,#2a0c04 80%)!important}
+body.imperial-theme .container{background:linear-gradient(135deg,rgba(60,30,10,.96),rgba(40,15,5,.96));border-color:#e67e22}
+body.imperial-theme h1{color:#ffb347}
+body.imperial-theme .tab-btn.active{background:#e67e22}
 @media(max-width:700px){.event-timer-side{position:static;transform:none;margin-bottom:1rem;width:100%;max-width:none}}
 @media(max-width:600px){h1{font-size:1.8rem}.container{padding:1.5rem 1rem}.team-grid{grid-template-columns:1fr}}
 </style>
@@ -118,22 +155,26 @@ input[type=password],input[type=number]{padding:.5rem;border-radius:10px;border:
 
 <div class="container">
   <h1><span>6А</span> класс</h1>
-  <div class="subhead"><strong>ГБОУ Лицей №486</strong></div>
+  <div class="subhead"><strong>ГБОУ Лицей №486</strong> · <span id="headerNick" style="color:#d98c3f">Гость</span> · <span style="color:#9aa3b0;font-size:.8rem">v2.4</span></div>
 
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('home',this)">🏠 Главная</button>
-    <button class="tab-btn" onclick="switchTab('games',this)">🌱 Огород</button>
-    <button class="tab-btn" onclick="switchTab('homework',this)">📚 ДЗ</button>
+    <button class="tab-btn" onclick="switchTab('games',this)">🌳 Дерево</button>
+    <button class="tab-btn" onclick="switchTab('pass',this)">🎫 Пасс</button>
+    <button class="tab-btn" onclick="switchTab('tests',this)">📝 Тесты</button>
     <button class="tab-btn" onclick="switchTab('chat',this)">💬 Чат</button>
     <button class="tab-btn" onclick="switchTab('team',this)">👑 Команда</button>
-    <button class="tab-btn" onclick="switchTab('site-achievements',this)">🏆 Достижения сайта</button>
+    <button class="tab-btn" onclick="switchTab('achievements',this)">🏆 Достижения</button>
+    <button class="tab-btn" onclick="switchTab('profile',this)">👤 Профиль</button>
+    <button class="tab-btn" onclick="switchTab('updates',this)">📜 Обновления</button>
   </div>
 
   <div class="tab-content active" id="tab-home">
     <div class="coming-soon">
       <div class="big">🍁</div>
-      <h2>Скоро тут будут ивенты</h2>
-      <p>Мы готовим осенние события. Следи за обновлениями!</p>
+      <h2>Добро пожаловать на сайт 6А!</h2>
+      <p>Собирай листики на дереве, проходи тесты, качай пасс и получай награды.</p>
+      <p style="margin-top:.6rem;color:#e8b04b">🎫 Сезон 1 · до 1 декабря</p>
     </div>
   </div>
 
@@ -142,28 +183,24 @@ input[type=password],input[type=number]{padding:.5rem;border-radius:10px;border:
       <div class="currency leaves">🍂 <span id="leafCount">0</span> <small>листиков</small></div>
       <div class="currency coins">💰 <span id="coinCount">0</span></div>
     </div>
-
-    <div class="panel">
-      <h3>🪴 Мои грядки <span id="plotCounter" style="font-size:.85rem;color:#9aa3b0"></span></h3>
-      <div class="garden-grid grid" id="gardenGrid"></div>
-    </div>
-
-    <div class="panel">
-      <div class="stock-header">
-        <h3 style="border:none;margin:0;padding:0">🌰 Магазин семечек</h3>
-        <div class="stock-timer" id="stockTimer">Пополнение через --:--</div>
+    <div class="tree-area">
+      <h3>🌳 Моё дерево <span id="treeLevelTxt" style="font-size:.85rem;color:#9aa3b0"></span></h3>
+      <div class="tree-canvas" id="treeCanvas">
+        <svg class="tree-svg" id="treeSvg" viewBox="0 0 800 360" preserveAspectRatio="xMidYMax meet"></svg>
+        <div class="basket-count">🧺 <span id="basketCount">0</span> / <span id="basketCap">50</span></div>
+        <svg class="basket-svg" id="basketIcon" viewBox="0 0 100 100">
+          <path d="M20 40 H80 L72 85 H28 Z" fill="#a0723c" stroke="#6b4a2a" stroke-width="3"/>
+          <path d="M35 40 C35 20 65 20 65 40" fill="none" stroke="#6b4a2a" stroke-width="4"/>
+        </svg>
       </div>
-      <div class="seed-grid grid" id="seedStockGrid"></div>
-      <div style="text-align:center;margin-top:10px">
-        <button class="btn gray small" onclick="rerollStock(true)">🔄 Обновить сток (10 💰)</button>
+      <div style="text-align:center;margin-top:8px">
+        <button class="btn small green" onclick="collectBasket()">🧺 Забрать из коробки</button>
       </div>
     </div>
-
-    <div class="panel"><h3>🎒 Инвентарь семечек</h3><div class="inv-grid grid" id="inventoryGrid"></div></div>
+    <div class="panel"><h3>🧴 Расходники и эффекты</h3><div id="effectsList"></div><div id="consumablesList"></div></div>
     <div class="panel"><h3>⚙️ Улучшения</h3><div id="upgradeList"></div></div>
     <div class="panel"><h3>💰 Магазин монеток</h3><div id="coinShopList"></div></div>
     <div class="panel"><h3>🎮 Достижения игры</h3><div id="gameAchievementsList"></div></div>
-
     <div style="text-align:center;margin-top:1rem">
       <button class="btn gray" onclick="toggleSecretPrompt()">🔑 Ввести пароль</button>
     </div>
@@ -171,34 +208,68 @@ input[type=password],input[type=number]{padding:.5rem;border-radius:10px;border:
       <input type="password" id="secretPassword" placeholder="Пароль">
       <button class="btn" onclick="checkPassword()">OK</button>
     </div>
-
     <div class="secret-panel" id="secretPanel">
       <h3>🔓 Админ-панель</h3>
       <div style="margin-bottom:.9rem">
         <input type="number" id="addLeafInput" placeholder="Листики" style="width:110px">
         <button class="btn" onclick="adminAddLeaves()">Начислить 🍂</button>
       </div>
-      <div class="secret-grid" id="adminSeedGrid"></div>
+      <div style="margin-bottom:.9rem">
+        <input type="number" id="addCoinInput" placeholder="Монетки" style="width:110px">
+        <button class="btn orange" onclick="adminAddCoins()">Начислить 💰</button>
+      </div>
       <div style="margin-top:.9rem;display:flex;flex-wrap:wrap;gap:6px;justify-content:center">
-        <button class="btn blue small" onclick="rerollStock(false)">🔄 Сбросить сток</button>
-        <button class="btn green small" onclick="adminGrowAll()">⏩ Созреть всё</button>
-        <button class="btn orange small" onclick="adminStartAutumn()">🍁 Вкл ивент листьев</button>
+        <button class="btn green small" onclick="adminSpawnLeaves()">🍃 Заспавнить листики</button>
+        <button class="btn orange small" onclick="adminStartAutumn()">🍁 Вкл ивент</button>
         <button class="btn gray small" onclick="adminStopAutumn()">⏹ Выкл ивент</button>
+        <button class="btn blue small" onclick="adminGiveConsumables()">🧴 Выдать расходники</button>
+        <button class="btn red small" onclick="adminAddPassXP(500)">+500 XP пасса</button>
         <button class="btn gray small" onclick="closeSecretPanel()">Выйти</button>
       </div>
     </div>
   </div>
 
-  <div class="tab-content" id="tab-homework">
-    <div id="hwLocked">
-      <h2 style="color:#e8b04b;margin-bottom:1rem">📚 Домашнее задание</h2>
-      <p style="color:#9aa3b0;margin-bottom:1.2rem">Раздел станет доступен 6 ноября в 00:00.</p>
-      <div class="hw-box"><div style="color:#9aa3b0;margin-bottom:.4rem">Доступ откроется через:</div><div class="hw-big" id="hwTimer">--:--:--</div></div>
+  <div class="tab-content" id="tab-pass">
+    <div class="pass-header">
+      <div>
+        <div style="font-size:1.3rem;font-weight:900;color:#e8b04b">🎫 Осенний Пасс</div>
+        <div style="color:#9aa3b0;font-size:.85rem">Сезон <span id="passSeason">1</span></div>
+      </div>
+      <div style="text-align:right">
+        <div style="color:#9aa3b0;font-size:.8rem">До конца сезона</div>
+        <div class="pass-timer" id="passTimer">--д --:--:--</div>
+      </div>
     </div>
-    <div id="hwContent" style="display:none">
-      <h2 style="color:#e8b04b;margin-bottom:1rem">📚 Домашнее задание</h2>
-      <div class="panel"><p style="color:#9aa3b0">Список домашнего задания будет здесь.</p></div>
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div>
+          <strong style="color:#e8b04b">Уровень <span id="passLevel">1</span> / 50</strong>
+          <div style="color:#9aa3b0;font-size:.85rem">Опыт: <span id="passXP">0</span> / 200</div>
+        </div>
+        <div id="passPaidStatus"></div>
+      </div>
+      <div class="xp-bar"><div class="xp-fill" id="passXpFill" style="width:0%"></div></div>
+      <div id="boosterStatus" style="margin-top:8px;color:#6fa86f;font-weight:700;font-size:.85rem"></div>
     </div>
+    <div class="pass-branches">
+      <div class="pass-branch">
+        <h3 style="color:#e8b04b;margin-bottom:.6rem">🆓 Бесплатный</h3>
+        <div id="freePassLevels"></div>
+      </div>
+      <div class="pass-branch paid">
+        <h3 style="color:#e67e22;margin-bottom:.6rem">👑 Платный</h3>
+        <div id="paidPassLevels"></div>
+      </div>
+    </div>
+    <div class="panel"><h3>✅ Ежедневные квесты</h3><div id="dailyQuestsList"></div></div>
+    <div class="panel"><h3>🔥 Мегаквесты (платный пасс)</h3><div id="megaQuestsList"></div></div>
+  </div>
+
+  <div class="tab-content" id="tab-tests">
+    <h2 style="color:#e8b04b;margin-bottom:1rem">📝 Тесты по предметам</h2>
+    <p style="color:#9aa3b0;margin-bottom:1rem">За каждый пройденный тест — 15 💰. Один раз в день на предмет.</p>
+    <div id="testsList"></div>
+    <div id="testRunner" style="display:none"></div>
   </div>
 
   <div class="tab-content" id="tab-chat">
@@ -215,197 +286,785 @@ input[type=password],input[type=number]{padding:.5rem;border-radius:10px;border:
     </div>
   </div>
 
-  <div class="tab-content" id="tab-site-achievements">
+  <div class="tab-content" id="tab-achievements">
     <h2 style="color:#e8b04b;margin-bottom:1rem">🏆 Достижения сайта</h2>
     <div id="siteAchievementsList"></div>
+    <h2 style="color:#e8b04b;margin:1.5rem 0 1rem">🏅 Челленджи</h2>
+    <p style="color:#9aa3b0;margin-bottom:1rem;font-size:.88rem">За челленджи — монетки, эксклюзивные рамки и титулы.</p>
+    <div id="challengesList"></div>
   </div>
 
-  <footer><strong>Официальный сайт 6А класса</strong> · ГБОУ Лицей 486 · 2026</footer>
+  <div class="tab-content" id="tab-profile">
+    <h2 style="color:#e8b04b;margin-bottom:1rem">👤 Мой профиль</h2>
+    <div class="profile-card">
+      <div class="avatar-wrap" id="avatarPreview">🦊</div>
+      <div style="flex:1;min-width:200px;text-align:left">
+        <div id="profileNick" style="font-size:1.3rem;font-weight:900;color:#e8b04b">Гость</div>
+        <div id="profileTitle" style="margin-top:.3rem"></div>
+        <div style="margin-top:.5rem;color:#9aa3b0;font-size:.85rem">Уровень пасса: <span id="profilePassLvl">1</span> · Монеток: <span id="profileCoins">0</span></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>✏️ Настройки профиля</h3>
+      <div style="margin-bottom:.8rem">
+        <label style="color:#9aa3b0;font-size:.85rem;display:block;margin-bottom:4px">Ник</label>
+        <input type="text" id="nickInput" placeholder="Введи ник" maxlength="20">
+      </div>
+      <div style="margin-bottom:.8rem">
+        <label style="color:#9aa3b0;font-size:.85rem;display:block;margin-bottom:4px">URL аватарки (картинка)</label>
+        <input type="url" id="avatarInput" placeholder="https://...">
+        <div style="color:#9aa3b0;font-size:.78rem;margin-top:4px">Оставь пустым — будет emoji 🦊</div>
+      </div>
+      <button class="btn" onclick="saveProfile()">💾 Сохранить</button>
+    </div>
+    <div class="panel">
+      <h3>🎖 Мои награды</h3>
+      <div id="myFramesList"></div>
+    </div>
+    <div class="panel">
+      <h3>🛒 Магазин рамок и титулов</h3>
+      <div id="frameShopList"></div>
+      <div id="titleShopList"></div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-updates">
+    <h2 style="color:#e8b04b;margin-bottom:1rem">📜 История обновлений</h2>
+    <div id="updatesList"></div>
+  </div>
+
+  <footer><strong>Официальный сайт 6А класса</strong> · ГБОУ Лицей 486 · 2026 · v2.4</footer>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const KEY='6a_state_garden',OLD_KEY='6a_state_main',RATE=1000,PASS='ОСЕНЬ2026';
-const HW_DATE=new Date('2026-11-06T00:00:00'),STOCK_MS=5*60*1000,BASE_PLOTS=4;
-const AUTUMN_DURATION=10*60*1000;
-const MUT_CHANCE=0.08;
-
-const SEEDS={
-  pumpkin:{name:'Тыквенное',emoji:'🌱',fruit:'🎃',chance:30,grow:20e3,reward:5,price:10,rarity:'common'},
-  sunflower:{name:'Подсолнечное',emoji:'🌻',fruit:'🌻',chance:22,grow:40e3,reward:12,price:25,rarity:'common'},
-  carrot:{name:'Морковное',emoji:'🥕',fruit:'🥕',chance:15,grow:60e3,reward:30,price:60,rarity:'uncommon'},
-  cucumber:{name:'Огуречное',emoji:'🥒',fruit:'🥒',chance:12,grow:90e3,reward:55,price:120,rarity:'uncommon'},
-  tomato:{name:'Томатное',emoji:'🍅',fruit:'🍅',chance:8,grow:150e3,reward:100,price:250,rarity:'uncommon'},
-  apple:{name:'Яблочное',emoji:'🍎',fruit:'🍎',chance:5,grow:240e3,reward:220,price:550,rarity:'rare'},
-  grape:{name:'Виноградное',emoji:'🍇',fruit:'🍇',chance:3.5,grow:360e3,reward:500,price:1200,rarity:'rare'},
-  acorn:{name:'Желудёвое',emoji:'🌰',fruit:'🌰',chance:2,grow:600e3,reward:1200,price:3000,rarity:'epic'},
-  mushroom:{name:'Грибное',emoji:'🍄',fruit:'🍄',chance:1.5,grow:900e3,reward:3000,price:7500,rarity:'epic'},
-  golden:{name:'Золотое',emoji:'✨',fruit:'🌟',chance:.8,grow:1500e3,reward:8000,price:20000,rarity:'legend'},
-  diamond:{name:'Алмазное',emoji:'💎',fruit:'💎',chance:.2,grow:2400e3,reward:25000,price:60000,rarity:'legend'}
-};
-const RAR={common:['Обычное','rarity-common'],uncommon:['Необычное','rarity-uncommon'],rare:['Редкое','rarity-rare'],epic:['Эпическое','rarity-epic'],legend:['Легендарное','rarity-legend']};
+const KEY='6a_state_v2',OLD_KEY='6a_state_tree',PASS='ОСЕНЬ2026';
+const RATE=1000,AUTUMN_DURATION=10*60*1000,MUT_CHANCE=0.08,BASE_BASKET=50;
+const PASS_END_DATE=new Date('2026-12-01T00:00:00');
+const PASS_XP_PER_LEVEL=200,PASS_MAX_LEVEL=50,PAID_PASS_PRICE=500;
+const SVGNS='http://www.w3.org/2000/svg';
 
 const UPGRADES=[
-  {id:'plots',name:'🪴 Грядка',desc:'+1 слот для посадки',base:50,growth:2.2,max:8,get:()=>S.extraPlots,add:()=>S.extraPlots++,eff:l=>`Слотов: ${BASE_PLOTS+l}`},
-  {id:'fert',name:'💰 Удобрение',desc:'+20% к листикам с плода',base:80,growth:1.8,max:20,get:()=>S.fert,add:()=>S.fert++,eff:l=>`Бонус дохода: +${l*20}%`},
-  {id:'green',name:'⏱️ Теплица',desc:'−8% ко времени роста',base:120,growth:1.9,max:15,get:()=>S.green,add:()=>S.green++,eff:l=>`Время роста: −${Math.round((1-Math.pow(.92,l))*100)}%`},
-  {id:'luck',name:'🍀 Удача',desc:'+5% к шансу редких семечек',base:200,growth:2,max:10,get:()=>S.luck,add:()=>S.luck++,eff:l=>`Бонус удачи: +${l*5}%`},
-  {id:'auto',name:'🤖 Автосбор',desc:'Автоматически собирает созревшее',base:500,growth:2,max:5,get:()=>S.auto,add:()=>S.auto++,eff:l=>l?`Автосбор раз в ${Math.max(5,30-l*5)} сек`:'Выключен'}
+  {id:'branches',name:'🌿 Новые ветки',desc:'+лимит листиков, +скорость появления',base:120,growth:2.1,max:10,get:()=>S.branches,add:()=>S.branches++,eff:l=>`Веток: ${l+1} · лимит: ${10+l*8}`},
+  {id:'better',name:'🍃 Улучшенные листики',desc:'+20% к стоимости листика',base:200,growth:1.9,max:20,get:()=>S.better,add:()=>S.better++,eff:l=>`Стоимость: +${l*20}%`},
+  {id:'fast',name:'⚡ Быстрый рост',desc:'−10% времени появления листика',base:280,growth:2.0,max:15,get:()=>S.fast,add:()=>S.fast++,eff:l=>`Скорость: −${Math.round((1-Math.pow(.9,l))*100)}%`},
+  {id:'basket',name:'🧺 Большая коробка',desc:'+50 к вместимости коробки',base:240,growth:1.8,max:10,get:()=>S.basketUp,add:()=>S.basketUp++,eff:l=>`Вместимость: ${BASE_BASKET+l*50}`},
+  {id:'fall',name:'🍂 Листопад',desc:'Листики сами падают на землю',base:600,growth:2.1,max:10,get:()=>S.fall,add:()=>S.fall++,eff:l=>l?`Падение: ${l*10}%`:'Выключен'},
+  {id:'care',name:'🌱 Уход',desc:'−шанс пожелтения, +время до опадания',base:450,growth:2.0,max:10,get:()=>S.care,add:()=>S.care++,eff:l=>`Защита: +${l*10}%`},
+  {id:'luck',name:'🍀 Удача',desc:'+5% шанс золотого листика (×5)',base:550,growth:2.1,max:10,get:()=>S.luck,add:()=>S.luck++,eff:l=>`Удача: +${l*5}%`}
 ];
 
+const CONSUMABLES={
+  watering:{name:'💧 Лейка',desc:'Ускоряет появление листиков ×2 на 5 мин',price:250,duration:5*60*1000,effect:'grow'},
+  fertilizer:{name:'🧪 Удобрение',desc:'+50% к доходу на 5 мин',price:400,duration:5*60*1000,effect:'income'},
+  spray:{name:'💨 Распылитель',desc:'5 пшиков — возвращает жёлтый листик в зелёный',price:60,duration:0,effect:'spray',charges:5}
+};
+
 const GAME_ACH={
-  first_plant:{name:'🌱 Первый росток',desc:'Посадить первое семечко',reward:2,check:()=>S.plantedEver>0},
-  first_harvest:{name:'🧺 Первый урожай',desc:'Собрать первый плод',reward:3,check:()=>S.totalHarvests>=1},
-  harvest_10:{name:'🌾 Десятка',desc:'Собрать 10 плодов',reward:5,check:()=>S.totalHarvests>=10},
-  harvest_100:{name:'🚜 Фермер',desc:'Собрать 100 плодов',reward:15,check:()=>S.totalHarvests>=100},
-  first_upgrade:{name:'⚙️ Первое улучшение',desc:'Купить любое улучшение',reward:3,check:()=>S.extraPlots+S.fert+S.green+S.luck+S.auto>0},
-  max_plots:{name:'🏡 Плантация',desc:'Прокачать грядки до максимума',reward:20,check:()=>S.extraPlots>=8},
-  golden_harvest:{name:'✨ Золотой урожай',desc:'Собрать золотой плод',reward:10,check:()=>!!S.types.golden},
-  diamond_harvest:{name:'💎 Алмазный урожай',desc:'Собрать алмазный плод',reward:25,check:()=>!!S.types.diamond},
-  all_types:{name:'🍁 Коллекционер',desc:'Собрать все виды плодов',reward:30,check:()=>Object.keys(SEEDS).every(k=>S.types[k])},
-  rich_1000:{name:'🍂 Тысячник',desc:'Накопить 1000 листиков',reward:10,check:()=>S.leaves>=1000},
-  rich_100k:{name:'🍁 Богач',desc:'Накопить 100 000 листиков',reward:40,check:()=>S.leaves>=100000},
-  mutation:{name:'🍁 Мутант',desc:'Получить семечко с мутацией листочка',reward:8,check:()=>!!S.gotMutation}
+  first_leaf:{name:'🍃 Первый листик',desc:'Собрать первый листик',reward:2,check:()=>S.totalLeaves>=1},
+  first_upgrade:{name:'⚙️ Первое улучшение',desc:'Купить любое улучшение',reward:3,check:()=>S.branches+S.better+S.fast+S.basketUp+S.fall+S.care+S.luck>0},
+  max_tree:{name:'🌳 Дерево-гигант',desc:'Прокачать ветки до максимума',reward:20,check:()=>S.branches>=10},
+  first_fall:{name:'🍂 Первый листопад',desc:'Первый листик упал сам',reward:5,check:()=>S.fallCount>=1},
+  golden_leaf:{name:'✨ Золотой листик',desc:'Собрать золотой листик',reward:10,check:()=>S.goldenCount>=1},
+  mutated_leaf:{name:'🍁 Мутированный',desc:'Собрать мутированный листик',reward:15,check:()=>S.mutCount>=1},
+  saved_leaf:{name:'💨 Спаситель',desc:'Спасти жёлтый листик от опадания',reward:8,check:()=>S.savedCount>=1}
 };
 const SITE_ACH={
   chat_teacher:{name:'👩‍🏫 В гостях у учителя',desc:'Зайти в чат с учителем',reward:1},
   chat_students:{name:'👥 Свой среди своих',desc:'Зайти в чат без учителя',reward:1},
   team_view:{name:'👑 Знакомство',desc:'Посмотреть команду сайта',reward:1}
 };
+const CHALLENGES={
+  ch_test_first:{name:'📝 Первый тест',desc:'Пройти любой тест',reward:{coins:50},check:()=>S.testsPassedTotal>=1},
+  ch_test_10:{name:'📚 Отличник',desc:'Пройти 10 тестов',reward:{coins:150},check:()=>S.testsPassedTotal>=10},
+  ch_test_all:{name:'🎓 Эрудит',desc:'Пройти все 5 предметов',reward:{title:'red',titleName:'Эрудит'},check:()=>Object.keys(S.testsDone).length>=5},
+  ch_pass_10:{name:'🎫 Пасс-новичок',desc:'Достичь 10 ур. пасса',reward:{coins:100},check:()=>S.passLevel>=10},
+  ch_pass_25:{name:'🎫 Пасс-профи',desc:'Достичь 25 ур. пасса',reward:{frame:'leaves'},check:()=>S.passLevel>=25},
+  ch_pass_50:{name:'🎫 Пасс-легенда',desc:'Достичь 50 ур. пасса',reward:{title:'red',titleName:'Легенда пасса'},check:()=>S.passLevel>=50},
+  ch_quests_10:{name:'✅ Квестоман',desc:'Выполнить 10 квестов',reward:{coins:200},check:()=>S.questsCompleted>=10},
+  ch_rich_1000:{name:'💰 Богач',desc:'Накопить 1000 монеток',reward:{frame:'leaves'},check:()=>S.coins>=1000},
+  ch_golden_50:{name:'✨ Золотая коллекция',desc:'Собрать 50 золотых листиков',reward:{title:'red',titleName:'Золотой коллекционер'},check:()=>S.goldenCount>=50}
+};
 
-/* Цены редких семечек в магазине монеток */
-const COIN_SEED_SHOP=[
-  {key:'acorn',price:50},
-  {key:'mushroom',price:100},
-  {key:'golden',price:500},
-  {key:'diamond',price:2000}
+const TESTS={
+  math:{name:'🔢 Математика',questions:[
+    {q:'Сколько будет 7 × 8?',opts:['54','56','64','48'],a:1},
+    {q:'Чему равно 15% от 200?',opts:['15','20','30','40'],a:2},
+    {q:'Периметр квадрата со стороной 6?',opts:['12','24','36','18'],a:1},
+    {q:'2³ = ?',opts:['6','8','9','12'],a:1},
+    {q:'Сколько градусов в прямом угле?',opts:['45','90','180','360'],a:1}
+  ]},
+  rus:{name:'📖 Русский язык',questions:[
+    {q:'Сколько букв в русском алфавите?',opts:['31','32','33','34'],a:2},
+    {q:'Какая часть речи отвечает на вопрос «какой?»',opts:['Существительное','Прилагательное','Глагол','Наречие'],a:1},
+    {q:'Как пишется: «не» с глаголами?',opts:['Слитно','Раздельно','Через дефис','По-разному'],a:1},
+    {q:'Что такое корень слова?',opts:['Приставка','Главная значимая часть','Окончание','Суффикс'],a:1},
+    {q:'Сколько склонений у существительных?',opts:['2','3','4','5'],a:1}
+  ]},
+  hist:{name:'🏛 История',questions:[
+    {q:'В каком году началась Великая Отечественная война?',opts:['1939','1941','1945','1914'],a:1},
+    {q:'Кто был первым космонавтом?',opts:['Гагарин','Титов','Терешкова','Леонов'],a:0},
+    {q:'Столица Древней Руси?',opts:['Москва','Киев','Новгород','Псков'],a:1},
+    {q:'Кто основал Санкт-Петербург?',opts:['Иван Грозный','Пётр I','Екатерина II','Николай II'],a:1},
+    {q:'В каком году распался СССР?',opts:['1989','1990','1991','1992'],a:2}
+  ]},
+  eng:{name:'🇬🇧 Английский',questions:[
+    {q:'Как переводится «apple»?',opts:['Апельсин','Яблоко','Банан','Груша'],a:1},
+    {q:'Выбери правильное: I ___ a student.',opts:['am','is','are','be'],a:0},
+    {q:'Множественное число от «child»?',opts:['childs','children','childes','child'],a:1},
+    {q:'Как будет «пять»?',opts:['four','five','six','seven'],a:1},
+    {q:'What color is the sun?',opts:['Blue','Green','Yellow','Red'],a:2}
+  ]},
+  world:{name:'🌍 Окружающий мир',questions:[
+    {q:'Самая большая планета Солнечной системы?',opts:['Земля','Марс','Юпитер','Сатурн'],a:2},
+    {q:'Сколько материков на Земле?',opts:['5','6','7','8'],a:1},
+    {q:'Что выделяют растения при фотосинтезе?',opts:['Углекислый газ','Кислород','Азот','Водород'],a:1},
+    {q:'Самая длинная река в мире?',opts:['Амазонка','Нил','Волга','Янцзы'],a:1},
+    {q:'Сколько ног у паука?',opts:['6','8','10','4'],a:1}
+  ]}
+};
+
+function makeFreePass(){
+  const r={};
+  for(let i=1;i<=50;i++){
+    if(i===25){r[i]={type:'frame',frame:'leaves'};continue;}
+    if(i===50){r[i]={type:'title',title:'red',titleName:'Король пёстрого ковра'};continue;}
+    r[i]={type:'coins',amount:10+i*4};
+  }
+  return r;
+}
+function makePaidPass(){
+  const r={};
+  for(let i=1;i<=50;i++){
+    if(i===25){r[i]={type:'frame',frame:'fire'};continue;}
+    if(i===37){r[i]={type:'title',title:'imperial',titleName:'Осенний император'};continue;}
+    if(i===50){r[i]={type:'theme',theme:'imperial'};continue;}
+    if(i%5===0){r[i]={type:'boost',amount:1};continue;}
+    r[i]={type:'coins',amount:20+i*6};
+  }
+  return r;
+}
+const FREE_PASS_REWARDS=makeFreePass();
+const PAID_PASS_REWARDS=makePaidPass();
+
+const FRAME_SHOP={
+  leaves:{name:'🍃 Рамка «Листики»',desc:'Зелёно-жёлтая рамка с листвой',price:800},
+  fire:{name:'🔥 Рамка «Огонь»',desc:'Анимированное пламя',price:1500},
+  gold:{name:'✨ Рамка «Золото»',desc:'Золотое свечение',price:2500},
+  ice:{name:'❄️ Рамка «Лёд»',desc:'Голубое сияние',price:2500}
+};
+const TITLE_SHOP={
+  red:{name:'Король пёстрого ковра',desc:'Красный титул',price:1200},
+  imperial:{name:'Осенний император',desc:'Перелив красно-оранжево-жёлтый',price:3000},
+  autumn:{name:'Осенний лист',desc:'Оранжевый титул',price:900},
+  frost:{name:'Ледяной страж',desc:'Голубой титул',price:900}
+};
+
+const DAILY_QUESTS=[
+  {id:'q_collect20',name:'🍂 Собери 20 листиков',xp:50,target:20,key:'daily_collected'},
+  {id:'q_upgrade',name:'⚙️ Купи улучшение',xp:30,target:1,key:'daily_upgrades'},
+  {id:'q_test',name:'📝 Пройди тест',xp:40,target:1,key:'daily_tests'},
+  {id:'q_golden',name:'✨ Собери 5 золотых листиков',xp:60,target:5,key:'daily_golden'}
+];
+const MEGA_QUESTS=[
+  {id:'mq_collect100',name:'🔥 Собери 100 листиков',xp:200,coins:50,target:100,key:'mega_collected'},
+  {id:'mq_tests3',name:'🔥 Пройди 3 теста',xp:150,coins:30,target:3,key:'mega_tests'}
+];
+
+const CHANGELOG=[
+  {ver:'2.4',date:'17.11.2026',items:[
+    '❌ Убраны достижения за количество листиков (10/100/1000/10000)',
+    '⚡ Базовый рост листиков ускорен ×3 всегда',
+    '🍂 Листик теперь даёт 5–20 листиков (рандом)',
+    '✨ Золотой листик даёт 1000–10000 листиков (рандом)',
+    '🍁 Мутированный листик — ×3 от базы'
+  ]},
+  {ver:'2.3',date:'17.11.2026',items:[
+    '❌ Убран «Пакет листиков» из магазина',
+    '🐛 Фикс: купленные листики теперь сразу доступны для улучшений',
+    '⚡ Новый товар: «Быстрый рост» (×3 появление листиков на 10 мин за 20💰)'
+  ]},
+  {ver:'2.2',date:'17.11.2026',items:[
+    '📈 Подняты цены в магазине за монетки',
+    '🎁 Стартовый бонус новичку: 5💰',
+    '🐛 Фикс: кнопка обмена монеток теперь доступна с самого начала'
+  ]},
+  {ver:'2.1',date:'17.11.2026',items:[
+    '💰 Админка: начисление монеток',
+    '🎫 Пасс: награда за КАЖДЫЙ уровень 1–50, статус «Собрано»',
+    '🐛 Фикс дёргания листика при наведении',
+    '📈 Подняты ценники магазина игры',
+    '🛒 Новый магазин рамок и титулов',
+    '🎨 Новые рамки: Золото, Лёд; новые титулы: Осенний лист, Ледяной страж'
+  ]},
+  {ver:'2.0',date:'17.11.2026',items:[
+    '👤 Профили: ник + URL аватарки',
+    '🎫 Осенний Пасс: 50 уровней',
+    '⏳ Таймер пасса до 1 декабря',
+    '🏅 Челленджи с рамками и титулами',
+    '📝 Тесты по 5 предметам',
+    '✅ Ежедневные квесты + мегаквесты',
+    '📜 Апдейт-лог'
+  ]},
+  {ver:'1.0',date:'ранее',items:[
+    '🌳 Игра «Дерево листиков»',
+    '🧴 Расходники и эффекты',
+    '🎮 Достижения игры и сайта',
+    '🍁 Осенний ивент',
+    '💬 Чаты и команда',
+    '🔐 Админ-панель'
+  ]}
 ];
 
 let S={
-  leaves:0,coins:0,extraPlots:0,fert:0,green:0,luck:0,auto:0,
-  inv:{},invMut:{},
-  plots:[],stock:{},stockAt:0,
-  gameAch:{},siteAch:{},totalHarvests:0,types:{},secret:false,
-  plantedEver:0,gotMutation:false,
-  autumnActive:false,autumnEnd:0,autumnManual:false
+  leaves:0,coins:0,
+  branches:0,better:0,fast:0,basketUp:0,fall:0,care:0,luck:0,
+  basket:0,leavesOnTree:[],leafIdSeq:0,sprayCharges:0,
+  growEnd:0,incomeEnd:0,fastGrowthEnd:0,
+  gameAch:{},siteAch:{},challenges:{},
+  totalLeaves:0,goldenCount:0,mutCount:0,savedCount:0,fallCount:0,
+  secret:false,autumnActive:false,autumnEnd:0,autumnManual:false,
+  nick:'Гость',avatarUrl:'',activeFrame:'',activeTitle:'',activeTitleName:'',
+  ownedFrames:[],ownedTitles:[],
+  passSeason:1,passLevel:1,passXP:0,passPaid:false,
+  passClaimedFree:[],passClaimedPaid:[],
+  passBoostEnd:0,
+  questsDate:'',questProgress:{},questsCompleted:0,
+  testsDone:{},testsPassedTotal:0,testCooldown:{},
+  imperialTheme:false
 };
 
-/* ---------- утилиты ---------- */
 const $=id=>document.getElementById(id);
 function fmt(n){if(n>=1e9)return(n/1e9).toFixed(2)+' млрд';if(n>=1e6)return(n/1e6).toFixed(2)+' млн';if(n>=1e3)return(n/1e3).toFixed(1)+' тыс';return Math.floor(n).toString();}
 function fmtTime(ms){if(ms<=0)return'00:00';const t=Math.floor(ms/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60,p=n=>String(n).padStart(2,'0');return h?`${p(h)}:${p(m)}:${p(s)}`:`${p(m)}:${p(s)}`;}
+function fmtPassTime(ms){if(ms<=0)return'00д 00:00:00';const t=Math.floor(ms/1000),d=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),s=t%60,p=n=>String(n).padStart(2,'0');return`${d}д ${p(h)}:${p(m)}:${p(s)}`;}
 function toast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200);}
-function growMult(){return Math.pow(.92,S.green);}
-function rewardMult(mut){return (1+S.fert*.2)*(mut?2:1);}
-function maxPlots(){return BASE_PLOTS+S.extraPlots;}
+function basketCap(){return BASE_BASKET+S.basketUp*50;}
+function leafValue(mult){
+  let base=5+Math.random()*15;
+  let v=base*(1+S.better*0.2);
+  if(S.incomeEnd>Date.now())v*=1.5;
+  if(S.autumnActive)v*=2;
+  if(mult==='golden'){
+    v=1000+Math.random()*9000;
+    if(S.incomeEnd>Date.now())v*=1.5;
+    if(S.autumnActive)v*=2;
+    return v;
+  }
+  if(mult==='mut')v*=3;
+  return v;
+}
+function spawnInterval(){
+  let ms=3000*(1-Math.min(.85,S.fast*.1));
+  ms/=3;
+  if(S.growEnd>Date.now())ms/=2;
+  if(S.fastGrowthEnd>Date.now())ms/=3;
+  return Math.max(100,ms);
+}
+function maxLeavesOnTree(){return 10+S.branches*8;}
+function todayStr(){const d=new Date();return`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;}
 
-/* ---------- сохранение/загрузка ---------- */
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){
   try{
-    const old=JSON.parse(localStorage.getItem(OLD_KEY));
     const cur=JSON.parse(localStorage.getItem(KEY));
+    const old=JSON.parse(localStorage.getItem(OLD_KEY));
     if(cur){Object.assign(S,cur);}
     else if(old){
-      S.leaves=Math.floor((old.clickerCandy||0)/RATE);
+      S.leaves=Math.floor((old.clickerCandy||old.leaves||0)/RATE);
       S.coins=old.coins||0;
-      toast(`🍂 Конвертация: ${fmt(old.clickerCandy||0)} конфет → ${fmt(S.leaves)} листиков`);
+      S.totalLeaves=old.totalLeaves||0;
+      toast('🍂 Данные перенесены из версии 1.0');
     }
   }catch(e){}
-  if(!S.inv)S.inv={};
-  if(!S.invMut)S.invMut={};
-  if(!S.stock)S.stock={};
-  if(!S.plots)S.plots=[];
-  if(!S.types)S.types={};
-  if(!S.gameAch)S.gameAch={};
-  if(!S.siteAch)S.siteAch={};
-  if(!S.plots.length)S.plots=Array(maxPlots()).fill(null);
-  while(S.plots.length<maxPlots())S.plots.push(null);
-  if(!S.stockAt||Date.now()-S.stockAt>=STOCK_MS)refreshStock(false);
-    Object.keys(GAME_ACH).forEach(k=>{if(S.gameAch[k]===undefined)S.gameAch[k]=false;});
+  if(!localStorage.getItem('6a_started')){
+    S.coins=Math.max(S.coins,5);
+    localStorage.setItem('6a_started','1');
+    setTimeout(()=>toast('🎁 Стартовый бонус: 5 💰!'),500);
+  }
+  ['leavesOnTree','gameAch','siteAch','challenges','ownedFrames','ownedTitles','passClaimedFree','passClaimedPaid','questProgress','testsDone','testCooldown'].forEach(k=>{if(!S[k])S[k]=Array.isArray(S[k])?[]:{};});
+  Object.keys(GAME_ACH).forEach(k=>{if(S.gameAch[k]===undefined)S.gameAch[k]=false;});
   Object.keys(SITE_ACH).forEach(k=>{if(S.siteAch[k]===undefined)S.siteAch[k]=false;});
+  Object.keys(CHALLENGES).forEach(k=>{if(S.challenges[k]===undefined)S.challenges[k]=false;});
   if(S.autumnActive&&Date.now()>=S.autumnEnd)stopAutumn(false);
+  checkPassSeason();
+}
+function checkPassSeason(){
+  const now=Date.now();
+  if(now>=PASS_END_DATE.getTime()){
+    S.passSeason++;S.passLevel=1;S.passXP=0;S.passPaid=false;
+    S.passClaimedFree=[];S.passClaimedPaid=[];S.passBoostEnd=0;
+    S.questsDate='';S.questProgress={};
+    save();toast('🎫 Новый сезон пасса начался!');
+  }
 }
 
-/* ---------- сток: одна ячейка на тип, с остатком ---------- */
-function refreshStock(paid){
-  if(paid){if(S.coins<10){toast('Нужно 10 💰');return;}S.coins-=10;}
-  const luckBonus=1+S.luck*.05;
-  const pool=[];
-  Object.entries(SEEDS).forEach(([k,s])=>{
-    let w=s.chance;
-    if(s.rarity==='rare'||s.rarity==='epic'||s.rarity==='legend')w*=luckBonus;
-    pool.push({k,w});
+function applyFrame(){
+  const wrap=$('avatarPreview');wrap.className='avatar-wrap';
+  if(S.activeFrame==='leaves')wrap.classList.add('frame-leaves');
+  if(S.activeFrame==='fire')wrap.classList.add('frame-fire');
+  if(S.activeFrame==='gold')wrap.classList.add('frame-gold');
+  if(S.activeFrame==='ice')wrap.classList.add('frame-ice');
+  if(S.avatarUrl){wrap.innerHTML=`<img src="${S.avatarUrl}" onerror="this.style.display='none';this.parentElement.textContent='🦊'" alt="">`;}
+  else{wrap.textContent='🦊';}
+}
+function renderProfile(){
+  $('headerNick').textContent=S.nick||'Гость';
+  $('profileNick').textContent=S.nick||'Гость';
+  $('profilePassLvl').textContent=S.passLevel;
+  $('profileCoins').textContent=fmt(S.coins);
+  applyFrame();
+  const t=$('profileTitle');
+  if(S.activeTitle==='red')t.innerHTML=`<span class="title-badge title-red">${S.activeTitleName||'Титул'}</span>`;
+  else if(S.activeTitle==='imperial')t.innerHTML=`<span class="title-badge title-imperial">${S.activeTitleName||'Осенний император'}</span>`;
+  else if(S.activeTitle==='autumn')t.innerHTML=`<span class="title-badge title-autumn">${S.activeTitleName||'Осенний лист'}</span>`;
+  else if(S.activeTitle==='frost')t.innerHTML=`<span class="title-badge title-frost">${S.activeTitleName||'Ледяной страж'}</span>`;
+  else t.innerHTML='<span style="color:#9aa3b0;font-size:.85rem">Без титула</span>';
+  renderMyFrames();
+}
+function renderMyFrames(){
+  const g=$('myFramesList');g.innerHTML='';
+  if(!S.ownedFrames.length&&!S.ownedTitles.length){
+    g.innerHTML='<div style="color:#9aa3b0;font-size:.85rem">Пока нет наград. Проходи челленджи и качай пасс!</div>';return;
+  }
+  S.ownedFrames.forEach(f=>{
+    const d=document.createElement('div');d.className='shop-item';
+    const active=S.activeFrame===f?'✅':'';
+    d.innerHTML=`<div class="info-block"><div class="info-name">Рамка: ${f==='leaves'?'🍃 Листики':f==='fire'?'🔥 Огонь':f==='gold'?'✨ Золото':'❄️ Лёд'}</div></div><button class="btn small ${active?'green':''}">${active?'Активна':'Надеть'}</button>`;
+    d.querySelector('button').onclick=()=>{S.activeFrame=f;save();renderProfile();};
+    g.appendChild(d);
   });
-  const sum=pool.reduce((a,x)=>a+x.w,0);
-  const newStock={};
-  for(let i=0;i<5;i++){
-    let r=Math.random()*sum;
-    for(const x of pool){r-=x.w;if(r<=0){newStock[x.k]=(newStock[x.k]||0)+1;break;}}
+  S.ownedTitles.forEach(t=>{
+    const d=document.createElement('div');d.className='shop-item';
+    const active=S.activeTitle===t.type&&S.activeTitleName===t.name?'✅':'';
+    d.innerHTML=`<div class="info-block"><div class="info-name">Титул: ${t.name}</div></div><button class="btn small ${active?'green':''}">${active?'Активен':'Надеть'}</button>`;
+    d.querySelector('button').onclick=()=>{S.activeTitle=t.type;S.activeTitleName=t.name;save();renderProfile();};
+    g.appendChild(d);
+  });
+}
+function saveProfile(){
+  S.nick=$('nickInput').value.trim().slice(0,20)||'Гость';
+  S.avatarUrl=$('avatarInput').value.trim();
+  save();renderProfile();toast('💾 Профиль сохранён');
+}
+function grantFrame(f){if(!S.ownedFrames.includes(f)){S.ownedFrames.push(f);toast(`🖼 Новая рамка!`);}}
+function grantTitle(type,name){if(!S.ownedTitles.find(t=>t.type===type&&t.name===name)){S.ownedTitles.push({type,name});toast(`👑 Новый титул: ${name}!`);}}
+function renderFrameShop(){
+  const g=$('frameShopList');if(!g)return;g.innerHTML='<div style="color:#9aa3b0;font-size:.85rem;margin-bottom:6px">🖼 Рамки</div>';
+  Object.entries(FRAME_SHOP).forEach(([k,it])=>{
+    const owned=S.ownedFrames.includes(k);
+    const d=document.createElement('div');d.className='shop-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${it.name}</div><div class="info-desc">${it.desc}</div></div>${owned?'<span class="claimed-badge">✅ Куплено</span>':`<button class="btn small" ${S.coins<it.price?'disabled':''}>${fmt(it.price)} 💰</button>`}`;
+    if(!owned)d.querySelector('button').onclick=()=>buyFrame(k);
+    g.appendChild(d);
+  });
+}
+function renderTitleShop(){
+  const g=$('titleShopList');if(!g)return;g.innerHTML='<div style="color:#9aa3b0;font-size:.85rem;margin:6px 0">👑 Титулы</div>';
+  Object.entries(TITLE_SHOP).forEach(([k,it])=>{
+    const owned=S.ownedTitles.find(t=>t.type===k&&t.name===it.name);
+    const d=document.createElement('div');d.className='shop-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${it.name}</div><div class="info-desc">${it.desc}</div></div>${owned?'<span class="claimed-badge">✅ Куплено</span>':`<button class="btn small" ${S.coins<it.price?'disabled':''}>${fmt(it.price)} 💰</button>`}`;
+    if(!owned)d.querySelector('button').onclick=()=>buyTitle(k,it.name,it.price);
+    g.appendChild(d);
+  });
+}
+function buyFrame(k){
+  const it=FRAME_SHOP[k];if(S.ownedFrames.includes(k))return;
+  if(S.coins<it.price){toast('Недостаточно монеток');return;}
+  S.coins-=it.price;S.ownedFrames.push(k);
+  save();renderCoins();renderProfile();renderFrameShop();toast(`🖼 Куплена рамка: ${it.name}`);
+}
+function buyTitle(k,name,price){
+  if(S.ownedTitles.find(t=>t.type===k&&t.name===name))return;
+  if(S.coins<price){toast('Недостаточно монеток');return;}
+  S.coins-=price;S.ownedTitles.push({type:k,name});
+  save();renderCoins();renderProfile();renderTitleShop();toast(`👑 Куплен титул: ${name}`);
+}
+
+function addPassXP(amount){
+  if(S.passLevel>=PASS_MAX_LEVEL){return;}
+  let mult=1;if(S.passBoostEnd>Date.now())mult=2;
+  const gain=Math.floor(amount*mult);
+  S.passXP+=gain;
+  while(S.passXP>=PASS_XP_PER_LEVEL&&S.passLevel<PASS_MAX_LEVEL){
+    S.passXP-=PASS_XP_PER_LEVEL;S.passLevel++;toast(`🎫 Уровень пасса ${S.passLevel}!`);
   }
-  S.stock=newStock;
-  S.stockAt=Date.now();
-  save();renderStock();renderCoins();renderTop();
+  if(S.passLevel>=PASS_MAX_LEVEL)S.passXP=0;
+  save();renderPass();renderProfile();
+}
+function buyPaidPass(){
+  if(S.passPaid){toast('Платный пасс уже куплен');return;}
+  if(S.coins<PAID_PASS_PRICE){toast(`Нужно ${PAID_PASS_PRICE} 💰`);return;}
+  S.coins-=PAID_PASS_PRICE;S.passPaid=true;
+  save();renderCoins();renderPass();renderProfile();toast('👑 Платный пасс активирован!');
+}
+function claimPassReward(branch,lvl){
+  const arr=branch==='free'?S.passClaimedFree:S.passClaimedPaid;
+  if(arr.includes(lvl))return;
+  if(S.passLevel<lvl){toast('Уровень пасса слишком низкий');return;}
+  if(branch==='paid'&&!S.passPaid){toast('Нужен платный пасс');return;}
+  const r=(branch==='free'?FREE_PASS_REWARDS:PAID_PASS_REWARDS)[lvl];
+  if(!r)return;
+  if(r.type==='coins'){S.coins+=r.amount;toast(`+${r.amount} 💰`);}
+  else if(r.type==='frame'){grantFrame(r.frame);}
+  else if(r.type==='title'){grantTitle(r.title,r.titleName);}
+  else if(r.type==='boost'){S.passBoostEnd=Math.max(Date.now(),S.passBoostEnd)+10*60*1000;toast('⚡ ×2 опыта пасса на 10 мин');}
+  else if(r.type==='theme'){S.imperialTheme=true;document.body.classList.add('imperial-theme');toast('🌈 Осенняя тема активирована!');}
+  arr.push(lvl);save();renderPass();renderProfile();renderCoins();
+}
+function renderPass(){
+  const left=PASS_END_DATE.getTime()-Date.now();
+  $('passTimer').textContent=fmtPassTime(left);
+  $('passSeason').textContent=S.passSeason;
+  $('passLevel').textContent=S.passLevel;
+  $('passXP').textContent=S.passXP;
+  $('passXpFill').style.width=(S.passLevel>=PASS_MAX_LEVEL?100:Math.round(S.passXP/PASS_XP_PER_LEVEL*100))+'%';
+  $('passPaidStatus').innerHTML=S.passPaid?'<span style="color:#e67e22;font-weight:800">👑 Платный пасс активен</span>':'<button class="btn orange" onclick="buyPaidPass()">Купить платный пасс — 500 💰</button>';
+  const bs=$('boosterStatus');
+  if(S.passBoostEnd>Date.now())bs.textContent=`⚡ Бустер ×2 опыта: ${fmtTime(S.passBoostEnd-Date.now())}`;
+  else bs.textContent='';
+  const fg=$('freePassLevels');fg.innerHTML='';
+  Object.keys(FREE_PASS_REWARDS).map(Number).sort((a,b)=>a-b).forEach(lvl=>{
+    const r=FREE_PASS_REWARDS[lvl];const claimed=S.passClaimedFree.includes(lvl);const unlocked=S.passLevel>=lvl;
+    let txt='';
+    if(r.type==='coins')txt=`${r.amount} 💰`;
+    else if(r.type==='frame')txt=`Рамка 🍃 Листики`;
+    else if(r.type==='title')txt=`Титул «${r.titleName}»`;
+    const d=document.createElement('div');
+    d.className='pass-level-item'+(claimed?' claimed':(unlocked?'':' locked'));
+    d.innerHTML=`<div class="info-block"><div class="info-name">Ур. ${lvl}</div><div class="info-desc">${txt}</div></div>
+      ${claimed?'<span class="claimed-badge">✅ Собрано</span>':`<button class="btn small" ${unlocked?'':'disabled'}>Забрать</button>`}`;
+    if(!claimed&&unlocked)d.querySelector('button').onclick=()=>claimPassReward('free',lvl);
+    fg.appendChild(d);
+  });
+  const pg=$('paidPassLevels');pg.innerHTML='';
+  Object.keys(PAID_PASS_REWARDS).map(Number).sort((a,b)=>a-b).forEach(lvl=>{
+    const r=PAID_PASS_REWARDS[lvl];const claimed=S.passClaimedPaid.includes(lvl);const unlocked=S.passLevel>=lvl&&S.passPaid;
+    let txt='';
+    if(r.type==='coins')txt=`${r.amount} 💰`;
+    else if(r.type==='frame')txt=`Рамка 🔥 Огонь`;
+    else if(r.type==='title')txt=`Титул «${r.titleName}»`;
+    else if(r.type==='boost')txt=`⚡ ×2 XP ×${r.amount}`;
+    else if(r.type==='theme')txt='🌈 Осенняя тема';
+    const d=document.createElement('div');
+    d.className='pass-level-item'+(claimed?' claimed':(unlocked?'':' locked'));
+    d.innerHTML=`<div class="info-block"><div class="info-name">Ур. ${lvl}</div><div class="info-desc">${txt}</div></div>
+      ${claimed?'<span class="claimed-badge">✅ Собрано</span>':`<button class="btn small" ${unlocked?'':'disabled'}>Забрать</button>`}`;
+    if(!claimed&&unlocked)d.querySelector('button').onclick=()=>claimPassReward('paid',lvl);
+    pg.appendChild(d);
+  });
 }
 
-function buySeed(key){
-  const left=S.stock[key]||0;
-  if(left<=0){toast('В стоке не осталось');return;}
-  const price=SEEDS[key].price;
-  if(S.leaves<price){toast('Недостаточно листиков');return;}
-  S.leaves-=price;
-  S.stock[key]=left-1;
-  if(S.stock[key]<=0)delete S.stock[key];
-  let mutated=false;
-  if(S.autumnActive&&Date.now()<S.autumnEnd&&Math.random()<MUT_CHANCE){
-    mutated=true;S.gotMutation=true;
-    S.invMut[key]=(S.invMut[key]||0)+1;
-    toast(`🍁 Мутация листочка! ${SEEDS[key].name} ×2 доход`);
-  }else{
-    S.inv[key]=(S.inv[key]||0)+1;
+function resetQuestsIfNeeded(){if(S.questsDate!==todayStr()){S.questsDate=todayStr();S.questProgress={};save();}}
+function renderQuests(){
+  resetQuestsIfNeeded();
+  const g=$('dailyQuestsList');g.innerHTML='';
+  DAILY_QUESTS.forEach(q=>{
+    const prog=S.questProgress[q.id]||0;const done=prog>=q.target;
+    const d=document.createElement('div');d.className='quest-item'+(done?' owned':'');
+    d.innerHTML=`<div class="info-block"><div class="info-name">${q.name}</div><div class="info-desc">Прогресс: ${Math.min(prog,q.target)}/${q.target} · +${q.xp} XP</div></div>${done?'<span class="claimed-badge">✅ Выполнено</span>':'<span style="color:#9aa3b0">—</span>'}`;
+    g.appendChild(d);
+  });
+  const mg=$('megaQuestsList');mg.innerHTML='';
+  if(!S.passPaid){mg.innerHTML='<div style="color:#9aa3b0;font-size:.85rem">Доступно только с платным пассом.</div>';return;}
+  MEGA_QUESTS.forEach(q=>{
+    const prog=S.questProgress[q.id]||0;const done=prog>=q.target;
+    const d=document.createElement('div');d.className='quest-item'+(done?' owned':'');
+    d.innerHTML=`<div class="info-block"><div class="info-name">${q.name}</div><div class="info-desc">Прогресс: ${Math.min(prog,q.target)}/${q.target} · +${q.xp} XP · +${q.coins}💰</div></div>${done?'<span class="claimed-badge">✅ Выполнено</span>':'<span style="color:#9aa3b0">—</span>'}`;
+    mg.appendChild(d);
+  });
+}
+function progressQuest(key,amount){
+  resetQuestsIfNeeded();
+  DAILY_QUESTS.forEach(q=>{if(q.key===key){
+    const prev=S.questProgress[q.id]||0;S.questProgress[q.id]=prev+amount;
+    if(prev<q.target&&S.questProgress[q.id]>=q.target){addPassXP(q.xp);S.questsCompleted++;toast(`✅ Квест: +${q.xp} XP`);}
+  }});
+  MEGA_QUESTS.forEach(q=>{if(q.key===key&&S.passPaid){
+    const prev=S.questProgress[q.id]||0;S.questProgress[q.id]=prev+amount;
+    if(prev<q.target&&S.questProgress[q.id]>=q.target){addPassXP(q.xp);S.coins+=q.coins;S.questsCompleted++;toast(`🔥 Мегаквест: +${q.xp} XP, +${q.coins}💰`);}
+  }});
+  save();renderQuests();renderCoins();
+}
+
+let currentTest=null,currentTestAnswers=[];
+function renderTestsList(){
+  const g=$('testsList');g.innerHTML='';
+  Object.entries(TESTS).forEach(([key,t])=>{
+    const done=S.testsDone[key]===todayStr();
+    const d=document.createElement('div');d.className='test-subject';
+    d.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><div><strong style="color:#e8b04b">${t.name}</strong><div style="color:#9aa3b0;font-size:.85rem">${t.questions.length} вопросов · 15💰</div></div><button class="btn small ${done?'gray':''}" ${done?'disabled':''}>${done?'✅ Пройден сегодня':'Начать'}</button></div>`;
+    if(!done)d.querySelector('button').onclick=()=>startTest(key);
+    g.appendChild(d);
+  });
+  $('testRunner').style.display='none';$('testsList').style.display='block';
+}
+function startTest(key){
+  currentTest=key;currentTestAnswers=TESTS[key].questions.map(()=>-1);
+  $('testsList').style.display='none';
+  const r=$('testRunner');r.style.display='block';
+  r.innerHTML=`<h3 style="color:#e8b04b;margin-bottom:1rem">${TESTS[key].name}</h3>`;
+  TESTS[key].questions.forEach((q,i)=>{
+    const box=document.createElement('div');box.className='test-q';
+    box.innerHTML=`<h4>${i+1}. ${q.q}</h4>`;
+    q.opts.forEach((opt,j)=>{
+      const b=document.createElement('button');b.className='test-opt';b.textContent=opt;
+      b.onclick=()=>{currentTestAnswers[i]=j;box.querySelectorAll('.test-opt').forEach(x=>x.classList.remove('correct','wrong'));b.classList.add('correct');};
+      box.appendChild(b);
+    });
+    r.appendChild(box);
+  });
+  const finish=document.createElement('button');finish.className='btn';finish.textContent='✅ Завершить тест';finish.style.marginTop='10px';finish.onclick=()=>finishTest(key);
+  r.appendChild(finish);
+}
+function finishTest(key){
+  const qs=TESTS[key].questions;let correct=0;
+  qs.forEach((q,i)=>{if(currentTestAnswers[i]===q.a)correct++;});
+  const passed=correct>=Math.ceil(qs.length*0.6);
+  if(passed){
+    S.coins+=15;S.testsDone[key]=todayStr();S.testsPassedTotal++;
+    progressQuest('daily_tests',1);progressQuest('mega_tests',1);addPassXP(30);
+    toast(`✅ Тест пройден! ${correct}/${qs.length} · +15💰 · +30 XP`);
+  }else{toast(`❌ ${correct}/${qs.length} — нужно 60%`);}
+  save();renderCoins();renderTestsList();checkAch();checkChallenges();
+}
+
+function checkChallenges(){
+  let changed=false;
+  Object.entries(CHALLENGES).forEach(([k,c])=>{
+    if(S.challenges[k])return;
+    if(c.check()){
+      S.challenges[k]=true;changed=true;const r=c.reward;
+      if(r.coins){S.coins+=r.coins;toast(`🏅 ${c.name}: +${r.coins}💰`);}
+      if(r.frame){grantFrame(r.frame);toast(`🏅 ${c.name}: рамка!`);}
+      if(r.title){grantTitle(r.title,r.titleName);toast(`🏅 ${c.name}: титул «${r.titleName}»!`);}
+    }
+  });
+  if(changed){save();renderChallenges();renderCoins();renderProfile();}
+}
+function renderChallenges(){
+  const g=$('challengesList');if(!g)return;g.innerHTML='';
+  Object.entries(CHALLENGES).forEach(([k,c])=>{
+    const done=!!S.challenges[k];
+    let rewardTxt='';if(c.reward.coins)rewardTxt=`+${c.reward.coins} 💰`;if(c.reward.frame)rewardTxt=`Рамка`;if(c.reward.title)rewardTxt=`Титул`;
+    const d=document.createElement('div');d.className='achievement-item'+(done?' owned':'');
+    d.innerHTML=`<div class="ach-icon">${done?'🏅':'🔒'}</div><div class="info-block"><div class="info-name">${c.name}</div><div class="info-desc">${c.desc}</div><div class="ach-status ${done?'unlocked':'locked'}">${done?'Выполнено':'Не выполнено'}</div></div><div class="ach-reward">${rewardTxt}</div>`;
+    g.appendChild(d);
+  });
+}
+
+function getBranchesGeometry(){
+  const lvl=S.branches,list=[],baseX=400,baseY=340;
+  list.push({id:'trunk',x1:baseX,y1:baseY,x2:baseX,y2:baseY-100-lvl*14,width:14+lvl*2});
+  for(let i=0;i<lvl;i++){
+    const y=baseY-60-i*16,dir=i%2===0?-1:1,len=70-Math.min(40,i*3);
+    list.push({id:'b'+i,x1:baseX,y1:y,x2:baseX+dir*len,y2:y-len*0.35,width:Math.max(3,8-i*0.4),dir});
   }
-  save();renderTop();renderStock();renderInv();checkAch();
-  if(mutated)renderGarden();
+  return{branches:list};
+}
+function renderTreeSvg(){
+  const svg=$('treeSvg');if(!svg)return;
+  const geo=getBranchesGeometry();svg.innerHTML='';
+  const ground=document.createElementNS(SVGNS,'ellipse');
+  ground.setAttribute('cx','400');ground.setAttribute('cy','345');ground.setAttribute('rx','180');ground.setAttribute('ry','18');ground.setAttribute('fill','#2a3a24');ground.setAttribute('opacity','0.7');svg.appendChild(ground);
+  const trunk=geo.branches.find(b=>b.id==='trunk');
+  const tp=document.createElementNS(SVGNS,'path');
+  tp.setAttribute('d',`M ${trunk.x1-8} ${trunk.y1} Q ${trunk.x1-4} ${(trunk.y1+trunk.y2)/2} ${trunk.x2-4} ${trunk.y2} L ${trunk.x2+4} ${trunk.y2} Q ${trunk.x1+4} ${(trunk.y1+trunk.y2)/2} ${trunk.x1+8} ${trunk.y1} Z`);
+  tp.setAttribute('fill','#6b4a2a');tp.setAttribute('stroke','#4a3018');tp.setAttribute('stroke-width','2');svg.appendChild(tp);
+  const bd=[];
+  geo.branches.filter(b=>b.id!=='trunk').forEach(b=>{
+    const line=document.createElementNS(SVGNS,'path');const len=Math.hypot(b.x2-b.x1,b.y2-b.y1);
+    line.setAttribute('d',`M ${b.x1} ${b.y1} Q ${(b.x1+b.x2)/2} ${b.y1-10} ${b.x2} ${b.y2}`);
+    line.setAttribute('stroke','#6b4a2a');line.setAttribute('stroke-width',b.width);line.setAttribute('fill','none');
+    line.style.strokeDasharray=len;line.style.strokeDashoffset=len;line.style.setProperty('--len',len);line.classList.add('branch-line');
+    svg.appendChild(line);bd.push(b);
+  });
+  const bp=[];
+  bd.forEach(b=>{
+    const count=1+Math.floor(Math.random()*4);
+    for(let k=0;k<count;k++){
+      const t=0.3+Math.random()*0.6,bx=b.x1+(b.x2-b.x1)*t,by=b.y1+(b.y2-b.y1)*t;
+      bp.push({branchId:b.id,bx,by,used:false});
+      const bud=document.createElementNS(SVGNS,'ellipse');
+      bud.setAttribute('cx',bx);bud.setAttribute('cy',by);bud.setAttribute('rx',3.5);bud.setAttribute('ry',4.5);bud.setAttribute('class','bud');svg.appendChild(bud);
+    }
+  });
+  window._budPositions=bp;
+  S.leavesOnTree.forEach(leaf=>drawLeafSvg(svg,leaf,false));
+}
+function drawLeafSvg(svg,leaf,animate){
+  const g=document.createElementNS(SVGNS,'g');g.classList.add('tree-leaf');g.dataset.leafId=leaf.id;
+  if(leaf.yellow)g.classList.add('yellow');if(leaf.golden)g.classList.add('golden');if(leaf.mut)g.classList.add('mutated');
+  if(animate)g.classList.add('leaf-grow');
+  const path=document.createElementNS(SVGNS,'path');const size=leaf.size||10;
+  path.setAttribute('d',`M 0 ${size} C ${-size*0.8} ${size*0.3} ${-size*0.5} ${-size*0.6} 0 ${-size} C ${size*0.5} ${-size*0.6} ${size*0.8} ${size*0.3} 0 ${size} Z`);
+  path.setAttribute('fill',leaf.yellow?'#e8c84a':(leaf.golden?'#ffd700':(leaf.mut?'#e67333':'#4a8a3a')));
+  path.setAttribute('stroke',leaf.yellow?'#b89a20':(leaf.golden?'#b89020':(leaf.mut?'#a04a1a':'#2e5a24')));path.setAttribute('stroke-width','1.2');g.appendChild(path);
+  const vein=document.createElementNS(SVGNS,'line');vein.setAttribute('x1',0);vein.setAttribute('y1',-size*0.8);vein.setAttribute('x2',0);vein.setAttribute('y2',size*0.8);
+  vein.setAttribute('stroke',leaf.yellow?'#b89a20':(leaf.golden?'#b89020':(leaf.mut?'#a04a1a':'#2e5a24')));vein.setAttribute('stroke-width','0.8');g.appendChild(vein);
+  g.setAttribute('transform',`translate(${leaf.x},${leaf.y})`);
+  g.onclick=(e)=>{e.stopPropagation();if(leaf.yellow)sprayLeaf(leaf.id);else harvestLeaf(leaf.id);};
+  svg.appendChild(g);
+}
+let lastSpawn=0;
+function spawnLeaf(forced){
+  if(S.leavesOnTree.length>=maxLeavesOnTree())return;
+  const buds=(window._budPositions||[]).filter(b=>!b.used);if(!buds.length)return;
+  const bud=buds[Math.floor(Math.random()*buds.length)];bud.used=true;
+  const golden=Math.random()<0.05+S.luck*.05,mut=S.autumnActive&&Math.random()<MUT_CHANCE;
+  const leaf={id:++S.leafIdSeq,x:bud.bx,y:bud.by,size:8+Math.random()*4,yellow:false,golden,mut};
+  S.leavesOnTree.push(leaf);const svg=$('treeSvg');if(svg)drawLeafSvg(svg,leaf,true);
+  if(forced)save();scheduleYellow(leaf.id);
+}
+function scheduleYellow(id){
+  const leaf=S.leavesOnTree.find(l=>l.id===id);if(!leaf)return;
+  const chance=0.15*(1-Math.min(.9,S.care*.1));if(Math.random()>chance)return;
+  const delay=8000+S.care*1000+Math.random()*4000;
+  setTimeout(()=>{
+    const l=S.leavesOnTree.find(x=>x.id===id);if(!l||l.yellow)return;
+    l.yellow=true;refreshLeafVisual(l);
+    const life=10000+S.care*1500;
+    setTimeout(()=>{const l2=S.leavesOnTree.find(x=>x.id===id);if(l2&&l2.yellow)dropLeaf(id);},life);
+  },delay);
+}
+function refreshLeafVisual(leaf){
+  const svg=$('treeSvg');if(!svg)return;const g=svg.querySelector(`[data-leaf-id="${leaf.id}"]`);if(!g)return;
+  g.classList.toggle('yellow',leaf.yellow);g.classList.toggle('golden',leaf.golden);g.classList.toggle('mutated',leaf.mut);
+  const path=g.querySelector('path'),vein=g.querySelector('line');
+  const fill=leaf.yellow?'#e8c84a':(leaf.golden?'#ffd700':(leaf.mut?'#e67333':'#4a8a3a'));
+  const stroke=leaf.yellow?'#b89a20':(leaf.golden?'#b89020':(leaf.mut?'#a04a1a':'#2e5a24'));
+  if(path){path.setAttribute('fill',fill);path.setAttribute('stroke',stroke);}if(vein)vein.setAttribute('stroke',stroke);
+}
+function dropLeaf(id){
+  const idx=S.leavesOnTree.findIndex(l=>l.id===id);if(idx<0)return;
+  S.leavesOnTree.splice(idx,1);const svg=$('treeSvg');if(svg){const g=svg.querySelector(`[data-leaf-id="${id}"]`);if(g)g.remove();}save();
+}
+function harvestLeaf(id){
+  const idx=S.leavesOnTree.findIndex(l=>l.id===id);if(idx<0)return;
+  const leaf=S.leavesOnTree[idx];if(S.basket>=basketCap()){toast('Коробка полна — забери!');return;}
+  const svg=$('treeSvg');const g=svg?svg.querySelector(`[data-leaf-id="${id}"]`):null;
+  if(g){g.style.transition='transform .5s,opacity .5s';g.style.opacity='0';setTimeout(()=>{if(g.parentNode)g.remove();},500);}
+  S.leavesOnTree.splice(idx,1);
+  const mult=leaf.golden?'golden':(leaf.mut?'mut':1);
+  const v=leafValue(mult);
+  if(leaf.golden){S.goldenCount++;progressQuest('daily_golden',1);}
+  if(leaf.mut)S.mutCount++;
+  S.basket+=v;if(S.basket>basketCap())S.basket=basketCap();
+  updateBasketUI();checkAch();checkChallenges();save();
+}
+function collectBasket(){
+  if(S.basket<=0){toast('Коробка пуста');return;}
+  const gain=Math.floor(S.basket);S.leaves+=gain;S.totalLeaves+=gain;S.basket=0;
+  updateBasketUI();renderTop();renderUpgrades();renderConsumables();
+  progressQuest('daily_collected',gain);progressQuest('mega_collected',gain);
+  addPassXP(Math.min(30,Math.floor(gain/5)));toast(`🍂 +${fmt(gain)} листиков`);save();
+}
+function updateBasketUI(){$('basketCount').textContent=Math.floor(S.basket);$('basketCap').textContent=basketCap();}
+function sprayLeaf(id){
+  if(S.sprayCharges<=0){toast('Нет распылителя');return;}
+  const leaf=S.leavesOnTree.find(l=>l.id===id);if(!leaf||!leaf.yellow)return;
+  S.sprayCharges--;leaf.yellow=false;S.savedCount++;refreshLeafVisual(leaf);renderEffects();checkAch();save();toast('💨 Листик зелёный!');
 }
 
-/* ---------- посадка/сбор ---------- */
-function plantSeedTo(idx,key,mutated){
-  const invKey=mutated?'invMut':'inv';
-  if(!S[invKey][key])return;
-  const s=SEEDS[key];
-  S[invKey][key]--;if(S[invKey][key]<=0)delete S[invKey][key];
-  S.plots[idx]={key,plantedAt:Date.now(),grow:Math.floor(s.grow*growMult()),mut:!!mutated};
-  S.plantedEver++;
-  save();renderTop();renderInv();renderGarden();checkAch();
+function upgPrice(u){if(u.id==='branches'&&u.get()===0)return 0;return Math.ceil(u.base*Math.pow(u.growth,u.get()));}
+function buyUpgrade(id){
+  const u=UPGRADES.find(x=>x.id===id),lvl=u.get();if(lvl>=u.max)return;
+  const price=upgPrice(u);if(S.leaves<price){toast('Недостаточно листиков');return;}
+  S.leaves-=price;u.add();save();renderTop();renderUpgrades();renderTreeSvg();checkAch();checkChallenges();
+  progressQuest('daily_upgrades',1);toast(`⚙️ ${u.name} → ур. ${u.get()}`);
 }
-function openPlantPicker(idx){
-  const norm=Object.keys(S.inv).filter(k=>S.inv[k]>0);
-  const mut=Object.keys(S.invMut).filter(k=>S.invMut[k]>0);
-  const keys=[...norm.map(k=>({k,m:false})),...mut.map(k=>({k,m:true}))];
-  if(!keys.length){toast('Инвентарь пуст — купи семечки');return;}
-  if(keys.length===1){plantSeedTo(idx,keys[0].k,keys[0].m);return;}
-  const text='Что посадить? Введи номер:\n'+keys.map((x,i)=>{
-    const s=SEEDS[x.k];
-    return `${i+1}. ${s.name}${x.m?' 🍁(мутация)':''} (${(x.m?S.invMut:S.inv)[x.k]})`;
-  }).join('\n');
-  const n=parseInt(prompt(text));
-  if(n>=1&&n<=keys.length)plantSeedTo(idx,keys[n-1].k,keys[n-1].m);
+function buyConsumable(key){
+  const c=CONSUMABLES[key];if(S.leaves<c.price){toast('Недостаточно листиков');return;}
+  S.leaves-=c.price;
+  if(key==='watering')S.growEnd=Math.max(Date.now(),S.growEnd)+c.duration;
+  else if(key==='fertilizer')S.incomeEnd=Math.max(Date.now(),S.incomeEnd)+c.duration;
+  else if(key==='spray')S.sprayCharges+=c.charges;
+  save();renderTop();renderUpgrades();renderEffects();renderConsumables();toast(`Куплено: ${c.name}`);
 }
-function harvest(idx){
-  const p=S.plots[idx];if(!p)return;
-  if(Date.now()<p.plantedAt+p.grow)return;
-  const s=SEEDS[p.key];
-  const gain=Math.floor(s.reward*rewardMult(p.mut));
-  S.leaves+=gain;
-  S.totalHarvests++;
-  S.types[p.key]=true;
-  S.plots[idx]=null;
-  save();renderTop();renderGarden();checkAch();
-  toast(`🧺 +${fmt(gain)} 🍂 (${s.fruit}${p.mut?' 🍁':''})`);
+function renderEffects(){
+  const g=$('effectsList');g.innerHTML='';const now=Date.now();
+  if(S.growEnd>now){const d=document.createElement('div');d.className='consumable-item';d.innerHTML=`<div class="info-block"><div class="info-name">💧 Лейка</div><div class="info-desc">Появление ×2</div></div><div class="effect-timer">${fmtTime(S.growEnd-now)}</div>`;g.appendChild(d);}
+  if(S.fastGrowthEnd>now){const d=document.createElement('div');d.className='consumable-item';d.innerHTML=`<div class="info-block"><div class="info-name">⚡ Быстрый рост</div><div class="info-desc">Появление ×3</div></div><div class="effect-timer">${fmtTime(S.fastGrowthEnd-now)}</div>`;g.appendChild(d);}
+  if(S.incomeEnd>now){const d=document.createElement('div');d.className='consumable-item';d.innerHTML=`<div class="info-block"><div class="info-name">🧪 Удобрение</div><div class="info-desc">+50% доход</div></div><div class="effect-timer">${fmtTime(S.incomeEnd-now)}</div>`;g.appendChild(d);}
+  if(S.sprayCharges>0){const d=document.createElement('div');d.className='consumable-item';d.innerHTML=`<div class="info-block"><div class="info-name">💨 Распылитель</div><div class="info-desc">Пшиков: ${S.sprayCharges}</div></div>`;g.appendChild(d);}
+  if(!g.children.length)g.innerHTML='<div style="color:#9aa3b0;font-size:.85rem">Нет активных эффектов</div>';
 }
-
-/* ---------- достижения ---------- */
+function renderConsumables(){
+  const g=$('consumablesList');g.innerHTML='';
+  Object.entries(CONSUMABLES).forEach(([k,c])=>{
+    const d=document.createElement('div');d.className='consumable-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${c.name}</div><div class="info-desc">${c.desc}</div></div><button class="btn small" ${S.leaves<c.price?'disabled':''}>${fmt(c.price)} 🍂</button>`;
+    d.querySelector('button').onclick=()=>buyConsumable(k);g.appendChild(d);
+  });
+}
+function buyLeavesWithCoins(){
+  if(S.coins<1){toast('Нужно 1 💰');return;}
+  S.coins-=1;S.leaves+=1000;S.totalLeaves+=1000;
+  save();renderTop();renderCoins();renderCoinShop();renderUpgrades();renderConsumables();checkAch();checkChallenges();
+  toast('1 💰 → 1000 🍂');
+}
+function buyFastGrowth(){
+  if(S.coins<20){toast('Нужно 20 💰');return;}
+  S.coins-=20;
+  S.fastGrowthEnd=Math.max(Date.now(),S.fastGrowthEnd)+10*60*1000;
+  save();renderCoins();renderCoinShop();renderEffects();
+  toast('⚡ Быстрый рост активен 10 мин!');
+}
+function buyConsumableWithCoins(key,price){
+  if(S.coins<price){toast(`Нужно ${price} 💰`);return;}
+  S.coins-=price;const c=CONSUMABLES[key];
+  if(key==='watering')S.growEnd=Math.max(Date.now(),S.growEnd)+c.duration;
+  else if(key==='fertilizer')S.incomeEnd=Math.max(Date.now(),S.incomeEnd)+c.duration;
+  else if(key==='spray')S.sprayCharges+=c.charges;
+  save();renderTop();renderCoins();renderEffects();renderCoinShop();toast(`Куплено: ${c.name}`);
+}
+function renderCoinShop(){
+  const g=$('coinShopList');g.innerHTML='';
+  const items=[
+    {name:'🍂 Обменять на листики',desc:'1 💰 → 1000 листиков',price:1,fn:buyLeavesWithCoins},
+    {name:'⚡ Быстрый рост',desc:'×3 к появлению листиков на 10 мин',price:20,fn:buyFastGrowth},
+    {name:'💧 Лейка',desc:'×2 рост на 5 мин',price:15,fn:()=>buyConsumableWithCoins('watering',15)},
+    {name:'🧪 Удобрение',desc:'+50% дохода 5 мин',price:25,fn:()=>buyConsumableWithCoins('fertilizer',25)},
+    {name:'💨 Распылитель',desc:'5 пшиков',price:12,fn:()=>buyConsumableWithCoins('spray',12)}
+  ];
+  items.forEach(it=>{
+    const d=document.createElement('div');d.className='shop-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${it.name}</div><div class="info-desc">${it.desc}</div></div><button class="btn small" ${S.coins<it.price?'disabled':''}>Купить (${it.price} 💰)</button>`;
+    d.querySelector('button').onclick=it.fn;g.appendChild(d);
+  });
+}
+function renderTop(){$('leafCount').textContent=fmt(S.leaves);$('coinCount').textContent=fmt(S.coins);updateBasketUI();}
+function renderCoins(){$('coinCount').textContent=fmt(S.coins);}
+function renderUpgrades(){
+  const g=$('upgradeList');g.innerHTML='';
+  UPGRADES.forEach(u=>{
+    const lvl=u.get(),maxed=lvl>=u.max,price=upgPrice(u);
+    const priceTxt=maxed?'✅ Макс':(price===0?'Бесплатно':fmt(price)+' 🍂');
+    const d=document.createElement('div');d.className='upgrade-item'+(maxed?' maxed':'');
+    d.innerHTML=`<div class="info-block"><div class="info-name">${u.name}</div><div class="info-desc">${u.desc}</div><div class="info-lvl">Ур. ${lvl}/${u.max} · ${u.eff(lvl)}</div></div><button class="btn small" ${maxed||S.leaves<price?'disabled':''}>${priceTxt}</button>`;
+    d.querySelector('button').onclick=()=>buyUpgrade(u.id);g.appendChild(d);
+  });
+}
+function renderAch(){
+  const g=$('gameAchievementsList');g.innerHTML='';
+  Object.entries(GAME_ACH).forEach(([k,a])=>{
+    const done=!!S.gameAch[k];
+    const d=document.createElement('div');d.className='achievement-item'+(done?' owned':'');
+    d.innerHTML=`<div class="ach-icon">${done?'✅':'🔒'}</div><div class="info-block"><div class="info-name">${a.name}</div><div class="info-desc">${a.desc}</div><div class="ach-status ${done?'unlocked':'locked'}">${done?'Выполнено':'Не выполнено'}</div></div><div class="ach-reward">+${a.reward} 💰</div>`;
+    g.appendChild(d);
+  });
+}
+function renderSiteAch(){
+  const g=$('siteAchievementsList');if(!g)return;g.innerHTML='';
+  Object.entries(SITE_ACH).forEach(([k,a])=>{
+    const done=!!S.siteAch[k];
+    const d=document.createElement('div');d.className='achievement-item'+(done?' owned':'');
+    d.innerHTML=`<div class="ach-icon">${done?'✅':'🔒'}</div><div class="info-block"><div class="info-name">${a.name}</div><div class="info-desc">${a.desc}</div><div class="ach-status ${done?'unlocked':'locked'}">${done?'Выполнено':'Не выполнено'}</div></div><div class="ach-reward">+${a.reward} 💰</div>`;
+    g.appendChild(d);
+  });
+}
 function checkAch(){
   let changed=false;
   Object.entries(GAME_ACH).forEach(([k,a])=>{
@@ -415,362 +1074,120 @@ function checkAch(){
 }
 function unlockAchievement(id){
   if(S.siteAch[id])return;
-  S.siteAch[id]=true;S.coins+=SITE_ACH[id].reward;
-  save();toast(`🏆 ${SITE_ACH[id].name} (+${SITE_ACH[id].reward} 💰)`);
+  S.siteAch[id]=true;S.coins+=SITE_ACH[id].reward;save();toast(`🏆 ${SITE_ACH[id].name}`);
   renderSiteAch();renderCoins();
 }
-
-/* ---------- улучшения ---------- */
-function upgPrice(u){return Math.ceil(u.base*Math.pow(u.growth,u.get()));}
-function buyUpgrade(id){
-  const u=UPGRADES.find(x=>x.id===id);const lvl=u.get();
-  if(lvl>=u.max)return;
-  const price=upgPrice(u);
-  if(S.leaves<price){toast('Недостаточно листиков');return;}
-  S.leaves-=price;u.add();
-  if(id==='plots')while(S.plots.length<maxPlots())S.plots.push(null);
-  save();renderTop();renderUpgrades();renderGarden();checkAch();
-  toast(`⚙️ ${u.name} → ур. ${u.get()}`);
-}
-
-/* ---------- магазин монеток ---------- */
-function buyLeavesWithCoins(){
-  if(S.coins<1){toast('Нужно 1 💰');return;}
-  S.coins-=1;S.leaves+=1000;
-  save();renderTop();renderCoins();renderCoinShop();
-  toast('Обменяно: 1 💰 → 1000 🍂');
-}
-function buySeedWithCoins(key,price){
-  if(S.coins<price){toast('Нужно '+price+' 💰');return;}
-  S.coins-=price;S.inv[key]=(S.inv[key]||0)+1;
-  save();renderTop();renderCoins();renderInv();renderCoinShop();
-  toast(`Куплено семечко: ${SEEDS[key].name}`);
-}
-
-/* ---------- рендер ---------- */
-function renderTop(){
-  $('leafCount').textContent=fmt(S.leaves);
-  $('coinCount').textContent=fmt(S.coins);
-  $('plotCounter').textContent=`(${S.plots.filter(p=>p).length}/${maxPlots()})`;
-}
-
-let gardenNodes=[];
-function buildGarden(){
-  const g=$('gardenGrid');g.innerHTML='';gardenNodes=[];
-  while(S.plots.length<maxPlots())S.plots.push(null);
-  S.plots.forEach((p,i)=>{
-    const d=document.createElement('div');
-    g.appendChild(d);
-    gardenNodes.push({el:d,idx:i});
-    paintPlot(d,i);
-  });
-}
-function paintPlot(d,i){
-  const p=S.plots[i];
-  d.onclick=null;
-  if(!p){
-    d.className='plot empty';
-    d.innerHTML='<div class="emoji">➕</div><div class="nm">Посадить</div>';
-    d.onclick=()=>openPlantPicker(i);
-    return;
-  }
-  const s=SEEDS[p.key];
-  const left=p.plantedAt+p.grow-Date.now();
-  if(left>0){
-    const pct=Math.min(100,100-(left/p.grow*100));
-    d.className='plot growing'+(p.mut?' mutated':'');
-    d.innerHTML=`<div class="emoji">${s.emoji}</div><div class="nm">${s.name}${p.mut?' 🍁':''}</div><div class="tm" data-tm>${fmtTime(left)}</div><div class="progress"><div data-bar style="width:${pct}%"></div></div>`;
-  }else{
-    d.className='plot ready'+(p.mut?' mutated':'');
-    d.innerHTML=`<div class="emoji">${s.fruit}</div><div class="nm">Созрело!</div><div class="tm">+${fmt(Math.floor(s.reward*rewardMult(p.mut)))} 🍂</div>${p.mut?'<div class="mut">🍁 ×2</div>':''}`;
-    d.onclick=()=>harvest(i);
-  }
-}
-function updateGardenTimers(){
-  gardenNodes.forEach(({el,idx})=>{
-    const p=S.plots[idx];
-    if(!p)return;
-    const left=p.plantedAt+p.grow-Date.now();
-    if(left>0){
-      const tm=el.querySelector('[data-tm]');
-      const bar=el.querySelector('[data-bar]');
-      if(tm)tm.textContent=fmtTime(left);
-      if(bar)bar.style.width=Math.min(100,100-(left/p.grow*100))+'%';
-    }else if(!el.classList.contains('ready')){
-      paintPlot(el,idx);
-    }
-  });
-}
-function renderGarden(){buildGarden();}
-
-function renderStock(){
-  const g=$('seedStockGrid');g.innerHTML='';
-  const keys=Object.keys(S.stock).filter(k=>S.stock[k]>0);
-  if(!keys.length){g.innerHTML='<div style="color:#9aa3b0;text-align:center;width:100%">Сток пуст — обнови за 10 💰</div>';return;}
-  keys.forEach(k=>{
-    const s=SEEDS[k];const r=RAR[s.rarity];const left=S.stock[k];
-    const d=document.createElement('div');d.className='seed-card';
-    d.innerHTML=`
-      <div class="emoji">${s.emoji}</div>
-      <div class="name">${s.name}</div>
-      <div class="info">${fmtTime(s.grow)} · +${fmt(s.reward)} 🍂</div>
-      <div class="rarity ${r[1]}">${r[0]}</div>
-      <div class="price">${fmt(s.price)} 🍂</div>
-      <div class="left">В стоке: ×${left}</div>
-      <button class="btn small" ${S.leaves<s.price?'disabled':''} onclick="buySeed('${k}')">Купить</button>`;
-    g.appendChild(d);
-  });
-}
-function renderInv(){
-  const g=$('inventoryGrid');g.innerHTML='';
-  const norm=Object.keys(S.inv).filter(k=>S.inv[k]>0);
-  const mut=Object.keys(S.invMut).filter(k=>S.invMut[k]>0);
-  if(!norm.length&&!mut.length){g.innerHTML='<div style="color:#9aa3b0;text-align:center;width:100%">Пусто</div>';return;}
-  norm.forEach(k=>{
-    const s=SEEDS[k];
-    const d=document.createElement('div');d.className='inv-card';
-    d.innerHTML=`<div class="emoji">${s.emoji}</div><div class="name">${s.name}</div><div class="count">×${S.inv[k]}</div>
-      <button class="btn small green" onclick="plantFromInv('${k}',false)">Посадить</button>`;
-    g.appendChild(d);
-  });
-  mut.forEach(k=>{
-    const s=SEEDS[k];
-    const d=document.createElement('div');d.className='inv-card';
-    d.style.borderColor='#ff8c00';
-    d.innerHTML=`<div class="emoji">${s.emoji}</div><div class="name">${s.name} 🍁</div><div class="count" style="color:#ffb347">×${S.invMut[k]}</div>
-      <button class="btn small orange" onclick="plantFromInv('${k}',true)">Посадить ×2</button>`;
-    g.appendChild(d);
-  });
-}
-function plantFromInv(key,mut){
-  const idx=S.plots.findIndex(p=>!p);
-  if(idx<0){toast('Нет свободных грядок');return;}
-  plantSeedTo(idx,key,mut);
-}
-function renderUpgrades(){
-  const g=$('upgradeList');g.innerHTML='';
-  UPGRADES.forEach(u=>{
-    const lvl=u.get();const maxed=lvl>=u.max;const price=upgPrice(u);
-    const d=document.createElement('div');
-    d.className='upgrade-item'+(maxed?' maxed':'');
-    d.innerHTML=`
-      <div class="info-block">
-        <div class="info-name">${u.name}</div>
-        <div class="info-desc">${u.desc}</div>
-        <div class="info-lvl">Ур. ${lvl}/${u.max} · ${u.eff(lvl)}</div>
-      </div>
-      <button class="btn small" ${maxed||S.leaves<price?'disabled':''} onclick="buyUpgrade('${u.id}')">
-        ${maxed?'✅ Макс':fmt(price)+' 🍂'}
-      </button>`;
-    g.appendChild(d);
-  });
-}
-function renderCoinShop(){
-  const g=$('coinShopList');g.innerHTML='';
-  const d1=document.createElement('div');d1.className='shop-item';
-  d1.innerHTML=`<div class="info-block"><div class="info-name">🍂 Обменять на листики</div><div class="info-desc">1 💰 → 1000 листиков</div></div>
-    <button class="btn small" ${S.coins<1?'disabled':''} onclick="buyLeavesWithCoins()">Обменять (1 💰)</button>`;
-  g.appendChild(d1);
-  COIN_SEED_SHOP.forEach(({key,price})=>{
-    const s=SEEDS[key];
-    const d=document.createElement('div');d.className='shop-item';
-    d.innerHTML=`<div class="info-block"><div class="info-name">${s.emoji} ${s.name} семечко</div><div class="info-desc">Редкое семечко вне стока · +${fmt(s.reward)} 🍂</div></div>
-      <button class="btn small" ${S.coins<price?'disabled':''} onclick="buySeedWithCoins('${key}',${price})">Купить (${price} 💰)</button>`;
-    g.appendChild(d);
-  });
-}
-function renderAch(){
-  const g=$('gameAchievementsList');g.innerHTML='';
-  Object.entries(GAME_ACH).forEach(([k,a])=>{
-    const done=!!S.gameAch[k];
-    const d=document.createElement('div');
-    d.className='achievement-item'+(done?' owned':'');
-    d.innerHTML=`
-      <div class="ach-icon">${done?'✅':'🔒'}</div>
-      <div class="info-block">
-        <div class="info-name">${a.name}</div>
-        <div class="info-desc">${a.desc}</div>
-        <div class="ach-status ${done?'unlocked':'locked'}">${done?'Выполнено':'Не выполнено'}</div>
-      </div>
-      <div class="ach-reward">+${a.reward} 💰</div>`;
-    g.appendChild(d);
-  });
-}
-function renderSiteAch(){
-  const g=$('siteAchievementsList');if(!g)return;g.innerHTML='';
-  Object.entries(SITE_ACH).forEach(([k,a])=>{
-    const done=!!S.siteAch[k];
-    const d=document.createElement('div');
-    d.className='achievement-item'+(done?' owned':'');
-    d.innerHTML=`
-      <div class="ach-icon">${done?'✅':'🔒'}</div>
-      <div class="info-block">
-        <div class="info-name">${a.name}</div>
-        <div class="info-desc">${a.desc}</div>
-        <div class="ach-status ${done?'unlocked':'locked'}">${done?'Выполнено':'Не выполнено'}</div>
-      </div>
-      <div class="ach-reward">+${a.reward} 💰</div>`;
-    g.appendChild(d);
-  });
-}
-
-/* ---------- вкладки ---------- */
 function switchTab(name,btn){
   document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   $('tab-'+name).classList.add('active');btn.classList.add('active');
   if(name==='team')unlockAchievement('team_view');
-  if(name==='site-achievements')renderSiteAch();
-  if(name==='games'){renderTop();renderGarden();renderStock();renderInv();renderUpgrades();renderCoinShop();renderAch();}
+  if(name==='achievements'){renderSiteAch();renderChallenges();}
+  if(name==='games'){renderTop();renderTreeSvg();renderUpgrades();renderEffects();renderConsumables();renderCoinShop();renderAch();}
+  if(name==='pass'){renderPass();renderQuests();}
+  if(name==='tests'){renderTestsList();}
+  if(name==='profile'){renderProfile();renderFrameShop();renderTitleShop();$('nickInput').value=S.nick;$('avatarInput').value=S.avatarUrl;}
+  if(name==='updates'){renderUpdates();}
+}
+function renderUpdates(){
+  const g=$('updatesList');g.innerHTML='';
+  CHANGELOG.forEach(u=>{
+    const d=document.createElement('div');d.className='update-item';
+    d.innerHTML=`<div class="update-ver">v${u.ver}</div><div class="update-date">${u.date}</div><ul>${u.items.map(i=>`<li>${i}</li>`).join('')}</ul>`;
+    g.appendChild(d);
+  });
 }
 
-/* ---------- ивент «Падающие листья» ---------- */
 let autumnLeafTimer=null;
 function startAutumn(manual){
-  S.autumnActive=true;
-  S.autumnEnd=Date.now()+AUTUMN_DURATION;
-  S.autumnManual=!!manual;
-  document.body.classList.add('autumn-active');
-  spawnAutumnLeaves();
-  toast('🍁 Ивент «Падающие листья»! Шанс мутации семечка при покупке.');
-  save();
+  S.autumnActive=true;S.autumnEnd=Date.now()+AUTUMN_DURATION;S.autumnManual=!!manual;
+  document.body.classList.add('autumn-active');spawnAutumnLeaves();toast('🍁 Ивент «Падающие листья»!');save();
 }
 function stopAutumn(manual){
-  S.autumnActive=false;S.autumnEnd=0;
-  if(!manual)S.autumnManual=false;
-  document.body.classList.remove('autumn-active');
-  stopAutumnLeaves();
-  save();
+  S.autumnActive=false;S.autumnEnd=0;if(!manual)S.autumnManual=false;
+  document.body.classList.remove('autumn-active');stopAutumnLeaves();save();
 }
 function spawnAutumnLeaves(){
-  stopAutumnLeaves();
-  const layer=$('leafLayer');
+  stopAutumnLeaves();const layer=$('leafLayer');
   autumnLeafTimer=setInterval(()=>{
     if(!S.autumnActive){stopAutumnLeaves();return;}
-    const l=document.createElement('div');
-    l.className='autumn-leaf';
-    const em=['🍁','🍂'];
-    l.textContent=em[Math.floor(Math.random()*em.length)];
-    l.style.left=Math.random()*100+'vw';
-    l.style.animationDuration=(4+Math.random()*5)+'s';
-    l.style.fontSize=(1.2+Math.random()*1.4)+'rem';
-    layer.appendChild(l);
-    setTimeout(()=>l.remove(),9000);
+    const l=document.createElement('div');l.className='autumn-leaf';
+    const em=['🍁','🍂','🍃'];l.textContent=em[Math.floor(Math.random()*em.length)];
+    l.style.left=Math.random()*100+'vw';l.style.animationDuration=(4+Math.random()*5)+'s';l.style.fontSize=(1.2+Math.random()*1.4)+'rem';
+    layer.appendChild(l);setTimeout(()=>l.remove(),9000);
   },350);
 }
-function stopAutumnLeaves(){
-  if(autumnLeafTimer){clearInterval(autumnLeafTimer);autumnLeafTimer=null;}
-  document.querySelectorAll('.autumn-leaf').forEach(e=>e.remove());
-}
+function stopAutumnLeaves(){if(autumnLeafTimer){clearInterval(autumnLeafTimer);autumnLeafTimer=null;}document.querySelectorAll('.autumn-leaf').forEach(e=>e.remove());}
 
-/* ---------- админка ---------- */
 function toggleSecretPrompt(){const p=$('secretPrompt');p.style.display=p.style.display==='none'?'block':'none';}
 function checkPassword(){
-  const v=$('secretPassword').value;
-  if(v===PASS){S.secret=true;$('secretPanel').classList.add('visible');$('secretPrompt').style.display='none';toast('🔓 Админка открыта');renderAdminSeeds();}
+  if($('secretPassword').value===PASS){S.secret=true;$('secretPanel').classList.add('visible');$('secretPrompt').style.display='none';toast('🔓 Админка открыта');}
   else toast('❌ Неверный пароль');
   $('secretPassword').value='';
 }
 function closeSecretPanel(){S.secret=false;$('secretPanel').classList.remove('visible');}
-function renderAdminSeeds(){
-  const g=$('adminSeedGrid');g.innerHTML='';
-  Object.keys(SEEDS).forEach(k=>{
-    const s=SEEDS[k];
-    const b=document.createElement('button');b.className='secret-btn';
-    b.textContent=s.emoji+' '+s.name;
-    b.onclick=()=>{S.inv[k]=(S.inv[k]||0)+1;save();renderInv();toast('Выдано: '+s.name);};
-    g.appendChild(b);
-  });
-}
 function adminAddLeaves(){
   if(!S.secret)return;
   const v=parseFloat($('addLeafInput').value);if(isNaN(v))return;
-  S.leaves+=v;save();renderTop();toast('Начислено: '+fmt(v));
+  S.leaves+=v;S.totalLeaves+=v;
+  save();renderTop();renderUpgrades();renderConsumables();
+  toast('Начислено: '+fmt(v));
 }
-function adminGrowAll(){
-  if(!S.secret)return;
-  S.plots.forEach(p=>{if(p)p.plantedAt=Date.now()-p.grow-1;});
-  save();renderGarden();toast('⏩ Всё созрело');
-}
+function adminAddCoins(){if(!S.secret)return;const v=parseFloat($('addCoinInput').value);if(isNaN(v))return;S.coins+=v;save();renderCoins();renderCoinShop();renderPass();renderProfile();renderFrameShop();renderTitleShop();toast('Начислено: '+fmt(v)+' 💰');}
+function adminSpawnLeaves(){if(!S.secret)return;for(let i=0;i<3;i++)setTimeout(()=>spawnLeaf(true),i*300);toast('🍃 Листики заспавнены');}
 function adminStartAutumn(){if(!S.secret)return;startAutumn(true);}
 function adminStopAutumn(){if(!S.secret)return;stopAutumn(true);toast('⏹ Ивент выключен');}
+function adminGiveConsumables(){if(!S.secret)return;S.sprayCharges+=5;S.growEnd=Math.max(Date.now(),S.growEnd)+5*60*1000;S.incomeEnd=Math.max(Date.now(),S.incomeEnd)+5*60*1000;save();renderEffects();renderConsumables();toast('🧴 Выдано');}
+function adminAddPassXP(v){if(!S.secret)return;addPassXP(v);toast('+'+v+' XP пасса');}
 
-function stopAutumnLeaves(){
-  if(autumnLeafTimer){clearInterval(autumnLeafTimer);autumnLeafTimer=null;}
-  document.querySelectorAll('.autumn-leaf, .leaf').forEach(e=>e.remove());
-}
-
-/* ---------- таймеры ---------- */
 function tick(){
   if(document.hidden)return;
-
-  const stockLeft=S.stockAt+STOCK_MS-Date.now();
-  if(stockLeft<=0){refreshStock(false);}
-  else{$('stockTimer').textContent='Пополнение через '+fmtTime(stockLeft);}
-
-  updateGardenTimers();
-
-  const hw=HW_DATE.getTime()-Date.now();
-  if(hw<=0){$('hwLocked').style.display='none';$('hwContent').style.display='block';}
-  else{$('hwTimer').textContent=fmtTime(hw);}
-
-  const now=new Date();
-  const isTopOfHour=now.getMinutes()===0;
-  if(isTopOfHour&&!S.autumnActive&&!S.autumnManual){
-    startAutumn(false);
-  }
-  if(S.autumnActive){
-    const left=S.autumnEnd-Date.now();
-    if(left<=0){stopAutumn(false);}
-    else{
-      $('nearestEventName').textContent='🍁 Листопад идёт!';
-      $('nearestEventTime').textContent='осталось '+fmtTime(left);
+  const now=Date.now();
+  if(now-lastSpawn>=spawnInterval()){lastSpawn=now;spawnLeaf(false);}
+  if(S.fall>0&&Math.random()<S.fall*0.01&&S.leavesOnTree.length>0){
+    const idx=Math.floor(Math.random()*S.leavesOnTree.length),leaf=S.leavesOnTree[idx];
+    if(!leaf.yellow&&S.basket<basketCap()){
+      S.leavesOnTree.splice(idx,1);
+      const g=$('treeSvg')?.querySelector(`[data-leaf-id="${leaf.id}"]`);if(g)g.remove();
+      const mult=leaf.golden?'golden':(leaf.mut?'mut':1);
+      S.basket+=leafValue(mult);
+      if(S.basket>basketCap())S.basket=basketCap();
+      S.fallCount++;updateBasketUI();checkAch();save();
     }
+  }
+  const left=PASS_END_DATE.getTime()-now;
+  if(left<=0)checkPassSeason();
+  if(document.getElementById('tab-pass').classList.contains('active'))$('passTimer').textContent=fmtPassTime(left);
+  const d=new Date();
+  if(d.getMinutes()===0&&!S.autumnActive&&!S.autumnManual)startAutumn(false);
+  if(S.autumnActive){
+    const l=S.autumnEnd-now;
+    if(l<=0)stopAutumn(false);
+    else{$('nearestEventName').textContent='🍁 Листопад!';$('nearestEventTime').textContent='осталось '+fmtTime(l);}
   }
   if(!S.autumnActive){
-    const next=new Date(now);
-    next.setHours(now.getHours()+1,0,0,0);
-    const left=next-now;
-    $('nearestEventName').textContent='🍁 Падающие листья';
-    $('nearestEventTime').textContent='через '+fmtTime(left);
+    const next=new Date(d);next.setHours(d.getHours()+1,0,0,0);
+    $('nearestEventName').textContent='🍁 Падающие листья';$('nearestEventTime').textContent='через '+fmtTime(next-now);
   }
-
-  if(S.auto>0){
-    const interval=Math.max(5,30-S.auto*5)*1000;
-    if(!tick._last||Date.now()-tick._last>=interval){
-      tick._last=Date.now();
-      S.plots.forEach((p,i)=>{if(p&&Date.now()>=p.plantedAt+p.grow)harvest(i);});
-    }
-  }
-  checkAch();
+  if(document.getElementById('tab-games').classList.contains('active'))renderEffects();
+  checkAch();checkChallenges();
 }
 
-/* ---------- старт ---------- */
 load();
-renderTop();renderGarden();renderStock();renderInv();renderUpgrades();renderCoinShop();renderAch();renderSiteAch();
+renderTop();renderTreeSvg();renderUpgrades();renderEffects();renderConsumables();renderCoinShop();renderAch();renderSiteAch();
+renderChallenges();renderPass();renderQuests();renderProfile();renderUpdates();
+if(S.imperialTheme)document.body.classList.add('imperial-theme');
 if(S.autumnActive)spawnAutumnLeaves();
 setInterval(tick,500);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick();});
 window.addEventListener('focus',()=>tick());
 
-/* экспорт для inline-обработчиков */
-window.switchTab=switchTab;
-window.buySeed=buySeed;
-window.plantFromInv=plantFromInv;
-window.buyUpgrade=buyUpgrade;
-window.buyLeavesWithCoins=buyLeavesWithCoins;
-window.buySeedWithCoins=buySeedWithCoins;
-window.rerollStock=refreshStock;
-window.toggleSecretPrompt=toggleSecretPrompt;
-window.checkPassword=checkPassword;
-window.closeSecretPanel=closeSecretPanel;
-window.adminAddLeaves=adminAddLeaves;
-window.adminGrowAll=adminGrowAll;
-window.adminStartAutumn=adminStartAutumn;
-window.adminStopAutumn=adminStopAutumn;
-window.unlockAchievement=unlockAchievement;
-window.harvest=harvest;
-window.openPlantPicker=openPlantPicker;
+window.switchTab=switchTab;window.collectBasket=collectBasket;window.buyUpgrade=buyUpgrade;window.buyConsumable=buyConsumable;
+window.toggleSecretPrompt=toggleSecretPrompt;window.checkPassword=checkPassword;window.closeSecretPanel=closeSecretPanel;
+window.adminAddLeaves=adminAddLeaves;window.adminAddCoins=adminAddCoins;window.adminSpawnLeaves=adminSpawnLeaves;window.adminStartAutumn=adminStartAutumn;
+window.adminStopAutumn=adminStopAutumn;window.adminGiveConsumables=adminGiveConsumables;window.adminAddPassXP=adminAddPassXP;
+window.unlockAchievement=unlockAchievement;window.saveProfile=saveProfile;window.buyPaidPass=buyPaidPass;window.claimPassReward=claimPassReward;
+window.buyFrame=buyFrame;window.buyTitle=buyTitle;window.buyFastGrowth=buyFastGrowth;window.buyLeavesWithCoins=buyLeavesWithCoins;
 </script>
 </body>
 </html>
