@@ -1,1 +1,1179 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Сайт 6А класса — ГБОУ Лицей 486</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,system-ui,sans-serif}
+:root{--bg1:#0f1419;--bg2:#1a222c;--panel:#1e2733;--border:#2e3b4a;--accent:#e8b04b;--accent2:#d98c3f;--text:#e6e8ec;--muted:#9aa3b0;--green:#6fa86f;--red:#c96a6a;--blue:#7aa7c7;--orange:#e67e22}
+body{background:radial-gradient(circle at 15% 10%,#1c2430,#0c0f14 80%);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px;overflow-x:hidden;transition:background .6s}
+body.theme-autumn{background:radial-gradient(circle at 15% 10%,#5a2a08,#2a0c04 80%)}
+body.theme-fire{background:radial-gradient(circle at 15% 10%,#5a0a08,#1a0404 80%)}
+body.theme-ice{background:radial-gradient(circle at 15% 10%,#0a2a3a,#04101a 80%)}
+body.theme-fire .container{border-color:#ff4500;box-shadow:0 0 60px rgba(255,69,0,.5)}
+body.theme-autumn .container{border-color:#e67e22;box-shadow:0 0 50px rgba(230,126,34,.4)}
+body.theme-ice .container{border-color:#7ad7f0;box-shadow:0 0 50px rgba(122,215,240,.4)}
+.autumn-leaf{position:fixed;top:-50px;font-size:1.7rem;opacity:.85;pointer-events:none;z-index:1;animation:fall linear infinite}
+@keyframes fall{to{transform:translateY(105vh) rotate(360deg)}}
+.container{max-width:960px;width:100%;background:rgba(22,27,35,.94);backdrop-filter:blur(8px);border:2px solid var(--border);border-radius:24px 10px 24px 10px;box-shadow:0 0 40px rgba(120,150,180,.15);padding:1.6rem 1.2rem;position:relative;z-index:10;text-align:center}
+h1{font-size:2rem;color:var(--accent);text-shadow:3px 3px 0 #2a2418;margin-bottom:.3rem;display:flex;align-items:center;justify-content:center;gap:10px}
+h1 span{background:var(--accent2);color:#1a1408;padding:0 14px;border-radius:50px;font-size:1.7rem}
+.subhead{color:var(--muted);margin:.5rem 0 1rem;font-size:.9rem}
+.subhead strong{color:var(--accent)}
+/* === ГЛАВНАЯ КНОПКИ === */
+.home-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:1rem}
+.home-btn{background:var(--panel);border:2px solid var(--border);border-radius:16px;padding:1.2rem .8rem;cursor:pointer;transition:.2s;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px}
+.home-btn:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 6px 16px rgba(232,176,75,.2)}
+.home-btn .icon{font-size:2rem}
+.home-btn .name{font-weight:800;color:var(--text);font-size:.9rem}
+.home-btn .desc{font-size:.72rem;color:var(--muted)}
+/* === СЕКЦИИ === */
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.section-header h2{color:var(--accent);font-size:1.3rem}
+/* === ПАНЕЛИ === */
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:.9rem 1rem;margin-bottom:12px;text-align:left}
+.panel h3{color:var(--accent);font-size:1.05rem;margin-bottom:.6rem;padding-bottom:4px;border-bottom:1px dotted var(--border);display:flex;justify-content:space-between;align-items:center}
+/* === КНОПКИ === */
+.btn{background:var(--accent2);color:#1a1408;border:none;padding:.5rem 1rem;border-radius:20px;font-weight:700;font-size:.85rem;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:4px}
+.btn:hover:not(:disabled){background:var(--accent);transform:scale(1.05)}
+.btn:disabled{background:#2a333f;color:#5a6470;cursor:not-allowed}
+.btn.small{padding:.3rem .7rem;font-size:.75rem}
+.btn.green{background:var(--green);color:#0e1a0e}
+.btn.gray{background:#3a424d;color:#cfd6df}
+.btn.blue{background:var(--blue);color:#0a141a}
+.btn.orange{background:var(--orange);color:#1a1207}
+.btn.red{background:var(--red);color:#1a0a0a}
+.btn.ghost{background:transparent;border:2px solid var(--border);color:var(--text)}
+.btn.ghost:hover{border-color:var(--accent);background:rgba(232,176,75,.1)}
+/* === ИВЕНТ === */
+.event-card{background:linear-gradient(135deg,#2a1a0c,#1a0c04);border:2px solid var(--orange);border-radius:16px;padding:1.2rem;margin:1rem 0;cursor:pointer;transition:.2s;position:relative;overflow:hidden;text-align:center}
+.event-card:hover{transform:scale(1.02);box-shadow:0 0 30px rgba(230,126,34,.4)}
+.event-card::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(230,126,34,.3),transparent 70%);animation:rotate 8s linear infinite;pointer-events:none}
+@keyframes rotate{to{transform:rotate(360deg)}}
+.event-card .big{font-size:2.5rem;margin-bottom:.4rem;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.event-card h2{color:var(--accent);margin-bottom:.3rem;font-size:1.2rem;position:relative}
+.event-card .timer{font-size:1.1rem;font-weight:900;color:#ffb347;margin:.6rem 0;font-variant-numeric:tabular-nums;position:relative}
+/* === ДЕРЕВО === */
+.game-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:.8rem}
+.currency{background:#222b38;border:2px solid var(--border);border-radius:14px;padding:.4rem .9rem;font-size:1rem;font-weight:800;display:flex;align-items:center;gap:6px}
+.currency.leaves{color:#e0b15a}.currency.coins{color:#e8c65a;border-color:#6a5a2a}
+.tree-area{background:var(--panel);border:2px solid var(--border);border-radius:16px;padding:.8rem;margin-bottom:10px}
+.tree-canvas{position:relative;width:100%;height:320px;background:radial-gradient(ellipse at 50% 100%,#243024,#12181a 70%);border-radius:12px;overflow:hidden}
+.tree-svg{width:100%;height:100%;display:block}
+.basket-svg{position:absolute;right:8px;bottom:4px;width:70px;height:70px;cursor:pointer;transition:transform .15s}
+.basket-svg.bump{transform:scale(1.15)}
+.basket-count{position:absolute;right:14px;bottom:78px;color:var(--accent);font-weight:700;font-size:.75rem;background:rgba(0,0,0,.4);padding:2px 6px;border-radius:6px}
+.tree-leaf{cursor:pointer}
+.tree-leaf path{transition:filter .15s}
+.tree-leaf:hover path{filter:brightness(1.3) drop-shadow(0 0 4px rgba(232,176,75,.6))}
+.tree-leaf.yellow{animation:yellowPulse 1s infinite alternate}
+@keyframes yellowPulse{0%{opacity:.8}100%{opacity:1}}
+.tree-leaf.golden{filter:drop-shadow(0 0 6px #ffd700)}
+.tree-leaf.mutated{filter:drop-shadow(0 0 6px #ff5500)}
+.branch-line{stroke-linecap:round;fill:none;animation:branchGrow .8s ease-out forwards}
+@keyframes branchGrow{from{stroke-dashoffset:var(--len)}to{stroke-dashoffset:0}}
+.leaf-grow{transform-origin:center;animation:leafGrow .4s ease-out}
+@keyframes leafGrow{0%{transform:scale(0)}80%{transform:scale(1.15)}100%{transform:scale(1)}}
+.bud{fill:#4a7a3a}
+/* === СПИСКИ === */
+.shop-item,.upgrade-item,.achievement-item,.chat-card,.consumable-item,.quest-item,.pass-level-item,.theme-item{background:#222b38;border:1px solid var(--border);border-radius:12px;padding:.7rem .9rem;transition:.2s;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;text-align:left;margin-bottom:8px;gap:8px}
+.info-block{flex:1;min-width:150px}
+.info-name{color:var(--accent);font-weight:700;font-size:.9rem}
+.info-desc{color:var(--muted);font-size:.78rem;margin-top:2px}
+.info-lvl{color:var(--green);font-size:.78rem;font-weight:700;margin-top:2px}
+.upgrade-item.maxed,.achievement-item.owned{border-color:var(--green);background:#17211a}
+.ach-icon{font-size:1.4rem}
+.ach-status{font-size:.72rem;font-weight:700;margin-top:2px}
+.ach-status.unlocked{color:var(--green)}.ach-status.locked{color:var(--red)}
+.ach-reward{color:var(--accent);font-weight:800;white-space:nowrap;font-size:.8rem}
+.claimed-badge{color:var(--green);font-weight:800;font-size:.8rem}
+/* === ПРОФИЛЬ === */
+.profile-card{background:var(--panel);border:2px solid var(--border);border-radius:18px;padding:1rem;margin-bottom:1rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;justify-content:center}
+.avatar-wrap{width:80px;height:80px;border-radius:50%;overflow:hidden;background:#0f1318;display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0}
+.avatar-wrap img{width:100%;height:100%;object-fit:cover}
+.frame-leaves{padding:4px;border-radius:50%;background:linear-gradient(135deg,#4a8a3a,#e8c84a,#4a8a3a);box-shadow:0 0 15px rgba(232,200,74,.6)}
+.frame-iron{padding:4px;border-radius:50%;background:linear-gradient(135deg,#8a8a8a,#c0c0c0,#8a8a8a);box-shadow:0 0 12px rgba(192,192,192,.5)}
+.frame-gold{padding:4px;border-radius:50%;background:linear-gradient(135deg,#ffd700,#fff8b0,#ffd700);background-size:200% 200%;box-shadow:0 0 20px rgba(255,215,0,.9);animation:goldShine 2.5s linear infinite}
+@keyframes goldShine{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+.frame-diamond{padding:4px;border-radius:50%;background:linear-gradient(135deg,#7ad7f0,#b0e8ff,#7ad7f0,#e0f7ff);background-size:300% 300%;box-shadow:0 0 25px rgba(122,215,240,.9);animation:diamondShine 3s linear infinite}
+@keyframes diamondShine{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.frame-fire{padding:4px;border-radius:50%;background:linear-gradient(135deg,#ff4500,#ffd700,#ff4500,#ff8c00);background-size:300% 300%;animation:fireGlow 2s linear infinite;box-shadow:0 0 25px rgba(255,100,0,.9)}
+@keyframes fireGlow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.title-badge{padding:.3rem .9rem;border-radius:20px;font-weight:800;font-size:.78rem;display:inline-block;margin-top:.3rem}
+.title-red{background:#c0392b;color:#fff}
+.title-imperial{background:linear-gradient(90deg,#c0392b,#e67e22,#f1c40f,#e67e22,#c0392b);background-size:300% 100%;color:#1a1207;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;animation:imperialShift 3s linear infinite}
+@keyframes imperialShift{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+.title-gold{background:linear-gradient(90deg,#ffd700,#fff8b0,#ffd700,#fff8b0,#ffd700);background-size:300% 100%;color:#1a1207;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;animation:goldText 3s linear infinite}
+@keyframes goldText{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+.title-autumn{background:#e67e22;color:#1a1207}
+.title-frost{background:#7ad7f0;color:#0a1a1f}
+/* === ТЕМЫ === */
+.theme-item{cursor:pointer}
+.theme-item.active{border-color:var(--accent);background:#2a1a0c}
+.theme-item.locked{opacity:.6}
+/* === ПАСС === */
+.pass-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:.8rem;padding:.8rem;background:var(--panel);border:2px solid var(--accent2);border-radius:14px}
+.pass-timer{font-size:.95rem;font-weight:800;color:var(--accent);font-variant-numeric:tabular-nums}
+.xp-bar{width:100%;height:14px;background:#0f1318;border-radius:8px;overflow:hidden;margin-top:6px;border:1px solid var(--border)}
+.xp-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--accent));transition:width .4s;border-radius:8px}
+.pass-branches{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:.6rem 0}
+@media(max-width:600px){.pass-branches{grid-template-columns:1fr}}
+.pass-branch{background:var(--panel);border:2px solid var(--border);border-radius:12px;padding:.7rem;text-align:left;max-height:400px;overflow-y:auto}
+.pass-branch.paid{border-color:var(--accent2)}
+.pass-level-item{font-size:.78rem;padding:.4rem .6rem}
+.pass-level-item.claimed{opacity:.6;border-color:var(--green);background:#17211a}
+.pass-level-item.locked{opacity:.5}
+/* === ТЕСТЫ === */
+.test-subject{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:.8rem;margin-bottom:8px;cursor:pointer;transition:.2s;text-align:left}
+.test-subject:hover{border-color:var(--accent);transform:translateY(-2px)}
+.test-q{background:#161d26;border:1px solid var(--border);border-radius:10px;padding:.8rem;margin-bottom:8px;text-align:left;animation:fadeIn .3s}
+.test-q h4{color:var(--accent);margin-bottom:.4rem;font-size:.88rem}
+.test-opt{display:block;width:100%;text-align:left;background:#0f1318;border:1px solid var(--border);color:var(--text);padding:.5rem .6rem;border-radius:8px;margin-bottom:4px;cursor:pointer;transition:.15s;font-size:.8rem}
+.test-opt:hover{border-color:var(--accent);transform:translateX(3px)}
+.test-opt.correct{background:#1a3a1a;border-color:var(--green)}
+.test-opt.wrong{background:#3a1a1a;border-color:var(--red)}
+/* === СТРИК === */
+.streak-card{background:linear-gradient(135deg,#2a1a0c,#1a0c04);border:2px solid var(--orange);border-radius:14px;padding:.8rem;margin-bottom:.8rem;text-align:center}
+.streak-flame{font-size:2rem;animation:bounce 1.5s infinite}
+.streak-days{font-size:1.3rem;font-weight:900;color:var(--accent)}
+.streak-milestones{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-top:.4rem}
+.streak-milestone{background:#222b38;border:1px solid var(--border);border-radius:16px;padding:.25rem .6rem;font-size:.7rem;font-weight:700;color:var(--muted)}
+.streak-milestone.reached{border-color:var(--accent);color:var(--accent);background:#2a1a0c}
+/* === ОБНОВЛЕНИЯ === */
+.update-item{background:var(--panel);border-left:4px solid var(--accent2);border-radius:8px;padding:.7rem;margin-bottom:6px;text-align:left}
+.update-ver{color:var(--accent);font-weight:900;font-size:.95rem;margin-bottom:.2rem}
+.update-date{color:var(--muted);font-size:.72rem;margin-bottom:.3rem}
+.update-item ul{margin-left:1rem;color:#cfd6df;font-size:.78rem;line-height:1.45}
+/* === МОДАЛКИ === */
+.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);z-index:1000;align-items:center;justify-content:center;padding:16px;animation:fadeIn .25s}
+.modal-overlay.active{display:flex}
+.modal{background:var(--panel);border:2px solid var(--accent2);border-radius:18px;padding:1.2rem;max-width:480px;width:100%;max-height:85vh;overflow-y:auto;text-align:left;animation:modalIn .3s ease;position:relative}
+@keyframes modalIn{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.modal h2{color:var(--accent);margin-bottom:.8rem;padding-bottom:.4rem;border-bottom:1px dotted var(--border);font-size:1.1rem}
+.modal-close{position:absolute;top:8px;right:8px;background:transparent;border:none;color:var(--muted);font-size:1.3rem;cursor:pointer;width:28px;height:28px;border-radius:50%}
+.modal-close:hover{background:#3a424d;color:var(--text)}
+.upgrade-tree-node{background:#161d26;border:2px solid var(--border);border-radius:10px;padding:.5rem .7rem;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:.2s}
+.upgrade-tree-node:hover{border-color:var(--accent);transform:translateX(2px)}
+.upgrade-tree-node.maxed{border-color:var(--green);background:#17211a}
+/* === РЕДКАЯ НАГРАДА === */
+.rare-reward-popup{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:2000;display:flex;align-items:center;justify-content:center;animation:fadeIn .3s}
+.rare-reward-content{text-align:center;animation:rareIn .6s cubic-bezier(.34,1.56,.64,1)}
+@keyframes rareIn{0%{transform:scale(0) rotate(-180deg);opacity:0}60%{transform:scale(1.2) rotate(10deg);opacity:1}100%{transform:scale(1) rotate(0);opacity:1}}
+.rare-reward-icon{font-size:4rem;margin-bottom:.8rem;filter:drop-shadow(0 0 20px #ffd700);animation:rareGlow 1s infinite alternate}
+@keyframes rareGlow{from{filter:drop-shadow(0 0 15px #ffd700) brightness(1)}to{filter:drop-shadow(0 0 40px #ffd700) brightness(1.3)}}
+.rare-reward-text{color:#ffd700;font-size:1.3rem;font-weight:900;text-shadow:0 0 10px #ffd700}
+.rare-reward-sub{color:#e8b04b;font-size:.9rem;margin-top:.4rem}
+.rare-particles{position:absolute;width:100%;height:100%;top:0;left:0;pointer-events:none;overflow:hidden}
+.rare-particle{position:absolute;width:8px;height:8px;background:#ffd700;border-radius:50%;animation:particleFly 1.5s ease-out forwards}
+@keyframes particleFly{0%{transform:translate(0,0) scale(1);opacity:1}100%{transform:translate(var(--tx),var(--ty)) scale(0);opacity:0}}
+/* === ТОСТ === */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--panel);border:2px solid var(--accent2);color:var(--text);padding:.5rem 1rem;border-radius:20px;font-weight:700;z-index:300;opacity:0;transition:.3s;pointer-events:none;max-width:90vw;text-align:center;font-size:.85rem}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+footer{margin-top:1rem;color:var(--muted);font-size:.78rem;border-top:1px solid var(--border);padding-top:.6rem;width:100%;text-align:center}
+input[type=password],input[type=number],input[type=text],input[type=url]{padding:.4rem;border-radius:8px;border:1px solid var(--border);background:#0f1318;color:var(--text);width:100%;max-width:240px;font-size:.82rem}
+@media(max-width:600px){h1{font-size:1.5rem}.container{padding:1rem .7rem}.home-grid{grid-template-columns:repeat(2,1fr)}.team-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="theme-classic">
+<div id="leafLayer"></div>
 
+<div class="container">
+  <div id="appHeader">
+    <h1><span>6А</span> класс</h1>
+    <div class="subhead"><strong>ГБОУ Лицей №486</strong> · <span id="headerNick" style="color:#d98c3f">Гость</span> · <span style="color:#9aa3b0;font-size:.75rem">v3.1</span></div>
+  </div>
+
+  <div id="appContent">
+    <!-- ГЛАВНАЯ -->
+    <div id="sec-home">
+      <div class="event-card" id="birthdayCard" onclick="openBirthdayModal()">
+        <div class="big">🎂</div>
+        <h2>4-е день рождения Пакетика!</h2>
+        <p style="color:#cfd6df;font-size:.85rem;margin-top:.3rem">Нажми, чтобы узнать подробности</p>
+        <div class="timer" id="birthdayTimer">--д --:--:--</div>
+      </div>
+      <div class="home-grid">
+        <div class="home-btn" onclick="goSection('games')"><div class="icon">🌳</div><div class="name">Дерево</div><div class="desc">Собирай листики</div></div>
+        <div class="home-btn" onclick="goSection('pass')"><div class="icon">🎫</div><div class="name">Пасс</div><div class="desc">Награды сезона</div></div>
+        <div class="home-btn" onclick="goSection('tests')"><div class="icon">📝</div><div class="name">Тесты</div><div class="desc">Проверь себя</div></div>
+        <div class="home-btn" onclick="goSection('chat')"><div class="icon">💬</div><div class="name">Чат</div><div class="desc">Общение</div></div>
+        <div class="home-btn" onclick="goSection('team')"><div class="icon">👑</div><div class="name">Команда</div><div class="desc">Админы сайта</div></div>
+        <div class="home-btn" onclick="goSection('achievements')"><div class="icon">🏆</div><div class="name">Достижения</div><div class="desc">Награды</div></div>
+        <div class="home-btn" onclick="goSection('profile')"><div class="icon">👤</div><div class="name">Профиль</div><div class="desc">Настройки</div></div>
+        <div class="home-btn" onclick="goSection('updates')"><div class="icon">📜</div><div class="name">Обновления</div><div class="desc">История версий</div></div>
+      </div>
+    </div>
+
+    <!-- ДЕРЕВО -->
+    <div id="sec-games" style="display:none">
+      <div class="section-header"><h2>🌳 Дерево</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
+      <div class="game-header">
+        <div class="currency leaves">🍂 <span id="leafCount">0</span></div>
+        <div class="currency coins">💰 <span id="coinCount">0</span></div>
+      </div>
+      <div class="tree-area">
+        <div class="tree-canvas" id="treeCanvas">
+          <svg class="tree-svg" id="treeSvg" viewBox="0 0 800 360" preserveAspectRatio="xMidYMax meet"></svg>
+          <div class="basket-count">🧺 <span id="basketCount">0</span>/<span id="basketCap">50</span></div>
+          <svg class="basket-svg" id="basketIcon" viewBox="0 0 100 100"><path d="M20 40 H80 L72 85 H28 Z" fill="#a0723c" stroke="#6b4a2a" stroke-width="3"/><path d="M35 40 C35 20 65 20 65 40" fill="none" stroke="#6b4a2a" stroke-width="4"/></svg>
+        </div>
+        <div style="text-align:center;margin-top:8px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
+          <button class="btn small green" onclick="collectBasket()">🧺 Забрать</button>
+          <button class="btn small blue" onclick="openShopModal()">💰 Магазин</button>
+          <button class="btn small orange" onclick="openEffectsModal()">🧴 Эффекты</button>
+          <button class="btn small ghost" onclick="openUpgradeModal()">⚙️ Улучшения</button>
+          <button class="btn small ghost" onclick="openAchModal()">🎮 Достижения</button>
+          <button class="btn small gray" onclick="toggleSecretPrompt()">🔑</button>
+        </div>
+        <div id="secretPrompt" style="display:none;text-align:center;margin-top:.5rem">
+          <input type="password" id="secretPassword" placeholder="Пароль">
+          <button class="btn small" onclick="checkPassword()">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ПАСС -->
+    <div id="sec-pass" style="display:none">
+      <div class="section-header"><h2>🎫 Пасс</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
+      <div class="pass-header">
+        <div><div style="font-size:1.1rem;font-weight:900;color:var(--accent)">Осенний Пасс</div><div style="color:var(--muted);font-size:.75rem">Сезон <span id="passSeason">1</span></div></div>
+        <div style="text-align:right"><div style="color:var(--muted);font-size:.7rem">До конца</div><div class="pass-timer" id="passTimer">--д --:--:--</div></div>
+      </div>
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px">
+          <div><strong style="color:var(--accent)">Ур. <span id="passLevel">1</span>/50</strong><div style="color:var(--muted);font-size:.78rem">Опыт: <span id="passXP">0</span>/200</div></div>
+          <div id="passPaidStatus"></div>
+        </div>
+        <div class="xp-bar"><div class="xp-fill" id="passXpFill" style="width:0%"></div></div>
+        <div id="boosterStatus" style="margin-top:6px;color:var(--green);font-weight:700;font-size:.78rem"></div>
+        <div style="margin-top:8px;text-align:center"><button class="btn blue small" onclick="skipPassLevel()">⚡ Пропуск уровня — 5💰</button></div>
+      </div>
+      <div class="pass-branches">
+        <div class="pass-branch"><h3 style="color:var(--accent);margin-bottom:.4rem">🆓 Бесплатный</h3><div id="freePassLevels"></div></div>
+        <div class="pass-branch paid"><h3 style="color:var(--orange);margin-bottom:.4rem">👑 Платный</h3><div id="paidPassLevels"></div></div>
+      </div>
+      <div class="panel"><h3>✅ Квесты <span id="questTimer" style="font-size:.72rem;color:var(--muted)"></span></h3><div id="dailyQuestsList"></div></div>
+      <div class="panel"><h3>🔥 Мегаквесты</h3><div id="megaQuestsList"></div></div>
+    </div>
+
+    <!-- ТЕСТЫ -->
+    <div id="sec-tests" style="display:none">
+      <div class="section-header"><h2>📝 Тесты</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
+      <div class="streak-card">
+        <div class="streak-flame">🔥</div>
+        <div style="color:var(--muted);font-size:.75rem">Стрик</div>
+        <div class="streak-days"><span id="streakDays">0</span> дней</div>
+        <div class="streak-milestones" id="streakMilestones"></div>
+      </div>
+      <div id="testsList"></div>
+      <div id="testRunner" style="display:none"></div>
+    </div>
+
+    <!-- ЧАТ -->
+    <div id="sec-chat" style="display:none">
+      <div class="section-header"><h2>💬 Чат</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
+      <div class="chat-card"><h3>👩‍🏫 С учителем</h3><a href="https://max.ru/join/V2B5tL1BaqdCUuMW34gv32wSURG1loEZ_qh8jpoCnkQ" target="_blank" class="btn" onclick="unlockAchievement('chat_teacher')">Войти</a></div>
+      <div class="chat-card"><h3>👥 Без учителя</h3><a href="https://max.ru/join/oyIjaHVrv3TGWLYjDW-vLe1MTDsH2jMM8f7BYk7L87k" target="_blank" class="btn" onclick="unlockAchievement('chat_students')">Войти</a></div>
+    </div>
+
+    <!-- КОМАНДА -->
+    <div id="sec-team" style="display:none">
+      <div class="section-header"><h2>👑 Команда</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
+      <div class="team-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <div class="chat-card" style="text-align:center"><b>Рассадкин Арсений</b><br><small>Гл. админ</small><br><a href="tel:+79944346499">+7 (994) 434-64-99</a></div>
+        <div class="chat-card" style="text-align:center"><b>Пашкова Рита</b><br><small>Атмосфера</small><br><a href="https://web.max.ru/314909703">MAX</a></div>
+        <div class="chat-card" style="text-align:center"><b>Батрутдинов Рома</b><br><small>Админ</small><br><a href="tel:+79315806804">+7 931 580 68 04</a></div>
+        <div class="chat-card" style="text-align:center"><b>Даша Васильева</b><br><small>ДЗ</small><br><a href="tel:+79602477126">+7 960 247 71 26</a></div>
+      </div>
+    </div>
+
+    <!-- ДОСТИЖЕНИЯ -->
+    <div id="sec-achievements" style="display:none">
+      <div class="section-header"><h2>🏆 Достижения</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
+      <div class="panel"><h3>Достижения сайта</h3><div id="siteAchievementsList"></div></div>
+      <div class="panel"><h3>Челленджи</h3><div id="challengesList"></div></div>
+    </div>
+
+    <!-- ПРОФИЛЬ -->
+    <div id="sec-profile" style="display:none">
+      <div class="section-header"><h2>👤 Профиль</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
+      <div class="profile-card">
+        <div class="avatar-wrap" id="avatarPreview">🦊</div>
+        <div style="flex:1;min-width:160px;text-align:left">
+          <div id="profileNick" style="font-size:1.1rem;font-weight:900;color:var(--accent)">Гость</div>
+          <div id="profileTitle" style="margin-top:.3rem"></div>
+          <div style="margin-top:.4rem;color:var(--muted);font-size:.78rem">Ур. пасса: <span id="profilePassLvl">1</span> · Монет: <span id="profileCoins">0</span></div>
+        </div>
+      </div>
+      <div class="panel"><h3>✏️ Настройки</h3>
+        <div style="margin-bottom:.5rem"><label style="color:var(--muted);font-size:.78rem">Ник</label><input type="text" id="nickInput" maxlength="20"></div>
+        <div style="margin-bottom:.5rem"><label style="color:var(--muted);font-size:.78rem">URL аватарки</label><input type="url" id="avatarInput"></div>
+        <div style="margin-bottom:.5rem"><label style="color:var(--muted);font-size:.78rem">Emoji</label><input type="text" id="avatarEmoji" maxlength="4"></div>
+        <button class="btn" onclick="saveProfile()">💾 Сохранить</button>
+      </div>
+      <div class="panel"><h3>🎨 Темы</h3><div id="themeButtons"></div></div>
+      <div class="panel"><h3>🎖 Награды</h3><div id="myFramesList"></div></div>
+      <div class="panel"><h3>🛒 Магазин рамок/титулов</h3><div id="frameShopList"></div><div id="titleShopList"></div></div>
+    </div>
+
+    <!-- ОБНОВЛЕНИЯ -->
+    <div id="sec-updates" style="display:none">
+      <div class="section-header"><h2>📜 Обновления</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
+      <div id="updatesList"></div>
+    </div>
+  </div>
+
+  <footer><strong>Сайт 6А класса</strong> · ГБОУ Лицей 486 · 2026 · v3.1</footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============ КОНСТАНТЫ ============ */
+const KEY='6a_v31',PASS='ОСЕНЬ2026',SVGNS='http://www.w3.org/2000/svg';
+const AUTUMN_DUR=10*60*1000,MUT_CH=0.08,BASE_BASKET=50;
+const PASS_END=new Date('2026-12-01T00:00:00');
+const PASS_XP=200,PASS_MAX=50,PAID_PRICE=5000;
+const QUEST_RESET=3*60*60*1000,SKIP_COST=5;
+const BIRTHDAY=new Date('2026-11-21T00:00:00');
+const $=id=>document.getElementById(id);
+const fmt=n=>n>=1e9?(n/1e9).toFixed(2)+'млрд':n>=1e6?(n/1e6).toFixed(2)+'млн':n>=1e3?(n/1e3).toFixed(1)+'тыс':Math.floor(n);
+const p2=n=>String(n).padStart(2,'0');
+const fmtT=ms=>{if(ms<=0)return'00:00';const t=Math.floor(ms/1000),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return h?`${p2(h)}:${p2(m)}:${p2(s)}`:`${p2(m)}:${p2(s)}`};
+const fmtPT=ms=>{if(ms<=0)return'00д 00:00:00';const t=Math.floor(ms/1000),d=Math.floor(t/86400),h=Math.floor(t%86400/3600),m=Math.floor(t%3600/60),s=t%60;return`${d}д ${p2(h)}:${p2(m)}:${p2(s)}`};
+const today=()=>{const d=new Date();return`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`};
+function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200)}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ============ УЛУЧШЕНИЯ ============ */
+const UPGRADES=[
+  {id:'branches',name:'🌿 Ветки',desc:'+лимит',base:120,growth:2.1,max:10,eff:l=>`${l+1}·${10+l*8}`},
+  {id:'better',name:'🍃 Листики',desc:'+20%',base:200,growth:1.9,max:20,eff:l=>`+${l*20}%`},
+  {id:'fast',name:'⚡ Рост',desc:'−10%',base:280,growth:2.0,max:15,eff:l=>`−${Math.round((1-Math.pow(.9,l))*100)}%`},
+  {id:'basket',name:'🧺 Коробка',desc:'+50',base:240,growth:1.8,max:10,eff:l=>`${BASE_BASKET+l*50}`},
+  {id:'fall',name:'🍂 Листопад',desc:'Сами',base:600,growth:2.1,max:10,eff:l=>l?`${l*10}%`:'—'},
+  {id:'care',name:'🌱 Уход',desc:'Защита',base:450,growth:2.0,max:10,eff:l=>`+${l*10}%`},
+  {id:'luck',name:'🍀 Удача',desc:'Золотые',base:550,growth:2.1,max:10,eff:l=>`+${l*5}%`}
+];
+const upgPrice=u=>u.id==='branches'&&S[u.id]===0?0:Math.ceil(u.base*Math.pow(u.growth,S[u.id]));
+
+/* ============ РАСХОДНИКИ ============ */
+const CONSUMABLES={
+  watering:{name:'💧 Лейка',desc:'×2 рост 5мин',price:250,dur:5*60*1000,key:'growEnd'},
+  fertilizer:{name:'🧪 Удобрение',desc:'+50% 5мин',price:400,dur:5*60*1000,key:'incomeEnd'},
+  spray:{name:'💨 Распылитель',desc:'5 пшиков',price:60,dur:0,key:'spray'}
+};
+
+/* ============ ДОСТИЖЕНИЯ ИГРЫ ============ */
+const GAME_ACH={
+  first_leaf:{name:'🍃 Первый',desc:'Собрать 1',reward:2,check:()=>S.totalLeaves>=1},
+  first_upgrade:{name:'⚙️ Улучшение',desc:'Купить',reward:3,check:()=>UPGRADES.some(u=>S[u.id]>0)},
+  max_tree:{name:'🌳 Гигант',desc:'Ветки 10',reward:20,check:()=>S.branches>=10},
+  first_fall:{name:'🍂 Листопад',desc:'Упал сам',reward:5,check:()=>S.fallCount>=1},
+  golden_leaf:{name:'✨ Золотой',desc:'Собрать',reward:10,check:()=>S.goldenCount>=1},
+  mutated_leaf:{name:'🍁 Мутация',desc:'Собрать',reward:15,check:()=>S.mutCount>=1},
+  saved_leaf:{name:'💨 Спаситель',desc:'Спасти',reward:8,check:()=>S.savedCount>=1}
+};
+
+/* ============ ДОСТИЖЕНИЯ САЙТА ============ */
+const SITE_ACH={
+  chat_teacher:{name:'👩‍🏫 Учитель',desc:'Зайти в чат',reward:1},
+  chat_students:{name:'👥 Свои',desc:'Зайти в чат',reward:1},
+  team_view:{name:'👑 Команда',desc:'Открыть',reward:1},
+  profile_set:{name:'✏️ Профиль',desc:'Сменить ник',reward:2,check:()=>S.nick!=='Гость'},
+  avatar_set:{name:'🖼 Аватарка',desc:'Установить',reward:2,check:()=>S.avatarUrl!==''||S.avatarEmoji!=='🦊'},
+  theme_change:{name:'🎨 Тема',desc:'Сменить',reward:3,check:()=>S.activeTheme!=='classic'},
+  pass_buy:{name:'🎫 Платник',desc:'Купить пасс',reward:5,check:()=>S.passPaid},
+  test_all:{name:'🎓 Все тесты',desc:'4 за день',reward:5,check:()=>Object.keys(S.testsDone).length>=4},
+  streak_2:{name:'🔥 Стрик 2',desc:'2 дня',reward:2,check:()=>S.streak>=2},
+  streak_7:{name:'🔥 Стрик 7',desc:'7 дней',reward:5,check:()=>S.streak>=7},
+  frame_own:{name:'🖼 Рамка',desc:'Получить',reward:3,check:()=>S.ownedFrames.length>=1},
+  title_own:{name:'👑 Титул',desc:'Получить',reward:3,check:()=>S.ownedTitles.length>=1},
+  rich_site:{name:'💰 Богач',desc:'500 монет',reward:10,check:()=>S.coins>=500},
+  open_updates:{name:'📜 Читатель',desc:'Открыть',reward:1},
+  open_achievements:{name:'🏆 Достигатор',desc:'Открыть',reward:1}
+};
+
+/* ============ ЧЕЛЛЕНДЖИ ============ */
+const CHALLENGES={
+  ch_test_first:{name:'📝 Первый тест',desc:'Пройти',reward:{coins:50},check:()=>S.testsPassedTotal>=1},
+  ch_test_10:{name:'📚 Отличник',desc:'10 тестов',reward:{coins:150},check:()=>S.testsPassedTotal>=10},
+  ch_test_all:{name:'🎓 Эрудит',desc:'4 предмета',reward:{title:'red',titleName:'Эрудит'},check:()=>Object.keys(S.testsDone).length>=4},
+  ch_pass_10:{name:'🎫 Пасс-новичок',desc:'10 ур',reward:{coins:100},check:()=>S.passLevel>=10},
+  ch_pass_25:{name:'🎫 Пасс-профи',desc:'25 ур',reward:{frame:'leaves'},check:()=>S.passLevel>=25},
+  ch_pass_50:{name:'🎫 Пасс-легенда',desc:'50 ур',reward:{title:'red',titleName:'Легенда'},check:()=>S.passLevel>=50},
+  ch_quests_10:{name:'✅ Квестоман',desc:'10 квестов',reward:{coins:200},check:()=>S.questsCompleted>=10},
+  ch_rich_1000:{name:'💰 Богач',desc:'1000 монет',reward:{frame:'leaves'},check:()=>S.coins>=1000},
+  ch_golden_50:{name:'✨ Золото',desc:'50 золотых',reward:{title:'red',titleName:'Коллекционер'},check:()=>S.goldenCount>=50},
+  ch_streak_10:{name:'🔥 Стрик 10',desc:'10 дней',reward:{frame:'iron'},check:()=>S.streak>=10},
+  ch_streak_30:{name:'👑 Стрик 30',desc:'30 дней',reward:{title:'gold',titleName:'Месяц'},check:()=>S.streak>=30}
+};
+
+/* ============ ТЕСТЫ ============ */
+const TESTS_POOL={
+  math:[
+    {q:'2,4:(1,2−0,8)·3,5',opts:['14','21','24','10,5'],a:1},
+    {q:'3(x−2)=5x+4',opts:['−5','5','−1','1'],a:0},
+    {q:'18 от 45 — сколько %?',opts:['35%','40%','45%','50%'],a:1},
+    {q:'S=96 см², ширина 8. P?',opts:['40','48','28','56'],a:0},
+    {q:'800₽ −25% +20% =',opts:['720','740','760','800'],a:0},
+    {q:'НОД(84,126)+НОК(84,126)',opts:['252','294','336','420'],a:1},
+    {q:'Среднее 4,8;5,2;6,1;3,9',opts:['5','5,1','5,2','4,9'],a:0},
+    {q:'14:30 — угол между стрелками',opts:['90°','105°','120°','75°'],a:1},
+    {q:'18 из 30 — %',opts:['50%','55%','60%','65%'],a:2},
+    {q:'2,6,12,20,30,?',opts:['40','42','44','46'],a:1}
+  ],
+  rus:[
+    {q:'НН в слове',opts:['серебр..ый','оловя..ый','ветре..ый','ю..ый'],a:1},
+    {q:'Чередующаяся гласная',opts:['замереть','мирный','измерение','мерить'],a:0},
+    {q:'Обращение в предложении',opts:['Он пришёл.','Мама, помоги!','Солнце село.','Мы гуляли.'],a:1},
+    {q:'3-е склонение',opts:['степь','конь','поле','село'],a:0},
+    {q:'Притяжательное',opts:['деревянный','лисий','красивый','умный'],a:1},
+    {q:'ПРЕ-',opts:['пр..школьный','пр..красный','пр..ехать','пр..открыть'],a:1},
+    {q:'Простое числительное',opts:['двадцать один','двадцать','двадцать пять','сто двадцать'],a:1},
+    {q:'II спряжение',opts:['видеть','гулять','читать','прыгать'],a:0},
+    {q:'НЕ слитно',opts:['(не)правда,а ложь','(не)взгоды','(не)красивый','(не)вижу'],a:1},
+    {q:'Ъ',opts:['с..езд','с..ел','в..юга','под..ём'],a:0}
+  ],
+  hist:[
+    {q:'Ледовое побоище год',opts:['1240','1242','1380','1480'],a:1},
+    {q:'Первый царь',opts:['Иван III','Иван IV','Пётр I','Годунов'],a:1},
+    {q:'Крещение Руси',opts:['862','882','988','1097'],a:2},
+    {q:'Второе ополчение',opts:['Минин и Пожарский','Трубецкой','Пожарский','Минин'],a:0},
+    {q:'СПб основан в веке',opts:['XVII','XVIII','XIX','XVI'],a:1},
+    {q:'Последний император',opts:['Александр II','Александр III','Николай II','Павел I'],a:2},
+    {q:'Северная война',opts:['1700','1703','1709','1721'],a:0},
+    {q:'Крестил Русь',opts:['Владимир','Ярослав','Святослав','Олег'],a:0},
+    {q:'Основал Москву',opts:['Долгорукий','Мономах','Невский','Калита'],a:0},
+    {q:'Судебник Ивана III',opts:['1497','1498','1550','1649'],a:0}
+  ],
+  eng:[
+    {q:'She ___ to school every day.',opts:['go','goes','going','gone'],a:1},
+    {q:'They ___ already ___ homework.',opts:['have/done','has/done','have/did','did/done'],a:0},
+    {q:'If it ___ tomorrow, we stay home.',opts:['rain','rains','will rain','rained'],a:1},
+    {q:'There ___ many books.',opts:['is','are','was','be'],a:1},
+    {q:'Он играл в футбол вчера.',opts:['He plays','He played','He play','He is playing'],a:1},
+    {q:'I am good ___ math.',opts:['in','at','on','for'],a:1},
+    {q:'This is ___ book.',opts:['my','mine','me','I'],a:0},
+    {q:'She has been living here ___ 2010.',opts:['since','for','from','at'],a:0},
+    {q:'Past form of write',opts:['writed','written','wrote','write'],a:2},
+    {q:'Correct sentence',opts:['I have a dog.','I has a dog.','I having a dog.','I have dog.'],a:0}
+  ]
+};
+const TESTS_META={math:{name:'🔢 Математика',emoji:'🔢'},rus:{name:'📖 Русский',emoji:'📖'},hist:{name:'🏛 История',emoji:'🏛'},eng:{name:'🇬🇧 Английский',emoji:'🇬🇧'}};
+const TEST_Q=10;
+
+function genTest(subj){return [...TESTS_POOL[subj]].sort(()=>Math.random()-0.5).slice(0,TEST_Q)}
+
+/* ============ ПАСС ============ */
+function genFreePass(){const r={};for(let i=1;i<=50;i++){if(i===25)r[i]={t:'frame',v:'leaves'};else if(i===50)r[i]={t:'title',title:'red',name:'Король пёстрого ковра'};else r[i]={t:'coins',v:1+Math.floor(Math.random()*5)}}return r}
+function genPaidPass(){const r={};for(let i=1;i<=50;i++){if(i===25)r[i]={t:'frame',v:'fire'};else if(i===37)r[i]={t:'title',title:'imperial',name:'Осенний император'};else if(i===50)r[i]={t:'theme',v:'fire'};else if(i%5===0)r[i]={t:'boost'};else r[i]={t:'coins',v:3+Math.floor(Math.random()*8)}}return r}
+const FREE_PASS=genFreePass(),PAID_PASS=genPaidPass();
+
+/* ============ МАГАЗИН РАМОК/ТИТУЛОВ ============ */
+const FRAME_SHOP={
+  leaves:{name:'🍃 Листики',desc:'Зелёно-жёлтый',price:800},
+  iron:{name:'⚙️ Железо',desc:'Серый',price:1200},
+  gold:{name:'✨ Золото',desc:'Золотой',price:2500},
+  diamond:{name:'💎 Алмаз',desc:'Голубой',price:3500},
+  fire:{name:'🔥 Огонь',desc:'Анимированный',price:1500}
+};
+const TITLE_SHOP={
+  imperial:{name:'Осенний император',desc:'Перелив',price:3000},
+  autumn:{name:'Осенний лист',desc:'Оранжевый',price:900},
+  frost:{name:'Ледяной страж',desc:'Голубой',price:900},
+  gold:{name:'Месяц без перерыва',desc:'Золотой',price:5000}
+};
+
+/* ============ ТЕМЫ (только базовые, огненная — за стрик/пасс) ============ */
+const THEMES=[
+  {id:'classic',name:'🏠 Стандартная',price:0},
+  {id:'autumn',name:'🍁 Осенняя',price:500},
+  {id:'ice',name:'❄️ Ледяная',price:1000}
+];
+
+/* ============ КВЕСТЫ ============ */
+const DAILY_POOL=[
+  {id:'q_c20',n:'Собери 20',xp:50,t:20,k:'daily_collected'},
+  {id:'q_c50',n:'Собери 50',xp:80,t:50,k:'daily_collected'},
+  {id:'q_u1',n:'Купи улучшение',xp:30,t:1,k:'daily_upgrades'},
+  {id:'q_u3',n:'Купи 3',xp:60,t:3,k:'daily_upgrades'},
+  {id:'q_t',n:'Пройди тест',xp:40,t:1,k:'daily_tests'},
+  {id:'q_g5',n:'5 золотых',xp:60,t:5,k:'daily_golden'},
+  {id:'q_g10',n:'10 золотых',xp:100,t:10,k:'daily_golden'},
+  {id:'q_s3',n:'Спаси 3',xp:40,t:3,k:'daily_saved'}
+];
+const MEGA_POOL=[
+  {id:'mq_c100',n:'100 листиков',xp:200,coins:50,t:100,k:'mega_collected'},
+  {id:'mq_t3',n:'3 теста',xp:150,coins:30,t:3,k:'mega_tests'},
+  {id:'mq_g15',n:'15 золотых',xp:180,coins:40,t:15,k:'mega_golden'}
+];
+
+/* ============ СТРИК ============ */
+const STREAK_MILESTONES=[
+  {day:2,type:'coins',v:2,label:'2д—2💰'},
+  {day:5,type:'boost',label:'5д—буст'},
+  {day:7,type:'coins',v:3,label:'7д—3💰'},
+  {day:10,type:'frame',v:'iron',label:'10д—⚙️'},
+  {day:20,type:'frame',v:'gold',label:'20д—✨'},
+  {day:30,type:'title',title:'gold',name:'Месяц без перерыва',label:'30д—👑'},
+  {day:40,type:'frame',v:'diamond',label:'40д—💎'},
+  {day:50,type:'theme',v:'fire',label:'50д—🔥'}
+];
+
+/* ============ АПДЕЙТ-ЛОГ ============ */
+const CHANGELOG=[
+  {ver:'3.1',date:'17.11.2026',items:['🎨 Новое оформление: главная с кнопками','🚪 Кнопка «Выход» в разделах','📖 Ивент «Пакетик» с описанием','🖼 Темы: выбрано/надеть','🐛 Фикс магазина','❌ Огненная тема не в начале']},
+  {ver:'3.0',date:'17.11.2026',items:['🎂 Ивент Пакетик','📝 Сложные тесты','🔥 Стрик','🎨 Редизайн','✨ Редкие награды']},
+  {ver:'2.6.1',date:'17.11.2026',items:['❌ Убран Окр.мир','🏅 Эрудит 4']},
+  {ver:'2.6',date:'17.11.2026',items:['Крупные листики','Emoji','Монеты меньше','Пасс 5000','Рамки-ободки','Темы','Квесты 3ч']},
+  {ver:'2.0',date:'17.11.2026',items:['Профили','Пасс','Челленджи','Тесты','Квесты','Лог']},
+  {ver:'1.0',date:'ранее',items:['Дерево','Расходники','Достижения','Чаты']}
+];
+
+/* ============ СОСТОЯНИЕ ============ */
+let S={
+  leaves:0,coins:0,basket:0,leavesOnTree:[],leafIdSeq:0,sprayCharges:0,
+  branches:0,better:0,fast:0,basketUp:0,fall:0,care:0,luck:0,
+  growEnd:0,incomeEnd:0,fastGrowthEnd:0,
+  gameAch:{},siteAch:{},challenges:{},
+  totalLeaves:0,goldenCount:0,mutCount:0,savedCount:0,fallCount:0,
+  secret:false,autumnActive:false,autumnEnd:0,autumnManual:false,
+  nick:'Гость',avatarUrl:'',avatarEmoji:'🦊',activeFrame:'',activeTitle:'',activeTitleName:'',
+  ownedFrames:[],ownedTitles:[],
+  passSeason:1,passLevel:1,passXP:0,passPaid:false,
+  passClaimedFree:[],passClaimedPaid:[],passBoostEnd:0,
+  questsResetAt:0,questProgress:{},questsCompleted:0,dailyQuests:[],megaQuests:[],
+  testsDone:{},testsPassedTotal:0,
+  activeTheme:'classic',ownedThemes:['classic'],
+  streak:0,lastStreakDate:'',streakMilestonesHit:[]
+};
+
+/* ============ ЗАГРУЗКА ============ */
+function load(){
+  try{const c=JSON.parse(localStorage.getItem(KEY));if(c)Object.assign(S,c)}catch(e){}
+  if(!localStorage.getItem('6a_started')){S.coins=Math.max(S.coins,5);localStorage.setItem('6a_started','1');setTimeout(()=>toast('🎁 Бонус: 5💰!'),500)}
+  ['leavesOnTree','gameAch','siteAch','challenges','ownedFrames','ownedTitles','passClaimedFree','passClaimedPaid','questProgress','testsDone','dailyQuests','megaQuests','ownedThemes','streakMilestonesHit'].forEach(k=>{if(!S[k])S[k]=Array.isArray(S[k])?[]:{}});
+  Object.keys(GAME_ACH).forEach(k=>{if(S.gameAch[k]===undefined)S.gameAch[k]=false});
+  Object.keys(SITE_ACH).forEach(k=>{if(S.siteAch[k]===undefined)S.siteAch[k]=false});
+  Object.keys(CHALLENGES).forEach(k=>{if(S.challenges[k]===undefined)S.challenges[k]=false});
+  if(!S.ownedThemes.includes('classic'))S.ownedThemes.push('classic');
+  checkPassSeason();applyTheme(S.activeTheme);
+}
+function checkPassSeason(){
+  if(Date.now()>=PASS_END.getTime()){
+    S.passSeason++;S.passLevel=1;S.passXP=0;S.passPaid=false;
+    S.passClaimedFree=[];S.passClaimedPaid=[];S.passBoostEnd=0;
+    S.questsResetAt=0;S.questProgress={};save();toast('🎫 Новый сезон!');
+  }
+}
+
+/* ============ НАВИГАЦИЯ ============ */
+function goSection(name){
+  ['home','games','pass','tests','chat','team','achievements','profile','updates'].forEach(n=>{const el=$('sec-'+n);if(el)el.style.display=n===name?'block':'none'});
+  $('appHeader').style.display=name==='home'?'block':'none';
+  if(name==='team')unlockAchievement('team_view');
+  if(name==='updates')unlockAchievement('open_updates');
+  if(name==='achievements')unlockAchievement('open_achievements');
+  if(name==='games'){renderTop();renderTree();renderUpgrades();renderEffects();renderConsumables()}
+  if(name==='pass'){renderPass();renderQuests()}
+  if(name==='tests'){renderTestsList();renderStreak()}
+  if(name==='achievements'){renderSiteAch();renderChallenges()}
+  if(name==='profile'){renderProfile();renderFrameShop();renderTitleShop();renderThemeButtons();$('nickInput').value=S.nick;$('avatarInput').value=S.avatarUrl;$('avatarEmoji').value=S.avatarEmoji||'🦊'}
+  if(name==='updates')renderUpdates();
+  window.scrollTo(0,0);
+}
+function goHome(){goSection('home')}
+
+/* ============ ТЕМЫ ============ */
+function applyTheme(id){document.body.classList.remove('theme-classic','theme-autumn','theme-fire','theme-ice');document.body.classList.add('theme-'+id);S.activeTheme=id}
+function renderThemeButtons(){
+  const g=$('themeButtons');if(!g)return;g.innerHTML='';
+  THEMES.forEach(t=>{
+    const owned=S.ownedThemes.includes(t.id);const active=S.activeTheme===t.id;
+    const d=document.createElement('div');d.className='theme-item'+(active?' active':'')+(owned?'':' locked');
+    d.innerHTML=`<div class="info-block"><div class="info-name">${t.name}</div><div class="info-desc">${owned?(active?'✅ Выбрано':'Нажми, чтобы надеть'):'🔒 '+t.price+'💰'}</div></div><button class="btn small ${active?'green':''}" ${!owned&&S.coins<t.price?'disabled':''}>${owned?(active?'✅':'Надеть'):'Купить '+t.price+'💰'}</button>`;
+    d.querySelector('button').onclick=(e)=>{
+      e.stopPropagation();
+      if(owned){applyTheme(t.id);save();renderThemeButtons();toast('🎨 Применено');checkSiteAch()}
+      else{if(S.coins<t.price){toast(`Нужно ${t.price}💰`);return}S.coins-=t.price;S.ownedThemes.push(t.id);applyTheme(t.id);save();renderCoins();renderThemeButtons();showRareReward('🎨',t.name,'Новая тема!')}
+    };
+    g.appendChild(d);
+  });
+}
+
+/* ============ РЕДКАЯ НАГРАДА ============ */
+function showRareReward(icon,name,sub){
+  const div=document.createElement('div');div.className='rare-reward-popup';
+  div.innerHTML=`<div class="rare-particles"></div><div class="rare-reward-content"><div class="rare-reward-icon">${icon}</div><div class="rare-reward-text">${name}</div><div class="rare-reward-sub">${sub||''}</div></div>`;
+  document.body.appendChild(div);
+  const pdiv=div.querySelector('.rare-particles');
+  for(let i=0;i<20;i++){const p=document.createElement('div');p.className='rare-particle';p.style.left='50%';p.style.top='50%';const a=Math.random()*Math.PI*2,r=100+Math.random()*200;p.style.setProperty('--tx',Math.cos(a)*r+'px');p.style.setProperty('--ty',Math.sin(a)*r+'px');p.style.animationDelay=Math.random()*0.3+'s';pdiv.appendChild(p)}
+  setTimeout(()=>{div.style.opacity='0';div.style.transition='opacity .4s';setTimeout(()=>div.remove(),400)},2000);
+}
+
+/* ============ ПРОФИЛЬ ============ */
+function applyFrame(){
+  const w=$('avatarPreview');w.className='avatar-wrap';
+  if(S.activeFrame&&['leaves','fire','gold','ice','iron','diamond'].includes(S.activeFrame))w.classList.add('frame-'+S.activeFrame);
+  if(S.avatarUrl)w.innerHTML=`<img src="${S.avatarUrl}" onerror="this.style.display='none';this.parentElement.textContent='${S.avatarEmoji||'🦊'}'">`;
+  else w.textContent=S.avatarEmoji||'🦊';
+}
+function renderProfile(){
+  $('headerNick').textContent=S.nick||'Гость';$('profileNick').textContent=S.nick||'Гость';
+  $('profilePassLvl').textContent=S.passLevel;$('profileCoins').textContent=fmt(S.coins);
+  applyFrame();
+  const t=$('profileTitle');const tm={red:'title-red',imperial:'title-imperial',autumn:'title-autumn',frost:'title-frost',gold:'title-gold'};
+  if(S.activeTitle&&tm[S.activeTitle])t.innerHTML=`<span class="title-badge ${tm[S.activeTitle]}">${S.activeTitleName||''}</span>`;
+  else t.innerHTML='<span style="color:#9aa3b0;font-size:.75rem">Без титула</span>';
+  renderMyFrames();
+}
+function renderMyFrames(){
+  const g=$('myFramesList');g.innerHTML='';
+  if(!S.ownedFrames.length&&!S.ownedTitles.length){g.innerHTML='<div style="color:#9aa3b0;font-size:.78rem">Нет наград</div>';return}
+  const fn={leaves:'🍃',fire:'🔥',gold:'✨',ice:'❄️',iron:'⚙️',diamond:'💎'};
+  S.ownedFrames.forEach(f=>{
+    const d=document.createElement('div');d.className='shop-item';const act=S.activeFrame===f;
+    d.innerHTML=`<div class="info-block"><div class="info-name">Рамка: ${fn[f]||f}</div></div><button class="btn small ${act?'green':''}">${act?'✅':'Надеть'}</button>`;
+    d.querySelector('button').onclick=()=>{S.activeFrame=f;save();renderProfile()};g.appendChild(d);
+  });
+  S.ownedTitles.forEach(t=>{
+    const d=document.createElement('div');d.className='shop-item';const act=S.activeTitle===t.type&&S.activeTitleName===t.name;
+    d.innerHTML=`<div class="info-block"><div class="info-name">${t.name}</div></div><button class="btn small ${act?'green':''}">${act?'✅':'Надеть'}</button>`;
+    d.querySelector('button').onclick=()=>{S.activeTitle=t.type;S.activeTitleName=t.name;save();renderProfile()};g.appendChild(d);
+  });
+}
+function saveProfile(){S.nick=$('nickInput').value.trim().slice(0,20)||'Гость';S.avatarUrl=$('avatarInput').value.trim();S.avatarEmoji=$('avatarEmoji').value.trim()||'🦊';save();renderProfile();toast('💾 Сохранено');checkSiteAch()}
+function grantFrame(f){if(!S.ownedFrames.includes(f)){S.ownedFrames.push(f);showRareReward('🖼','Рамка: '+f,'Редкая!')}}
+function grantTitle(type,name){if(!S.ownedTitles.find(t=>t.type===type&&t.name===name)){S.ownedTitles.push({type,name});showRareReward('👑',name,'Редкий!')}}
+
+function renderFrameShop(){
+  const g=$('frameShopList');if(!g)return;g.innerHTML='<div style="color:#9aa3b0;font-size:.78rem;margin-bottom:4px">🖼 Рамки</div>';
+  Object.entries(FRAME_SHOP).forEach(([k,it])=>{
+    const own=S.ownedFrames.includes(k);const d=document.createElement('div');d.className='shop-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${it.name}</div><div class="info-desc">${it.desc}</div></div>${own?'<span class="claimed-badge">✅</span>':`<button class="btn small" ${S.coins<it.price?'disabled':''}>${fmt(it.price)}💰</button>`}`;
+    if(!own)d.querySelector('button').onclick=()=>buyFrame(k);g.appendChild(d);
+  });
+}
+function renderTitleShop(){
+  const g=$('titleShopList');if(!g)return;g.innerHTML='<div style="color:#9aa3b0;font-size:.78rem;margin:4px 0">👑 Титулы</div>';
+  Object.entries(TITLE_SHOP).forEach(([k,it])=>{
+    const own=S.ownedTitles.find(t=>t.type===k&&t.name===it.name);const d=document.createElement('div');d.className='shop-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${it.name}</div><div class="info-desc">${it.desc}</div></div>${own?'<span class="claimed-badge">✅</span>':`<button class="btn small" ${S.coins<it.price?'disabled':''}>${fmt(it.price)}💰</button>`}`;
+    if(!own)d.querySelector('button').onclick=()=>buyTitle(k,it.name,it.price);g.appendChild(d);
+  });
+}
+function buyFrame(k){const it=FRAME_SHOP[k];if(S.ownedFrames.includes(k))return;if(S.coins<it.price){toast('Мало монет');return}S.coins-=it.price;S.ownedFrames.push(k);save();renderCoins();renderProfile();renderFrameShop();showRareReward('🖼',it.name,'Куплено!');checkSiteAch()}
+function buyTitle(k,name,price){if(S.ownedTitles.find(t=>t.type===k&&t.name===name))return;if(S.coins<price){toast('Мало монет');return}S.coins-=price;S.ownedTitles.push({type:k,name});save();renderCoins();renderProfile();renderTitleShop();showRareReward('👑',name,'Куплено!');checkSiteAch()}
+
+/* ============ ПАСС ============ */
+function addPassXP(amount){
+  if(S.passLevel>=PASS_MAX)return;
+  const mult=S.passBoostEnd>Date.now()?2:1;const gain=Math.floor(amount*mult);
+  S.passXP+=gain;
+  while(S.passXP>=PASS_XP&&S.passLevel<PASS_MAX){S.passXP-=PASS_XP;S.passLevel++;toast(`🎫 Уровень ${S.passLevel}!`)}
+  if(S.passLevel>=PASS_MAX)S.passXP=0;
+  save();renderPass();renderProfile();
+}
+function skipPassLevel(){
+  if(S.passLevel>=PASS_MAX){toast('Максимум');return}
+  if(S.coins<SKIP_COST){toast(`Нужно ${SKIP_COST}💰`);return}
+  S.coins-=SKIP_COST;S.passXP=0;S.passLevel++;save();renderCoins();renderPass();renderProfile();toast(`⚡ Уровень ${S.passLevel}`);
+}
+function buyPaidPass(){
+  if(S.passPaid){toast('Уже куплен');return}
+  if(S.coins<PAID_PRICE){toast(`Нужно ${PAID_PRICE}💰`);return}
+  S.coins-=PAID_PRICE;S.passPaid=true;save();renderCoins();renderPass();renderProfile();showRareReward('👑','Платный пасс','Активирован!');checkSiteAch();
+}
+function claimPassReward(branch,lvl){
+  const arr=branch==='free'?S.passClaimedFree:S.passClaimedPaid;
+  if(arr.includes(lvl))return;
+  if(S.passLevel<lvl){toast('Уровень низкий');return}
+  if(branch==='paid'&&!S.passPaid){toast('Нужен платный пасс');return}
+  const r=(branch==='free'?FREE_PASS:PAID_PASS)[lvl];if(!r)return;
+  if(r.t==='coins'){S.coins+=r.v;toast(`+${r.v}💰`)}
+  else if(r.t==='frame'){grantFrame(r.v)}
+  else if(r.t==='title'){grantTitle(r.title,r.name)}
+  else if(r.t==='boost'){S.passBoostEnd=Math.max(Date.now(),S.passBoostEnd)+10*60*1000;toast('⚡ ×2 XP 10мин')}
+  else if(r.t==='theme'){if(!S.ownedThemes.includes(r.v))S.ownedThemes.push(r.v);applyTheme(r.v);showRareReward('🔥','Огненная тема','Редкая!')}
+  arr.push(lvl);save();renderPass();renderProfile();renderCoins();
+}
+function renderPass(){
+  $('passTimer').textContent=fmtPT(PASS_END.getTime()-Date.now());
+  $('passSeason').textContent=S.passSeason;$('passLevel').textContent=S.passLevel;$('passXP').textContent=S.passXP;
+  $('passXpFill').style.width=(S.passLevel>=PASS_MAX?100:Math.round(S.passXP/PASS_XP*100))+'%';
+  $('passPaidStatus').innerHTML=S.passPaid?'<span style="color:#e67e22;font-weight:800;font-size:.8rem">👑 Активен</span>':`<button class="btn orange small" onclick="buyPaidPass()">Купить — ${PAID_PRICE}💰</button>`;
+  $('boosterStatus').textContent=S.passBoostEnd>Date.now()?`⚡ ×2 XP: ${fmtT(S.passBoostEnd-Date.now())}`:'';
+  const renderBranch=(g,rewards,claimed,paid)=>{
+    g.innerHTML='';
+    Object.keys(rewards).map(Number).sort((a,b)=>a-b).forEach(lvl=>{
+      const r=rewards[lvl];const c=claimed.includes(lvl);const u=S.passLevel>=lvl&&(!paid||S.passPaid);
+      let txt=r.t==='coins'?`${r.v}💰`:r.t==='frame'?'Рамка':r.t==='title'?`«${r.name}»`:r.t==='boost'?'⚡':r.t==='theme'?'🔥':'';
+      const d=document.createElement('div');d.className='pass-level-item'+(c?' claimed':(u?'':' locked'));
+      d.innerHTML=`<div class="info-block"><div class="info-name">Ур. ${lvl}</div><div class="info-desc">${txt}</div></div>${c?'<span class="claimed-badge">✅</span>':`<button class="btn small" ${u?'':'disabled'}>Забрать</button>`}`;
+      if(!c&&u)d.querySelector('button').onclick=()=>claimPassReward(paid?'paid':'free',lvl);
+      g.appendChild(d);
+    });
+  };
+  renderBranch($('freePassLevels'),FREE_PASS,S.passClaimedFree,false);
+  renderBranch($('paidPassLevels'),PAID_PASS,S.passClaimedPaid,true);
+}
+
+/* ============ КВЕСТЫ ============ */
+function rollQuests(){
+  S.dailyQuests=[...DAILY_POOL].sort(()=>Math.random()-0.5).slice(0,4).map(q=>q.id);
+  S.megaQuests=[...MEGA_POOL].sort(()=>Math.random()-0.5).slice(0,2).map(q=>q.id);
+  S.questProgress={};S.questsResetAt=Date.now();save();
+}
+function checkQuestsReset(){if(!S.questsResetAt||Date.now()-S.questsResetAt>=QUEST_RESET){rollQuests();renderQuests()}}
+function renderQuests(){
+  $('questTimer').textContent=`(через ${fmtT(QUEST_RESET-(Date.now()-S.questsResetAt))})`;
+  const g=$('dailyQuestsList');g.innerHTML='';
+  S.dailyQuests.forEach(id=>{
+    const q=DAILY_POOL.find(x=>x.id===id);if(!q)return;
+    const p=S.questProgress[q.id]||0;const done=p>=q.t;
+    const d=document.createElement('div');d.className='quest-item'+(done?' owned':'');
+    d.innerHTML=`<div class="info-block"><div class="info-name">${q.n}</div><div class="info-desc">${Math.min(p,q.t)}/${q.t} · +${q.xp}XP</div></div>${done?'<span class="claimed-badge">✅</span>':'<span style="color:#9aa3b0">—</span>'}`;
+    g.appendChild(d);
+  });
+  const mg=$('megaQuestsList');mg.innerHTML='';
+  if(!S.passPaid){mg.innerHTML='<div style="color:#9aa3b0;font-size:.78rem">Только с платным пассом</div>';return}
+  S.megaQuests.forEach(id=>{
+    const q=MEGA_POOL.find(x=>x.id===id);if(!q)return;
+    const p=S.questProgress[q.id]||0;const done=p>=q.t;
+    const d=document.createElement('div');d.className='quest-item'+(done?' owned':'');
+    d.innerHTML=`<div class="info-block"><div class="info-name">${q.n}</div><div class="info-desc">${Math.min(p,q.t)}/${q.t} · +${q.xp}XP · +${q.coins}💰</div></div>${done?'<span class="claimed-badge">✅</span>':'<span style="color:#9aa3b0">—</span>'}`;
+    mg.appendChild(d);
+  });
+}
+function progressQuest(key,amount){
+  S.dailyQuests.forEach(id=>{
+    const q=DAILY_POOL.find(x=>x.id===id);if(!q||q.k!==key)return;
+    const prev=S.questProgress[q.id]||0;S.questProgress[q.id]=prev+amount;
+    if(prev<q.t&&S.questProgress[q.id]>=q.t){addPassXP(q.xp);S.questsCompleted++;toast(`✅ +${q.xp}XP`)}
+  });
+  S.megaQuests.forEach(id=>{
+    const q=MEGA_POOL.find(x=>x.id===id);if(!q||q.k!==key||!S.passPaid)return;
+    const prev=S.questProgress[q.id]||0;S.questProgress[q.id]=prev+amount;
+    if(prev<q.t&&S.questProgress[q.id]>=q.t){addPassXP(q.xp);S.coins+=q.coins;S.questsCompleted++;toast(`🔥 +${q.xp}XP +${q.coins}💰`)}
+  });
+  save();renderQuests();renderCoins();
+}
+
+/* ============ СТРИК ============ */
+function checkStreak(){
+  const t=today();if(S.lastStreakDate===t)return;
+  const y=new Date();y.setDate(y.getDate()-1);
+  const yStr=`${y.getFullYear()}-${y.getMonth()+1}-${y.getDate()}`;
+  if(S.lastStreakDate===yStr)S.streak++;
+  else if(S.lastStreakDate!=='')S.streak=0;
+  S.lastStreakDate=t;
+  STREAK_MILESTONES.forEach(m=>{
+    if(S.streak>=m.day&&!S.streakMilestonesHit.includes(m.day)){
+      S.streakMilestonesHit.push(m.day);
+      if(m.type==='coins'){S.coins+=m.v;toast(`🔥 ${m.day}д: +${m.v}💰`)}
+      else if(m.type==='boost'){S.passBoostEnd=Math.max(Date.now(),S.passBoostEnd)+10*60*1000;toast(`🔥 ${m.day}д: бустер!`)}
+      else if(m.type==='frame'){grantFrame(m.v)}
+      else if(m.type==='title'){grantTitle(m.title,m.name)}
+      else if(m.type==='theme'){if(!S.ownedThemes.includes(m.v))S.ownedThemes.push(m.v);showRareReward('🔥','Огненная тема','50 дней!')}
+    }
+  });
+  save();renderStreak();
+}
+function renderStreak(){
+  $('streakDays').textContent=S.streak;
+  const g=$('streakMilestones');g.innerHTML='';
+  STREAK_MILESTONES.forEach(m=>{
+    const d=document.createElement('div');d.className='streak-milestone'+(S.streak>=m.day?' reached':'');
+    d.textContent=m.label;g.appendChild(d);
+  });
+}
+
+/* ============ ТЕСТЫ ============ */
+let currentTest=null,currentAnswers=[];
+function renderTestsList(){
+  const g=$('testsList');g.innerHTML='';
+  Object.entries(TESTS_META).forEach(([k,m])=>{
+    const done=S.testsDone[k]===today();
+    const d=document.createElement('div');d.className='test-subject';
+    d.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px"><div><strong style="color:#e8b04b">${m.name}</strong><div style="color:#9aa3b0;font-size:.78rem">${TEST_Q} вопросов · 70% · 15💰</div></div><button class="btn small ${done?'gray':''}" ${done?'disabled':''}>${done?'✅':'Начать'}</button></div>`;
+    if(!done)d.querySelector('button').onclick=()=>startTest(k);
+    g.appendChild(d);
+  });
+  $('testRunner').style.display='none';$('testsList').style.display='block';
+}
+function startTest(subj){
+  currentTest=subj;const qs=genTest(subj);currentAnswers=qs.map(()=>-1);
+  $('testsList').style.display='none';
+  const r=$('testRunner');r.style.display='block';
+  r.innerHTML=`<h3 style="color:#e8b04b;margin-bottom:.8rem">${TESTS_META[subj].name}</h3>`;
+  qs.forEach((q,i)=>{
+    const box=document.createElement('div');box.className='test-q';
+    box.innerHTML=`<h4>${i+1}. ${q.q}</h4>`;
+    q.opts.forEach((opt,j)=>{
+      const b=document.createElement('button');b.className='test-opt';b.textContent=opt;
+      b.onclick=()=>{currentAnswers[i]=j;box.querySelectorAll('.test-opt').forEach(x=>x.classList.remove('correct','wrong'));b.classList.add('correct')};
+      box.appendChild(b);
+    });
+    r.appendChild(box);
+  });
+  const f=document.createElement('button');f.className='btn';f.textContent='✅ Завершить';f.style.marginTop='8px';
+  f.onclick=()=>finishTest(subj,qs);r.appendChild(f);
+}
+function finishTest(subj,qs){
+  let correct=0;qs.forEach((q,i)=>{if(currentAnswers[i]===q.a)correct++});
+  if(correct/qs.length>=0.7){
+    S.coins+=15;S.testsDone[subj]=today();S.testsPassedTotal++;
+    progressQuest('daily_tests',1);progressQuest('mega_tests',1);addPassXP(30);checkStreak();
+    toast(`✅ ${correct}/${qs.length} · +15💰`);
+  }else toast(`❌ ${correct}/${qs.length} — нужно 70%`);
+  save();renderCoins();renderTestsList();checkAch();checkChallenges();
+}
+
+/* ============ ДОСТИЖЕНИЯ ============ */
+function checkAch(){
+  let ch=false;
+  Object.entries(GAME_ACH).forEach(([k,a])=>{if(!S.gameAch[k]&&a.check()){S.gameAch[k]=true;S.coins+=a.reward;ch=true;toast(`🏆 ${a.name} +${a.reward}💰`)}});
+  if(ch){save();renderCoins()}
+}
+function checkSiteAch(){
+  let ch=false;
+  Object.entries(SITE_ACH).forEach(([k,a])=>{
+    if(S.siteAch[k])return;
+    if(a.check&&a.check()){S.siteAch[k]=true;S.coins+=a.reward;ch=true;toast(`🏆 ${a.name} +${a.reward}💰`)}
+  });
+  if(ch){save();renderSiteAch();renderCoins()}
+}
+function checkChallenges(){
+  let ch=false;
+  Object.entries(CHALLENGES).forEach(([k,c])=>{
+    if(S.challenges[k])return;
+    if(c.check()){S.challenges[k]=true;ch=true;const r=c.reward;
+      if(r.coins){S.coins+=r.coins;toast(`🏅 ${c.name} +${r.coins}💰`)}
+      if(r.frame)grantFrame(r.frame);
+      if(r.title)grantTitle(r.title,r.titleName);
+    }
+  });
+  if(ch){save();renderChallenges();renderCoins();renderProfile()}
+}
+function renderChallenges(){
+  const g=$('challengesList');if(!g)return;g.innerHTML='';
+  Object.entries(CHALLENGES).forEach(([k,c])=>{
+    const done=!!S.challenges[k];
+    let rt='';if(c.reward.coins)rt=`+${c.reward.coins}💰`;if(c.reward.frame)rt='Рамка';if(c.reward.title)rt='Титул';
+    const d=document.createElement('div');d.className='achievement-item'+(done?' owned':'');
+    d.innerHTML=`<div class="ach-icon">${done?'🏅':'🔒'}</div><div class="info-block"><div class="info-name">${c.name}</div><div class="info-desc">${c.desc}</div><div class="ach-status ${done?'unlocked':'locked'}">${done?'✅':'—'}</div></div><div class="ach-reward">${rt}</div>`;
+    g.appendChild(d);
+  });
+}
+function renderSiteAch(){
+  const g=$('siteAchievementsList');if(!g)return;g.innerHTML='';
+  Object.entries(SITE_ACH).forEach(([k,a])=>{
+    const done=!!S.siteAch[k];
+    const d=document.createElement('div');d.className='achievement-item'+(done?' owned':'');
+    d.innerHTML=`<div class="ach-icon">${done?'✅':'🔒'}</div><div class="info-block"><div class="info-name">${a.name}</div><div class="info-desc">${a.desc}</div></div><div class="ach-reward">+${a.reward}💰</div>`;
+    g.appendChild(d);
+  });
+}
+function unlockAchievement(id){
+  if(S.siteAch[id])return;
+  S.siteAch[id]=true;S.coins+=SITE_ACH[id].reward;save();
+  toast(`🏆 ${SITE_ACH[id].name} +${SITE_ACH[id].reward}💰`);
+  renderSiteAch();renderCoins();
+}
+
+/* ============ ДЕРЕВО ============ */
+function basketCap(){return BASE_BASKET+S.basketUp*50}
+function leafValue(mult){
+  let v=(5+Math.random()*15)*(1+S.better*0.2);
+  if(S.incomeEnd>Date.now())v*=1.5;if(S.autumnActive)v*=2;
+  if(mult==='golden'){v=1000+Math.random()*9000;if(S.incomeEnd>Date.now())v*=1.5;if(S.autumnActive)v*=2;return v}
+  if(mult==='mut')v*=3;return v;
+}
+function spawnInterval(){let ms=3000*(1-Math.min(.85,S.fast*.1))/3;if(S.growEnd>Date.now())ms/=2;if(S.fastGrowthEnd>Date.now())ms/=3;return Math.max(100,ms)}
+function maxLeaves(){return 10+S.branches*8}
+
+function getBranches(){
+  const l=S.branches,list=[],bx=400,by=340;
+  list.push({id:'trunk',x1:bx,y1:by,x2:bx,y2:by-100-l*14,width:14+l*2});
+  for(let i=0;i<l;i++){const y=by-60-i*16,d=i%2===0?-1:1,len=70-Math.min(40,i*3);list.push({id:'b'+i,x1:bx,y1:y,x2:bx+d*len,y2:y-len*0.35,width:Math.max(3,8-i*0.4)})}
+  return list;
+}
+function renderTree(){
+  const svg=$('treeSvg');if(!svg)return;const geo=getBranches();svg.innerHTML='';
+  const gr=document.createElementNS(SVGNS,'ellipse');gr.setAttribute('cx','400');gr.setAttribute('cy','345');gr.setAttribute('rx','180');gr.setAttribute('ry','18');gr.setAttribute('fill','#2a3a24');gr.setAttribute('opacity','0.7');svg.appendChild(gr);
+  const tr=geo.find(b=>b.id==='trunk');const tp=document.createElementNS(SVGNS,'path');
+  tp.setAttribute('d',`M ${tr.x1-8} ${tr.y1} Q ${tr.x1-4} ${(tr.y1+tr.y2)/2} ${tr.x2-4} ${tr.y2} L ${tr.x2+4} ${tr.y2} Q ${tr.x1+4} ${(tr.y1+tr.y2)/2} ${tr.x1+8} ${tr.y1} Z`);
+  tp.setAttribute('fill','#6b4a2a');tp.setAttribute('stroke','#4a3018');tp.setAttribute('stroke-width','2');svg.appendChild(tp);
+  const bd=[];geo.filter(b=>b.id!=='trunk').forEach(b=>{
+    const line=document.createElementNS(SVGNS,'path');const len=Math.hypot(b.x2-b.x1,b.y2-b.y1);
+    line.setAttribute('d',`M ${b.x1} ${b.y1} Q ${(b.x1+b.x2)/2} ${b.y1-10} ${b.x2} ${b.y2}`);
+    line.setAttribute('stroke','#6b4a2a');line.setAttribute('stroke-width',b.width);line.setAttribute('fill','none');
+    line.style.strokeDasharray=len;line.style.strokeDashoffset=len;line.style.setProperty('--len',len);line.classList.add('branch-line');
+    svg.appendChild(line);bd.push(b);
+  });
+  const bp=[];bd.forEach(b=>{
+    const cnt=1+Math.floor(Math.random()*4);
+    for(let k=0;k<cnt;k++){const t=0.3+Math.random()*0.6,bx=b.x1+(b.x2-b.x1)*t,by=b.y1+(b.y2-b.y1)*t;bp.push({bx,by,used:false});const bud=document.createElementNS(SVGNS,'ellipse');bud.setAttribute('cx',bx);bud.setAttribute('cy',by);bud.setAttribute('rx',3.5);bud.setAttribute('ry',4.5);bud.setAttribute('class','bud');svg.appendChild(bud)}
+  });
+  window._budPos=bp;S.leavesOnTree.forEach(l=>drawLeaf(svg,l,false));
+}
+function drawLeaf(svg,leaf,anim){
+  const g=document.createElementNS(SVGNS,'g');g.classList.add('tree-leaf');g.dataset.id=leaf.id;
+  if(leaf.yellow)g.classList.add('yellow');if(leaf.golden)g.classList.add('golden');if(leaf.mut)g.classList.add('mutated');if(anim)g.classList.add('leaf-grow');
+  const p=document.createElementNS(SVGNS,'path');const s=leaf.size||20;
+  p.setAttribute('d',`M 0 ${s} C ${-s*0.8} ${s*0.3} ${-s*0.5} ${-s*0.6} 0 ${-s} C ${s*0.5} ${-s*0.6} ${s*0.8} ${s*0.3} 0 ${s} Z`);
+  const fill=leaf.yellow?'#e8c84a':leaf.golden?'#ffd700':leaf.mut?'#e67333':'#4a8a3a';
+  const stroke=leaf.yellow?'#b89a20':leaf.golden?'#b89020':leaf.mut?'#a04a1a':'#2e5a24';
+  p.setAttribute('fill',fill);p.setAttribute('stroke',stroke);p.setAttribute('stroke-width','1.5');g.appendChild(p);
+  const v=document.createElementNS(SVGNS,'line');v.setAttribute('x1',0);v.setAttribute('y1',-s*0.8);v.setAttribute('x2',0);v.setAttribute('y2',s*0.8);v.setAttribute('stroke',stroke);v.setAttribute('stroke-width','1');g.appendChild(v);
+  g.setAttribute('transform',`translate(${leaf.x},${leaf.y})`);
+  g.onclick=(e)=>{e.stopPropagation();leaf.yellow?sprayLeaf(leaf.id):harvestLeaf(leaf.id)};
+  svg.appendChild(g);
+}
+let lastSpawn=0;
+function spawnLeaf(force){
+  if(S.leavesOnTree.length>=maxLeaves())return;
+  const buds=(window._budPos||[]).filter(b=>!b.used);if(!buds.length)return;
+  const bud=buds[Math.floor(Math.random()*buds.length)];bud.used=true;
+  const leaf={id:++S.leafIdSeq,x:bud.bx,y:bud.by,size:16+Math.random()*8,yellow:false,golden:Math.random()<0.05+S.luck*.05,mut:S.autumnActive&&Math.random()<MUT_CH};
+  S.leavesOnTree.push(leaf);const svg=$('treeSvg');if(svg)drawLeaf(svg,leaf,true);
+  if(force)save();scheduleYellow(leaf.id);
+}
+function scheduleYellow(id){
+  const leaf=S.leavesOnTree.find(l=>l.id===id);if(!leaf)return;
+  if(Math.random()>0.15*(1-Math.min(.9,S.care*.1)))return;
+  setTimeout(()=>{
+    const l=S.leavesOnTree.find(x=>x.id===id);if(!l||l.yellow)return;l.yellow=true;refreshLeaf(l);
+    setTimeout(()=>{const l2=S.leavesOnTree.find(x=>x.id===id);if(l2&&l2.yellow)dropLeaf(id)},10000+S.care*1500);
+  },8000+S.care*1000+Math.random()*4000);
+}
+function refreshLeaf(leaf){
+  const svg=$('treeSvg');if(!svg)return;const g=svg.querySelector(`[data-id="${leaf.id}"]`);if(!g)return;
+  g.classList.toggle('yellow',leaf.yellow);g.classList.toggle('golden',leaf.golden);g.classList.toggle('mutated',leaf.mut);
+  const fill=leaf.yellow?'#e8c84a':leaf.golden?'#ffd700':leaf.mut?'#e67333':'#4a8a3a';
+  const stroke=leaf.yellow?'#b89a20':leaf.golden?'#b89020':leaf.mut?'#a04a1a':'#2e5a24';
+  const p=g.querySelector('path'),v=g.querySelector('line');
+  if(p){p.setAttribute('fill',fill);p.setAttribute('stroke',stroke)}if(v)v.setAttribute('stroke',stroke);
+}
+function dropLeaf(id){const i=S.leavesOnTree.findIndex(l=>l.id===id);if(i<0)return;S.leavesOnTree.splice(i,1);const g=$('treeSvg')?.querySelector(`[data-id="${id}"]`);if(g)g.remove();save()}
+function harvestLeaf(id){
+  const i=S.leavesOnTree.findIndex(l=>l.id===id);if(i<0)return;
+  const leaf=S.leavesOnTree[i];if(S.basket>=basketCap()){toast('Коробка полна!');return}
+  const g=$('treeSvg')?.querySelector(`[data-id="${id}"]`);
+  if(g){g.style.transition='transform .5s,opacity .5s';g.style.opacity='0';setTimeout(()=>g.remove(),500)}
+  S.leavesOnTree.splice(i,1);
+  const v=leafValue(leaf.golden?'golden':leaf.mut?'mut':1);
+  if(leaf.golden){S.goldenCount++;progressQuest('daily_golden',1);progressQuest('mega_golden',1)}
+  if(leaf.mut)S.mutCount++;
+  S.basket+=v;if(S.basket>basketCap())S.basket=basketCap();
+  updateBasket();checkAch();checkChallenges();save();
+}
+function collectBasket(){
+  if(S.basket<=0){toast('Пусто');return}
+  const g=Math.floor(S.basket);S.leaves+=g;S.totalLeaves+=g;S.basket=0;
+  updateBasket();renderTop();renderUpgrades();
+  progressQuest('daily_collected',g);progressQuest('mega_collected',g);
+  addPassXP(Math.min(30,Math.floor(g/50)));toast(`🍂 +${fmt(g)}`);save();
+}
+function updateBasket(){$('basketCount').textContent=Math.floor(S.basket);$('basketCap').textContent=basketCap()}
+function sprayLeaf(id){
+  if(S.sprayCharges<=0){toast('Нет распылителя');return}
+  const leaf=S.leavesOnTree.find(l=>l.id===id);if(!leaf||!leaf.yellow)return;
+  S.sprayCharges--;leaf.yellow=false;S.savedCount++;progressQuest('daily_saved',1);refreshLeaf(leaf);save();toast('💨 Зелёный!');
+}
+
+/* ============ УЛУЧШЕНИЯ / МАГАЗИН ============ */
+function buyUpgrade(id){
+  const u=UPGRADES.find(x=>x.id===id);const lvl=S[u.id];if(lvl>=u.max)return;
+  const price=upgPrice(u);if(S.leaves<price){toast('Мало листиков');return}
+  S.leaves-=price;S[u.id]++;save();renderTop();renderUpgrades();renderTree();checkAch();checkChallenges();
+  progressQuest('daily_upgrades',1);toast(`⚙️ ${u.name} → ${S[u.id]}`);
+}
+function renderUpgrades(){
+  const g=$('upgradeList');if(!g)return;g.innerHTML='';
+  UPGRADES.forEach(u=>{
+    const lvl=S[u.id],maxed=lvl>=u.max,price=upgPrice(u);
+    const d=document.createElement('div');d.className='upgrade-item'+(maxed?' maxed':'');
+    d.innerHTML=`<div class="info-block"><div class="info-name">${u.name}</div><div class="info-desc">${u.desc}</div><div class="info-lvl">Ур. ${lvl}/${u.max} · ${u.eff(lvl)}</div></div><button class="btn small" ${maxed||S.leaves<price?'disabled':''}>${maxed?'✅':fmt(price)+'🍂'}</button>`;
+    d.querySelector('button').onclick=()=>buyUpgrade(u.id);g.appendChild(d);
+  });
+}
+function renderEffects(){
+  const g=$('effectsList');if(!g)return;g.innerHTML='';const now=Date.now();
+  if(S.growEnd>now)g.innerHTML+=`<div class="consumable-item"><div class="info-block"><div class="info-name">💧 Лейка</div><div class="info-desc">×2</div></div><div class="effect-timer">${fmtT(S.growEnd-now)}</div></div>`;
+  if(S.fastGrowthEnd>now)g.innerHTML+=`<div class="consumable-item"><div class="info-block"><div class="info-name">⚡ Рост</div><div class="info-desc">×3</div></div><div class="effect-timer">${fmtT(S.fastGrowthEnd-now)}</div></div>`;
+  if(S.incomeEnd>now)g.innerHTML+=`<div class="consumable-item"><div class="info-block"><div class="info-name">🧪 Удобрение</div><div class="info-desc">+50%</div></div><div class="effect-timer">${fmtT(S.incomeEnd-now)}</div></div>`;
+  if(S.sprayCharges>0)g.innerHTML+=`<div class="consumable-item"><div class="info-block"><div class="info-name">💨 Распылитель</div><div class="info-desc">${S.sprayCharges}</div></div></div>`;
+  if(!g.children.length)g.innerHTML='<div style="color:#9aa3b0;font-size:.78rem">Нет</div>';
+}
+function buyConsumable(k){
+  const c=CONSUMABLES[k];if(S.leaves<c.price){toast('Мало листиков');return}
+  S.leaves-=c.price;
+  if(k==='watering')S.growEnd=Math.max(Date.now(),S.growEnd)+c.dur;
+  else if(k==='fertilizer')S.incomeEnd=Math.max(Date.now(),S.incomeEnd)+c.dur;
+  else S.sprayCharges+=5;
+  save();renderTop();renderUpgrades();renderEffects();toast(`Куплено: ${c.name}`);
+}
+function renderConsumables(){
+  const g=$('consumablesList');if(!g)return;g.innerHTML='';
+  Object.entries(CONSUMABLES).forEach(([k,c])=>{
+    const d=document.createElement('div');d.className='consumable-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${c.name}</div><div class="info-desc">${c.desc}</div></div><button class="btn small" ${S.leaves<c.price?'disabled':''}>${fmt(c.price)}🍂</button>`;
+    d.querySelector('button').onclick=()=>buyConsumable(k);g.appendChild(d);
+  });
+}
+
+/* ============ МОДАЛКИ ============ */
+function openModal(html){
+  const old=document.querySelector('.modal-overlay');if(old)old.remove();
+  const div=document.createElement('div');div.className='modal-overlay active';
+  div.innerHTML=`<div class="modal"><button class="modal-close" onclick="this.parentElement.parentElement.remove()">✕</button>${html}</div>`;
+  div.onclick=(e)=>{if(e.target===div)div.remove()};
+  document.body.appendChild(div);
+}
+function openUpgradeModal(){
+  let html='<h2>🌳 Дерево улучшений</h2>';
+  UPGRADES.forEach(u=>{
+    const lvl=S[u.id],maxed=lvl>=u.max,price=upgPrice(u);
+    html+=`<div class="upgrade-tree-node ${maxed?'maxed':''}" onclick="buyUpgrade('${u.id}');openUpgradeModal()">
+      <div class="info-block"><div class="info-name">${u.name}</div><div class="info-desc">${u.eff(lvl)}</div></div>
+      <div style="font-weight:800;color:${maxed?'#6fa86f':'#e8b04b'}">${maxed?'✅':fmt(price)+'🍂'}</div></div>`;
+  });
+  openModal(html);
+}
+function openShopModal(){
+  openModal('<h2>💰 Магазин</h2><div id="modalShopBody"></div>');
+  const body=$('modalShopBody');
+  const items=[
+    {n:'🍂 Обмен на листики',d:'1💰→1000🍂',p:1,fn:()=>{if(S.coins<1){toast('Мало');return}S.coins-=1;S.leaves+=1000;S.totalLeaves+=1000;save();renderTop();renderCoins();renderUpgrades();toast('1💰→1000🍂')}},
+    {n:'⚡ Быстрый рост',d:'×3 10мин',p:20,fn:()=>{if(S.coins<20){toast('Мало');return}S.coins-=20;S.fastGrowthEnd=Math.max(Date.now(),S.fastGrowthEnd)+10*60*1000;save();renderCoins();renderEffects();toast('⚡')}},
+    {n:'💧 Лейка',d:'×2 5мин',p:15,fn:()=>{if(S.coins<15){toast('Мало');return}S.coins-=15;S.growEnd=Math.max(Date.now(),S.growEnd)+5*60*1000;save();renderCoins();renderEffects();toast('💧')}},
+    {n:'🧪 Удобрение',d:'+50% 5мин',p:25,fn:()=>{if(S.coins<25){toast('Мало');return}S.coins-=25;S.incomeEnd=Math.max(Date.now(),S.incomeEnd)+5*60*1000;save();renderCoins();renderEffects();toast('🧪')}},
+    {n:'💨 Распылитель',d:'5',p:12,fn:()=>{if(S.coins<12){toast('Мало');return}S.coins-=12;S.sprayCharges+=5;save();renderCoins();renderEffects();toast('💨')}}
+  ];
+  items.forEach(it=>{
+    const d=document.createElement('div');d.className='shop-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${it.n}</div><div class="info-desc">${it.d}</div></div><button class="btn small" ${S.coins<it.p?'disabled':''}>${it.p}💰</button>`;
+    d.querySelector('button').onclick=()=>{it.fn();openShopModal()};
+    body.appendChild(d);
+  });
+}
+function openEffectsModal(){
+  openModal('<h2>🧴 Эффекты</h2><div id="modalEffectsBody"></div><h2 style="margin-top:.8rem">🛒 Расходники</h2><div id="modalConsBody"></div>');
+  const eb=$('modalEffectsBody');eb.innerHTML='';const now=Date.now();
+  const addEff=(icon,name,desc,left)=>{const d=document.createElement('div');d.className='consumable-item';d.innerHTML=`<div class="info-block"><div class="info-name">${icon} ${name}</div><div class="info-desc">${desc}</div></div><div class="effect-timer">${fmtT(left)}</div>`;eb.appendChild(d)};
+  if(S.growEnd>now)addEff('💧','Лейка','×2',S.growEnd-now);
+  if(S.fastGrowthEnd>now)addEff('⚡','Рост','×3',S.fastGrowthEnd-now);
+  if(S.incomeEnd>now)addEff('🧪','Удобрение','+50%',S.incomeEnd-now);
+  if(S.sprayCharges>0){const d=document.createElement('div');d.className='consumable-item';d.innerHTML=`<div class="info-block"><div class="info-name">💨 Распылитель</div><div class="info-desc">Пшиков: ${S.sprayCharges}</div></div>`;eb.appendChild(d)}
+  if(!eb.children.length)eb.innerHTML='<div style="color:#9aa3b0;font-size:.78rem">Нет</div>';
+  const cb=$('modalConsBody');cb.innerHTML='';
+  Object.entries(CONSUMABLES).forEach(([k,c])=>{
+    const d=document.createElement('div');d.className='consumable-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${c.name}</div><div class="info-desc">${c.desc}</div></div><button class="btn small" ${S.leaves<c.price?'disabled':''}>${fmt(c.price)}🍂</button>`;
+    d.querySelector('button').onclick=()=>{buyConsumable(k);openEffectsModal()};
+    cb.appendChild(d);
+  });
+}
+function openAchModal(){
+  openModal('<h2>🎮 Достижения игры</h2><div id="modalAchBody"></div>');
+  const body=$('modalAchBody');
+  Object.entries(GAME_ACH).forEach(([k,a])=>{
+    const done=!!S.gameAch[k];
+    const d=document.createElement('div');d.className='achievement-item'+(done?' owned':'');
+    d.innerHTML=`<div class="ach-icon">${done?'✅':'🔒'}</div><div class="info-block"><div class="info-name">${a.name}</div><div class="info-desc">${a.desc}</div></div><div class="ach-reward">+${a.reward}💰</div>`;
+    body.appendChild(d);
+  });
+}
+function openBirthdayModal(){
+  const left=BIRTHDAY.getTime()-Date.now();
+  openModal(`<h2>🎂 4-е день рождения Пакетика</h2>
+    <p style="color:#cfd6df;font-size:.88rem;line-height:1.5;margin-bottom:.8rem">Собирай пакетики, отдавай их другим игрокам и получай очки пасса! За участие — эксклюзивные награды.</p>
+    <div style="background:#2a1a0c;border:2px solid #e67e22;border-radius:12px;padding:1rem;text-align:center;margin-bottom:.8rem">
+      <div style="color:#9aa3b0;font-size:.78rem;margin-bottom:.3rem">${left>0?'До начала ивента':'Ивент идёт!'}</div>
+      <div style="font-size:1.2rem;font-weight:900;color:#ffb347;font-variant-numeric:tabular-nums">${left>0?fmtPT(left):'🎉'}</div>
+      <div style="color:#9aa3b0;font-size:.72rem;margin-top:.3rem">21 ноября 00:00</div>
+    </div>
+    <p style="color:#e8b04b;font-size:.82rem;text-align:center">Подробности позже...</p>`);
+}
+
+/* ============ АДМИНКА ============ */
+function toggleSecretPrompt(){const p=$('secretPrompt');if(p)p.style.display=p.style.display==='none'?'block':'none'}
+function checkPassword(){
+  if($('secretPassword').value===PASS){S.secret=true;toast('🔓 Админка');showAdmin()}
+  else toast('❌ Неверно');
+  $('secretPassword').value='';
+}
+function showAdmin(){
+  openModal(`<h2>🔓 Админка</h2>
+    <div style="margin-bottom:.6rem"><input type="number" id="addL" placeholder="Листики" style="width:100px"><button class="btn small" onclick="adminL()">+🍂</button></div>
+    <div style="margin-bottom:.6rem"><input type="number" id="addC" placeholder="Монетки" style="width:100px"><button class="btn small orange" onclick="adminC()">+💰</button></div>
+    <div style="display:flex;gap:4px;flex-wrap:wrap"><button class="btn small green" onclick="adminSpawn()">🍃 Спавн</button><button class="btn small orange" onclick="startAutumn(true)">🍁 Ивент</button><button class="btn small gray" onclick="stopAutumn(true)">⏹ Стоп</button><button class="btn small red" onclick="addPassXP(500)">+500XP</button></div>`);
+}
+function adminL(){const v=parseFloat($('addL').value);if(isNaN(v))return;S.leaves+=v;S.totalLeaves+=v;save();renderTop();renderUpgrades();toast('+'+fmt(v))}
+function adminC(){const v=parseFloat($('addC').value);if(isNaN(v))return;S.coins+=v;save();renderCoins();toast('+'+fmt(v)+'💰')}
+function adminSpawn(){for(let i=0;i<3;i++)setTimeout(()=>spawnLeaf(true),i*300);toast('🍃')}
+
+/* ============ ИВЕНТ ЛИСТЬЕВ ============ */
+let autumnT=null;
+function startAutumn(m){S.autumnActive=true;S.autumnEnd=Date.now()+AUTUMN_DUR;S.autumnManual=!!m;spawnAutumn();save()}
+function stopAutumn(m){S.autumnActive=false;S.autumnEnd=0;if(!m)S.autumnManual=false;stopAutumnLeaves();save()}
+function spawnAutumn(){stopAutumnLeaves();const layer=$('leafLayer');autumnT=setInterval(()=>{if(!S.autumnActive){stopAutumnLeaves();return}const l=document.createElement('div');l.className='autumn-leaf';l.textContent=['🍁','🍂','🍃'][Math.floor(Math.random()*3)];l.style.left=Math.random()*100+'vw';l.style.animationDuration=(4+Math.random()*5)+'s';l.style.fontSize=(1.2+Math.random()*1.4)+'rem';layer.appendChild(l);setTimeout(()=>l.remove(),9000)},350)}
+function stopAutumnLeaves(){if(autumnT){clearInterval(autumnT);autumnT=null}document.querySelectorAll('.autumn-leaf').forEach(e=>e.remove())}
+
+/* ============ РЕНДЕР ============ */
+function renderTop(){$('leafCount').textContent=fmt(S.leaves);$('coinCount').textContent=fmt(S.coins);updateBasket()}
+function renderCoins(){$('coinCount').textContent=fmt(S.coins)}
+function renderUpdates(){
+  const g=$('updatesList');g.innerHTML='';
+  CHANGELOG.forEach(u=>{const d=document.createElement('div');d.className='update-item';d.innerHTML=`<div class="update-ver">v${u.ver}</div><div class="update-date">${u.date}</div><ul>${u.items.map(i=>`<li>${i}</li>`).join('')}</ul>`;g.appendChild(d)});
+}
+function renderBirthday(){
+  const left=BIRTHDAY.getTime()-Date.now();
+  const el=$('birthdayTimer');if(el)el.textContent=left>0?fmtPT(left):'🎉 Начался!';
+}
+
+/* ============ ТИК ============ */
+function tick(){
+  if(document.hidden)return;
+  const now=Date.now();
+  if(now-lastSpawn>=spawnInterval()){lastSpawn=now;spawnLeaf(false)}
+  if(S.fall>0&&Math.random()<S.fall*0.01&&S.leavesOnTree.length>0){
+    const i=Math.floor(Math.random()*S.leavesOnTree.length),leaf=S.leavesOnTree[i];
+    if(!leaf.yellow&&S.basket<basketCap()){S.leavesOnTree.splice(i,1);const g=$('treeSvg')?.querySelector(`[data-id="${leaf.id}"]`);if(g)g.remove();S.basket+=leafValue(leaf.golden?'golden':leaf.mut?'mut':1);if(S.basket>basketCap())S.basket=basketCap();S.fallCount++;updateBasket();checkAch();save()}
+  }
+  const left=PASS_END.getTime()-now;
+  if(left<=0)checkPassSeason();
+  if(document.getElementById('sec-pass').style.display!=='none')$('passTimer').textContent=fmtPT(left);
+  const d=new Date();
+  if(d.getMinutes()===0&&!S.autumnActive&&!S.autumnManual)startAutumn(false);
+  if(S.autumnActive){const l=S.autumnEnd-now;if(l<=0)stopAutumn(false)}
+  if(document.getElementById('sec-home').style.display!=='none')renderBirthday();
+  if(document.getElementById('sec-pass').style.display!=='none')checkQuestsReset();
+  checkAch();checkChallenges();checkSiteAch();
+}
+
+/* ============ СТАРТ ============ */
+load();
+renderTop();renderTree();renderUpgrades();renderEffects();renderConsumables();
+renderSiteAch();renderChallenges();renderPass();renderQuests();renderProfile();renderUpdates();renderThemeButtons();renderStreak();renderBirthday();
+if(S.autumnActive)spawnAutumn();
+if(!S.questsResetAt)rollQuests();
+setInterval(tick,500);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick()});
+window.addEventListener('focus',()=>tick());
+
+window.goSection=goSection;window.goHome=goHome;window.collectBasket=collectBasket;window.buyUpgrade=buyUpgrade;window.buyConsumable=buyConsumable;
+window.toggleSecretPrompt=toggleSecretPrompt;window.checkPassword=checkPassword;
+window.adminL=adminL;window.adminC=adminC;window.adminSpawn=adminSpawn;
+window.unlockAchievement=unlockAchievement;window.saveProfile=saveProfile;window.buyPaidPass=buyPaidPass;window.claimPassReward=claimPassReward;
+window.buyFrame=buyFrame;window.buyTitle=buyTitle;window.skipPassLevel=skipPassLevel;
+window.openUpgradeModal=openUpgradeModal;window.openShopModal=openShopModal;window.openEffectsModal=openEffectsModal;window.openAchModal=openAchModal;
+window.openBirthdayModal=openBirthdayModal;window.startAutumn=startAutumn;window.stopAutumn=stopAutumn;window.addPassXP=addPassXP;
+</script>
+</body>
+</html>
