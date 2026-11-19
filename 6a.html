@@ -100,6 +100,8 @@ h1 span{background:var(--accent2);color:#1a1408;padding:0 14px;border-radius:50p
 .frame-neon{border-color:#9b5de5;box-shadow:0 0 25px rgba(155,93,229,.9),inset 0 0 0 2px #c8a2ff;animation:neonPulse 1.2s ease-in-out infinite alternate}
 @keyframes neonPulse{from{box-shadow:0 0 15px rgba(155,93,229,.6),inset 0 0 0 2px #c8a2ff}to{box-shadow:0 0 40px rgba(155,93,229,1),inset 0 0 0 2px #e0c8ff}}
 .frame-steel{border-color:#8a8a8a;box-shadow:0 0 10px rgba(138,138,138,.6),inset 0 0 0 2px #c0c0c0}
+.frame-paketik{border-color:#ffb347;box-shadow:0 0 25px rgba(255,179,71,.9),inset 0 0 0 2px #fff3e0;animation:paketikPulse 2s ease-in-out infinite alternate}
+@keyframes paketikPulse{from{box-shadow:0 0 15px rgba(255,179,71,.6),inset 0 0 0 2px #ffe0b2}to{box-shadow:0 0 35px rgba(255,179,71,1),inset 0 0 0 2px #fff3e0}}
 .title-badge{padding:.3rem .9rem;border-radius:20px;font-weight:800;font-size:.78rem;display:inline-block;margin-top:.3rem}
 .title-red{background:#c0392b;color:#fff}
 .title-gold{background:linear-gradient(90deg,#ffd700,#fff8b0,#ffd700,#fff8b0,#ffd700);background-size:300% 100%;color:#1a1207;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;animation:goldText 3s linear infinite}
@@ -110,6 +112,13 @@ h1 span{background:var(--accent2);color:#1a1408;padding:0 14px;border-radius:50p
 .title-storm{background:linear-gradient(90deg,#4d96ff,#9b5de5,#4d96ff);background-size:300% 100%;color:#fff;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;animation:stormShift 3s linear infinite}
 @keyframes stormShift{0%{background-position:0% 50%}100%{background-position:300% 50%}}
 .title-nature{background:#4a8a3a;color:#fff}
+.title-paketik{background:linear-gradient(90deg,#ffb347,#fff3e0,#ffb347,#fff3e0,#ffb347);background-size:300% 100%;color:#1a1207;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;animation:paketikText 3s linear infinite}
+@keyframes paketikText{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+.title-blueice{background:linear-gradient(90deg,#00bfff,#e0f7ff,#00bfff,#e0f7ff,#00bfff);background-size:300% 100%;color:#0a1a1f;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;animation:blueiceText 3s linear infinite}
+@keyframes blueiceText{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+.title-babazhir{background:linear-gradient(90deg,#00bfff,#e0f7ff,#00bfff,#e0f7ff,#00bfff);background-size:300% 100%;color:#0a1a1f;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;animation:blueiceText 3s linear infinite}
+.title-deputat{background:linear-gradient(90deg,#00bfff,#e0f7ff,#00bfff,#e0f7ff,#00bfff);background-size:300% 100%;color:#0a1a1f;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;animation:blueiceText 3s linear infinite}
+.title-saynus{background:linear-gradient(90deg,#00bfff,#e0f7ff,#00bfff,#e0f7ff,#00bfff);background-size:300% 100%;color:#0a1a1f;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:900;animation:blueiceText 3s linear infinite}
 .theme-item{cursor:pointer}
 .theme-item.active{border-color:var(--accent);background:#2a1a0c}
 .theme-item.locked{opacity:.6}
@@ -172,13 +181,11 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
 </head>
 <body class="theme-classic">
 <div id="leafLayer"></div>
-
 <div class="container">
   <div id="appHeader">
     <h1><span>6А</span> класс</h1>
-    <div class="subhead"><strong>ГБОУ Лицей №486</strong> · <span id="headerNick" style="color:#d98c3f">Гость</span> · <span style="color:#9aa3b0;font-size:.75rem">v3.3</span></div>
+    <div class="subhead"><strong>ГБОУ Лицей №486</strong> · <span id="headerNick" style="color:#d98c3f">Гость</span> · <span style="color:#9aa3b0;font-size:.75rem">v3.4</span></div>
   </div>
-
   <div id="appContent">
     <div id="sec-home">
       <div class="event-card" id="birthdayCard" onclick="openBirthdayModal()">
@@ -195,10 +202,10 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
         <div class="home-btn" onclick="goSection('team')"><div class="icon">👑</div><div class="name">Команда</div><div class="desc">Админы сайта</div></div>
         <div class="home-btn" onclick="goSection('achievements')"><div class="icon">🏆</div><div class="name">Достижения</div><div class="desc">Награды</div></div>
         <div class="home-btn" onclick="goSection('profile')"><div class="icon">👤</div><div class="name">Профиль</div><div class="desc">Настройки</div></div>
+        <div class="home-btn" onclick="goSection('promo')"><div class="icon">🎁</div><div class="name">Промокоды</div><div class="desc">Бонусы</div></div>
         <div class="home-btn" onclick="goSection('updates')"><div class="icon">📜</div><div class="name">Обновления</div><div class="desc">История версий</div></div>
       </div>
     </div>
-
     <div id="sec-games" style="display:none">
       <div class="section-header"><h2>🌳 Дерево</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
       <div class="game-header">
@@ -217,15 +224,9 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
           <button class="btn small orange" onclick="openEffectsModal()">🧴 Эффекты</button>
           <button class="btn small ghost" onclick="openUpgradeModal()">⚙️ Улучшения</button>
           <button class="btn small ghost" onclick="openAchModal()">🎮 Достижения</button>
-          <button class="btn small gray" onclick="toggleSecretPrompt()">🔑</button>
-        </div>
-        <div id="secretPrompt" style="display:none;text-align:center;margin-top:.5rem">
-          <input type="password" id="secretPassword" placeholder="Пароль">
-          <button class="btn small" onclick="checkPassword()">OK</button>
         </div>
       </div>
     </div>
-
     <div id="sec-pass" style="display:none">
       <div class="section-header"><h2>🎫 Пасс</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
       <div class="pass-header">
@@ -248,7 +249,6 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
       <div class="panel"><h3>✅ Квесты <span id="questTimer" style="font-size:.72rem;color:var(--muted)"></span></h3><div id="dailyQuestsList"></div></div>
       <div class="panel"><h3>🔥 Мегаквесты</h3><div id="megaQuestsList"></div></div>
     </div>
-
     <div id="sec-tests" style="display:none">
       <div class="section-header"><h2>📝 Тесты</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
       <div class="streak-card">
@@ -260,13 +260,11 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
       <div id="testsList"></div>
       <div id="testRunner" style="display:none"></div>
     </div>
-
     <div id="sec-chat" style="display:none">
       <div class="section-header"><h2>💬 Чат</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
       <div class="chat-card"><h3>👩‍🏫 С учителем</h3><a href="https://max.ru/join/V2B5tL1BaqdCUuMW34gv32wSURG1loEZ_qh8jpoCnkQ" target="_blank" class="btn" onclick="unlockAchievement('chat_teacher')">Войти</a></div>
       <div class="chat-card"><h3>👥 Без учителя</h3><a href="https://max.ru/join/oyIjaHVrv3TGWLYjDW-vLe1MTDsH2jMM8f7BYk7L87k" target="_blank" class="btn" onclick="unlockAchievement('chat_students')">Войти</a></div>
     </div>
-
     <div id="sec-team" style="display:none">
       <div class="section-header"><h2>👑 Команда</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -276,13 +274,11 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
         <div class="chat-card" style="text-align:center"><b>Даша Васильева</b><br><small>ДЗ</small><br><a href="tel:+79602477126">+7 960 247 71 26</a></div>
       </div>
     </div>
-
     <div id="sec-achievements" style="display:none">
       <div class="section-header"><h2>🏆 Достижения</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
       <div class="panel"><h3>Достижения сайта</h3><div id="siteAchievementsList"></div></div>
       <div class="panel"><h3>Челленджи</h3><div id="challengesList"></div></div>
     </div>
-
     <div id="sec-profile" style="display:none">
       <div class="section-header"><h2>👤 Профиль</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
       <div class="profile-card">
@@ -303,20 +299,34 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
       <div class="panel"><h3>🎖 Награды</h3><div id="myFramesList"></div></div>
       <div class="panel"><h3>🛒 Магазин рамок/титулов</h3><div id="frameShopList"></div><div id="titleShopList"></div></div>
     </div>
-
+    <div id="sec-promo" style="display:none">
+      <div class="section-header"><h2>🎁 Промокоды</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
+      <div class="panel">
+        <h3>Введите промокод</h3>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+          <input type="text" id="promoInput" placeholder="Промокод" style="max-width:220px">
+          <button class="btn green" onclick="redeemPromo()">🎁 Активировать</button>
+        </div>
+        <div id="promoResult" style="margin-top:.6rem;font-size:.85rem;color:var(--green)"></div>
+      </div>
+      <div class="panel">
+        <h3>🔑 Админка</h3>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+          <input type="password" id="adminPass" placeholder="Пароль админки" style="max-width:220px">
+          <button class="btn orange" onclick="adminLogin()">Войти</button>
+        </div>
+      </div>
+    </div>
     <div id="sec-updates" style="display:none">
       <div class="section-header"><h2>📜 Обновления</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
       <div id="updatesList"></div>
     </div>
   </div>
-
-  <footer><strong>Сайт 6А класса</strong> · ГБОУ Лицей 486 · 2026 · v3.3</footer>
+  <footer><strong>Сайт 6А класса</strong> · ГБОУ Лицей 486 · 2026 · v3.4</footer>
 </div>
-
 <div class="toast" id="toast"></div>
-
 <script>
-const KEY='6a_v33',PASS='ОСЕНЬ2026',SVGNS='http://www.w3.org/2000/svg';
+const KEY='6a_v34',PASS='ОСЕНЬ2026',SVGNS='http://www.w3.org/2000/svg';
 const AUTUMN_DUR=10*60*1000,MUT_CH=0.08,BASE_BASKET=50;
 const PASS_END=new Date('2026-12-01T00:00:00');
 const PASS_XP=200,PASS_MAX=50,PAID_PRICE=5000;
@@ -330,6 +340,14 @@ const fmtPT=ms=>{if(ms<=0)return'00д 00:00:00';const t=Math.floor(ms/1000),d=Ma
 const today=()=>{const d=new Date();return`${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`};
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200)}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* === ПРОМОКОДЫ === */
+const PROMOS={
+  '0101':{type:'title',name:'Какой же ты холодный 🥶🧊',cls:'title-blueice'},
+  'koles225':{type:'title',name:'Бабажир 1488',cls:'title-babazhir'},
+  'pupupu':{type:'title',name:'Депутат Презерватив',cls:'title-deputat'},
+  'sayn030':{type:'title',name:'Великий Сайнус',cls:'title-saynus'}
+};
 
 const UPGRADES=[
   {id:'branches',name:'🌿 Ветки',desc:'+лимит',base:120,growth:2.1,max:10,eff:l=>`${l+1}·${10+l*8}`},
@@ -391,6 +409,7 @@ const CHALLENGES={
   ch_streak_30:{name:'👑 Стрик 30',desc:'30 дней',reward:{title:'gold',titleName:'Месяц'},check:()=>S.streak>=30}
 };
 
+/* === ТЕСТЫ (без повторов) === */
 const TESTS_POOL={
   math:[
     {q:'2,4:(1,2−0,8)·3,5',opts:['14','21','24','10,5'],a:1},
@@ -402,7 +421,9 @@ const TESTS_POOL={
     {q:'Среднее 4,8;5,2;6,1;3,9',opts:['5','5,1','5,2','4,9'],a:0},
     {q:'14:30 угол',opts:['90°','105°','120°','75°'],a:1},
     {q:'18 из 30 — %',opts:['50%','55%','60%','65%'],a:2},
-    {q:'2,6,12,20,30,?',opts:['40','42','44','46'],a:1}
+    {q:'2,6,12,20,30,?',opts:['40','42','44','46'],a:1},
+    {q:'Корень из 144',opts:['10','11','12','13'],a:2},
+    {q:'Площадь круга r=5',opts:['25π','10π','5π','50π'],a:0}
   ],
   rus:[
     {q:'НН',opts:['серебр..ый','оловя..ый','ветре..ый','ю..ый'],a:1},
@@ -414,7 +435,9 @@ const TESTS_POOL={
     {q:'Простое числ.',opts:['двадцать один','двадцать','двадцать пять','сто двадцать'],a:1},
     {q:'II спряжение',opts:['видеть','гулять','читать','прыгать'],a:0},
     {q:'НЕ слитно',opts:['(не)правда,а ложь','(не)взгоды','(не)красивый','(не)вижу'],a:1},
-    {q:'Ъ',opts:['с..езд','с..ел','в..юга','под..ём'],a:0}
+    {q:'Ъ',opts:['с..езд','с..ел','в..юга','под..ём'],a:0},
+    {q:'Сложное слово',opts:['пароход','вода','стол','дом'],a:0},
+    {q:'Суффикс -чик',opts:['груз..ик','камен..ик','стекол..ик','барабан..ик'],a:0}
   ],
   hist:[
     {q:'Ледовое побоище',opts:['1240','1242','1380','1480'],a:1},
@@ -426,7 +449,9 @@ const TESTS_POOL={
     {q:'Сев. война',opts:['1700','1703','1709','1721'],a:0},
     {q:'Крестил Русь',opts:['Владимир','Ярослав','Святослав','Олег'],a:0},
     {q:'Основал Москву',opts:['Долгорукий','Мономах','Невский','Калита'],a:0},
-    {q:'Судебник 1497',opts:['1497','1498','1550','1649'],a:0}
+    {q:'Судебник 1497',opts:['1497','1498','1550','1649'],a:0},
+    {q:'Куликовская битва',opts:['1380','1240','1480','1552'],a:0},
+    {q:'Бородино год',opts:['1812','1825','1861','1905'],a:0}
   ],
   eng:[
     {q:'She ___ every day',opts:['go','goes','going','gone'],a:1},
@@ -438,16 +463,24 @@ const TESTS_POOL={
     {q:'This is ___ book',opts:['my','mine','me','I'],a:0},
     {q:'living here ___ 2010',opts:['since','for','from','at'],a:0},
     {q:'Past of write',opts:['writed','written','wrote','write'],a:2},
-    {q:'Correct',opts:['I have a dog.','I has a dog.','I having a dog.','I have dog.'],a:0}
+    {q:'Correct',opts:['I have a dog.','I has a dog.','I having a dog.','I have dog.'],a:0},
+    {q:'Plural of mouse',opts:['mouses','mice','mices','mouse'],a:1},
+    {q:'I ___ to school yesterday',opts:['go','went','gone','going'],a:1}
   ]
 };
 const TESTS_META={math:{name:'🔢 Математика'},rus:{name:'📖 Русский'},hist:{name:'🏛 История'},eng:{name:'🇬🇧 Английский'}};
 const TEST_Q=10;
 
+/* === УНИКАЛЬНЫЕ ВОПРОСЫ === */
 function genTest(subj,mods={}){
   let pool=[...TESTS_POOL[subj]];
-  if(mods.subject)pool=[...TESTS_POOL[mods.subject],...pool].sort(()=>Math.random()-0.5);
-  const qs=pool.sort(()=>Math.random()-0.5).slice(0,TEST_Q);
+  if(mods.subject)pool=[...TESTS_POOL[mods.subject],...pool];
+  const seen=new Set();
+  const unique=[];
+  for(const q of pool){
+    if(!seen.has(q.q)){seen.add(q.q);unique.push(q)}
+  }
+  const qs=unique.sort(()=>Math.random()-0.5).slice(0,TEST_Q);
   if(mods.reverse)qs.forEach(q=>{q.opts=[...q.opts].reverse();q.a=q.opts.length-1-q.a});
   return qs;
 }
@@ -473,10 +506,12 @@ const TEST_MODS=[
   {id:'calm',name:'🧘 Спокойствие',desc:'Без таймера',pct:-5,type:'easy'}
 ];
 
+/* === ПАСС === */
 function genFreePass(){const r={};for(let i=1;i<=50;i++){if(i===25)r[i]={t:'frame',v:'leaves'};else if(i===50)r[i]={t:'title',title:'red',name:'Король пёстрого ковра'};else r[i]={t:'coins',v:1+Math.floor(Math.random()*5)}}return r}
 function genPaidPass(){const r={};for(let i=1;i<=50;i++){if(i===25)r[i]={t:'frame',v:'glow'};else if(i===37)r[i]={t:'title',title:'flame',name:'Пламя'};else if(i===50)r[i]={t:'theme',v:'fire'};else if(i%5===0)r[i]={t:'boost'};else r[i]={t:'coins',v:3+Math.floor(Math.random()*8)}}return r}
 const FREE_PASS=genFreePass(),PAID_PASS=genPaidPass();
 
+/* === МАГАЗИН (без ивентового!) === */
 const FRAME_SHOP={
   leaves:{name:'🍃 Листики',desc:'Зелёно-жёлтый',price:800},
   ice:{name:'❄️ Лёд',desc:'Голубой',price:1000},
@@ -498,6 +533,7 @@ const THEMES=[
   {id:'ice',name:'❄️ Ледяная',price:1000}
 ];
 
+/* === КВЕСТЫ === */
 const DAILY_POOL=[
   {id:'q_c20',n:'Собери 20',xp:50,t:20,k:'daily_collected'},
   {id:'q_c50',n:'Собери 50',xp:80,t:50,k:'daily_collected'},
@@ -514,6 +550,7 @@ const MEGA_POOL=[
   {id:'mq_g15',n:'15 золотых',xp:180,coins:40,t:15,k:'mega_golden'}
 ];
 
+/* === СТРИК === */
 const STREAK_MILESTONES=[
   {day:2,type:'coins',v:2,label:'2д—2💰'},
   {day:5,type:'boost',label:'5д—буст'},
@@ -525,12 +562,23 @@ const STREAK_MILESTONES=[
   {day:50,type:'theme',v:'fire',label:'50д—🔥'}
 ];
 
+/* === ИВЕНТ ПАКЕТИК — 7 УРОВНЕЙ === */
+const PAKETIK_PASS=[
+  {lvl:1,name:'Бустер ×2 XP пасса',type:'boost'},
+  {lvl:2,name:'300 монет',type:'coins',v:300},
+  {lvl:3,name:'Рамка Пакетик',type:'frame',v:'paketik'},
+  {lvl:4,name:'5 заморозок стрика',type:'freeze',v:5},
+  {lvl:5,name:'Тема Пакетик',type:'theme',v:'paketik'},
+  {lvl:6,name:'Сундук монет (500💰)',type:'coins',v:500},
+  {lvl:7,name:'Титул «а я пакетик и ты пакетик»',type:'title',cls:'title-paketik',name:'а я пакетик и ты пакетик'}
+];
+
 const CHANGELOG=[
-  {ver:'3.3',date:'18.11.2026',items:['🎲 +10 модификаторов тестов','📉 Тесты без модов — 60% проход','❌ Убраны ивентовые рамки/титулы','🎨 Новые рамки: Лёд, Подсветка, Радуга, Неон, Сталь','👑 Новые титулы: Пламя, Шторм, Природа','🛠 Админка: стрик']},
-  {ver:'3.2',date:'18.11.2026',items:['🎲 Модификаторы','🖼 Рамки-ободки','💵 Доход','🍂 1-5','🐛 Коробка']},
-  {ver:'3.1',date:'17.11.2026',items:['🎨 Оформление','🚪 Выход','📖 Ивент','🖼 Темы','🐛 Магазин']},
+  {ver:'3.4',date:'19.11.2026',items:['❌ Убрано всё ивентовое из магазина','🐛 Мегаквесты работают','🎂 Ивент Пакетик — 7 уровней','📝 Тесты без повторов + новые','🎁 Вкладка промокодов','🔑 Админка в промокодах','👑 5 новых титулов за промокоды']},
+  {ver:'3.3',date:'18.11.2026',items:['🎲 +10 модов','📉 60% проход','🎨 Новые рамки','👑 Новые титулы']},
+  {ver:'3.2',date:'18.11.2026',items:['🎲 Модификаторы','🖼 Рамки-ободки','💵 Доход','🍂 1-5']},
+  {ver:'3.1',date:'17.11.2026',items:['🎨 Оформление','🚪 Выход','📖 Ивент','🖼 Темы']},
   {ver:'3.0',date:'17.11.2026',items:['🎂 Ивент','📝 Тесты','🔥 Стрик','🎨 Редизайн']},
-  {ver:'2.6.1',date:'17.11.2026',items:['❌ Окр.мир']},
   {ver:'1.0',date:'ранее',items:['Дерево','Расходники','Достижения','Чаты']}
 ];
 
@@ -548,13 +596,14 @@ let S={
   questsResetAt:0,questProgress:{},questsCompleted:0,dailyQuests:[],megaQuests:[],
   testsDone:{},testsPassedTotal:0,testMods:[],
   activeTheme:'classic',ownedThemes:['classic'],
-  streak:0,lastStreakDate:'',streakMilestonesHit:[]
+  streak:0,lastStreakDate:'',streakMilestonesHit:[],
+  promoUsed:[],freeze:0,paketikLevel:0,paketikClaimed:[]
 };
 
 function load(){
   try{const c=JSON.parse(localStorage.getItem(KEY));if(c)Object.assign(S,c)}catch(e){}
   if(!localStorage.getItem('6a_started')){S.coins=Math.max(S.coins,5);localStorage.setItem('6a_started','1');setTimeout(()=>toast('🎁 Бонус: 5💰!'),500)}
-  ['leavesOnTree','gameAch','siteAch','challenges','ownedFrames','ownedTitles','passClaimedFree','passClaimedPaid','questProgress','testsDone','dailyQuests','megaQuests','ownedThemes','streakMilestonesHit','testMods'].forEach(k=>{if(!S[k])S[k]=Array.isArray(S[k])?[]:{}});
+  ['leavesOnTree','gameAch','siteAch','challenges','ownedFrames','ownedTitles','passClaimedFree','passClaimedPaid','questProgress','testsDone','dailyQuests','megaQuests','ownedThemes','streakMilestonesHit','testMods','promoUsed','paketikClaimed'].forEach(k=>{if(!S[k])S[k]=Array.isArray(S[k])?[]:{}});
   Object.keys(GAME_ACH).forEach(k=>{if(S.gameAch[k]===undefined)S.gameAch[k]=false});
   Object.keys(SITE_ACH).forEach(k=>{if(S.siteAch[k]===undefined)S.siteAch[k]=false});
   Object.keys(CHALLENGES).forEach(k=>{if(S.challenges[k]===undefined)S.challenges[k]=false});
@@ -569,8 +618,9 @@ function checkPassSeason(){
   }
 }
 
+/* === НАВИГАЦИЯ === */
 function goSection(name){
-  ['home','games','pass','tests','chat','team','achievements','profile','updates'].forEach(n=>{const el=$('sec-'+n);if(el)el.style.display=n===name?'block':'none'});
+  ['home','games','pass','tests','chat','team','achievements','profile','promo','updates'].forEach(n=>{const el=$('sec-'+n);if(el)el.style.display=n===name?'block':'none'});
   $('appHeader').style.display=name==='home'?'block':'none';
   if(name==='team')unlockAchievement('team_view');
   if(name==='updates')unlockAchievement('open_updates');
@@ -585,6 +635,30 @@ function goSection(name){
 }
 function goHome(){goSection('home')}
 
+/* === ПРОМОКОДЫ === */
+function redeemPromo(){
+  const code=$('promoInput').value.trim().toLowerCase();
+  const res=$('promoResult');
+  if(!code){res.style.color='#c96a6a';res.textContent='Введите промокод';return}
+  if(S.promoUsed.includes(code)){res.style.color='#c96a6a';res.textContent='Этот промокод уже использован';return}
+  const promo=PROMOS[code];
+  if(!promo){res.style.color='#c96a6a';res.textContent='Неверный промокод';return}
+  if(promo.type==='title'){
+    S.ownedTitles.push({type:promo.cls,name:promo.name});
+    S.promoUsed.push(code);
+    res.style.color='#6fa86f';res.textContent='✅ Получен титул: '+promo.name;
+    showRareReward('👑',promo.name,'Промокод!');
+    save();renderProfile();
+  }
+  $('promoInput').value='';
+}
+function adminLogin(){
+  const pass=$('adminPass').value;
+  if(pass===PASS){S.secret=true;showAdmin();$('adminPass').value='';toast('🔓 Админка')}
+  else toast('❌ Неверный пароль');
+}
+
+/* === ТЕМЫ === */
 function applyTheme(id){document.body.classList.remove('theme-classic','theme-autumn','theme-fire','theme-ice');document.body.classList.add('theme-'+id);S.activeTheme=id}
 function renderThemeButtons(){
   const g=$('themeButtons');if(!g)return;g.innerHTML='';
@@ -600,6 +674,7 @@ function renderThemeButtons(){
   });
 }
 
+/* === РЕДКАЯ НАГРАДА === */
 function showRareReward(icon,name,sub){
   const div=document.createElement('div');div.className='rare-reward-popup';
   div.innerHTML=`<div class="rare-particles"></div><div class="rare-reward-content"><div class="rare-reward-icon">${icon}</div><div class="rare-reward-text">${name}</div><div class="rare-reward-sub">${sub||''}</div></div>`;
@@ -609,9 +684,11 @@ function showRareReward(icon,name,sub){
   setTimeout(()=>{div.style.opacity='0';div.style.transition='opacity .4s';setTimeout(()=>div.remove(),400)},2000);
 }
 
+/* === ПРОФИЛЬ === */
 function applyFrame(){
   const w=$('avatarPreview');w.className='avatar-wrap';
-  if(S.activeFrame&&['leaves','ice','glow','rainbow','neon','steel','gold','iron','diamond'].includes(S.activeFrame))w.classList.add('frame-'+S.activeFrame);
+  const valid=['leaves','ice','glow','rainbow','neon','steel','gold','iron','diamond','paketik'];
+  if(S.activeFrame&&valid.includes(S.activeFrame))w.classList.add('frame-'+S.activeFrame);
   if(S.avatarUrl)w.innerHTML=`<img src="${S.avatarUrl}" onerror="this.style.display='none';this.parentElement.textContent='${S.avatarEmoji||'🦊'}'">`;
   else w.textContent=S.avatarEmoji||'🦊';
 }
@@ -619,7 +696,8 @@ function renderProfile(){
   $('headerNick').textContent=S.nick||'Гость';$('profileNick').textContent=S.nick||'Гость';
   $('profilePassLvl').textContent=S.passLevel;$('profileCoins').textContent=fmt(S.coins);
   applyFrame();
-  const t=$('profileTitle');const tm={red:'title-red',frost:'title-frost',gold:'title-gold',flame:'title-flame',storm:'title-storm',nature:'title-nature'};
+  const t=$('profileTitle');
+  const tm={red:'title-red',frost:'title-frost',gold:'title-gold',flame:'title-flame',storm:'title-storm',nature:'title-nature',paketik:'title-paketik',blueice:'title-blueice',babazhir:'title-babazhir',deputat:'title-deputat',saynus:'title-saynus'};
   if(S.activeTitle&&tm[S.activeTitle])t.innerHTML=`<span class="title-badge ${tm[S.activeTitle]}">${S.activeTitleName||''}</span>`;
   else t.innerHTML='<span style="color:#9aa3b0;font-size:.75rem">Без титула</span>';
   renderMyFrames();
@@ -627,7 +705,7 @@ function renderProfile(){
 function renderMyFrames(){
   const g=$('myFramesList');g.innerHTML='';
   if(!S.ownedFrames.length&&!S.ownedTitles.length){g.innerHTML='<div style="color:#9aa3b0;font-size:.78rem">Нет наград</div>';return}
-  const fn={leaves:'🍃',ice:'❄️',glow:'💡',rainbow:'🌈',neon:'💜',steel:'🔩',gold:'✨',iron:'⚙️',diamond:'💎'};
+  const fn={leaves:'🍃',ice:'❄️',glow:'💡',rainbow:'🌈',neon:'💜',steel:'🔩',gold:'✨',iron:'⚙️',diamond:'💎',paketik:'🎁'};
   S.ownedFrames.forEach(f=>{
     const d=document.createElement('div');d.className='shop-item';const act=S.activeFrame===f;
     d.innerHTML=`<div class="info-block"><div class="info-name">Рамка: ${fn[f]||f}</div></div><button class="btn small ${act?'green':''}">${act?'✅':'Надеть'}</button>`;
@@ -662,6 +740,7 @@ function renderTitleShop(){
 function buyFrame(k){const it=FRAME_SHOP[k];if(S.ownedFrames.includes(k))return;if(S.coins<it.price){toast('Мало монет');return}S.coins-=it.price;S.ownedFrames.push(k);save();renderCoins();renderProfile();renderFrameShop();showRareReward('🖼',it.name,'Куплено!');checkSiteAch()}
 function buyTitle(k,name,price){if(S.ownedTitles.find(t=>t.type===k&&t.name===name))return;if(S.coins<price){toast('Мало монет');return}S.coins-=price;S.ownedTitles.push({type:k,name});save();renderCoins();renderProfile();renderTitleShop();showRareReward('👑',name,'Куплено!');checkSiteAch()}
 
+/* === ПАСС === */
 function addPassXP(amount){
   if(S.passLevel>=PASS_MAX)return;
   const mult=S.passBoostEnd>Date.now()?2:1;const gain=Math.floor(amount*mult);
@@ -714,6 +793,7 @@ function renderPass(){
   renderBranch($('paidPassLevels'),PAID_PASS,S.passClaimedPaid,true);
 }
 
+/* === КВЕСТЫ (мегаквесты работают!) === */
 function rollQuests(){
   S.dailyQuests=[...DAILY_POOL].sort(()=>Math.random()-0.5).slice(0,4).map(q=>q.id);
   S.megaQuests=[...MEGA_POOL].sort(()=>Math.random()-0.5).slice(0,2).map(q=>q.id);
@@ -754,6 +834,7 @@ function progressQuest(key,amount){
   save();renderQuests();renderCoins();
 }
 
+/* === СТРИК === */
 function checkStreak(){
   const t=today();if(S.lastStreakDate===t)return;
   const y=new Date();y.setDate(y.getDate()-1);
@@ -782,6 +863,7 @@ function renderStreak(){
   });
 }
 
+/* === ТЕСТЫ === */
 let currentTest=null,currentAnswers=[],testTimer=null;
 function renderTestsList(){
   const g=$('testsList');g.innerHTML='';
@@ -890,6 +972,7 @@ function finishTest(subj,qs,mods={}){
   save();renderCoins();renderTestsList();checkAch();checkChallenges();
 }
 
+/* === ДОСТИЖЕНИЯ === */
 function checkAch(){
   let ch=false;
   Object.entries(GAME_ACH).forEach(([k,a])=>{if(!S.gameAch[k]&&a.check()){S.gameAch[k]=true;S.coins+=a.reward;ch=true;toast(`🏆 ${a.name} +${a.reward}💰`)}});
@@ -941,6 +1024,7 @@ function unlockAchievement(id){
   renderSiteAch();renderCoins();
 }
 
+/* === ДЕРЕВО === */
 function basketCap(){return BASE_BASKET+S.basketUp*50}
 function leafValue(mult){
   let v=(1+Math.random()*4)*(1+S.better*0.2)*(1+S.income*0.15);
@@ -1041,6 +1125,7 @@ function sprayLeaf(id){
   S.sprayCharges--;leaf.yellow=false;S.savedCount++;progressQuest('daily_saved',1);refreshLeaf(leaf);save();toast('💨 Зелёный!');
 }
 
+/* === УЛУЧШЕНИЯ === */
 function buyUpgrade(id){
   const u=UPGRADES.find(x=>x.id===id);const lvl=S[u.id];if(lvl>=u.max)return;
   const price=upgPrice(u);if(S.leaves<price){toast('Мало листиков');return}
@@ -1081,6 +1166,7 @@ function renderConsumables(){
   });
 }
 
+/* === МОДАЛКИ === */
 function openModal(html){
   const old=document.querySelector('.modal-overlay');if(old)old.remove();
   const div=document.createElement('div');div.className='modal-overlay active';
@@ -1144,6 +1230,10 @@ function openAchModal(){
 }
 function openBirthdayModal(){
   const left=BIRTHDAY.getTime()-Date.now();
+  let rewards='';
+  PAKETIK_PASS.forEach(p=>{
+    rewards+=`<div class="pass-level-item"><div class="info-block"><div class="info-name">Ур. ${p.lvl}</div><div class="info-desc">${p.name}</div></div></div>`;
+  });
   openModal(`<h2>🎂 4-е день рождения Пакетика</h2>
     <p style="color:#cfd6df;font-size:.88rem;line-height:1.5;margin-bottom:.8rem">Собирай пакетики, отдавай их другим игрокам и получай очки пасса! За участие — эксклюзивные награды.</p>
     <div style="background:#2a1a0c;border:2px solid #e67e22;border-radius:12px;padding:1rem;text-align:center;margin-bottom:.8rem">
@@ -1151,15 +1241,11 @@ function openBirthdayModal(){
       <div style="font-size:1.2rem;font-weight:900;color:#ffb347;font-variant-numeric:tabular-nums">${left>0?fmtPT(left):'🎉'}</div>
       <div style="color:#9aa3b0;font-size:.72rem;margin-top:.3rem">21 ноября 00:00</div>
     </div>
-    <p style="color:#e8b04b;font-size:.82rem;text-align:center">Подробности позже...</p>`);
+    <h3 style="color:#e8b04b;margin-bottom:.4rem">🎁 Ивентовый пасс (пока нельзя лутать)</h3>
+    ${rewards}`);
 }
 
-function toggleSecretPrompt(){const p=$('secretPrompt');if(p)p.style.display=p.style.display==='none'?'block':'none'}
-function checkPassword(){
-  if($('secretPassword').value===PASS){S.secret=true;toast('🔓 Админка');showAdmin()}
-  else toast('❌ Неверно');
-  $('secretPassword').value='';
-}
+/* === АДМИНКА === */
 function showAdmin(){
   openModal(`<h2>🔓 Админка</h2>
     <div style="margin-bottom:.6rem"><input type="number" id="addL" placeholder="Листики" style="width:100px"><button class="btn small" onclick="adminL()">+🍂</button></div>
@@ -1197,12 +1283,14 @@ function adminBoostStreak(){
   toast('🔥 Стрик +1: '+S.streak);
 }
 
+/* === ИВЕНТ ЛИСТЬЕВ === */
 let autumnT=null;
 function startAutumn(m){S.autumnActive=true;S.autumnEnd=Date.now()+AUTUMN_DUR;S.autumnManual=!!m;spawnAutumn();save()}
 function stopAutumn(m){S.autumnActive=false;S.autumnEnd=0;if(!m)S.autumnManual=false;stopAutumnLeaves();save()}
 function spawnAutumn(){stopAutumnLeaves();const layer=$('leafLayer');autumnT=setInterval(()=>{if(!S.autumnActive){stopAutumnLeaves();return}const l=document.createElement('div');l.className='autumn-leaf';l.textContent=['🍁','🍂','🍃'][Math.floor(Math.random()*3)];l.style.left=Math.random()*100+'vw';l.style.animationDuration=(4+Math.random()*5)+'s';l.style.fontSize=(1.2+Math.random()*1.4)+'rem';layer.appendChild(l);setTimeout(()=>l.remove(),9000)},350)}
 function stopAutumnLeaves(){if(autumnT){clearInterval(autumnT);autumnT=null}document.querySelectorAll('.autumn-leaf').forEach(e=>e.remove())}
 
+/* === РЕНДЕР === */
 function renderTop(){$('leafCount').textContent=fmt(S.leaves);$('coinCount').textContent=fmt(S.coins);updateBasket()}
 function renderCoins(){$('coinCount').textContent=fmt(S.coins)}
 function renderUpdates(){
@@ -1214,6 +1302,7 @@ function renderBirthday(){
   const el=$('birthdayTimer');if(el)el.textContent=left>0?fmtPT(left):'🎉 Начался!';
 }
 
+/* === ТИК === */
 function tick(){
   if(document.hidden)return;
   const now=Date.now();
@@ -1233,6 +1322,7 @@ function tick(){
   checkAch();checkChallenges();checkSiteAch();
 }
 
+/* === СТАРТ === */
 load();
 renderTop();renderTree();renderUpgrades();renderEffects();renderConsumables();
 renderSiteAch();renderChallenges();renderPass();renderQuests();renderProfile();renderUpdates();renderThemeButtons();renderStreak();renderBirthday();
@@ -1243,7 +1333,7 @@ document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick()});
 window.addEventListener('focus',()=>tick());
 
 window.goSection=goSection;window.goHome=goHome;window.collectBasket=collectBasket;window.buyUpgrade=buyUpgrade;window.buyConsumable=buyConsumable;
-window.toggleSecretPrompt=toggleSecretPrompt;window.checkPassword=checkPassword;
+window.redeemPromo=redeemPromo;window.adminLogin=adminLogin;
 window.adminL=adminL;window.adminC=adminC;window.adminSpawn=adminSpawn;window.adminSetStreak=adminSetStreak;window.adminBoostStreak=adminBoostStreak;
 window.unlockAchievement=unlockAchievement;window.saveProfile=saveProfile;window.buyPaidPass=buyPaidPass;window.claimPassReward=claimPassReward;
 window.buyFrame=buyFrame;window.buyTitle=buyTitle;window.skipPassLevel=skipPassLevel;
