@@ -6,7 +6,7 @@
 <title>Сайт 6А класса — ГБОУ Лицей 486</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Roboto,system-ui,sans-serif}
-:root{--bg1:#0f1419;--bg2:#1a222c;--panel:#1e2733;--border:#2e3b4a;--accent:#e8b04b;--accent2:#d98c3f;--text:#e6e8ec;--muted:#9aa3b0;--green:#6fa86f;--red:#c96a6a;--blue:#7aa7c7;--orange:#e67e22;--apple:#e74c3c}
+:root{--bg1:#0f1419;--bg2:#1a222c;--panel:#1e2733;--border:#2e3b4a;--accent:#e8b04b;--accent2:#d98c3f;--text:#e6e8ec;--muted:#9aa3b0;--green:#6fa86f;--red:#c96a6a;--blue:#7aa7c7;--orange:#e67e22;--apple:#e74c3c;--rub:#e8b04b}
 body{background:radial-gradient(circle at 15% 10%,#1c2430,#0c0f14 80%);color:var(--text);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:16px;overflow-x:hidden;transition:background .6s}
 body.theme-autumn{background:radial-gradient(circle at 15% 10%,#5a2a08,#2a0c04 80%)}
 body.theme-fire{background:radial-gradient(circle at 15% 10%,#5a0a08,#1a0404 80%)}
@@ -49,6 +49,7 @@ h1 span{background:var(--accent2);color:#1a1408;padding:0 14px;border-radius:50p
 .btn.red{background:var(--red);color:#1a0a0a}
 .btn.ghost{background:transparent;border:2px solid var(--border);color:var(--text)}
 .btn.ghost:hover{border-color:var(--accent);background:rgba(232,176,75,.1)}
+.btn.rub{background:linear-gradient(135deg,#ffd700,#ffb347);color:#1a1207}
 .event-card{background:linear-gradient(135deg,#2a1a0c,#1a0c04);border:2px solid var(--orange);border-radius:16px;padding:1.2rem;margin:1rem 0;cursor:pointer;transition:.2s;position:relative;overflow:hidden;text-align:center}
 .event-card:hover{transform:scale(1.02);box-shadow:0 0 30px rgba(230,126,34,.4)}
 .event-card .big{font-size:2.5rem;margin-bottom:.4rem;animation:bounce 2s infinite}
@@ -57,7 +58,7 @@ h1 span{background:var(--accent2);color:#1a1408;padding:0 14px;border-radius:50p
 .event-card .timer{font-size:1.1rem;font-weight:900;color:#ffb347;margin:.6rem 0;font-variant-numeric:tabular-nums;position:relative}
 .game-header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:.8rem}
 .currency{background:#222b38;border:2px solid var(--border);border-radius:14px;padding:.4rem .9rem;font-size:1rem;font-weight:800;display:flex;align-items:center;gap:6px}
-.currency.apples{color:var(--apple)}.currency.coins{color:#e8c65a;border-color:#6a5a2a}.currency.leaves{color:#e0b15a}
+.currency.apples{color:var(--apple)}.currency.coins{color:#e8c65a;border-color:#6a5a2a}.currency.rub{color:var(--rub);border-color:#8a7a2a}
 /* === ИГРА ПАКЕТИКИ === */
 .paketik-game{background:var(--panel);border:2px solid var(--border);border-radius:16px;padding:.8rem;margin-bottom:10px;position:relative}
 .paketik-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:relative}
@@ -70,8 +71,8 @@ h1 span{background:var(--accent2);color:#1a1408;padding:0 14px;border-radius:50p
 .paketik-item.dragging{cursor:grabbing;z-index:30;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6)) brightness(1.2)}
 .paketik-item img{width:100%;height:100%;object-fit:contain;pointer-events:none}
 .game-actions{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-/* === ПАНЕЛИ === */
-.shop-item,.upgrade-item,.achievement-item,.chat-card,.consumable-item,.quest-item,.pass-level-item,.theme-item{background:#222b38;border:1px solid var(--border);border-radius:12px;padding:.7rem .9rem;transition:.2s;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;text-align:left;margin-bottom:8px;gap:8px}
+/* === СПИСКИ === */
+.shop-item,.upgrade-item,.achievement-item,.chat-card,.consumable-item,.quest-item,.pass-level-item,.theme-item,.bundle-item{background:#222b38;border:1px solid var(--border);border-radius:12px;padding:.7rem .9rem;transition:.2s;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;text-align:left;margin-bottom:8px;gap:8px}
 .info-block{flex:1;min-width:150px}
 .info-name{color:var(--accent);font-weight:700;font-size:.9rem}
 .info-desc{color:var(--muted);font-size:.78rem;margin-top:2px}
@@ -194,7 +195,7 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
 <div class="container">
   <div id="appHeader">
     <h1><span>6А</span> класс</h1>
-    <div class="subhead"><strong>ГБОУ Лицей №486</strong> · <span id="headerNick" style="color:#d98c3f">Гость</span> · <span style="color:#9aa3b0;font-size:.75rem">v4.1</span></div>
+    <div class="subhead"><strong>ГБОУ Лицей №486</strong> · <span id="headerNick" style="color:#d98c3f">Гость</span> · <span style="color:#9aa3b0;font-size:.75rem">v4.2</span></div>
   </div>
   <div id="appContent">
     <div id="sec-home">
@@ -207,6 +208,7 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
       <div class="home-grid">
         <div class="home-btn" onclick="goSection('games')"><div class="icon">📦</div><div class="name">Пакетики</div><div class="desc">Лови и упаковывай</div><span id="new-games"></span></div>
         <div class="home-btn" onclick="goSection('pass')"><div class="icon">🎫</div><div class="name">Пасс</div><div class="desc">Награды сезона</div><span id="new-pass"></span></div>
+        <div class="home-btn" onclick="goSection('shop')"><div class="icon">🛒</div><div class="name">Магазин</div><div class="desc">Рамки, титулы, темы</div><span id="new-shop"></span></div>
         <div class="home-btn" onclick="goSection('tests')"><div class="icon">📝</div><div class="name">Тесты</div><div class="desc">Проверь себя</div><span id="new-tests"></span></div>
         <div class="home-btn" onclick="goSection('chat')"><div class="icon">💬</div><div class="name">Чат</div><div class="desc">Общение</div></div>
         <div class="home-btn" onclick="goSection('team')"><div class="icon">👑</div><div class="name">Команда</div><div class="desc">Админы сайта</div></div>
@@ -221,6 +223,7 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
       <div class="game-header">
         <div class="currency apples">🍎 <span id="appleCount">0</span></div>
         <div class="currency coins">💰 <span id="coinCount">0</span></div>
+        <div class="currency rub">₽ <span id="rubCount">0</span></div>
       </div>
       <div class="paketik-game">
         <div class="paketik-fields">
@@ -263,6 +266,15 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
       </div>
       <div class="panel"><h3>✅ Квесты <span id="questTimer" style="font-size:.72rem;color:var(--muted)"></span></h3><div id="dailyQuestsList"></div></div>
       <div class="panel"><h3>🔥 Мегаквесты</h3><div id="megaQuestsList"></div></div>
+    </div>
+    <div id="sec-shop" style="display:none">
+      <div class="section-header"><h2>🛒 Магазин</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
+      <div class="game-header">
+        <div class="currency coins">💰 <span id="shopCoins">0</span></div>
+        <div class="currency rub">₽ <span id="shopRub">0</span></div>
+      </div>
+      <div class="panel"><h3>💰 За монеты</h3><div id="shopCoinsList"></div></div>
+      <div class="panel"><h3>💎 Донат (обновляется в полночь)</h3><div id="shopDonateList"></div></div>
     </div>
     <div id="sec-tests" style="display:none">
       <div class="section-header"><h2>📝 Тесты</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
@@ -312,7 +324,6 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
       </div>
       <div class="panel"><h3>🎨 Темы</h3><div id="themeButtons"></div></div>
       <div class="panel"><h3>🎖 Награды</h3><div id="myFramesList"></div></div>
-      <div class="panel"><h3>🛒 Магазин рамок/титулов</h3><div id="frameShopList"></div><div id="titleShopList"></div></div>
     </div>
     <div id="sec-promo" style="display:none">
       <div class="section-header"><h2>🎁 Промокоды</h2><button class="btn small ghost" onclick="goHome()">🚪 Выход</button></div>
@@ -337,11 +348,21 @@ input[type=password],input[type=number],input[type=text],input[type=url]{padding
       <div id="updatesList"></div>
     </div>
   </div>
-  <footer><strong>Сайт 6А класса</strong> · ГБОУ Лицей 486 · 2026 · v4.1</footer>
+  <footer><strong>Сайт 6А класса</strong> · ГБОУ Лицей 486 · 2026 · v4.2</footer>
 </div>
 <div class="toast" id="toast"></div>
 <script>
-const KEY='6a_v41',PASS='ОСЕНЬ2026';
+/* ============================================================
+   ⚠️⚠️⚠️ ВАЖНО: НЕ МЕНЯТЬ КЛЮЧ KEY! ⚠️⚠️⚠️
+   Прогресс игроков хранится по этому ключу.
+   При обновлении версии меняется только APP_VERSION,
+   а KEY остаётся навсегда = '6a_site_v1'.
+   ============================================================ */
+const KEY='6a_site_v1';          // ❌ НЕ МЕНЯТЬ НИКОГДА
+const APP_VERSION='4.2';          // ✅ Меняется при обновлении
+const OLD_KEYS=['6a_v42','6a_v41','6a_v40','6a_v34','6a_v33','6a_v32','6a_v2','6a_state_tree'];
+
+const PASS='ОСЕНЬ2026';
 const PASS_END=new Date('2026-12-01T00:00:00');
 const PASS_XP=200,PASS_MAX=50,PAID_PRICE=5000;
 const QUEST_RESET=3*60*60*1000,SKIP_COST=5;
@@ -363,24 +384,36 @@ const PROMOS={
   'sayn030':{type:'title',name:'Великий Сайнус',cls:'title-saynus'}
 };
 
-/* === УЛУЧШЕНИЯ === */
+/* === УЛУЧШЕНИЯ (цены ×0.7) === */
 const PAKETIK_UPGRADES=[
-  {id:'speed',name:'⚡ Скорость',desc:'Быстрее упаковка',base:100,growth:1.8,max:20,eff:l=>`${10+l*5}%`},
-  {id:'income',name:'💰 Доход',desc:'+10% яблочек',base:150,growth:1.9,max:20,eff:l=>`+${l*10}%`},
-  {id:'bigchance',name:'📦 Большие',desc:'+5% шанс больших',base:200,growth:2.0,max:10,eff:l=>`+${l*5}%`},
-  {id:'spawn',name:'🌧 Спавн',desc:'Быстрее падают',base:180,growth:1.9,max:15,eff:l=>`${Math.round(2000*(1-l*0.08))}мс`},
-  {id:'capacity',name:'📥 Вместимость',desc:'+2 в упаковку',base:250,growth:2.0,max:10,eff:l=>`${10+l*2}`}
+  {id:'speed',name:'⚡ Скорость',desc:'Быстрее упаковка',base:70,growth:1.8,max:20,eff:l=>`${10+l*5}%`},
+  {id:'income',name:'💰 Доход',desc:'+10% яблочек',base:105,growth:1.9,max:20,eff:l=>`+${l*10}%`},
+  {id:'bigchance',name:'📦 Большие',desc:'+5% шанс больших',base:140,growth:2.0,max:10,eff:l=>`+${l*5}%`},
+  {id:'spawn',name:'🌧 Спавн',desc:'Быстрее падают',base:126,growth:1.9,max:15,eff:l=>`${Math.round(2000*(1-l*0.08))}мс`},
+  {id:'capacity',name:'📥 Вместимость',desc:'+2 в упаковку',base:175,growth:2.0,max:10,eff:l=>`${10+l*2}`}
 ];
 
-/* === ИВЕНТОВЫЙ ПАСС (7 уровней) === */
+/* === ИВЕНТОВЫЙ ПАСС (цены ×2) === */
 const PAKETIK_PASS=[
   {lvl:1,name:'⚡ Бустер ×2 XP пасса',type:'boost',xpCost:0,appleCost:0},
-  {lvl:2,name:'💰 300 монет',type:'coins',v:300,xpCost:50,appleCost:50},
-  {lvl:3,name:'🎁 Рамка Пакетик',type:'frame',v:'paketik',xpCost:100,appleCost:100},
-  {lvl:4,name:'❄️ 5 заморозок стрика',type:'freeze',v:5,xpCost:150,appleCost:150},
-  {lvl:5,name:'🎨 Тема Пакетик',type:'theme',v:'paketik',xpCost:200,appleCost:200},
-  {lvl:6,name:'💰 500 монет',type:'coins',v:500,xpCost:300,appleCost:300},
-  {lvl:7,name:'👑 Титул «а я пакетик и ты пакетик»',type:'title',cls:'title-paketik',name:'а я пакетик и ты пакетик',xpCost:500,appleCost:500}
+  {lvl:2,name:'💰 300 монет',type:'coins',v:300,xpCost:50,appleCost:100},
+  {lvl:3,name:'🎁 Рамка Пакетик',type:'frame',v:'paketik',xpCost:100,appleCost:200},
+  {lvl:4,name:'❄️ 5 заморозок стрика',type:'freeze',v:5,xpCost:150,appleCost:300},
+  {lvl:5,name:'🎨 Тема Пакетик',type:'theme',v:'paketik',xpCost:200,appleCost:400},
+  {lvl:6,name:'💰 500 монет',type:'coins',v:500,xpCost:300,appleCost:600},
+  {lvl:7,name:'👑 Титул «а я пакетик и ты пакетик»',type:'title',cls:'title-paketik',name:'а я пакетик и ты пакетик',xpCost:500,appleCost:1000}
+];
+
+/* === ДОНАТ-БАНДЛЫ (8 штук) === */
+const BUNDLES=[
+  {id:'autumn',name:'🍁 Осенний',desc:'Рамка+титул+тема',price:60,frame:'leaves',title:'autumn',theme:'autumn'},
+  {id:'winter',name:'❄️ Зимний',desc:'Рамка+титул+тема',price:60,frame:'ice',title:'frost',theme:'ice'},
+  {id:'fire',name:'🔥 Огненный',desc:'Рамка+титул+тема',price:70,frame:'glow',title:'flame',theme:'fire'},
+  {id:'water',name:'🌊 Водный',desc:'Рамка+титул+тема',price:70,frame:'rainbow',title:'storm',theme:'classic'},
+  {id:'lightning',name:'⚡ Молния',desc:'Рамка+титул+тема',price:80,frame:'neon',title:'storm',theme:'fire'},
+  {id:'rainbow',name:'🌈 Радужный',desc:'Рамка+титул+тема',price:90,frame:'rainbow',title:'nature',theme:'paketik'},
+  {id:'royal',name:'👑 Королевский',desc:'Рамка+титул+тема',price:100,frame:'gold',title:'gold',theme:'fire'},
+  {id:'diamond',name:'💎 Алмазный',desc:'Рамка+титул+тема',price:100,frame:'diamond',title:'frost',theme:'ice'}
 ];
 
 /* === ДОСТИЖЕНИЯ === */
@@ -391,7 +424,7 @@ const GAME_ACH={
   pakets_1000:{name:'📦 1000 пакетиков',desc:'Поймать 1000',reward:25,check:()=>S.totalPakets>=1000},
   pakets_10000:{name:'📦 10 000',desc:'Поймать 10 000',reward:50,check:()=>S.totalPakets>=10000},
   apples_1000:{name:'🍎 1000 яблок',desc:'Накопить 1000',reward:30,check:()=>S.apples>=1000},
-  golden_order:{name:'🏆 Золотой заказ',desc:'500 000 пакетиков',reward:100,check:()=>S.totalSent>=500000}
+  golden_order:{name:'🏆 Золотой заказ',desc:'150 000 пакетиков',reward:100,check:()=>S.totalSent>=150000}
 };
 const SITE_ACH={
   chat_teacher:{name:'👩‍🏫 Учитель',desc:'Зайти в чат',reward:1},
@@ -556,14 +589,14 @@ const STREAK_MILESTONES=[
 ];
 
 const CHANGELOG=[
-  {ver:'4.1',date:'20.11.2026',items:['📦 Пакетики в 1-й зоне исчезают','📦 Пакетики во 2-й зоне складываются','🎁 Ивентовый пасс на главной','🍎 Магазин яблочек в ивенте','⭐ Очки пасса за игру']},
-  {ver:'4.0',date:'20.11.2026',items:['📦 Игра Пакетики','🍎 Яблочки','🎁 Ивент Пакетик','🏆 Золотой заказ','🆕 НОВОЕ']},
-  {ver:'3.4',date:'19.11.2026',items:['🎁 Промокоды','🐛 Мегаквесты','📝 Тесты']},
+  {ver:'4.2',date:'22.11.2026',items:['📦 Paket.png (один файл)','📉 Цены апгрейдов ×0.7','⬇️ Гравитация ×0.7','🏆 «Золотой заказ» = 150к','📈 Цены пасса ×2','🐛 Фикс бага админки','₽ Рубли (только админ)','🛒 Магазин: монеты + донат','💎 8 бандлов, 2 случайных в полночь','💾 Прогресс сохраняется ВСЕГДА']},
+  {ver:'4.1',date:'20.11.2026',items:['📦 1-я зона исчезают','📦 2-я складываются','🎁 Пасс на главной','🍎 Магазин в ивенте']},
+  {ver:'4.0',date:'20.11.2026',items:['📦 Игра Пакетики','🍎 Яблочки','🎁 Ивент','🏆 Золотой заказ']},
   {ver:'1.0',date:'ранее',items:['Дерево','Расходники','Достижения']}
 ];
 
 let S={
-  apples:0,coins:0,
+  apples:0,coins:0,rubles:0,
   totalPakets:0,totalSent:0,totalApples:0,
   speed:0,income:0,bigchance:0,spawn:0,capacity:0,
   gameAch:{},siteAch:{},challenges:{},
@@ -579,19 +612,76 @@ let S={
   streak:0,lastStreakDate:'',streakMilestonesHit:[],
   promoUsed:[],freeze:0,
   leaves:0,totalLeaves:0,
-  seenSections:[],firstRun:true,
-  paketikPassClaimed:[],paketikPassXP:0,paketikPassLevel:1
+  seenSections:[],
+  paketikPassClaimed:[],paketikPassXP:0,paketikPassLevel:1,
+  dailyBundles:[],bundlesDate:'',
+  bundlePurchased:[]
 };
+
+/* === МИГРАЦИЯ (переносит прогресс из старых ключей) === */
+function migrate(){
+  if(localStorage.getItem(KEY))return;
+  for(const ok of OLD_KEYS){
+    try{
+      const raw=localStorage.getItem(ok);
+      if(!raw)continue;
+      const old=JSON.parse(raw);
+      if(!old)continue;
+      S.coins=old.coins||0;
+      S.apples=old.apples||old.leaves||0;
+      S.leaves=old.leaves||0;S.totalLeaves=old.totalLeaves||0;
+      S.ownedFrames=old.ownedFrames||[];
+      S.ownedTitles=old.ownedTitles||[];
+      S.passLevel=old.passLevel||1;S.passXP=old.passXP||0;
+      S.passPaid=old.passPaid||false;
+      S.passClaimedFree=old.passClaimedFree||[];
+      S.passClaimedPaid=old.passClaimedPaid||[];
+      S.streak=old.streak||0;
+      S.testsPassedTotal=old.testsPassedTotal||0;
+      S.testsDone=old.testsDone||{};
+      S.ownedThemes=old.ownedThemes||['classic'];
+      S.activeTheme=old.activeTheme||'classic';
+      S.activeFrame=old.activeFrame||'';
+      S.activeTitle=old.activeTitle||'';
+      S.activeTitleName=old.activeTitleName||'';
+      S.nick=old.nick||'Гость';
+      S.avatarUrl=old.avatarUrl||'';
+      S.avatarEmoji=old.avatarEmoji||'🦊';
+      S.promoUsed=old.promoUsed||[];
+      S.seenSections=old.seenSections||[];
+      S.gameAch=old.gameAch||{};
+      S.siteAch=old.siteAch||{};
+      S.challenges=old.challenges||{};
+      S.questsCompleted=old.questsCompleted||0;
+      S.goldenCount=old.goldenCount||0;
+      S.mutCount=old.mutCount||0;
+      S.savedCount=old.savedCount||0;
+      S.totalPakets=old.totalPakets||0;
+      S.totalSent=old.totalSent||0;
+      S.totalApples=old.totalApples||0;
+      S.paketikPassLevel=old.paketikPassLevel||1;
+      S.paketikPassXP=old.paketikPassXP||0;
+      S.paketikPassClaimed=old.paketikPassClaimed||[];
+      localStorage.setItem(KEY,JSON.stringify(S));
+      console.log('📦 Прогресс перенесён из '+ok);
+      return;
+    }catch(e){}
+  }
+}
 
 /* === ЗАГРУЗКА === */
 function load(){
+  migrate();
   try{const c=JSON.parse(localStorage.getItem(KEY));if(c)Object.assign(S,c)}catch(e){}
   if(!localStorage.getItem('6a_started')){S.coins=Math.max(S.coins,5);localStorage.setItem('6a_started','1');setTimeout(()=>toast('🎁 Бонус: 5💰!'),500)}
-  ['gameAch','siteAch','challenges','ownedFrames','ownedTitles','passClaimedFree','passClaimedPaid','questProgress','testsDone','dailyQuests','megaQuests','ownedThemes','streakMilestonesHit','testMods','promoUsed','seenSections','paketikPassClaimed'].forEach(k=>{if(!S[k])S[k]=Array.isArray(S[k])?[]:{}});
+  ['gameAch','siteAch','challenges','ownedFrames','ownedTitles','passClaimedFree','passClaimedPaid','questProgress','testsDone','dailyQuests','megaQuests','ownedThemes','streakMilestonesHit','testMods','promoUsed','seenSections','paketikPassClaimed','dailyBundles','bundlePurchased'].forEach(k=>{if(!S[k])S[k]=Array.isArray(S[k])?[]:{}});
   Object.keys(GAME_ACH).forEach(k=>{if(S.gameAch[k]===undefined)S.gameAch[k]=false});
   Object.keys(SITE_ACH).forEach(k=>{if(S.siteAch[k]===undefined)S.siteAch[k]=false});
   Object.keys(CHALLENGES).forEach(k=>{if(S.challenges[k]===undefined)S.challenges[k]=false});
   if(!S.ownedThemes.includes('classic'))S.ownedThemes.push('classic');
+  if(!S.ownedThemes.includes('autumn'))S.ownedThemes.push('autumn');
+  if(!S.ownedThemes.includes('fire'))S.ownedThemes.push('fire');
+  rollDailyBundles();
   checkPassSeason();applyTheme(S.activeTheme);
 }
 
@@ -603,9 +693,18 @@ function checkPassSeason(){
   }
 }
 
+/* === ДОНАТ-БАНДЛЫ (2 случайных в полночь) === */
+function rollDailyBundles(){
+  const t=today();
+  if(S.bundlesDate===t&&S.dailyBundles.length===2)return;
+  const shuffled=[...BUNDLES].sort(()=>Math.random()-0.5);
+  S.dailyBundles=shuffled.slice(0,2).map(b=>b.id);
+  S.bundlesDate=t;save();
+}
+
 /* === НАВИГАЦИЯ === */
 function goSection(name){
-  ['home','games','pass','tests','chat','team','achievements','profile','promo','updates'].forEach(n=>{const el=$('sec-'+n);if(el)el.style.display=n===name?'block':'none'});
+  ['home','games','pass','shop','tests','chat','team','achievements','profile','promo','updates'].forEach(n=>{const el=$('sec-'+n);if(el)el.style.display=n===name?'block':'none'});
   $('appHeader').style.display=name==='home'?'block':'none';
   if(!S.seenSections.includes(name)){S.seenSections.push(name);save();renderNewBadges()}
   if(name==='team')unlockAchievement('team_view');
@@ -613,16 +712,17 @@ function goSection(name){
   if(name==='achievements')unlockAchievement('open_achievements');
   if(name==='games'){renderTop();renderPaketikStats();startPaketikGame()}
   if(name==='pass'){renderPass();renderQuests()}
+  if(name==='shop'){renderShop()}
   if(name==='tests'){renderTestsList();renderStreak()}
   if(name==='achievements'){renderSiteAch();renderChallenges()}
-  if(name==='profile'){renderProfile();renderFrameShop();renderTitleShop();renderThemeButtons();$('nickInput').value=S.nick;$('avatarInput').value=S.avatarUrl;$('avatarEmoji').value=S.avatarEmoji||'🦊'}
+  if(name==='profile'){renderProfile();renderThemeButtons();$('nickInput').value=S.nick;$('avatarInput').value=S.avatarUrl;$('avatarEmoji').value=S.avatarEmoji||'🦊'}
   if(name==='updates')renderUpdates();
   if(name!=='games')stopPaketikGame();
   window.scrollTo(0,0);
 }
 function goHome(){goSection('home')}
 function renderNewBadges(){
-  ['games','pass','tests','promo','updates'].forEach(s=>{
+  ['games','pass','shop','tests','promo','updates'].forEach(s=>{
     const el=$('new-'+s);if(!el)return;
     el.innerHTML=S.seenSections.includes(s)?'':'<span class="new-badge">НОВОЕ</span>';
   });
@@ -661,7 +761,7 @@ function applyTheme(id){
     bg.innerHTML='';
     for(let i=0;i<15;i++){
       const d=document.createElement('div');d.className='paketik-bg-item';
-      d.innerHTML=`<img src="Paket${1+Math.floor(Math.random()*15)}.png" style="width:40px;height:40px">`;
+      d.innerHTML=`<img src="Paket.png" style="width:40px;height:40px">`;
       d.style.left=Math.random()*100+'vw';
       d.style.animationDuration=(6+Math.random()*6)+'s';
       d.style.animationDelay=(Math.random()*5)+'s';
@@ -736,24 +836,48 @@ function saveProfile(){S.nick=$('nickInput').value.trim().slice(0,20)||'Гост
 function grantFrame(f){if(!S.ownedFrames.includes(f)){S.ownedFrames.push(f);showRareReward('🖼','Рамка: '+f,'Редкая!')}}
 function grantTitle(type,name){if(!S.ownedTitles.find(t=>t.type===type&&t.name===name)){S.ownedTitles.push({type,name});showRareReward('👑',name,'Редкий!')}}
 
-function renderFrameShop(){
-  const g=$('frameShopList');if(!g)return;g.innerHTML='<div style="color:#9aa3b0;font-size:.78rem;margin-bottom:4px">🖼 Рамки</div>';
-  Object.entries(FRAME_SHOP).forEach(([k,it])=>{
-    const own=S.ownedFrames.includes(k);const d=document.createElement('div');d.className='shop-item';
-    d.innerHTML=`<div class="info-block"><div class="info-name">${it.name}</div><div class="info-desc">${it.desc}</div></div>${own?'<span class="claimed-badge">✅</span>':`<button class="btn small" ${S.coins<it.price?'disabled':''}>${fmt(it.price)}💰</button>`}`;
-    if(!own)d.querySelector('button').onclick=()=>buyFrame(k);g.appendChild(d);
+/* === МАГАЗИН === */
+function renderShop(){
+  const g1=$('shopCoinsList');g1.innerHTML='';
+  const shopItems=[
+    ...Object.entries(FRAME_SHOP).map(([k,it])=>({type:'frame',key:k,name:it.name,desc:it.desc,price:it.price})),
+    ...Object.entries(TITLE_SHOP).map(([k,it])=>({type:'title',key:k,name:it.name,desc:it.desc,price:it.price})),
+    ...THEMES.filter(t=>t.price>0).map(t=>({type:'theme',key:t.id,name:t.name,desc:'Тема',price:t.price}))
+  ];
+  shopItems.forEach(it=>{
+    const owned=it.type==='frame'?S.ownedFrames.includes(it.key):it.type==='title'?S.ownedTitles.find(t=>t.type===it.key):S.ownedThemes.includes(it.key);
+    const d=document.createElement('div');d.className='shop-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${it.name}</div><div class="info-desc">${it.desc}</div></div>${owned?'<span class="claimed-badge">✅</span>':`<button class="btn small" ${S.coins<it.price?'disabled':''}>${it.price}💰</button>`}`;
+    if(!owned)d.querySelector('button').onclick=()=>buyShopItem(it);g1.appendChild(d);
   });
-}
-function renderTitleShop(){
-  const g=$('titleShopList');if(!g)return;g.innerHTML='<div style="color:#9aa3b0;font-size:.78rem;margin:4px 0">👑 Титулы</div>';
-  Object.entries(TITLE_SHOP).forEach(([k,it])=>{
-    const own=S.ownedTitles.find(t=>t.type===k&&t.name===it.name);const d=document.createElement('div');d.className='shop-item';
-    d.innerHTML=`<div class="info-block"><div class="info-name">${it.name}</div><div class="info-desc">${it.desc}</div></div>${own?'<span class="claimed-badge">✅</span>':`<button class="btn small" ${S.coins<it.price?'disabled':''}>${fmt(it.price)}💰</button>`}`;
-    if(!own)d.querySelector('button').onclick=()=>buyTitle(k,it.name,it.price);g.appendChild(d);
+  const g2=$('shopDonateList');g2.innerHTML='<div style="color:#9aa3b0;font-size:.78rem;margin-bottom:6px">Обновление в полночь · 2 из 8 бандлов</div>';
+  S.dailyBundles.forEach(id=>{
+    const b=BUNDLES.find(x=>x.id===id);if(!b)return;
+    const owned=S.bundlePurchased.includes(id);
+    const d=document.createElement('div');d.className='bundle-item';
+    d.innerHTML=`<div class="info-block"><div class="info-name">${b.name}</div><div class="info-desc">${b.desc} · ${b.price}₽</div></div>${owned?'<span class="claimed-badge">✅</span>':`<button class="btn small rub" ${S.rubles<b.price?'disabled':''}>Купить ${b.price}₽</button>`}`;
+    if(!owned)d.querySelector('button').onclick=()=>buyBundle(id);g2.appendChild(d);
   });
+  $('shopCoins').textContent=fmt(S.coins);$('shopRub').textContent=fmt(S.rubles);
 }
-function buyFrame(k){const it=FRAME_SHOP[k];if(S.ownedFrames.includes(k))return;if(S.coins<it.price){toast('Мало монет');return}S.coins-=it.price;S.ownedFrames.push(k);save();renderTop();renderProfile();renderFrameShop();showRareReward('🖼',it.name,'Куплено!');checkSiteAch()}
-function buyTitle(k,name,price){if(S.ownedTitles.find(t=>t.type===k&&t.name===name))return;if(S.coins<price){toast('Мало монет');return}S.coins-=price;S.ownedTitles.push({type:k,name});save();renderTop();renderProfile();renderTitleShop();showRareReward('👑',name,'Куплено!');checkSiteAch()}
+function buyShopItem(it){
+  if(S.coins<it.price){toast('Мало монет');return}
+  S.coins-=it.price;
+  if(it.type==='frame'){grantFrame(it.key)}
+  else if(it.type==='title'){grantTitle(it.key,it.name)}
+  else if(it.type==='theme'){if(!S.ownedThemes.includes(it.key))S.ownedThemes.push(it.key);applyTheme(it.key)}
+  save();renderTop();renderProfile();renderShop();showRareReward('🛒',it.name,'Куплено!');
+}
+function buyBundle(id){
+  const b=BUNDLES.find(x=>x.id===id);if(!b)return;
+  if(S.rubles<b.price){toast(`Нужно ${b.price}₽`);return}
+  S.rubles-=b.price;S.bundlePurchased.push(id);
+  if(!S.ownedFrames.includes(b.frame))S.ownedFrames.push(b.frame);
+  if(!S.ownedTitles.find(t=>t.type===b.title))S.ownedTitles.push({type:b.title,name:b.title});
+  if(!S.ownedThemes.includes(b.theme))S.ownedThemes.push(b.theme);
+  save();renderTop();renderProfile();renderShop();
+  showRareReward('💎',b.name,'Бандл куплен!');
+}
 
 /* === ПАСС === */
 function addPassXP(amount){
@@ -1058,14 +1182,13 @@ function spawnPaketik(){
   else if(r<chance+0.3)sizeDef=PAKETIK_SIZES[1];
   else sizeDef=PAKETIK_SIZES[0];
   const size=sizeDef.size+Math.random()*10;
-  const num=1+Math.floor(Math.random()*15);
   const el=document.createElement('div');
   el.className='paketik-item';
   el.style.width=size+'px';el.style.height=size+'px';
   el.style.left=(Math.random()*(fieldW-size))+'px';
   el.style.top='-'+size+'px';
-  el.innerHTML=`<img src="Paket${num}.png" alt="paket">`;
-  const item={el,x:parseFloat(el.style.left),y:-size,vx:(Math.random()-0.5)*1,vy:1,size,num,apples:sizeDef.minApples+Math.floor(Math.random()*(sizeDef.maxApples-sizeDef.minApples+1))};
+  el.innerHTML=`<img src="Paket.png" alt="paket">`;
+  const item={el,x:parseFloat(el.style.left),y:-size,vx:(Math.random()-0.5)*1,vy:0.7,size,apples:sizeDef.minApples+Math.floor(Math.random()*(sizeDef.maxApples-sizeDef.minApples+1))};
   el.onmousedown=(e)=>startDrag(e,item);
   el.ontouchstart=(e)=>{e.preventDefault();startDrag(e.touches[0],item)};
   FIELD_L.appendChild(el);
@@ -1117,11 +1240,10 @@ function endDrag(e){
 function updatePaketikPhysics(){
   if(!paketikGateOpen){
     const fieldH=FIELD_L.offsetHeight,fieldW=FIELD_L.offsetWidth;
-    // 1-я зона: падают и исчезают
     for(let i=paketikItems.length-1;i>=0;i--){
       const item=paketikItems[i];
       if(paketikDragging===item)continue;
-      item.vy+=0.3;
+      item.vy+=0.21;
       item.y+=item.vy;
       item.x+=item.vx;
       if(item.x<0){item.x=0;item.vx*=-0.5}
@@ -1129,15 +1251,13 @@ function updatePaketikPhysics(){
       if(item.y>fieldH){item.el.remove();paketikItems.splice(i,1);continue}
       item.el.style.left=item.x+'px';item.el.style.top=item.y+'px';
     }
-    // 2-я зона: складываются
     const rH=FIELD_R.offsetHeight,rW=FIELD_R.offsetWidth;
     paketikRightItems.forEach(item=>{
-      item.vy+=0.3;
+      item.vy+=0.21;
       item.y+=item.vy;
       if(item.y+item.size>rH){item.y=rH-item.size;item.vy*=-0.3;if(Math.abs(item.vy)<1)item.vy=0}
       if(item.x<0)item.x=0;
       if(item.x>rW-item.size)item.x=rW-item.size;
-      // коллизия
       paketikRightItems.forEach(other=>{
         if(other===item)return;
         const dx=item.x-other.x,dy=item.y-other.y;
@@ -1183,9 +1303,9 @@ function sendPackets(){
         S.paketikPassXP-=S.paketikPassLevel*100;S.paketikPassLevel++;
         toast(`🎁 Ивентовый пасс: ур. ${S.paketikPassLevel}!`);
       }
-      if(S.totalSent>=500000&&!S.ownedTitles.find(t=>t.type==='goldorder')){
+      if(S.totalSent>=150000&&!S.ownedTitles.find(t=>t.type==='goldorder')){
         S.ownedTitles.push({type:'goldorder',name:'Золотой заказ'});
-        showRareReward('🏆','Золотой заказ','500 000 пакетиков!');
+        showRareReward('🏆','Золотой заказ','150 000 пакетиков!');
       }
       paketikGateOpen=false;
       $('fieldGate').classList.remove('active');
@@ -1197,7 +1317,7 @@ function sendPackets(){
 }
 function renderPaketikStats(){
   const g=$('paketikStats');if(!g)return;
-  g.innerHTML=`<div style="font-size:.85rem;line-height:1.6;color:#cfd6df">📦 Поймано: <b style="color:#e8b04b">${fmt(S.totalPakets)}</b><br>📤 Отправлено: <b style="color:#e8b04b">${fmt(S.totalSent)}</b><br>🍎 Собрано: <b style="color:#e74c3c">${fmt(S.totalApples)}</b><br>🏆 До «Золотой заказ»: <b style="color:#ffd700">${fmt(Math.max(0,-S.totalSent))}</b></500000div>`;
+  g.innerHTML=`<div style="font-size:.85rem;line-height:1.6;color:#cfd6df">📦 Поймано: <b style="color:#e8b04b">${fmt(S.totalPakets)}</b><br>📤 Отправлено: <b style="color:#e8b04b">${fmt(S.totalSent)}</b><br>🍎 Собрано: <b style="color:#e74c3c">${fmt(S.totalApples)}</b><br>🏆 До «Золотой заказ»: <b style="color:#ffd700">${fmt(Math.max(0,150000-S.totalSent))}</b></div>`;
 }
 
 /* === УЛУЧШЕНИЯ === */
@@ -1259,8 +1379,6 @@ function openAchModal(){
     body.appendChild(d);
   });
 }
-
-/* === ИВЕНТ ПАКЕТИК (модалка) === */
 function openBirthdayModal(){
   const left=BIRTHDAY.getTime()-Date.now();
   let passHtml='';
@@ -1280,7 +1398,7 @@ function openBirthdayModal(){
       <div style="font-size:1.1rem;font-weight:900;color:#e8b04b">Уровень ${S.paketikPassLevel}/7</div>
       <div style="color:#9aa3b0;font-size:.75rem">${fmt(S.paketikPassXP)} XP до следующего</div>
     </div>
-    <h3 style="color:#e8b04b;margin-bottom:.4rem">🎁 Награды (открываются за очки, покупаются за яблочки)</h3>
+    <h3 style="color:#e8b04b;margin-bottom:.4rem">🎁 Награды</h3>
     ${passHtml}`);
 }
 
@@ -1289,6 +1407,7 @@ function showAdmin(){
   openModal(`<h2>🔓 Админка</h2>
     <div style="margin-bottom:.6rem"><input type="number" id="addA" placeholder="Яблочки" style="width:100px"><button class="btn small" onclick="adminA()">+🍎</button></div>
     <div style="margin-bottom:.6rem"><input type="number" id="addC" placeholder="Монетки" style="width:100px"><button class="btn small orange" onclick="adminC()">+💰</button></div>
+    <div style="margin-bottom:.6rem"><input type="number" id="addR" placeholder="Рубли" style="width:100px"><button class="btn small rub" onclick="adminR()">+₽</button></div>
     <div style="display:flex;gap:4px;flex-wrap:wrap"><button class="btn small green" onclick="adminSpawn()">📦 Спавн</button><button class="btn small red" onclick="addPassXP(500)">+500XP</button></div>
     <div style="margin-top:.6rem;display:flex;gap:4px;flex-wrap:wrap;align-items:center">
       <span style="color:#9aa3b0;font-size:.8rem">🔥 Стрик:</span>
@@ -1299,12 +1418,13 @@ function showAdmin(){
 }
 function adminA(){const v=parseFloat($('addA').value);if(isNaN(v))return;S.apples+=v;save();renderTop();toast('+'+fmt(v)+'🍎')}
 function adminC(){const v=parseFloat($('addC').value);if(isNaN(v))return;S.coins+=v;save();renderTop();toast('+'+fmt(v)+'💰')}
+function adminR(){const v=parseFloat($('addR').value);if(isNaN(v))return;S.rubles+=v;save();renderTop();toast('+'+fmt(v)+'₽')}
 function adminSpawn(){for(let i=0;i<5;i++)setTimeout(spawnPaketik,i*200);toast('📦')}
 function adminSetStreak(){const v=parseInt($('streakVal').value);if(isNaN(v))return;S.streak=v;S.lastStreakDate=today();save();renderStreak();toast('🔥 Стрик = '+v)}
 function adminBoostStreak(){S.streak++;S.lastStreakDate=today();save();renderStreak();toast('🔥 Стрик +1: '+S.streak)}
 
 /* === РЕНДЕР === */
-function renderTop(){$('appleCount').textContent=fmt(S.apples);$('coinCount').textContent=fmt(S.coins)}
+function renderTop(){$('appleCount').textContent=fmt(S.apples);$('coinCount').textContent=fmt(S.coins);$('rubCount').textContent=fmt(S.rubles)}
 function renderUpdates(){
   const g=$('updatesList');g.innerHTML='';
   CHANGELOG.forEach(u=>{const d=document.createElement('div');d.className='update-item';d.innerHTML=`<div class="update-ver">v${u.ver}</div><div class="update-date">${u.date}</div><ul>${u.items.map(i=>`<li>${i}</li>`).join('')}</ul>`;g.appendChild(d)});
@@ -1338,7 +1458,7 @@ function tick(){
 /* === СТАРТ === */
 load();
 renderTop();renderPaketikStats();renderProfile();renderSiteAch();renderChallenges();
-renderPass();renderQuests();renderUpdates();renderThemeButtons();renderStreak();renderBirthday();renderNewBadges();
+renderPass();renderQuests();renderShop();renderUpdates();renderThemeButtons();renderStreak();renderBirthday();renderNewBadges();
 if(!S.questsResetAt)rollQuests();
 setInterval(tick,500);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)tick()});
@@ -1346,13 +1466,14 @@ window.addEventListener('focus',()=>tick());
 
 window.goSection=goSection;window.goHome=goHome;
 window.redeemPromo=redeemPromo;window.adminLogin=adminLogin;
-window.adminA=adminA;window.adminC=adminC;window.adminSpawn=adminSpawn;window.adminSetStreak=adminSetStreak;window.adminBoostStreak=adminBoostStreak;
+window.adminA=adminA;window.adminC=adminC;window.adminR=adminR;window.adminSpawn=adminSpawn;window.adminSetStreak=adminSetStreak;window.adminBoostStreak=adminBoostStreak;
 window.unlockAchievement=unlockAchievement;window.saveProfile=saveProfile;window.buyPaidPass=buyPaidPass;window.claimPassReward=claimPassReward;
 window.buyFrame=buyFrame;window.buyTitle=buyTitle;window.skipPassLevel=skipPassLevel;
 window.openUpgradeModal=openUpgradeModal;window.openAppleShop=openAppleShop;window.openAchModal=openAchModal;
 window.openBirthdayModal=openBirthdayModal;window.addPassXP=addPassXP;
 window.openTestMods=openTestMods;window.startTestWithMods=startTestWithMods;
 window.buyUpgrade=buyUpgrade;window.sendPackets=sendPackets;window.buyPaketikReward=buyPaketikReward;
+window.buyShopItem=buyShopItem;window.buyBundle=buyBundle;
 </script>
 </body>
 </html>
